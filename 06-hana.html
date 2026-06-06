@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>花卉物语 — 花開的声音</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff0f5;color:#5d4037;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.7);border-radius:20px;color:#e91e63;font-size:14px;transition:all .3s}
+.back-link:hover{background:linear-gradient(135deg,#a8edea,#fed6e3);color:#fff}
+nav{background:linear-gradient(135deg,#a8edea,#fed6e3);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 15px rgba(254,214,227,0.5)}
+nav .logo{font-size:24px;font-weight:700;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,0.1)}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#fff;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s}
+nav ul li a:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}
+.hero{position:relative;height:420px;background:linear-gradient(135deg,#a8edea 0%,#fed6e3 40%,#fff0f5 80%,#e8f5e9 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.hero h1{font-size:54px;color:#fff;text-shadow:2px 3px 8px rgba(200,100,150,0.3);z-index:2;letter-spacing:8px}
+.hero p{font-size:18px;color:rgba(255,255,255,0.85);margin-top:10px;z-index:2}
+.flower-deco{position:absolute;font-size:30px;opacity:0.15;animation:gentleSway 5s ease-in-out infinite}
+.flower-deco:nth-child(1){top:10%;left:5%;animation-delay:0s;font-size:40px}
+.flower-deco:nth-child(2){top:20%;right:8%;animation-delay:1s;font-size:35px}
+.flower-deco:nth-child(3){bottom:15%;left:12%;animation-delay:2s;font-size:28px}
+.flower-deco:nth-child(4){top:40%;right:15%;animation-delay:0.5s;font-size:45px}
+.flower-deco:nth-child(5){bottom:30%;right:25%;animation-delay:3s;font-size:32px}
+.flower-deco:nth-child(6){top:5%;left:40%;animation-delay:1.5s;font-size:25px}
+@keyframes gentleSway{
+0%,100%{transform:rotate(-5deg) scale(1)}
+50%{transform:rotate(5deg) scale(1.1)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:rgba(255,255,255,0.85);border-radius:30px 5px 30px 5px;padding:30px;box-shadow:0 8px 30px rgba(254,214,227,0.2);transition:all .5s ease;position:relative;overflow:hidden}
+.card::before{content:'🌸';position:absolute;top:-5px;right:20px;font-size:60px;opacity:0.05;transform:rotate(15deg)}
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(168,237,234,0.2);border-radius:5px 30px 5px 30px}
+.card h2{font-size:22px;color:#e91e63;margin-bottom:10px}
+.card .date{font-size:13px;color:#bcaaa4;margin-bottom:15px}
+.card p{line-height:1.9;color:#6d4c41;font-size:15px}
+.card .tag{display:inline-block;padding:4px 14px;background:linear-gradient(135deg,#a8edea,#fed6e3);border-radius:15px;font-size:12px;color:#fff;margin-top:12px;margin-right:5px;transition:all .3s}
+.card .tag:hover{transform:rotate(-3deg) scale(1.05)}
+.flower-divider{text-align:center;font-size:20px;letter-spacing:10px;margin:20px 0;opacity:0.4}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:rgba(255,255,255,0.85);border-radius:20px;padding:25px;box-shadow:0 8px 25px rgba(254,214,227,0.15);text-align:center}
+.sidebar-card h3{font-size:18px;color:#e91e63;margin-bottom:15px}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#a8edea,#fed6e3);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.sidebar-card p{font-size:14px;color:#6d4c41;line-height:1.7}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:8px 0;border-bottom:1px solid #fce4ec;font-size:14px;color:#6d4c41;transition:all .3s}
+.sidebar-card ul li:hover{color:#e91e63;padding-left:5px}
+.sidebar-card ul li:last-child{border:none}
+.garden-tip{background:linear-gradient(135deg,rgba(168,237,234,0.2),rgba(254,214,227,0.2));border:1px dashed rgba(233,30,99,0.2)}
+footer{text-align:center;padding:40px;background:linear-gradient(135deg,#a8edea,#fed6e3);color:#fff;margin-top:50px;font-size:14px}
+footer .deco{font-size:24px;letter-spacing:10px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">🌺 花卉物语</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">花开日记</a></li>
+<li><a href="#">花园手记</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="flower-deco">🌸</div><div class="flower-deco">🌺</div><div class="flower-deco">🌷</div>
+<div class="flower-deco">🌻</div><div class="flower-deco">🌹</div><div class="flower-deco">💐</div>
+<h1>花卉物语</h1>
+<p>每一朵花都有自己的花语 🌸</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>🌸 三月的樱花与四月的紫藤</h2>
+<div class="date">2026年4月2日 · 花开日记</div>
+<p>三月的最后一天，樱花开始飘落了。粉色的花瓣像雪一样纷纷扬扬，铺满了整条小路。正当我为樱花的凋零感到惋惜时，抬头一看——紫藤花已经悄悄爬满了花架。那一串串紫色的花穗，像是从天上垂下来的瀑布，散发着淡淡的幽香。</p>
+<p>花开花落，各有各的美丽。樱花的美在于它的短暂，让人懂得珍惜；紫藤的美在于它的绵长，让人感受生命的延续。每一朵花都在属于自己的季节里绽放，不急不躁，不争不抢。也许我们也应该像花一样，在对的时间做对的事，在属于自己的季节里尽情绽放。</p>
+<div class="flower-divider">🌸 🌺 🌷</div>
+<span class="tag">春天</span><span class="tag">樱花</span><span class="tag">紫藤</span>
+</article>
+<article class="card">
+<h2>🌻 向日葵教会我的事</h2>
+<div class="date">2026年5月10日 · 花园手记</div>
+<p>阳台上的向日葵终于开花了。那朵金黄色的花盘，比我想象中大得多，像是一个小太阳落在了花盆里。每天早上它都会转向东方，追着太阳的方向转动，直到傍晚太阳西沉。这种执着的追随，让人看了心生感动。</p>
+<p>向日葵的花语是"沉默的爱"和"忠诚"。它不像玫瑰那样热烈，不像百合那样高雅，但它有一种最朴素的力量——永远朝着光明的方向生长。在我们的人生中，也会遇到阴天和雨天，但只要心中有光，就永远不会迷失方向。感谢这朵向日葵，教会了我最简单也最深刻的人生道理。🌻</p>
+<div class="flower-divider">🌻 🌻 🌻</div>
+<span class="tag">向日葵</span><span class="tag">阳台花园</span><span class="tag">感悟</span>
+</article>
+<article class="card">
+<h2>🌿 我的阳台小花园</h2>
+<div class="date">2026年5月20日 · 养花笔记</div>
+<p>从今年春天开始，我在阳台上打造了一个小小的花园。六平米的阳台上，现在摆满了各种花草：多肉、薄荷、茉莉、月季、绣球，还有一棵小小的柠檬树。每天早上起来的第一件事，就是去阳台看看我的植物们——薄荷又长高了一截，月季冒出了新的花苞，多肉的叶片胖嘟嘟的。</p>
+<p>养花是一件需要耐心的事情。浇水、施肥、修剪、换盆，每一步都不能马虎。但当你看到一朵花从花苞到盛开的全过程，那种成就感是无法用语言形容的。小小的阳台花园，成了我最治愈的空间。🌺🌷🌹</p>
+<div class="flower-divider">🌿 🌱 🍀</div>
+<span class="tag">养花</span><span class="tag">阳台花园</span><span class="tag">生活</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">🌷</div>
+<h3>关于我</h3>
+<p>花卉爱好者<br>阳台花园主理人<br>用花语记录四季</p>
+</div>
+<div class="sidebar-card garden-tip">
+<h3>🌱 养花小贴士</h3>
+<ul>
+<li>🌸 浇水要"见干见湿"</li>
+<li>🌺 多肉夏天要控水</li>
+<li>🌷 薄荷需要充足阳光</li>
+<li>🌻 月季要定期修剪</li>
+<li>🌹 茉莉喜酸性土壤</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>📖 花语词典</h3>
+<ul>
+<li>🌸 樱花 — 生命之美</li>
+<li>🌻 向日葵 — 沉默的爱</li>
+<li>🌷 郁金香 — 永恒的祝福</li>
+<li>🌹 玫瑰 — 爱情与美</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<div class="deco">🌸 🌺 🌷 🌻 🌹 💐</div>
+<p>花卉物语 — 每一朵花都值得被温柔以待</p>
+<p style="margin-top:8px;opacity:0.8">© 2026 All Rights Reserved</p>
+</footer>
+</body>
+</html>

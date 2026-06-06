@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛博街道 - Cyber Street</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans SC',sans-serif;background:#141e30;color:#e0e0e0;overflow-x:hidden;}
+a{text-decoration:none;color:#00f0ff;}
+
+@keyframes floatGeo{0%,100%{transform:translateY(0) rotate(0deg);}25%{transform:translateY(-15px) rotate(90deg);}50%{transform:translateY(0) rotate(180deg);}75%{transform:translateY(15px) rotate(270deg);}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 5px #00f0ff,0 0 10px #00f0ff;}50%{box-shadow:0 0 15px #00f0ff,0 0 30px #00f0ff,0 0 45px #00f0ff;}}
+@keyframes gridScroll{0%{background-position:0 0;}100%{background-position:0 50px;}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes hudBlink{0%,100%{opacity:1;}50%{opacity:0.5;}}
+@keyframes circuitFlow{0%{background-position:0 0;}100%{background-position:100px 100px;}}
+
+.geo-shape{position:fixed;opacity:0.08;z-index:0;animation:floatGeo 10s linear infinite;}
+.geo-shape:nth-child(1){width:60px;height:60px;border:2px solid #00f0ff;top:15%;left:5%;animation-delay:0s;}
+.geo-shape:nth-child(2){width:40px;height:40px;border:2px solid #ff0080;top:30%;right:8%;animation-delay:2s;}
+.geo-shape:nth-child(3){width:80px;height:80px;border:2px solid #00f0ff;bottom:20%;left:10%;animation-delay:4s;}
+.geo-shape:nth-child(4){width:50px;height:50px;border:2px solid #ff0080;bottom:40%;right:15%;animation-delay:6s;}
+
+nav{background:rgba(20,30,48,0.95);border-bottom:2px solid #00f0ff;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+nav .inner{max-width:1200px;margin:0 auto;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;}
+nav .logo{font-size:1.4rem;font-weight:700;color:#00f0ff;text-shadow:0 0 10px rgba(0,240,255,0.5);}
+nav .links{display:flex;gap:25px;}
+nav .links a{color:#ff0080;font-size:0.9rem;transition:all 0.3s;position:relative;}
+nav .links a:hover{color:#00f0ff;text-shadow:0 0 8px #00f0ff;}
+
+.back-link{display:inline-block;margin:20px 30px;padding:8px 20px;border:1px solid #00f0ff;color:#00f0ff;font-size:0.85rem;transition:all 0.3s;}
+.back-link:hover{background:#00f0ff;color:#141e30;box-shadow:0 0 15px rgba(0,240,255,0.5);}
+
+.hero{position:relative;min-height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:linear-gradient(180deg,#141e30 0%,#243b55 100%);}
+.hero .grid-floor{position:absolute;bottom:0;left:-50%;width:200%;height:50%;background:linear-gradient(transparent 60%,rgba(0,240,255,0.1) 60%);background-size:50px 50px;transform:perspective(500px) rotateX(60deg);animation:gridScroll 2s linear infinite;}
+.hero h1{font-size:3.5rem;color:#00f0ff;text-shadow:0 0 20px rgba(0,240,255,0.5),0 0 40px rgba(0,240,255,0.3);position:relative;z-index:2;letter-spacing:6px;}
+.hero p{font-size:1.1rem;color:#ff0080;margin-top:15px;position:relative;z-index:2;text-shadow:0 0 10px rgba(255,0,128,0.3);}
+.hero .hud-corner{position:absolute;width:40px;height:40px;z-index:2;}
+.hero .hud-corner.tl{top:30px;left:30px;border-top:2px solid #00f0ff;border-left:2px solid #00f0ff;}
+.hero .hud-corner.tr{top:30px;right:30px;border-top:2px solid #00f0ff;border-right:2px solid #00f0ff;}
+.hero .hud-corner.bl{bottom:30px;left:30px;border-bottom:2px solid #00f0ff;border-left:2px solid #00f0ff;}
+.hero .hud-corner.br{bottom:30px;right:30px;border-bottom:2px solid #00f0ff;border-right:2px solid #00f0ff;}
+.hero .circuit-bg{position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(0,240,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,0.03) 1px,transparent 1px);background-size:30px 30px;animation:circuitFlow 10s linear infinite;}
+
+.container{max-width:1200px;margin:0 auto;padding:40px 30px;display:grid;grid-template-columns:1fr 350px;gap:40px;}
+.main-content{display:flex;flex-direction:column;gap:40px;}
+
+.post-card{background:rgba(36,59,85,0.3);border:1px solid rgba(0,240,255,0.3);padding:30px;position:relative;animation:slideIn 0.6s ease-out both;}
+.post-card:nth-child(2){animation-delay:0.2s;}
+.post-card:nth-child(3){animation-delay:0.4s;}
+.post-card .hud-tl{position:absolute;top:-1px;left:-1px;width:15px;height:15px;border-top:2px solid #00f0ff;border-left:2px solid #00f0ff;}
+.post-card .hud-tr{position:absolute;top:-1px;right:-1px;width:15px;height:15px;border-top:2px solid #00f0ff;border-right:2px solid #00f0ff;}
+.post-card .hud-bl{position:absolute;bottom:-1px;left:-1px;width:15px;height:15px;border-bottom:2px solid #00f0ff;border-left:2px solid #00f0ff;}
+.post-card .hud-br{position:absolute;bottom:-1px;right:-1px;width:15px;height:15px;border-bottom:2px solid #00f0ff;border-right:2px solid #00f0ff;}
+.post-card .tag{display:inline-block;padding:3px 12px;background:rgba(0,240,255,0.1);border:1px solid rgba(0,240,255,0.3);font-size:0.75rem;color:#00f0ff;margin-bottom:10px;}
+.post-card h2{font-size:1.5rem;color:#fff;margin-bottom:10px;text-shadow:0 0 5px rgba(0,240,255,0.2);}
+.post-card .meta{font-size:0.8rem;color:#667;margin-bottom:15px;}
+.post-card p{line-height:1.8;color:#b0b0b0;font-size:0.95rem;}
+.post-card .img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#141e30,#243b55);border:1px solid rgba(0,240,255,0.2);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;}
+.post-card .img-placeholder::after{content:'';position:absolute;top:5px;left:5px;right:5px;bottom:5px;border:1px solid rgba(255,0,128,0.2);}
+.post-card .read-more{display:inline-block;margin-top:15px;padding:8px 25px;border:1px solid #ff0080;color:#ff0080;font-size:0.85rem;transition:all 0.3s;}
+.post-card .read-more:hover{background:#ff0080;color:#141e30;box-shadow:0 0 20px rgba(255,0,128,0.5);}
+
+.sidebar{display:flex;flex-direction:column;gap:25px;}
+.widget{background:rgba(36,59,85,0.3);border:1px solid rgba(0,240,255,0.2);padding:25px;position:relative;}
+.widget .hud-tl,.widget .hud-tr,.widget .hud-bl,.widget .hud-br{position:absolute;width:10px;height:10px;}
+.widget .hud-tl{top:-1px;left:-1px;border-top:2px solid #ff0080;border-left:2px solid #ff0080;}
+.widget .hud-tr{top:-1px;right:-1px;border-top:2px solid #ff0080;border-right:2px solid #ff0080;}
+.widget .hud-bl{bottom:-1px;left:-1px;border-bottom:2px solid #ff0080;border-left:2px solid #ff0080;}
+.widget .hud-br{bottom:-1px;right:-1px;border-bottom:2px solid #ff0080;border-right:2px solid #ff0080;}
+.widget h3{color:#00f0ff;font-size:1rem;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(0,240,255,0.2);}
+.widget ul{list-style:none;}
+.widget ul li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.widget ul li a{color:#b0b0b0;font-size:0.9rem;transition:color 0.3s;}
+.widget ul li a:hover{color:#00f0ff;}
+.widget .tag-cloud{display:flex;flex-wrap:wrap;gap:8px;}
+.widget .tag-cloud span{padding:4px 12px;background:rgba(255,0,128,0.1);border:1px solid rgba(255,0,128,0.3);font-size:0.75rem;color:#ff0080;cursor:pointer;transition:all 0.3s;}
+.widget .tag-cloud span:hover{background:rgba(255,0,128,0.3);box-shadow:0 0 10px rgba(255,0,128,0.3);}
+.widget .hud-data{font-size:0.8rem;color:#00f0ff;line-height:2;font-family:'Courier New',monospace;}
+.widget .hud-data .label{color:#667;}
+.widget .avatar-hud{width:80px;height:80px;margin:0 auto 15px;border:2px solid #00f0ff;position:relative;display:flex;align-items:center;justify-content:center;font-size:2rem;animation:pulseGlow 3s infinite;}
+.widget .avatar-hud::before{content:'';position:absolute;top:-5px;left:-5px;right:-5px;bottom:-5px;border:1px solid rgba(255,0,128,0.3);}
+.widget .about-text{font-size:0.85rem;color:#888;line-height:1.6;text-align:center;}
+
+footer{text-align:center;padding:40px 30px;border-top:1px solid rgba(0,240,255,0.2);margin-top:40px;background:rgba(0,0,0,0.3);}
+footer p{color:#555;font-size:0.8rem;}
+footer .cyber-text{color:#00f0ff;text-shadow:0 0 10px rgba(0,240,255,0.5);}
+
+@media(max-width:900px){.container{grid-template-columns:1fr;}.hero h1{font-size:2rem;letter-spacing:3px;}}
+</style>
+</head>
+<body>
+<div class="geo-shape"></div>
+<div class="geo-shape"></div>
+<div class="geo-shape"></div>
+<div class="geo-shape"></div>
+<nav>
+<div class="inner">
+<a href="#" class="logo">赛博街道</a>
+<div class="links">
+<a href="#">首页</a><a href="#">城市</a><a href="#">增强</a><a href="#">终端</a>
+</div>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+<section class="hero">
+<div class="circuit-bg"></div>
+<div class="hud-corner tl"></div>
+<div class="hud-corner tr"></div>
+<div class="hud-corner bl"></div>
+<div class="hud-corner br"></div>
+<div class="grid-floor"></div>
+<div style="position:relative;z-index:2;">
+<h1>赛博街道</h1>
+<p>在钢铁与霓虹的丛林中，寻找最后的人性</p>
+</div>
+</section>
+<div class="container">
+<main class="main-content">
+<article class="post-card">
+<div class="hud-tl"></div><div class="hud-tr"></div><div class="hud-bl"></div><div class="hud-br"></div>
+<div class="img-placeholder">🏙️</div>
+<span class="tag">城市探索</span>
+<h2>夜城漫步：赛博朋克都市的隐秘角落</h2>
+<div class="meta">2026-05-25 · 街道猎人</div>
+<p>在赛博朋克的都市中，每一层都有不同的故事。地面上是光鲜亮丽的商业区，巨大的全息广告在楼宇间闪烁。但如果你深入地下三层，你会发现一个完全不同的世界——黑市、改装诊所、地下格斗场。在这里，身体增强手术已经司空见惯，机械臂和电子眼不再是科幻，而是生存的必需品。这座城市永远不会沉睡，因为有太多人在黑暗中寻找光明。</p>
+<a href="#" class="read-more">接入阅读 →</a>
+</article>
+<article class="post-card">
+<div class="hud-tl"></div><div class="hud-tr"></div><div class="hud-bl"></div><div class="hud-br"></div>
+<div class="img-placeholder">🦾</div>
+<span class="tag">身体增强</span>
+<h2>钢铁之躯：义体改造的伦理边界</h2>
+<div class="meta">2026-05-18 · 增强医师</div>
+<p>当你可以用机械替换骨骼，用芯片增强大脑，"人"的定义开始变得模糊。义体改造技术已经从最初的医疗用途扩展到了军事和民用领域。有些人全身70%已经被替换成了机械，他们被称为"全改造人"。这引发了一个深刻的哲学问题：当一艘船的所有木板都被替换后，它还是同一艘船吗？当一个人的大部分身体都变成了机器，他还是同一个人吗？</p>
+<a href="#" class="read-more">接入阅读 →</a>
+</article>
+<article class="post-card">
+<div class="hud-tl"></div><div class="hud-tr"></div><div class="hud-bl"></div><div class="hud-br"></div>
+<div class="img-placeholder">🌐</div>
+<span class="tag">网络空间</span>
+<h2>数据之海：网络空间的领地争夺</h2>
+<div class="meta">2026-05-10 · 数据游侠</div>
+<p>在这个时代，数据就是新的石油。巨型企业在网络空间中争夺着每一块数据领地，而黑客们则在这片无形的战场上进行着永无休止的游击战。一个顶级的网络游侠可以在几秒钟内入侵一家跨国公司的核心数据库，也可以在虚拟空间中构建出足以以假乱真的数字幻象。网络空间没有物理边界，但有看不见的围墙，而翻越这些围墙，就是数据游侠的日常。</p>
+<a href="#" class="read-more">接入阅读 →</a>
+</article>
+</main>
+<aside class="sidebar">
+<div class="widget">
+<div class="avatar-hud">🔧</div>
+<div class="about-text">穿梭于赛博街道的增强人类，用机械之眼记录钢铁丛林的每一个瞬间。</div>
+</div>
+<div class="widget">
+<h3>HUD状态</h3>
+<div class="hud-data">
+<div><span class="label">身份:</span> 街道猎人_v3.7</div>
+<div><span class="label">增强:</span> 机械臂/电子眼/神经链接</div>
+<div><span class="label">信用:</span> ████████░░ 80%</div>
+<div><span class="label">通缉:</span> <span style="color:#ff0080;">否</span></div>
+<div><span class="label">状态:</span> <span style="color:#00f0ff;">在线</span></div>
+</div>
+</div>
+<div class="widget">
+<h3>街道标签</h3>
+<div class="tag-cloud">
+<span>#赛博朋克</span><span>#增强</span><span>#黑客</span><span>#夜城</span><span>#义体</span><span>#网络空间</span><span>#黑市</span><span>#AI</span>
+</div>
+</div>
+<div class="widget">
+<h3>情报网络</h3>
+<ul>
+<li><a href="#">第七区的地下诊所</a></li>
+<li><a href="#">军用级义体黑市</a></li>
+<li><a href="#">AI觉醒的早期征兆</a></li>
+<li><a href="#">数据风暴生存指南</a></li>
+<li><a href="#">公司战争最新情报</a></li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p class="cyber-text">赛博街道 © 2026</p>
+<p style="margin-top:8px;">在钢铁丛林中，每个人都是自己命运的黑客</p>
+</footer>
+<script>
+document.querySelectorAll('.post-card').forEach(card=>{
+card.addEventListener('mouseenter',()=>{card.style.borderColor='rgba(0,240,255,0.8)';card.style.boxShadow='0 0 20px rgba(0,240,255,0.2)';});
+card.addEventListener('mouseleave',()=>{card.style.borderColor='rgba(0,240,255,0.3)';card.style.boxShadow='none';});
+});
+</script>
+</body>
+</html>

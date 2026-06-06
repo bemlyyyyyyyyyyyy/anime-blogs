@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>解构主义 — 碎片与重构</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff;color:#000;overflow-x:hidden;position:relative}
+a{color:#dc2626;text-decoration:none}
+a:hover{text-decoration:underline}
+
+nav{position:fixed;top:0;left:0;width:100%;background:#000;z-index:1000;padding:12px 30px;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:5px;transform:rotate(-2deg)}
+nav .nav-links{display:flex;gap:20px}
+nav .nav-links a{color:#fff;font-weight:400;font-size:0.85rem;letter-spacing:2px}
+nav .nav-links a:nth-child(2){transform:rotate(2deg)}
+nav .nav-links a:nth-child(3){transform:rotate(-1deg)}
+
+.back-link{position:fixed;top:55px;left:15px;z-index:999;background:#dc2626;color:#fff;padding:6px 14px;font-weight:700;font-size:0.8rem;transform:rotate(-3deg);letter-spacing:1px}
+
+/* Hero */
+.hero{margin-top:50px;min-height:100vh;position:relative;overflow:hidden;background:#f5f5f5}
+.hero-fragment{position:absolute;padding:20px 30px;background:#000;color:#fff}
+.hero-fragment.f1{top:10%;left:5%;transform:rotate(-5deg);font-size:5rem;font-weight:700;z-index:5;clip-path:polygon(0 0,100% 0,95% 100%,5% 100%)}
+.hero-fragment.f2{top:25%;right:8%;transform:rotate(3deg);font-size:1.5rem;z-index:4;background:#dc2626;max-width:300px}
+.hero-fragment.f3{bottom:20%;left:15%;transform:rotate(-8deg);font-size:1rem;z-index:3;border:3px solid #000;background:#fff;color:#000;max-width:350px}
+.hero-fragment.f4{top:40%;left:40%;transform:rotate(2deg);z-index:6;width:200px;height:200px;background:#000;clip-path:polygon(50% 0%,0% 100%,100% 100%)}
+.hero-fragment.f5{bottom:10%;right:15%;transform:rotate(-3deg);z-index:4;font-size:3rem;font-weight:700;color:rgba(220,38,38,0.2);border-bottom:4px solid #dc2626}
+.hero-line-deco{position:absolute;width:300px;height:3px;background:#dc2626;z-index:7}
+.hero-line-deco.l1{top:20%;left:30%;transform:rotate(15deg)}
+.hero-line-deco.l2{bottom:30%;right:20%;transform:rotate(-20deg)}
+.hero-line-deco.l3{top:60%;left:10%;transform:rotate(45deg);width:200px}
+
+/* Fragmented sections */
+.frag-section{position:relative;padding:60px 40px;max-width:1200px;margin:0 auto;z-index:2}
+.frag-block{position:relative;margin-bottom:40px}
+.frag-block .block-title{font-size:2rem;font-weight:700;transform:rotate(-2deg);margin-bottom:5px;display:inline-block;border-bottom:3px solid #dc2626}
+.frag-block .block-subtitle{font-size:0.8rem;color:#999;letter-spacing:3px;text-transform:uppercase;transform:rotate(1deg)}
+
+/* Posts - broken grid */
+.broken-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:15px;padding:0 40px;max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.post-card{background:#fff;border:2px solid #000;padding:25px;position:relative;transition:all 0.3s}
+.post-card:nth-child(1){grid-column:1/7;transform:rotate(-1deg);z-index:3}
+.post-card:nth-child(2){grid-column:6/13;transform:rotate(1.5deg);margin-top:40px;z-index:2}
+.post-card:nth-child(3){grid-column:2/8;transform:rotate(0.5deg);z-index:4}
+.post-card:nth-child(4){grid-column:8/13;transform:rotate(-2deg);margin-top:-30px;z-index:5}
+.post-card::before{content:attr(data-num);position:absolute;top:-15px;left:-10px;font-size:3rem;font-weight:700;color:rgba(220,38,38,0.15);transform:rotate(5deg)}
+.post-card .card-accent{position:absolute;top:0;left:0;width:100%;height:4px;background:#dc2626;transform:rotate(0.5deg)}
+.post-card h3{font-size:1.3rem;font-weight:700;margin-bottom:10px;margin-top:10px;line-height:1.3}
+.post-card .meta{font-size:0.75rem;color:#999;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.post-card p{font-size:0.9rem;line-height:1.7;color:#333}
+.post-card .fragment-link{display:inline-block;margin-top:12px;color:#dc2626;font-weight:700;font-size:0.85rem;transform:rotate(-1deg);border-bottom:2px solid #dc2626}
+.post-card:hover{transform:rotate(0deg) scale(1.02) !important;box-shadow:5px 5px 0 #000;z-index:10}
+
+/* Overlapping text section */
+.overlap-section{position:relative;padding:100px 40px;z-index:2;min-height:50vh}
+.overlap-text{position:absolute;font-size:8rem;font-weight:700;color:rgba(0,0,0,0.04);line-height:1;pointer-events:none}
+.overlap-text.ot1{top:50px;left:20px;transform:rotate(-3deg)}
+.overlap-text.ot2{bottom:30px;right:20px;transform:rotate(5deg)}
+.overlap-content{max-width:600px;margin:0 auto;position:relative;z-index:3}
+.overlap-content h2{font-size:2.5rem;font-weight:700;margin-bottom:15px;transform:rotate(-1deg);line-height:1.2}
+.overlap-content h2 span{display:block;color:#dc2626;transform:rotate(3deg);font-size:1.8rem}
+.overlap-content p{font-size:1rem;line-height:1.8;color:#333}
+
+/* Clip-path gallery */
+.clip-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:40px;max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.clip-item{height:200px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem;color:#fff;position:relative}
+.clip-item:nth-child(1){background:#000;clip-path:polygon(0 0,100% 0,100% 80%,0 100%)}
+.clip-item:nth-child(2){background:#dc2626;clip-path:polygon(0 20%,100% 0,100% 100%,0 80%)}
+.clip-item:nth-child(3){background:#333;clip-path:polygon(10% 0,90% 0,100% 100%,0 100%)}
+.clip-item span{transform:rotate(-3deg)}
+
+/* Footer */
+footer{background:#000;padding:50px 40px;position:relative;z-index:2}
+footer .footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start}
+footer .footer-left h3{font-size:1.5rem;color:#fff;font-weight:700;transform:rotate(-2deg);margin-bottom:8px}
+footer .footer-left p{color:#666;font-size:0.85rem}
+footer .footer-right{display:flex;gap:15px}
+footer .footer-right a{color:#fff;font-size:0.85rem;transform:rotate(1deg)}
+footer .footer-line{width:100%;height:2px;background:#dc2626;margin-top:30px;transform:rotate(-0.5deg)}
+
+@media(max-width:768px){
+.hero-fragment.f1{font-size:2.5rem}
+.broken-grid{grid-template-columns:1fr}
+.post-card:nth-child(n){grid-column:auto;transform:rotate(0);margin-top:0}
+.overlap-text{font-size:3rem}
+.clip-gallery{grid-template-columns:1fr}
+nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">解构主义</div>
+<div class="nav-links">
+<a href="#">碎片</a><a href="#">重构</a><a href="#">边缘</a><a href="#">越界</a>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="hero-fragment f1">解构</div>
+<div class="hero-fragment f2">打破秩序，质疑一切既定的视觉规则。在碎片中寻找新的意义。</div>
+<div class="hero-fragment f3">本文探讨德里达的解构理论如何影响当代视觉设计，以及设计师如何在破坏中创造。</div>
+<div class="hero-fragment f4"></div>
+<div class="hero-fragment f5">DECONSTRUCT</div>
+<div class="hero-line-deco l1"></div>
+<div class="hero-line-deco l2"></div>
+<div class="hero-line-deco l3"></div>
+</div>
+
+<div class="frag-section">
+<div class="frag-block">
+<div class="block-title">碎片阅读</div>
+<div class="block-subtitle">FRAGMENTED READING — 2024</div>
+</div>
+</div>
+
+<div class="broken-grid">
+<div class="post-card" data-num="01">
+<div class="card-accent"></div>
+<div class="meta">2024 · 解构理论</div>
+<h3>德里达与视觉解构</h3>
+<p>雅克·德里达的解构主义哲学为设计领域提供了全新的思考框架。解构不是简单的破坏，而是一种深入文本（或视觉元素）内部，揭示其隐藏的权力结构和二元对立的方法。在设计中，这意味着质疑"前景/背景""中心/边缘""重要/次要"等传统二元关系，通过颠覆这些关系来创造新的视觉体验。</p>
+<a href="#" class="fragment-link">深入碎片 →</a>
+</div>
+<div class="post-card" data-num="02">
+<div class="card-accent"></div>
+<div class="meta">2024 · 建筑</div>
+<h3>解构主义建筑的诞生</h3>
+<p>一九八八年MoMA的"解构主义建筑"展览标志着这一运动的正式诞生。弗兰克·盖里、扎哈·哈迪德、丹尼尔·里伯斯金等七位建筑师展出了挑战传统建筑观念的作品。他们的建筑不是稳定的方盒子，而是扭曲、分裂、碰撞的形式。这些建筑看起来像是被某种力量撕裂，但每一个碎片都经过精心设计。</p>
+<a href="#" class="fragment-link">深入碎片 →</a>
+</div>
+<div class="post-card" data-num="03">
+<div class="card-accent"></div>
+<div class="meta">2024 · 平面设计</div>
+<h3>打破网格的勇气</h3>
+<p>大卫·卡森在九十年代的《Ray Gun》杂志设计中，将解构主义的理念引入了平面设计领域。他故意将文字排得难以阅读，将图像倒置或重叠，打破了所有传统的排版规则。批评者说他毁了设计，但读者却在这种混乱中找到了一种新的阅读快感。卡森证明了规则的破坏本身可以成为一种强有力的表达方式。</p>
+<a href="#" class="fragment-link">深入碎片 →</a>
+</div>
+<div class="post-card" data-num="04">
+<div class="card-accent"></div>
+<div class="meta">2024 · 后现代</div>
+<h3>后现代主义的碎片美学</h3>
+<p>后现代主义拒绝宏大叙事，拥抱碎片化和不确定性。在视觉文化中，这表现为拼贴、混搭和引用的盛行。设计师们不再追求原创的"天才"设计，而是从已有的视觉符号中提取、重组和重新语境化。每一个设计都是一次对既有符号的重新解读，每一次引用都改变了被引用对象的意义。</p>
+<a href="#" class="fragment-link">深入碎片 →</a>
+</div>
+</div>
+
+<div class="overlap-section">
+<div class="overlap-text ot1">碎片</div>
+<div class="overlap-text ot2">重构</div>
+<div class="overlap-content">
+<h2>在废墟中<span>建造新的意义</span></h2>
+<p>解构不是虚无主义。它不是要摧毁一切，而是要揭示隐藏在结构背后的假设和权力关系。当我们拆解一个既定的视觉体系时，我们不是在创造混乱，而是在创造可能性。每一个被打破的规则都开辟了一条新的路径，每一个碎片都折射出不同的光线。解构主义设计师不是破坏者，而是考古学家——他们在既定秩序的废墟中挖掘被压抑的意义。</p>
+</div>
+</div>
+
+<div class="clip-gallery">
+<div class="clip-item"><span>打破</span></div>
+<div class="clip-item"><span>质疑</span></div>
+<div class="clip-item"><span>重构</span></div>
+</div>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-left">
+<h3>解构主义工作室</h3>
+<p>在秩序的边缘创造</p>
+</div>
+<div class="footer-right">
+<a href="#">存档</a><a href="#">理论</a><a href="#">关于</a>
+</div>
+</div>
+<div class="footer-line"></div>
+</footer>
+<script>
+document.querySelectorAll('.post-card').forEach(card=>{
+card.addEventListener('mouseenter',function(){
+this.querySelectorAll('*').forEach(el=>{el.style.transition='all 0.3s'});
+});
+});
+</script>
+</body>
+</html>

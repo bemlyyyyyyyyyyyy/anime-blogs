@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宣言风格 — 文字的力量</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,'Noto Serif SC',serif;background:#f5f5f5;color:#000;overflow-x:hidden}
+a{color:#dc2626;text-decoration:none}
+a:hover{text-decoration:underline}
+
+nav{position:fixed;top:0;left:0;width:100%;background:#000;z-index:1000;padding:12px 0;display:flex;justify-content:center}
+nav .nav-inner{width:100%;max-width:1000px;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-family:Georgia,serif;font-size:1.1rem;font-weight:700;color:#f5f5f5;letter-spacing:5px}
+nav .nav-links{display:flex;gap:24px}
+nav .nav-links a{color:#999;font-size:0.8rem;letter-spacing:3px}
+nav .nav-links a:hover{color:#dc2626}
+
+.back-link{position:fixed;top:55px;left:20px;z-index:999;background:#000;color:#dc2626;padding:6px 14px;font-weight:700;font-size:0.8rem;letter-spacing:2px}
+
+/* Masthead */
+.masthead{margin-top:48px;padding:30px 20px 20px;text-align:center;border-bottom:4px double #000;position:relative;z-index:2;background:#f5f5f5}
+.masthead .pub-info{font-size:0.7rem;letter-spacing:4px;color:#666;text-transform:uppercase;margin-bottom:5px}
+.masthead h1{font-family:Georgia,serif;font-size:3rem;font-weight:400;letter-spacing:8px;line-height:1;border-bottom:1px solid #000;padding-bottom:10px;display:inline-block}
+.masthead .issue-info{font-size:0.75rem;letter-spacing:3px;color:#999;margin-top:10px}
+.masthead .red-line{width:100%;height:3px;background:#dc2626;margin-top:15px}
+.masthead .thin-line{width:100%;height:1px;background:#000;margin-top:3px}
+
+/* Subheader bar */
+.subheader{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;border-bottom:2px solid #000;max-width:1000px;margin:0 auto;position:relative;z-index:2}
+.subheader p{font-size:0.7rem;letter-spacing:3px;color:#666;text-transform:uppercase}
+.subheader .price{font-weight:700;color:#000}
+
+/* Columns layout */
+.columns{max-width:1000px;margin:0 auto;padding:40px 20px;position:relative;z-index:2;column-count:3;column-gap:30px;column-rule:1px solid #ddd}
+.col-item{break-inside:avoid;margin-bottom:30px}
+.col-item .drop-cap::first-letter{font-family:Georgia,serif;font-size:3.5rem;float:left;line-height:0.8;padding-right:8px;padding-top:5px;color:#dc2626;font-weight:700}
+.col-item h3{font-family:Georgia,serif;font-size:1.2rem;font-weight:700;margin-bottom:8px;line-height:1.3;color:#000}
+.col-item .col-meta{font-size:0.65rem;letter-spacing:3px;color:#dc2626;text-transform:uppercase;margin-bottom:6px}
+.col-item p{font-size:0.85rem;line-height:1.8;color:#333;text-align:justify}
+.col-item .red-accent{border-left:3px solid #dc2626;padding-left:12px;margin:10px 0;font-style:italic;color:#555}
+
+/* Manifesto section */
+.manifesto-section{max-width:1000px;margin:0 auto;padding:0 20px 40px;position:relative;z-index:2}
+.manifesto-header{display:flex;align-items:center;gap:15px;margin-bottom:30px;border-top:4px solid #000;border-bottom:1px solid #000;padding:15px 0}
+.manifesto-header .red-block{width:40px;height:40px;background:#dc2626;flex-shrink:0}
+.manifesto-header h2{font-family:Georgia,serif;font-size:1.8rem;font-weight:400;letter-spacing:5px}
+.manifesto-header .issue{font-size:0.7rem;letter-spacing:3px;color:#999;margin-left:auto}
+
+.manifesto-grid{display:grid;grid-template-columns:2fr 1fr;gap:30px}
+.manifesto-main{border-right:1px solid #ddd;padding-right:30px}
+.manifesto-main .drop-cap::first-letter{font-family:Georgia,serif;font-size:4rem;float:left;line-height:0.8;padding-right:10px;padding-top:5px;color:#dc2626;font-weight:700}
+.manifesto-main h3{font-family:Georgia,serif;font-size:1.5rem;font-weight:700;margin-bottom:12px;line-height:1.3}
+.manifesto-main p{font-size:0.9rem;line-height:1.9;color:#333;text-align:justify;margin-bottom:15px}
+.manifesto-main .highlight{background:linear-gradient(180deg,transparent 60%,rgba(220,38,38,0.15) 60%);display:inline}
+.manifesto-side .side-block{border-bottom:1px solid #ddd;padding-bottom:20px;margin-bottom:20px}
+.manifesto-side .side-block:last-child{border-bottom:none}
+.manifesto-side .side-block h4{font-family:Georgia,serif;font-size:1rem;font-weight:700;margin-bottom:8px;color:#000}
+.manifesto-side .side-block p{font-size:0.8rem;line-height:1.7;color:#555}
+.manifesto-side .side-block .red-tag{display:inline-block;background:#dc2626;color:#fff;padding:2px 8px;font-size:0.65rem;letter-spacing:2px;margin-top:8px}
+
+/* Dense text block */
+.dense-block{max-width:1000px;margin:0 auto;padding:30px 20px;position:relative;z-index:2;border-top:3px solid #000;border-bottom:3px solid #000}
+.dense-block .dense-inner{column-count:2;column-gap:30px;column-rule:1px solid #ddd}
+.dense-block h3{font-family:Georgia,serif;font-size:1.3rem;font-weight:700;margin-bottom:10px;break-after:avoid}
+.dense-block .drop-cap::first-letter{font-family:Georgia,serif;font-size:3rem;float:left;line-height:0.8;padding-right:8px;padding-top:4px;color:#dc2626;font-weight:700}
+.dense-block p{font-size:0.85rem;line-height:1.8;color:#333;text-align:justify;margin-bottom:15px}
+.dense-block .red-line-block{border-top:2px solid #dc2626;border-bottom:2px solid #dc2626;padding:10px 0;margin:15px 0;text-align:center}
+.dense-block .red-line-block p{font-size:1.1rem;font-weight:700;color:#000;text-align:center;letter-spacing:3px}
+
+/* Pullquote */
+.pullquote{max-width:1000px;margin:0 auto;padding:40px 20px;position:relative;z-index:2;text-align:center}
+.pullquote blockquote{font-family:Georgia,serif;font-size:1.8rem;font-weight:400;color:#000;line-height:1.5;font-style:italic;max-width:600px;margin:0 auto}
+.pullquote blockquote::before{content:'"';display:block;font-size:4rem;color:#dc2626;line-height:0.5;margin-bottom:15px}
+.pullquote .attr{margin-top:15px;font-size:0.8rem;letter-spacing:4px;color:#999;text-transform:uppercase}
+.pullquote .red-line{width:60px;height:2px;background:#dc2626;margin:20px auto 0}
+
+/* Footer */
+footer{background:#000;padding:40px 20px;position:relative;z-index:2}
+footer .footer-inner{max-width:1000px;margin:0 auto;text-align:center}
+footer .footer-mast{font-family:Georgia,serif;font-size:1.2rem;color:#f5f5f5;letter-spacing:6px;margin-bottom:10px}
+footer .footer-info{font-size:0.7rem;letter-spacing:3px;color:#666;text-transform:uppercase}
+footer .footer-red{width:40px;height:2px;background:#dc2626;margin:15px auto}
+footer .footer-links{margin-top:15px;display:flex;justify-content:center;gap:20px}
+footer .footer-links a{color:#999;font-size:0.75rem;letter-spacing:2px}
+
+@media(max-width:768px){
+.columns{column-count:1}
+.manifesto-grid{grid-template-columns:1fr}
+.manifesto-main{border-right:none;padding-right:0;border-bottom:1px solid #ddd;padding-bottom:20px}
+.dense-block .dense-inner{column-count:1}
+.masthead h1{font-size:2rem}
+nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-inner">
+<div class="logo">宣 言</div>
+<div class="nav-links">
+<a href="#">首页</a><a href="#">当期</a><a href="#">存档</a><a href="#">投稿</a>
+</div>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="masthead">
+<div class="pub-info">独立出版 · 月刊 · 创刊于2024年</div>
+<h1>宣 言</h1>
+<div class="issue-info">第壹期 · 总第001期 · 2024年6月 · 定价：免费</div>
+<div class="red-line"></div>
+<div class="thin-line"></div>
+</div>
+
+<div class="subheader">
+<p>宣言出版工作室 · 北京</p>
+<p class="price">Manifesto Weekly</p>
+</div>
+
+<div class="columns">
+<div class="col-item">
+<div class="col-meta">创刊词</div>
+<h3>为什么要办一份宣言？</h3>
+<div class="drop-cap"><p>在这个信息泛滥的时代，我们选择回到文字的原点。宣言不是论文，不是报告，更不是社交媒体上的碎碎念。宣言是一种立场的鲜明表达，是一个群体向世界发出的声音。我们相信，在这个众声喧哗的年代，更需要有人站出来，用最直接的语言说出自己相信的东西。不回避争议，不模糊立场，不迎合所有人。</p></div>
+</div>
+<div class="col-item">
+<div class="col-meta">设计</div>
+<h3>排版即权力</h3>
+<p>谁控制了排版，谁就控制了阅读的节奏。字号的大小、行距的疏密、栏位的宽窄——这些看似技术性的选择，实际上都是权力的体现。大标题吸引注意力，小字注释容易被忽略。当我们设计一份出版物时，我们实际上在决定哪些信息值得被看到，哪些可以被忽视。</p>
+<div class="red-accent">每一次排版都是一次编辑判断，每一次编辑判断都是一次价值选择。</div>
+</div>
+<div class="col-item">
+<div class="col-meta">文化</div>
+<h3>从手抄本到超文本</h3>
+<p>文字的载体从泥板到纸张，从纸张到屏幕，每一次迁移都深刻改变了我们与文字的关系。手抄本时代的读者与文字之间有一种亲密的物质联系；印刷时代带来了大规模传播的可能；数字时代则彻底打破了线性阅读的限制。但在这不断的变迁中，文字的核心功能从未改变——记录思想，传递信息，引发思考。</p>
+</div>
+<div class="col-item">
+<div class="col-meta">评论</div>
+<h3>文字的重量</h3>
+<p>在短视频和表情包主导的传播环境中，长篇文字似乎正在失去它的受众。但我们认为，恰恰是这种环境让有深度的文字变得更加珍贵。当所有人都在追求快速消费的信息快餐时，一篇经过深思熟虑的长文就像一顿精心准备的正餐。它需要时间来消化，但给予的营养是碎片化内容无法比拟的。</p>
+</div>
+</div>
+
+<div class="manifesto-section">
+<div class="manifesto-header">
+<div class="red-block"></div>
+<h2>本期宣言</h2>
+<span class="issue">2024 · 专题</span>
+</div>
+<div class="manifesto-grid">
+<div class="manifesto-main">
+<h3>为文字的尊严而宣言</h3>
+<div class="drop-cap"><p>我们宣言：文字不是信息的附庸，而是思想的主体。在算法推荐和标题党横行的今天，我们拒绝将文字降格为流量的工具。每一篇文章都应该有它存在的理由，每一个段落都应该经过深思熟虑，每一个词语都应该被认真对待。我们不追求阅读量，不迎合算法，不制造焦虑。我们追求的是<span class="highlight">真实的表达、深入的思考和诚实的对话</span>。</p></div>
+<p>这份宣言不是一份商业计划书，不是一份营销方案，更不是一份公关稿。它是一份信念的声明。我们相信，仍然有人渴望阅读有深度的内容，仍然有人愿意花时间去理解复杂的问题，仍然有人相信文字可以改变世界。</p>
+<p>从今天开始，我们承诺：每一篇发表在《宣言》上的文章，都经过至少三位编辑的审阅；每一个数据都经过核实；每一个观点都有据可依。我们不保证永远正确，但我们保证永远诚实。</p>
+</div>
+<div class="manifesto-side">
+<div class="side-block">
+<h4>编辑原则</h4>
+<p>独立、客观、深入。不接受任何形式的内容干预，不为广告商修改编辑方针。</p>
+<span class="red-tag">独立出版</span>
+</div>
+<div class="side-block">
+<h4>投稿指南</h4>
+<p>我们欢迎有深度的评论、分析和报道。不接受洗稿、软文和未经核实的信息。</p>
+<span class="red-tag">长期征稿</span>
+</div>
+<div class="side-block">
+<h4>联系我们</h4>
+<p>manifesto@publication.cn</p>
+<p>北京市朝阳区某某路123号</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="dense-block">
+<div class="dense-inner">
+<h3>写作者的责任</h3>
+<div class="drop-cap"><p>每一个拿起笔（或敲击键盘）的人都应该意识到，写作是一种权力，而权力意味着责任。当你的文字被他人阅读时，它就开始了独立于作者的生命。它可以启发人，也可以误导人；可以安慰人，也可以伤害人。因此，写作者不仅对自己的文字负责，更对读者的信任负责。在这个意义上，写作不是一种自由表达，而是一种严肃的社会契约。</p></div>
+<div class="red-line-block">
+<p>█ 写作是权力，权力意味着责任 █</p>
+</div>
+<p>我们呼吁所有写作者：在发表之前，请三思。核实你的事实，审视你的逻辑，考虑你的文字可能产生的影响。不要为了流量而夸大，不要为了眼球而歪曲，不要为了快感而伤害。文字可以锋利，但不应该有毒。</p>
+</div>
+</div>
+
+<div class="pullquote">
+<blockquote>在众声喧哗的年代，更需要有人用最直接的语言说出自己相信的东西</blockquote>
+<div class="attr">—— 宣言创刊词</div>
+<div class="red-line"></div>
+</div>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-mast">宣 言</div>
+<div class="footer-info">宣言出版工作室 · 2024 · 独立出版</div>
+<div class="footer-red"></div>
+<div class="footer-links">
+<a href="#">存档</a><a href="#">投稿</a><a href="#">订阅</a><a href="#">关于</a>
+</div>
+</div>
+</footer>
+<script>
+const dropCaps=document.querySelectorAll('.drop-cap p');
+dropCaps.forEach(p=>{
+const text=p.innerHTML;
+const firstChar=text.charAt(0);
+const rest=text.slice(1);
+});
+</script>
+</body>
+</html>

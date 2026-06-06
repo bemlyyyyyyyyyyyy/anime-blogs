@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大海蔚蓝 — 海之声</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#e8f4fd;color:#1a3a5c;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.6);border-radius:20px;color:#667eea;font-size:14px;transition:all .3s}
+.back-link:hover{background:#667eea;color:#fff}
+nav{background:linear-gradient(135deg,#667eea,#764ba2);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 15px rgba(102,126,234,0.4)}
+nav .logo{font-size:24px;font-weight:700;color:#fff}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#fff;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s}
+nav ul li a:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.hero{position:relative;height:450px;background:linear-gradient(180deg,#667eea 0%,#764ba2 40%,#a8d8ea 80%,#e8f4fd 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.hero h1{font-size:54px;color:#fff;text-shadow:2px 4px 10px rgba(0,0,0,0.2);z-index:3;letter-spacing:8px}
+.hero p{font-size:18px;color:rgba(255,255,255,0.85);margin-top:10px;z-index:3}
+.wave{position:absolute;bottom:0;left:0;width:200%;height:100px;background:linear-gradient(transparent,#e8f4fd);z-index:2}
+.wave::before,.wave::after{content:'';position:absolute;bottom:0;left:0;width:200%;height:80px;background-repeat:repeat-x}
+.wave::before{background:radial-gradient(ellipse at 50% 100%,rgba(232,244,253,0.8) 40%,transparent 70%);animation:wave1 6s linear infinite}
+.wave::after{background:radial-gradient(ellipse at 50% 100%,rgba(232,244,253,0.5) 40%,transparent 70%);animation:wave2 8s linear infinite;bottom:10px}
+@keyframes wave1{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes wave2{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.bubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,0.4),rgba(102,126,234,0.1));border:1px solid rgba(255,255,255,0.3);animation:float linear infinite}
+.bubble:nth-child(1){width:20px;height:20px;left:10%;bottom:-20px;animation-duration:8s}
+.bubble:nth-child(2){width:14px;height:14px;left:25%;bottom:-20px;animation-duration:10s;animation-delay:2s}
+.bubble:nth-child(3){width:24px;height:24px;left:45%;bottom:-20px;animation-duration:7s;animation-delay:1s}
+.bubble:nth-child(4){width:10px;height:10px;left:60%;bottom:-20px;animation-duration:12s;animation-delay:3s}
+.bubble:nth-child(5){width:18px;height:18px;left:80%;bottom:-20px;animation-duration:9s;animation-delay:4s}
+.bubble:nth-child(6){width:12px;height:12px;left:35%;bottom:-20px;animation-duration:11s;animation-delay:5s}
+.bubble:nth-child(7){width:16px;height:16px;left:70%;bottom:-20px;animation-duration:8s;animation-delay:2.5s}
+.bubble:nth-child(8){width:22px;height:22px;left:15%;bottom:-20px;animation-duration:10s;animation-delay:6s}
+@keyframes float{
+0%{bottom:-20px;opacity:0;transform:translateX(0) scale(0.5)}
+20%{opacity:0.8}
+80%{opacity:0.4}
+100%{bottom:100%;opacity:0;transform:translateX(40px) scale(1)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:#fff;border-radius:20px;padding:30px;box-shadow:0 8px 30px rgba(102,126,234,0.1);transition:all .4s ease;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%;background:linear-gradient(180deg,#667eea,#764ba2)}
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(102,126,234,0.18)}
+.card h2{font-size:22px;color:#5c6bc0;margin-bottom:10px;padding-left:15px}
+.card .date{font-size:13px;color:#9e9e9e;margin-bottom:15px;padding-left:15px}
+.card p{line-height:1.8;color:#455a64;font-size:15px;padding-left:15px}
+.card .tag{display:inline-block;padding:4px 12px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:12px;font-size:12px;color:#fff;margin-top:12px;margin-left:15px;margin-right:5px}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:#fff;border-radius:20px;padding:25px;box-shadow:0 8px 25px rgba(102,126,234,0.08);text-align:center}
+.sidebar-card h3{font-size:18px;color:#5c6bc0;margin-bottom:15px}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.sidebar-card p{font-size:14px;color:#455a64;line-height:1.7}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:8px 0;border-bottom:1px solid #e8f4fd;font-size:14px;color:#455a64}
+.sidebar-card ul li:last-child{border:none}
+.sea-deco{font-size:20px;letter-spacing:8px;text-align:center;margin:15px 0;opacity:0.5}
+footer{text-align:center;padding:40px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;margin-top:50px;font-size:14px}
+footer .deco{font-size:28px;letter-spacing:15px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">🌊 大海蔚蓝</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">深海日记</a></li>
+<li><a href="#">旅行手记</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+<div class="bubble"></div><div class="bubble"></div>
+<h1>大海蔚蓝</h1>
+<p>面朝大海，春暖花开 🐚</p>
+<div class="wave"></div>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>🐚 第一次看到大海</h2>
+<div class="date">2026年4月8日 · 旅行手记</div>
+<p>从小在内陆城市长大的我，第一次看到大海时，整个人都愣住了。那种一望无际的蓝色，从脚下一直延伸到天边，和天空融为一体。海风吹过来，带着咸咸的味道，海浪一波一波地拍打着沙滩，发出有节奏的声响。我脱掉鞋子，赤脚踩在沙滩上，感受着细沙从脚趾间流过的感觉。</p>
+<p>我在海边坐了整整一个下午，看着太阳慢慢西沉，把海面染成了一片金红色。那一刻我突然理解了为什么那么多诗人和画家都对大海情有独钟——大海有一种神奇的力量，它能让你忘记所有烦恼，让你觉得自己是如此渺小，而世界是如此广阔。🐚🐟🌊</p>
+<div class="sea-deco">🐚 🐟 🐠 🐡 🦀 🐙</div>
+<span class="tag">旅行</span><span class="tag">大海</span><span class="tag">初见</span>
+</article>
+<article class="card">
+<h2>🐠 潜入蓝色世界</h2>
+<div class="date">2026年4月15日 · 深海日记</div>
+<p>第一次潜水的经历，简直可以用"震撼"来形容。当我把头埋入水下的那一刻，一个完全不同的世界展现在我眼前。阳光透过海水，形成一道道光柱，照亮了五彩斑斓的珊瑚礁。各种颜色的鱼儿在珊瑚间穿梭，完全不怕人，有些甚至好奇地游到我面前。</p>
+<p>海底的世界比陆地更加丰富多彩。紫色的海扇随着水流轻轻摇摆，橙色的小丑鱼在海葵中嬉戏，巨大的海龟悠闲地从我身边游过。在水下，你只能听到自己的呼吸声和水流的声音，那种宁静感让人上瘾。我已经开始计划下一次潜水之旅了。🐠🐡🐙</p>
+<div class="sea-deco">🌊 🐠 🪸 🐙 🐬 🌊</div>
+<span class="tag">潜水</span><span class="tag">海洋</span><span class="tag">探索</span>
+</article>
+<article class="card">
+<h2>🌅 海边小镇的慢时光</h2>
+<div class="date">2026年5月1日 · 旅行随笔</div>
+<p>在一个海边小镇住了三天。这里没有高楼大厦，没有车水马龙，只有一排排彩色的小房子，几条安静的街道，和永远在不远处闪烁的大海。每天早上被海浪声叫醒，去码头买刚捕上来的海鲜，然后在阳台上一边吃早餐一边看海。</p>
+<p>小镇上有一家开了三十年的书店，老板是个白发苍苍的老人，店里养了两只猫。我在那里买了一本旧诗集，坐在海边的咖啡馆里读了一个下午。这种慢节奏的生活，让人重新找回了生活的本质。也许我们不需要太多物质，一间小屋，一片大海，一本好书，就够了。🌅🐚</p>
+<div class="sea-deco">🌅 🏖️ 🐚 📖 ☕ 🌅</div>
+<span class="tag">旅行</span><span class="tag">慢生活</span><span class="tag">小镇</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">🌊</div>
+<h3>关于我</h3>
+<p>海洋爱好者<br>业余潜水员<br>用文字记录蓝色世界</p>
+</div>
+<div class="sidebar-card">
+<h3>🏷 热门标签</h3>
+<ul>
+<li>🌊 大海日记 (15)</li>
+<li>🐠 潜水笔记 (8)</li>
+<li>🐚 旅行手记 (12)</li>
+<li>🌅 日落摄影 (10)</li>
+<li>📖 海边阅读 (6)</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>🎒 旅行清单</h3>
+<ul>
+<li>防晒霜 SPF50+</li>
+<li>防水相机</li>
+<li>潜水镜和呼吸管</li>
+<li>一本好书</li>
+<li>好心情 ✨</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<div class="deco">🐚 🐟 🐠 🐡 🦀 🐙</div>
+<p>大海蔚蓝 — 每一片海都有自己的故事</p>
+<p style="margin-top:8px;opacity:0.8">© 2026 All Rights Reserved</p>
+</footer>
+</body>
+</html>

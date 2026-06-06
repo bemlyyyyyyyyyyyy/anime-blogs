@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>麻雀日记 — 小确幸</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',cursive,sans-serif;background:#f5f0e1;color:#5d4037;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.5);border:1px solid #d7ccc8;border-radius:3px;color:#8d6e63;font-size:14px;transition:all .3s}
+.back-link:hover{background:#e6d5b8;color:#5d4037}
+nav{background:#f5f0e1;border-bottom:2px solid #d7ccc8;padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+nav .logo{font-size:24px;font-weight:700;color:#5d4037;font-style:italic}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#8d6e63;font-size:15px;padding:5px 12px;border-bottom:2px solid transparent;transition:all .3s}
+nav ul li a:hover{border-bottom-color:#8d6e63;color:#5d4037}
+.hero{position:relative;height:400px;background:#f5f0e1;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;border-bottom:2px dashed #d7ccc8}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(215,204,200,0.3) 24px,rgba(215,204,200,0.3) 25px);pointer-events:none}
+.hero h1{font-size:52px;color:#5d4037;z-index:2;font-style:italic;letter-spacing:5px}
+.hero p{font-size:18px;color:#8d6e63;margin-top:10px;z-index:2;font-style:italic}
+.bird-deco{position:absolute;font-size:22px;opacity:0.15;animation:birdFly 8s ease-in-out infinite}
+.bird-deco:nth-child(1){top:20%;left:10%;animation-delay:0s}
+.bird-deco:nth-child(2){top:30%;right:15%;animation-delay:2s;font-size:18px}
+.bird-deco:nth-child(3){top:50%;left:25%;animation-delay:4s;font-size:26px}
+.bird-deco:nth-child(4){top:15%;right:30%;animation-delay:1s;font-size:16px}
+@keyframes birdFly{
+0%,100%{transform:translateX(0) translateY(0) rotate(0deg)}
+25%{transform:translateX(10px) translateY(-8px) rotate(2deg)}
+50%{transform:translateX(20px) translateY(0) rotate(0deg)}
+75%{transform:translateX(10px) translateY(8px) rotate(-2deg)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:#faf7f0;border:1px solid #d7ccc8;padding:30px;position:relative;transition:all .4s ease}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:repeating-linear-gradient(90deg,#d7ccc8 0px,#d7ccc8 5px,transparent 5px,transparent 10px)}
+.card::after{content:'';position:absolute;bottom:-5px;left:5px;right:5px;height:5px;background:linear-gradient(180deg,rgba(0,0,0,0.03),transparent);clip-path:polygon(0 0,2% 100%,4% 0,6% 100%,8% 0,10% 100%,12% 0,14% 100%,16% 0,18% 100%,20% 0,22% 100%,24% 0,26% 100%,28% 0,30% 100%,32% 0,34% 100%,36% 0,38% 100%,40% 0,42% 100%,44% 0,46% 100%,48% 0,50% 100%,52% 0,54% 100%,56% 0,58% 100%,60% 0,62% 100%,64% 0,66% 100%,68% 0,70% 100%,72% 0,74% 100%,76% 0,78% 100%,80% 0,82% 100%,84% 0,86% 100%,88% 0,90% 100%,92% 0,94% 100%,96% 0,98% 100%,100% 0)}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(141,110,99,0.1)}
+.card h2{font-size:22px;color:#5d4037;margin-bottom:10px;font-style:italic}
+.card .date{font-size:13px;color:#bcaaa4;margin-bottom:15px;font-style:italic}
+.card p{line-height:2;color:#6d4c41;font-size:15px}
+.card .tag{display:inline-block;padding:4px 12px;border:1px solid #d7ccc8;border-radius:2px;font-size:12px;color:#8d6e63;margin-top:12px;margin-right:5px;font-style:italic}
+.paper-divider{text-align:center;color:#d7ccc8;font-size:14px;letter-spacing:5px;margin:15px 0}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:#faf7f0;border:1px solid #d7ccc8;padding:25px;text-align:center}
+.sidebar-card h3{font-size:18px;color:#5d4037;margin-bottom:15px;font-style:italic}
+.profile-img{width:100px;height:100px;border-radius:50%;background:#e6d5b8;border:2px dashed #d7ccc8;margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.sidebar-card p{font-size:14px;color:#8d6e63;line-height:1.7;font-style:italic}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:10px 0;border-bottom:1px dotted #d7ccc8;font-size:14px;color:#8d6e63;font-style:italic}
+.sidebar-card ul li:last-child{border:none}
+.footer{text-align:center;padding:40px;background:#e6d5b8;color:#8d6e63;margin-top:50px;font-size:14px;font-style:italic;border-top:2px dashed #d7ccc8}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">🐦 麻雀日记</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">日常碎碎念</a></li>
+<li><a href="#">小确幸集</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="bird-deco">🐦</div><div class="bird-deco">🕊</div>
+<div class="bird-deco">🐦</div><div class="bird-deco">🐤</div>
+<h1>麻雀日记</h1>
+<p>记录生活中那些微小而确实的幸福</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>🐦 窗台上的麻雀一家</h2>
+<div class="date">2026年3月8日 · 日常碎碎念</div>
+<p>最近窗台上来了几位不速之客——一对麻雀夫妇在我的花盆后面筑了巢。起初我还挺烦恼的，但当我看到巢里那三颗小小的蛋时，心一下就软了。每天早上我都会悄悄地去看一眼，看鸟妈妈是不是还在孵蛋。它总是很警觉，一看到我就歪着头看我，那小表情可爱极了。</p>
+<p>终于在一个雨后的清晨，我听到了叽叽喳喳的小叫声。三只小麻雀出壳了！粉粉嫩嫩的，眼睛还没睁开，张着大嘴等妈妈喂食。鸟爸爸鸟妈妈忙前忙后，飞来飞去地找虫子。看着这温馨的一幕，我觉得窗台上的花盆被它们占了也挺好的。</p>
+<div class="paper-divider">· · · · · · · · · ·</div>
+<span class="tag">麻雀</span><span class="tag">日常</span><span class="tag">温暖</span>
+</article>
+<article class="card">
+<h2>☕ 雨天的咖啡馆</h2>
+<div class="date">2026年4月12日 · 小确幸集</div>
+<p>一个下着小雨的下午，我躲进了一家小咖啡馆。店里人不多，角落里有人在看书，吧台边有人在和老板聊天。我点了一杯热拿铁，找了一个靠窗的位置坐下。窗外的雨淅淅沥沥地下着，行人们打着五颜六色的伞匆匆走过。</p>
+<p>咖啡馆里放着轻柔的爵士乐，空气里弥漫着咖啡和面包的香味。我拿出随身带的小本子，开始写今天的日记。写着写着，旁边来了一只橘猫，它跳上椅子，蜷成一团就睡着了。在这样的下午，时间仿佛变慢了，每一分钟都是享受。生活的小确幸，就藏在这些不经意的瞬间里。</p>
+<div class="paper-divider">· · · · · · · · · ·</div>
+<span class="tag">咖啡馆</span><span class="tag">雨天</span><span class="tag">小确幸</span>
+</article>
+<article class="card">
+<h2>📚 旧书店里的宝藏</h2>
+<div class="date">2026年4月25日 · 旧物寻踪</div>
+<p>在一条老巷子里发现了一家旧书店，门面很小，差点走过去。推开门进去，里面堆满了各种旧书，从地板一直摞到天花板。空气中有一种旧纸特有的味道，让人觉得安心。店主是个戴眼镜的老先生，他推荐了一本五十年代出版的诗集，书页已经泛黄，但印刷的字迹依然清晰。</p>
+<p>我在旧书店里待了两个小时，翻了好几本书，最后买了三本。旧书和新书最大的不同，就是旧书有故事。有些书页上有人用铅笔画了线，有些扉页上写着赠言，这些都是上一任主人留下的痕迹。我总觉得，读旧书就像和一个素未谋面的人进行跨时空的对话。</p>
+<div class="paper-divider">· · · · · · · · · ·</div>
+<span class="tag">旧书</span><span class="tag">书店</span><span class="tag">发现</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">🐦</div>
+<h3>关于我</h3>
+<p>一个普通的记录者<br>相信生活中的小美好<br>值得被一一记住</p>
+</div>
+<div class="sidebar-card">
+<h3>📝 小确幸清单</h3>
+<ul>
+<li>🐦 窗台上的鸟叫声</li>
+<li>☕ 第一口热咖啡</li>
+<li>📖 翻到喜欢的旧书</li>
+<li>🌤 雨后出太阳的瞬间</li>
+<li>🎵 一首歌恰好很应景</li>
+<li>🍰 蛋糕店的最后一块</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>🎵 背景音乐</h3>
+<ul>
+<li>《春夏秋冬》— 陈奕迅</li>
+<li>《小幸运》— 田馥甄</li>
+<li>《晴天》— 周杰伦</li>
+</ul>
+</div>
+</aside>
+</div>
+<div class="footer">
+<p>🐦 麻雀日记 — 生活不止眼前的忙碌，还有窗台上的小麻雀 🐦</p>
+<p style="margin-top:8px;opacity:0.7">© 2026 All Rights Reserved</p>
+</div>
+</body>
+</html>

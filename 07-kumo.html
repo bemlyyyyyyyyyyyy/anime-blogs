@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云朵幻想 — 天空之城</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#f0f9ff;color:#37474f;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.7);border-radius:20px;color:#42a5f5;font-size:14px;transition:all .3s}
+.back-link:hover{background:#66a6ff;color:#fff}
+nav{background:linear-gradient(135deg,#89f7fe,#66a6ff);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 15px rgba(102,166,255,0.3)}
+nav .logo{font-size:24px;font-weight:700;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,0.1)}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#fff;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s}
+nav ul li a:hover{background:rgba(255,255,255,0.25);transform:translateY(-2px)}
+.hero{position:relative;height:450px;background:linear-gradient(180deg,#89f7fe 0%,#66a6ff 40%,#e3f2fd 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.hero h1{font-size:54px;color:#fff;text-shadow:2px 4px 10px rgba(0,100,200,0.2);z-index:3;letter-spacing:8px}
+.hero p{font-size:18px;color:rgba(255,255,255,0.85);margin-top:10px;z-index:3}
+.cloud{position:absolute;background:#fff;border-radius:50px;opacity:0.7}
+.cloud::before,.cloud::after{content:'';background:#fff;border-radius:50%;position:absolute}
+.cloud-1{width:120px;height:40px;top:15%;left:-150px;animation:cloudFloat 20s linear infinite}
+.cloud-1::before{width:50px;height:50px;top:-25px;left:20px}
+.cloud-1::after{width:70px;height:70px;top:-35px;left:45px}
+.cloud-2{width:160px;height:45px;top:35%;left:-200px;animation:cloudFloat 28s linear infinite;animation-delay:5s;opacity:0.5}
+.cloud-2::before{width:60px;height:60px;top:-30px;left:25px}
+.cloud-2::after{width:80px;height:80px;top:-40px;left:55px}
+.cloud-3{width:100px;height:35px;top:55%;left:-130px;animation:cloudFloat 24s linear infinite;animation-delay:10s;opacity:0.6}
+.cloud-3::before{width:45px;height:45px;top:-22px;left:15px}
+.cloud-3::after{width:60px;height:60px;top:-30px;left:40px}
+.cloud-4{width:140px;height:42px;top:25%;left:-180px;animation:cloudFloat 30s linear infinite;animation-delay:15s;opacity:0.4}
+.cloud-4::before{width:55px;height:55px;top:-28px;left:22px}
+.cloud-4::after{width:75px;height:75px;top:-38px;left:50px}
+@keyframes cloudFloat{
+0%{left:-200px;transform:translateY(0)}
+50%{transform:translateY(-15px)}
+100%{left:110%;transform:translateY(0)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:rgba(255,255,255,0.85);border-radius:20px;padding:30px;box-shadow:0 8px 30px rgba(102,166,255,0.1);transition:all .5s ease;position:relative;overflow:hidden}
+.card::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#89f7fe,#66a6ff,#89f7fe);background-size:200%;animation:shimmer 3s linear infinite}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+.card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 15px 40px rgba(102,166,255,0.18)}
+.card h2{font-size:22px;color:#1e88e5;margin-bottom:10px}
+.card .date{font-size:13px;color:#b0bec5;margin-bottom:15px}
+.card p{line-height:1.9;color:#546e7a;font-size:15px}
+.card .tag{display:inline-block;padding:4px 12px;background:linear-gradient(135deg,#89f7fe,#66a6ff);border-radius:12px;font-size:12px;color:#fff;margin-top:12px;margin-right:5px}
+.sky-deco{text-align:center;font-size:16px;letter-spacing:8px;margin:15px 0;opacity:0.3}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:rgba(255,255,255,0.85);border-radius:20px;padding:25px;box-shadow:0 8px 25px rgba(102,166,255,0.08);text-align:center}
+.sidebar-card h3{font-size:18px;color:#1e88e5;margin-bottom:15px}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#89f7fe,#66a6ff);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px;box-shadow:0 5px 20px rgba(102,166,255,0.2)}
+.sidebar-card p{font-size:14px;color:#78909c;line-height:1.7}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:8px 0;border-bottom:1px solid #e3f2fd;font-size:14px;color:#78909c}
+.sidebar-card ul li:last-child{border:none}
+.cloud-card{background:linear-gradient(135deg,rgba(137,247,254,0.1),rgba(102,166,255,0.1));border:1px dashed rgba(102,166,255,0.2)}
+footer{text-align:center;padding:40px;background:linear-gradient(135deg,#89f7fe,#66a6ff);color:#fff;margin-top:50px;font-size:14px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">☁ 云朵幻想</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">天空笔记</a></li>
+<li><a href="#">云朵图鉴</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="cloud cloud-1"></div>
+<div class="cloud cloud-2"></div>
+<div class="cloud cloud-3"></div>
+<div class="cloud cloud-4"></div>
+<h1>云朵幻想</h1>
+<p>每一朵云都是天空写给大地的情书 ☁</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>☁ 今天的云像一只猫</h2>
+<div class="date">2026年4月20日 · 云朵图鉴</div>
+<p>午休时间躺在公园的草地上看云，发现今天的云特别有趣。有一朵特别像一只蜷缩着睡觉的猫咪，圆圆的身体，卷起来的尾巴，甚至还能看出两只小耳朵。我赶紧拍了照，发给朋友们看，大家纷纷表示"真的很像！"。然后我们就开始比赛，看谁找到的云更有趣。</p>
+<p>看云是一件特别治愈的事情。它让你不得不停下脚步，抬起头，用一种孩子的目光去观察这个世界。在忙碌的生活中，我们太习惯低头看手机了，却忘了抬头看看天空。那些不断变化的云朵，是大自然最慷慨的画展，每天都不一样，而且完全免费。</p>
+<div class="sky-deco">☁ ⛅ ☁ ⛅ ☁</div>
+<span class="tag">云朵</span><span class="tag">观察</span><span class="tag">日常</span>
+</article>
+<article class="card">
+<h2>🌅 黄昏时分的火烧云</h2>
+<div class="date">2026年5月5日 · 天空笔记</div>
+<p>今天傍晚的火烧云美得让人窒息。整个西边的天空被染成了橘红色、紫色和金色，云朵像是被点燃了一样，从里到外散发着温暖的光芒。我站在楼顶，看着这幅壮丽的画面，心里涌起一种说不出的感动。大自然的美，真的是任何滤镜都无法复制的。</p>
+<p>火烧云只持续了大约二十分钟，就慢慢褪去了颜色，变成了淡淡的灰色。但这二十分钟的绚烂，足以让人记住很久。我在想，也许人生也是这样——不需要时时刻刻都精彩，那些偶尔出现的灿烂瞬间，就足以照亮整个生命。我拍了很多照片，但都无法还原眼睛看到的那种震撼。</p>
+<div class="sky-deco">🌅 🌇 🌅 🌇 🌅</div>
+<span class="tag">火烧云</span><span class="tag">黄昏</span><span class="tag">摄影</span>
+</article>
+<article class="card">
+<h2>🌈 雨后初晴的双彩虹</h2>
+<div class="date">2026年5月18日 · 天空奇遇</div>
+<p>下了一场大雨之后，天空突然放晴了。我走到阳台上深呼吸，抬头一看——双彩虹！两条完整的彩虹横跨天际，颜色鲜艳得像是画上去的。我激动得差点叫出来，赶紧叫家人一起来看。朋友圈瞬间被彩虹刷屏了，每个人都在分享这份来自天空的惊喜。</p>
+<p>彩虹是光与水的合作，是大自然的魔法。它提醒我们，每一场暴风雨之后，都可能有美丽的彩虹在等着我们。生活中的困难就像那场大雨，虽然让人不舒服，但雨过天晴后的世界，总是格外清新和美丽。🌈✨</p>
+<div class="sky-deco">🌈 ✨ 🌈 ✨ 🌈</div>
+<span class="tag">彩虹</span><span class="tag">雨后</span><span class="tag">惊喜</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">☁</div>
+<h3>关于我</h3>
+<p>天空观察爱好者<br>云朵收藏家<br>相信抬头就能看到美好</p>
+</div>
+<div class="sidebar-card cloud-card">
+<h3>⛅ 云朵类型</h3>
+<ul>
+<li>☁ 积云 — 棉花糖般的低云</li>
+<li>🌤 卷云 — 高空的丝缕状</li>
+<li>🌥 层云 — 灰蒙蒙的毯子</li>
+<li>⛈ 积雨云 — 雷暴的前兆</li>
+<li>🌈 虹彩云 — 罕见的彩色云</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>📸 天空摄影技巧</h3>
+<ul>
+<li>黄昏/黎明色彩最丰富</li>
+<li>偏振镜可以增强对比</li>
+<li>注意曝光不要过曝</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p>☁ 云朵幻想 — 仰望天空，世界就会变得不一样 ☁</p>
+<p style="margin-top:8px;opacity:0.8">© 2026 All Rights Reserved</p>
+</footer>
+</body>
+</html>

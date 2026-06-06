@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>水彩梦境 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#f0fffe;color:#4a6670;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-20px) scale(1.05)}}
+@keyframes watercolorDrip{0%{opacity:0.3;transform:scaleY(0.8)}50%{opacity:0.6;transform:scaleY(1.1)}100%{opacity:0.3;transform:scaleY(0.8)}}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none}
+.blob-1{width:400px;height:400px;background:radial-gradient(circle,rgba(168,237,234,0.4),transparent);top:-100px;left:-100px;animation:blobFloat 8s ease-in-out infinite}
+.blob-2{width:350px;height:350px;background:radial-gradient(circle,rgba(254,214,227,0.4),transparent);top:300px;right:-80px;animation:blobFloat 10s ease-in-out infinite reverse}
+.blob-3{width:300px;height:300px;background:radial-gradient(circle,rgba(212,252,121,0.3),transparent);bottom:100px;left:20%;animation:blobFloat 12s ease-in-out infinite}
+.blob-4{width:250px;height:250px;background:radial-gradient(circle,rgba(168,237,234,0.3),transparent);top:60%;right:30%;animation:blobFloat 9s ease-in-out infinite 2s}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(240,255,254,0.85);backdrop-filter:blur(10px);z-index:100;display:flex;justify-content:space-between;align-items:center;animation:fadeIn 0.8s ease;border-bottom:1px solid rgba(168,237,234,0.3)}
+.nav a{color:#4a6670;text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.nav a:hover{color:#a8edea}
+.nav-links{display:flex;gap:25px}
+.hero{position:relative;height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,rgba(168,237,234,0.3),rgba(254,214,227,0.3),rgba(212,252,121,0.2));animation:fadeIn 1s ease}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:3.5rem;font-weight:700;color:#4a6670;text-shadow:0 2px 20px rgba(168,237,234,0.5);margin-bottom:15px}
+.hero p{font-size:1.2rem;color:#6b8f9a;font-weight:300;letter-spacing:2px}
+.splash{position:absolute;border-radius:50%;opacity:0.15;filter:blur(2px)}
+.splash-1{width:120px;height:80px;background:#a8edea;top:20%;left:10%;transform:rotate(-15deg);animation:watercolorDrip 6s ease-in-out infinite}
+.splash-2{width:100px;height:70px;background:#fed6e3;bottom:25%;right:15%;transform:rotate(20deg);animation:watercolorDrip 8s ease-in-out infinite 1s}
+.splash-3{width:90px;height:60px;background:#d4fc79;top:40%;right:25%;transform:rotate(-8deg);animation:watercolorDrip 7s ease-in-out infinite 2s}
+.container{max-width:900px;margin:0 auto;padding:60px 20px;position:relative;z-index:1}
+.post{background:rgba(255,255,255,0.6);backdrop-filter:blur(5px);border-radius:20px;padding:40px;margin-bottom:50px;animation:fadeIn 1s ease;border:1px solid rgba(168,237,234,0.2);box-shadow:0 10px 40px rgba(168,237,234,0.1);transition:transform 0.3s,box-shadow 0.3s}
+.post:hover{transform:translateY(-5px);box-shadow:0 20px 60px rgba(168,237,234,0.2)}
+.post-date{font-size:0.85rem;color:#a8edea;margin-bottom:10px;letter-spacing:1px}
+.post h2{font-size:1.8rem;color:#4a6670;margin-bottom:15px;font-weight:700}
+.post p{line-height:2;color:#5a7a85;margin-bottom:15px;font-weight:300}
+.post-tag{display:inline-block;padding:4px 14px;background:rgba(168,237,234,0.2);border-radius:20px;font-size:0.8rem;color:#4a6670;margin-right:8px;margin-bottom:8px}
+.sidebar{position:fixed;right:30px;top:50%;transform:translateY(-50%);z-index:10}
+.sidebar-dot{width:10px;height:10px;border-radius:50%;margin:15px 0;cursor:pointer;transition:transform 0.3s}
+.sidebar-dot:nth-child(1){background:#a8edea}
+.sidebar-dot:nth-child(2){background:#fed6e3}
+.sidebar-dot:nth-child(3){background:#d4fc79}
+.sidebar-dot:hover{transform:scale(1.5)}
+footer{text-align:center;padding:40px;color:#6b8f9a;font-size:0.85rem;position:relative;z-index:1}
+footer .watercolor-line{height:3px;background:linear-gradient(90deg,transparent,#a8edea,#fed6e3,#d4fc79,transparent);margin-bottom:20px;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="blob blob-4"></div>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">首页</a>
+<a href="#">归档</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="splash splash-1"></div>
+<div class="splash splash-2"></div>
+<div class="splash splash-3"></div>
+<div class="hero-content">
+<h1>水彩梦境</h1>
+<p>用色彩编织的温柔世界 ✨</p>
+</div>
+</section>
+<div class="sidebar">
+<div class="sidebar-dot"></div>
+<div class="sidebar-dot"></div>
+<div class="sidebar-dot"></div>
+</div>
+<div class="container">
+<article class="post" style="animation-delay:0.2s">
+<div class="post-date">2025年3月15日 · 春分前夕</div>
+<h2>🎨 春天的第一幅水彩</h2>
+<p>窗外的樱花终于开了。我坐在阳台上，铺开水彩纸，蘸取淡淡的粉色。颜料在水中晕染开来，像是春天本身在纸上呼吸。那种不可控的流淌，恰恰是水彩最迷人的地方——你永远无法完全掌控它，就像你无法掌控季节的到来。</p>
+<p>画到一半时，一阵风吹来，几片花瓣落在了未干的画面上。我没有拂去它们，而是让花瓣的轮廓留在了画中。意外的美，往往比刻意的美更动人。生活不也是这样吗？那些计划之外的小插曲，往往成为最珍贵的记忆。</p>
+<div class="post-tag">水彩</div>
+<div class="post-tag">春天</div>
+<div class="post-tag">创作日记</div>
+</article>
+<article class="post" style="animation-delay:0.4s">
+<div class="post-date">2025年2月28日 · 雨水时节</div>
+<h2>☁️ 梦中的调色盘</h2>
+<p>昨夜做了一个奇异的梦。梦里所有的颜色都是流动的，天空像一块巨大的水彩画布，云朵是未调和的颜料块，缓缓地在蓝色的底色上化开。我伸出手去触碰那些颜色，指尖染上了温柔的紫和清透的绿。</p>
+<p>醒来后我立刻拿起画笔，试图记录下梦中的色调。那种介于现实与虚幻之间的色彩，只有水彩能够表达。我用了大量的水，让颜色自己去寻找归宿。画完后看着纸面上那些朦胧的色块，仿佛又回到了那个流动的梦境之中。</p>
+<div class="post-tag">梦境</div>
+<div class="post-tag">灵感</div>
+<div class="post-tag">色彩</div>
+</article>
+<article class="post" style="animation-delay:0.6s">
+<div class="post-date">2025年2月14日 · 情人节</div>
+<h2>💌 画一封不会寄出的信</h2>
+<p>今天是情人节，我没有写信，而是画了一封信。用薰衣草紫画信封，用玫瑰粉画邮票，用深褐色画上收件人的名字。水彩的特性让每一个笔触都带着微微的颤抖，像是心跳的频率。</p>
+<p>有些人你不必真的联系，只需在心中为他们留一个角落，偶尔用画笔去探望。我把这幅画夹在了日记本里，它会比任何真实的信件都保存得更久。因为画中的情感，不会因为时间的流逝而褪色——至少在水彩纸上不会。</p>
+<div class="post-tag">情人节</div>
+<div class="post-tag">思念</div>
+<div class="post-tag">水彩书信</div>
+</article>
+</div>
+<footer>
+<div class="watercolor-line"></div>
+<p>水彩梦境 · 用色彩记录生活的温柔角落</p>
+<p style="margin-top:8px;opacity:0.6">© 2025 All rights reserved</p>
+</footer>
+</body>
+</html>

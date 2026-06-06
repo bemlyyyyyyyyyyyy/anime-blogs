@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中土纪年 — 魔戒传说</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a1410;color:#c4a882;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:rgba(196,168,130,0.1);border:1px solid rgba(196,168,130,0.3);color:#c4a882;margin:20px;font-size:14px;letter-spacing:2px;transition:all .3s}
+.back-link:hover{background:rgba(196,168,130,0.2)}
+
+@keyframes flicker{0%,100%{opacity:1}50%{opacity:0.8}75%{opacity:0.95}}
+@keyframes ember{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-200px) scale(0);opacity:0}}
+@keyframes ringGlow{0%,100%{text-shadow:0 0 10px rgba(255,170,50,0.3),0 0 20px rgba(255,100,0,0.1)}50%{text-shadow:0 0 20px rgba(255,170,50,0.6),0 0 40px rgba(255,100,0,0.3),0 0 60px rgba(255,50,0,0.1)}}
+
+.hero{position:relative;min-height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#0a0a08 0%,#2a1a0a 30%,#4a1a0a 60%,#1a0a0a 100%);overflow:hidden}
+.hero .ember{position:absolute;bottom:0;width:4px;height:4px;background:#ff6a00;border-radius:50%;animation:ember 3s ease-out infinite}
+.hero .ember:nth-child(1){left:10%;animation-delay:0s;animation-duration:4s}
+.hero .ember:nth-child(2){left:25%;animation-delay:1s;animation-duration:3s}
+.hero .ember:nth-child(3){left:40%;animation-delay:0.5s;animation-duration:5s}
+.hero .ember:nth-child(4){left:55%;animation-delay:2s;animation-duration:3.5s}
+.hero .ember:nth-child(5){left:70%;animation-delay:1.5s;animation-duration:4.5s}
+.hero .ember:nth-child(6){left:85%;animation-delay:0.8s;animation-duration:3.8s}
+.hero .ember:nth-child(7){left:15%;animation-delay:2.5s;animation-duration:4.2s}
+.hero .ember:nth-child(8){left:60%;animation-delay:3s;animation-duration:3.2s}
+.hero .volcanic{position:absolute;bottom:0;width:100%;height:200px;background:linear-gradient(0deg,rgba(100,20,0,0.6),transparent);pointer-events:none}
+.hero h1{font-size:4.5rem;color:#ffaa32;letter-spacing:15px;animation:ringGlow 5s infinite;position:relative;z-index:1;font-weight:700;text-transform:uppercase}
+.hero .tengwar{font-size:1.5rem;color:rgba(255,170,50,0.3);margin-top:15px;letter-spacing:10px;position:relative;z-index:1}
+.hero .sub{font-size:0.9rem;color:rgba(196,168,130,0.5);margin-top:10px;letter-spacing:6px;position:relative;z-index:1}
+
+.ring-verse{background:rgba(26,20,16,0.9);border-top:1px solid rgba(196,168,130,0.2);border-bottom:1px solid rgba(196,168,130,0.2);padding:20px;text-align:center;font-size:14px;color:rgba(255,170,50,0.5);letter-spacing:3px;line-height:2;font-style:italic;animation:flicker 6s infinite}
+
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1200px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:35px}
+
+.chronicle{background:rgba(26,20,16,0.8);border:1px solid rgba(196,168,130,0.15);padding:30px;position:relative}
+.chronicle::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,#ff6a00,#ffaa32,#8b4513)}
+.chronicle h2{font-size:1.6rem;color:#ffaa32;margin-bottom:8px;text-shadow:0 0 10px rgba(255,170,50,0.2)}
+.chronicle .meta{font-size:12px;color:rgba(196,168,130,0.4);margin-bottom:18px;letter-spacing:3px}
+.chronicle .meta span{margin-right:15px}
+.chronicle p{line-height:2;color:#a89070;font-size:15px;margin-bottom:15px}
+.chronicle .quote{border-left:3px solid rgba(255,170,50,0.3);padding:15px 20px;margin:15px 0;background:rgba(255,170,50,0.03);font-style:italic;color:#c4a882}
+.chronicle .elvish{font-style:italic;color:rgba(255,170,50,0.5);letter-spacing:2px}
+
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-box{background:rgba(26,20,16,0.8);border:1px solid rgba(196,168,130,0.15);padding:25px}
+.sidebar-box h3{font-size:1rem;color:#ffaa32;margin-bottom:15px;letter-spacing:3px;padding-bottom:10px;border-bottom:1px solid rgba(196,168,130,0.15)}
+.sidebar-box h3::before{content:'⚔ '}
+.sidebar-box ul{list-style:none}
+.sidebar-box ul li{padding:8px 0;border-bottom:1px solid rgba(196,168,130,0.06);font-size:13px;color:#a89070;transition:color .3s}
+.sidebar-box ul li:hover{color:#ffaa32}
+.sidebar-box ul li::before{content:'◆ '}
+.sidebar-box p{font-size:13px;color:#a89070;line-height:1.8}
+.map-info{font-family:'Courier New',monospace;font-size:12px;color:rgba(196,168,130,0.5);line-height:2.2}
+.map-info .loc{color:#ffaa32}
+
+footer{text-align:center;padding:40px;border-top:1px solid rgba(196,168,130,0.1);margin-top:40px}
+footer p{font-size:12px;color:rgba(196,168,130,0.3);letter-spacing:4px}
+footer .elv{font-style:italic;color:rgba(255,170,50,0.3);margin-top:10px;letter-spacing:3px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<section class="hero">
+<div class="ember"></div><div class="ember"></div><div class="ember"></div>
+<div class="ember"></div><div class="ember"></div><div class="ember"></div>
+<div class="ember"></div><div class="ember"></div>
+<div class="volcanic"></div>
+<div>
+<h1>中土纪年</h1>
+<div class="tengwar">▐▓▒░ LORD OF THE RINGS ░▒▓▌</div>
+<p class="sub">第三纪元 · 魔戒圣战纪事</p>
+</div>
+</section>
+
+<div class="ring-verse">
+One Ring to rule them all, One Ring to find them<br>
+One Ring to bring them all, and in the darkness bind them<br>
+一枚戒指统领众戒，一枚戒指寻觅众戒，一枚戒指引诱众戒，于黑暗中束缚众戒
+</div>
+
+<div class="container">
+<main>
+
+<article class="chronicle">
+<h2>精灵宝钻与大乐章 — 创世之初</h2>
+<div class="meta"><span>📜 纪年: 远古纪元之前</span><span>📍 阿门洲 · 维林诺</span></div>
+<p>在时间开始之前，独一之神伊露维塔在虚空中发出了"大乐章"——一首由众埃努的歌声编织而成的宇宙交响曲。每一个音符都承载着一个世界的蓝图，每一段旋律都描绘着一段历史的轮廓。然而，其中最强大的埃努——米尔寇，在乐章中注入了不和谐的音符，试图用自己的意志覆盖造物主的设计。</p>
+<p>大乐章结束后，伊露维塔将乐章化为了现实——"一亚"，即宇宙。众埃努降临到这个新生的世界中，开始塑造大地、海洋和天空。其中最美丽的创造是双圣树——金树劳瑞林和银树泰尔佩瑞安，它们的光芒照亮了整个维林诺。而精灵宝钻——三颗由精灵费奥诺尔锻造的神圣宝石，捕捉了双圣树的光芒，成为了中土世界最珍贵的宝物。</p>
+<div class="quote">"光明终将消逝，但记忆永不磨灭。精灵宝钻中封存的不只是双圣树的光辉，更是整个阿尔达最美好的岁月。" ——《精灵宝钻》</div>
+</article>
+
+<article class="chronicle">
+<h2>索伦的崛起与魔戒的铸造</h2>
+<div class="meta"><span>📜 纪年: 第二纪元1600年</span><span>📍 魔多 · 末日火山</span></div>
+<p>索伦——曾经的迈雅，米尔寇最忠诚的仆从——在第一纪元末期逃脱了审判，化身为"美善的使者"潜入了精灵的领地。他以"安纳塔"（天赋之主）的身份接近了精灵铁匠凯勒布理鹏，传授了他们锻造力量之戒的秘密。但这一切都是一个精心设计的陷阱。</p>
+<p>当精灵们锻造了十九枚力量之戒后，索伦在末日火山的秘密锻造所中，用火山的烈焰铸造了至尊魔戒——"一枚戒指统领众戒"。这枚戒指承载了索伦大部分的力量和意志，它不仅是一件武器，更是控制所有力量之戒的钥匙。戒指上的铭文——用黑暗语书写的咒文——在火焰中显现："Ash nazg durbatulûk, ash nazg gimbatul"（一枚戒指统领众戒，一枚戒指寻觅众戒）。</p>
+<div class="elvish">Ash nazg durbatulûk, ash nazg gimbatul,<br>Ash nazg thrakatulûk, agh burzum-ishi krimpatul.</div>
+</article>
+
+<article class="chronicle">
+<h2>护戒远征队 — 从瑞文戴尔到末日火山</h2>
+<div class="meta"><span>📜 纪年: 第三纪元3018-3019年</span><span>📍 中土大陆</span></div>
+<p>当弗罗多·巴金斯继承了比尔博的魔戒后，一个不可能的任务降临到了这个霍比特人身上——将至尊魔戒带到末日火山销毁。在瑞文戴尔的会议上，九位来自不同种族的成员组成了护戒远征队：四位霍比特人、一位巫师、一位精灵、一位矮人和两个人类。</p>
+<p>远征队的旅程充满了艰辛与牺牲。他们穿越了墨瑞亚的黑暗矿坑，在那里失去了甘道夫；经过了洛丝罗瑞恩的金色森林，接受了加拉德瑞尔的馈赠；沿着安都因河漂流，直到波罗米尔的背叛导致了远征队的分裂。弗罗多和他的仆人山姆独自踏上了前往魔多的最后旅程，而阿拉贡、莱戈拉斯和金雳则踏上了追踪兽人、营救梅里和皮聘的征途。</p>
+<div class="quote">"我不能替你背负魔戒，但我能背负你！" ——山姆怀斯·甘吉，《双塔奇兵》</div>
+</article>
+
+</main>
+
+<aside>
+<div class="sidebar-box">
+<div style="width:80px;height:80px;background:radial-gradient(circle,#ff6a00,#8b4513);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:35px;margin:0 auto 15px;box-shadow:0 0 20px rgba(255,106,0,0.3)">💍</div>
+<h3 style="text-align:center">至尊魔戒</h3>
+<p style="text-align:center">一枚戒指统领众戒<br>一枚戒指寻觅众戒<br>一枚戒指引诱众戒<br>于黑暗中束缚众戒</p>
+</div>
+
+<div class="sidebar-box">
+<h3>种族分布</h3>
+<div class="map-info">
+<div><span class="loc">夏尔</span> — 霍比特人的宁静家园</div>
+<div><span class="loc">瑞文戴尔</span> — 精灵的最后庇护所</div>
+<div><span class="loc">洛丝罗瑞恩</span> — 黄金森林</div>
+<div><span class="loc">艾森加德</span> — 萨鲁曼的要塞</div>
+<div><span class="loc">魔多</span> — 黑暗之地</div>
+<div><span class="loc">刚铎</span> — 人类的白城</div>
+<div><span class="loc">孤山</span> — 矮人的王国</div>
+</div>
+</div>
+
+<div class="sidebar-box">
+<h3>纪年大事</h3>
+<ul>
+<li>双圣树的毁灭与太阳升起</li>
+<li>精灵宝钻战争</li>
+<li>努门诺尔的沉没</li>
+<li>最后联盟之战</li>
+<li>比尔博的冒险</li>
+<li>魔戒圣战</li>
+<li>第四纪元开始</li>
+</ul>
+</div>
+
+<div class="sidebar-box">
+<h3>智慧之言</h3>
+<p style="font-style:italic;line-height:2">
+"即使是最渺小的人，也能改变未来的走向。"<br>
+——加拉德瑞尔夫人<br><br>
+"世界上总有些美好的事物，值得我们为之奋战。"<br>
+——山姆怀斯·甘吉
+</p>
+</div>
+</aside>
+</div>
+
+<footer>
+<p>★ 中土纪年 · CHRONICLES OF MIDDLE-EARTH ★</p>
+<div class="elv">Namárië · 一路平安 · 在星光照耀下</div>
+<p style="margin-top:15px;font-size:10px">© 第四纪元 · 一切传说终将被铭记</p>
+</footer>
+</body>
+</html>

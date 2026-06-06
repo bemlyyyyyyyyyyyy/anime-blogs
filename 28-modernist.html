@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>现代主义 — 理性的秩序</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Georgia,'Noto Serif SC',serif;background:#f5f5f5;color:#1f2937;overflow-x:hidden}
+a{color:#dc2626;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* 12-column grid lines */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent calc(100%/12 - 1px),rgba(220,38,38,0.03) calc(100%/12 - 1px),rgba(220,38,38,0.03) calc(100%/12));pointer-events:none;z-index:9998}
+
+nav{position:fixed;top:0;left:0;width:100%;background:#1f2937;z-index:1000;padding:12px 0;display:flex;justify-content:center}
+nav .nav-inner{width:100%;max-width:1200px;padding:0 20px;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-family:Georgia,serif;font-size:1.1rem;font-weight:700;color:#f5f5f5;letter-spacing:6px;text-transform:uppercase}
+nav .nav-links{display:flex;gap:30px}
+nav .nav-links a{color:#9ca3af;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase}
+nav .nav-links a:hover{color:#f5f5f5}
+
+.back-link{position:fixed;top:55px;left:20px;z-index:999;background:#1f2937;color:#f5f5f5;padding:6px 14px;font-size:0.8rem;letter-spacing:2px;font-family:Georgia,serif}
+
+/* Grid container */
+.grid-container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* Hero */
+.hero{margin-top:50px;padding:100px 0;display:grid;grid-template-columns:repeat(12,1fr);gap:20px;min-height:70vh;align-items:center}
+.hero-content{grid-column:1/8;padding:40px 0}
+.hero-content .overline{font-size:0.75rem;letter-spacing:5px;text-transform:uppercase;color:#dc2626;margin-bottom:15px;font-family:'Noto Sans SC',sans-serif}
+.hero-content h1{font-size:3.5rem;font-weight:400;line-height:1.2;color:#1f2937;letter-spacing:-1px}
+.hero-content h1 em{font-style:italic;color:#dc2626}
+.hero-content .hero-body{margin-top:20px;font-size:1rem;line-height:2;color:#374151;max-width:500px}
+.hero-aside{grid-column:9/13;padding:40px 0}
+.hero-aside .aside-block{border-left:2px solid #dc2626;padding-left:20px;margin-bottom:30px}
+.hero-aside .aside-block .label{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:#9ca3af;margin-bottom:5px;font-family:'Noto Sans SC',sans-serif}
+.hero-aside .aside-block p{font-size:0.9rem;line-height:1.7;color:#374151}
+
+/* Section headers */
+.section-header{padding:60px 0 30px;display:grid;grid-template-columns:repeat(12,1fr);gap:20px;border-bottom:1px solid #1f2937;margin-bottom:40px}
+.section-header .sh-label{grid-column:1/4;font-size:0.7rem;letter-spacing:5px;text-transform:uppercase;color:#dc2626;font-family:'Noto Sans SC',sans-serif;padding-bottom:10px}
+.section-header .sh-title{grid-column:4/10;font-size:2rem;font-weight:400;color:#1f2937;padding-bottom:10px}
+.section-header .sh-meta{grid-column:10/13;font-size:0.75rem;color:#9ca3af;text-align:right;font-family:'Noto Sans SC',sans-serif;padding-bottom:10px}
+
+/* Posts */
+.posts-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;padding-bottom:60px}
+.post-card{border-top:2px solid #1f2937;padding-top:20px}
+.post-card:nth-child(1){grid-column:1/5}
+.post-card:nth-child(2){grid-column:5/9}
+.post-card:nth-child(3){grid-column:9/13}
+.post-card .post-num{font-size:2.5rem;font-weight:400;color:rgba(220,38,38,0.15);font-style:italic;margin-bottom:5px}
+.post-card .post-cat{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:#dc2626;margin-bottom:8px;font-family:'Noto Sans SC',sans-serif}
+.post-card h3{font-size:1.2rem;font-weight:400;line-height:1.4;margin-bottom:10px;color:#1f2937}
+.post-card p{font-size:0.85rem;line-height:1.8;color:#374151}
+.post-card .post-link{display:inline-block;margin-top:12px;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:#dc2626;font-family:'Noto Sans SC',sans-serif;border-bottom:1px solid #dc2626;padding-bottom:2px}
+
+/* Full width feature */
+.feature{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;border-top:3px solid #1f2937;border-bottom:1px solid #e5e7eb;padding:50px 0;margin-bottom:60px}
+.feature .feat-label{grid-column:1/4;font-size:0.7rem;letter-spacing:5px;text-transform:uppercase;color:#dc2626;font-family:'Noto Sans SC',sans-serif}
+.feature h3{grid-column:4/10;font-size:1.8rem;font-weight:400;line-height:1.4;color:#1f2937}
+.feature p{grid-column:4/10;font-size:0.95rem;line-height:2;color:#374151;margin-top:15px}
+.feature .feat-aside{grid-column:10/13;font-size:0.8rem;color:#9ca3af;line-height:1.8;font-family:'Noto Sans SC',sans-serif}
+
+/* Golden ratio reference */
+.golden-section{display:grid;grid-template-columns:1.618fr 1fr;gap:40px;padding:60px 0;border-bottom:1px solid #e5e7eb;margin-bottom:60px}
+.golden-section .golden-left{border-right:1px solid #e5e7eb;padding-right:40px}
+.golden-section h3{font-size:1.4rem;font-weight:400;color:#1f2937;margin-bottom:15px}
+.golden-section p{font-size:0.9rem;line-height:1.9;color:#374151}
+.golden-section .golden-right{padding-top:10px}
+.golden-section .golden-right .ratio-box{width:100%;aspect-ratio:1.618/1;border:2px solid #1f2937;margin-bottom:15px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;letter-spacing:3px;color:#9ca3af;font-family:'Noto Sans SC',sans-serif}
+
+/* Footer */
+footer{background:#1f2937;padding:50px 0;margin-top:40px}
+footer .footer-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+footer .footer-left{grid-column:1/5}
+footer .footer-left h3{font-family:Georgia,serif;font-size:1rem;color:#f5f5f5;letter-spacing:4px;margin-bottom:8px}
+footer .footer-left p{color:#6b7280;font-size:0.8rem;font-family:'Noto Sans SC',sans-serif}
+footer .footer-mid{grid-column:5/9}
+footer .footer-mid p{color:#6b7280;font-size:0.8rem;line-height:1.8;font-family:'Noto Sans SC',sans-serif}
+footer .footer-right{grid-column:9/13;text-align:right}
+footer .footer-right a{display:block;color:#9ca3af;font-size:0.8rem;margin-bottom:8px;letter-spacing:2px;font-family:'Noto Sans SC',sans-serif}
+footer .footer-line{grid-column:1/13;height:1px;background:rgba(255,255,255,0.1);margin-top:30px}
+footer .footer-copy{grid-column:1/13;margin-top:15px}
+footer .footer-copy p{color:#4b5563;font-size:0.75rem;font-family:'Noto Sans SC',sans-serif}
+
+@media(max-width:768px){
+.hero{grid-template-columns:1fr}
+.hero-content{grid-column:auto}
+.hero-aside{grid-column:auto}
+.section-header{grid-template-columns:1fr}
+.section-header .sh-label,.section-header .sh-title,.section-header .sh-meta{grid-column:auto;text-align:left}
+.posts-grid{grid-template-columns:1fr}
+.post-card:nth-child(n){grid-column:auto}
+.feature{grid-template-columns:1fr}
+.feature .feat-label,.feature h3,.feature p,.feature .feat-aside{grid-column:auto}
+.golden-section{grid-template-columns:1fr}
+.golden-section .golden-left{border-right:none;border-bottom:1px solid #e5e7eb;padding-right:0;padding-bottom:30px}
+footer .footer-inner{grid-template-columns:1fr}
+footer .footer-left,.footer .footer-mid,.footer .footer-right,.footer .footer-line,.footer .footer-copy{grid-column:auto;text-align:left}
+nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-inner">
+<div class="logo">Modernism</div>
+<div class="nav-links">
+<a href="#">首页</a><a href="#">理论</a><a href="#">历史</a><a href="#">当代</a>
+</div>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="grid-container">
+<div class="hero">
+<div class="hero-content">
+<div class="overline">瑞士国际主义风格 · 2024</div>
+<h1>理性秩序中的<br><em>永恒之美</em></h1>
+<div class="hero-body">现代主义追求的是超越时代的设计语言。通过严格的网格系统、清晰的排版层次和克制的色彩运用，瑞士设计师们在二十世纪中叶建立了一套至今仍然有效的视觉规范。</div>
+</div>
+<div class="hero-aside">
+<div class="aside-block">
+<div class="label">核心原则</div>
+<p>客观性、可读性、普遍性。设计不是自我表达，而是信息的清晰传达。</p>
+</div>
+<div class="aside-block">
+<div class="label">代表人物</div>
+<p>约瑟夫·穆勒-布罗克曼、马克斯·比尔、奥托·艾舍、阿明·霍夫曼。</p>
+</div>
+<div class="aside-block">
+<div class="label">黄金比例</div>
+<p>1:1.618——自然界中最优美的比例关系，也是现代主义设计的数学基础。</p>
+</div>
+</div>
+</div>
+
+<div class="section-header">
+<div class="sh-label">Volume I — 理论</div>
+<h2 class="sh-title">设计的经典法则</h2>
+<div class="sh-meta">2024年出版</div>
+</div>
+
+<div class="posts-grid">
+<div class="post-card">
+<div class="post-num">01</div>
+<div class="post-cat">排版</div>
+<h3>网格系统的建立与运用</h3>
+<p>网格系统是瑞士国际主义风格的核心工具。它不是对创造力的限制，而是对信息组织的优化。通过将页面划分为等分的栏位，设计师可以在保持视觉秩序的同时灵活安排内容。穆勒-布罗克曼在其经典著作中详细阐述了网格系统的理论基础和实践方法，为后来的平面设计提供了不可替代的参照系。</p>
+<a href="#" class="post-link">阅读全文 →</a>
+</div>
+<div class="post-card">
+<div class="post-num">02</div>
+<div class="post-cat">字体</div>
+<h3>Helvetica：永恒的中性</h3>
+<p>一九五七年，马克斯·米丁格和爱德华·霍夫曼在哈斯铸造厂设计了Neue Haas Grotesk，后被改名为Helvetica。这款字体以其绝对的中性和清晰的可读性成为了现代主义设计的标志。它不表达情感，不制造噪音，只是安静而高效地传达信息。从纽约地铁到航空公司标识，Helvetica无处不在。</p>
+<a href="#" class="post-link">阅读全文 →</a>
+</div>
+<div class="post-card">
+<div class="post-num">03</div>
+<div class="post-cat">色彩</div>
+<h3>克制的色彩哲学</h3>
+<p>现代主义设计对色彩的使用极为克制。黑白灰是基础，红色是唯一的强调色。这种限制不是贫乏，而是精确。当设计师将色彩的变量降到最低时，信息的层次结构反而变得更加清晰。每一个色彩选择都必须有其功能性理由——区分层级、引导注意力、传达品牌标识。</p>
+<a href="#" class="post-link">阅读全文 →</a>
+</div>
+</div>
+
+<div class="feature">
+<div class="feat-label">深度专题</div>
+<h3>约瑟夫·穆勒-布罗克曼：网格的布道者</h3>
+<p>穆勒-布罗克曼不仅是一位杰出的设计师，更是网格系统最有力的倡导者。他在苏黎世的设计实践和在苏黎世艺术大学的教学工作，使网格系统从一种设计方法上升为一种设计哲学。他相信，通过理性的分析和系统的规划，设计师可以创造出既美观又实用的视觉传达作品。他的设计没有个人风格的炫耀，只有信息的完美呈现。这种看似"无我"的设计态度，恰恰体现了现代主义最深层的人文关怀。</p>
+<div class="feat-aside">
+<p>穆勒-布罗克曼于1914年出生于瑞士拉珀斯维尔。1958年创办《新平面设计》杂志。1961年出版《平面设计中的网格系统》。</p>
+</div>
+</div>
+
+<div class="golden-section">
+<div class="golden-left">
+<h3>黄金比例在设计中的应用</h3>
+<p>黄金比例（φ≈1.618）自古以来就被认为是最完美的比例关系。从帕特农神庙到文艺复兴绘画，从鹦鹉螺壳到向日葵种子排列，这一比例在自然界和人类创造中反复出现。现代主义设计师将这一古老的数学关系系统性地应用于版面设计中。页面的宽高比、栏位的宽度关系、标题与正文的字号比例——每一个维度都可以用黄金比例来确定。这不是教条，而是一种创造和谐视觉体验的有效工具。当设计师遵循这些经过时间验证的比例关系时，他们的作品自然会获得一种内在的秩序感和美感。</p>
+</div>
+<div class="golden-right">
+<div class="ratio-box">φ = 1.618</div>
+<div class="ratio-box" style="aspect-ratio:1/1">1:1</div>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-left">
+<h3>MODERNISM</h3>
+<p>理性的秩序 · 永恒的美</p>
+</div>
+<div class="footer-mid">
+<p>现代主义不是一种风格，而是一种态度。它相信理性的力量，追求普遍的价值，在纷繁复杂的视觉世界中寻找永恒的秩序。</p>
+</div>
+<div class="footer-right">
+<a href="#">存档</a><a href="#">理论</a><a href="#">人物</a><a href="#">关于</a>
+</div>
+<div class="footer-line"></div>
+<div class="footer-copy">
+<p>现代主义设计研究 © 2024</p>
+</div>
+</div>
+</footer>
+<script>
+document.querySelectorAll('.post-card').forEach(card=>{
+card.style.transition='border-color 0.3s';
+card.addEventListener('mouseenter',()=>{card.style.borderTopColor='#dc2626'});
+card.addEventListener('mouseleave',()=>{card.style.borderTopColor='#1f2937'});
+});
+</script>
+</body>
+</html>

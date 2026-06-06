@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>哥特萝莉 — 暗夜中的华丽</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#0a0012;color:#e8d5e8;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:12px 25px;background:#1a0033;color:#d4af37;font-weight:700;margin:20px;border:2px solid #d4af37;letter-spacing:3px;font-size:0.85em}
+.back-link:hover{background:#d4af37;color:#1a0033}
+.hero{background:linear-gradient(180deg,#1a0033 0%,#0d001a 40%,#1a0033 100%);padding:100px 20px;text-align:center;position:relative;border-bottom:4px double #d4af37}
+.hero h1{font-size:3.5em;color:#d4af37;text-shadow:0 0 30px rgba(212,175,55,0.5);font-weight:700;letter-spacing:12px;border:3px double #d4af37;display:inline-block;padding:20px 50px}
+.hero .subtitle{color:#8b6914;font-size:1em;margin-top:20px;font-weight:300;letter-spacing:8px;font-style:italic}
+.hero-deco{font-size:20px;letter-spacing:30px;opacity:0.4;display:block;text-align:center;padding:15px}
+.lace-divider{height:30px;background:repeating-linear-gradient(90deg,transparent,transparent 10px,#d4af37 10px,#d4af37 11px),repeating-linear-gradient(0deg,transparent,transparent 5px,rgba(212,175,55,0.2) 5px,rgba(212,175,55,0.2) 6px);border-top:2px solid #d4af37;border-bottom:2px solid #d4af37;position:relative}
+.lace-divider::before{content:'✝️';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#0a0012;padding:0 15px;font-size:18px}
+.baroque-divider{height:4px;background:linear-gradient(90deg,transparent,#d4af37 20%,#d4af37 80%,transparent);margin:40px auto;width:60%;position:relative}
+.baroque-divider::before{content:'❧';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#0a0012;padding:0 10px;color:#d4af37;font-size:18px}
+.main-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;max-width:1200px;margin:50px auto;padding:0 20px}
+.posts-area{display:flex;flex-direction:column;gap:50px}
+.post-card{background:linear-gradient(145deg,#1a0033,#0d001a);border:3px solid #4a0080;padding:0;position:relative;overflow:hidden}
+.post-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#d4af37,transparent);z-index:1}
+.post-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#d4af37,transparent);z-index:1}
+.post-img{width:100%;height:300px;display:flex;align-items:center;justify-content:center;font-size:100px;border-bottom:3px solid #d4af37;position:relative}
+.post-img::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(212,175,55,0.05) 20px,rgba(212,175,55,0.05) 21px)}
+.post-content{padding:35px}
+.post-content h2{font-size:1.6em;color:#d4af37;margin-bottom:12px;font-weight:700;letter-spacing:2px}
+.post-meta{color:#6a5a6a;font-size:0.8em;margin-bottom:18px;display:flex;gap:15px;flex-wrap:wrap}
+.post-meta span{border:1px solid #4a0080;padding:3px 12px}
+.post-content p{line-height:2;color:#c0a8c0;margin-bottom:20px;text-align:justify}
+.read-more{display:inline-block;background:transparent;color:#d4af37;padding:10px 30px;border:2px solid #d4af37;font-weight:700;letter-spacing:3px;font-size:0.85em;transition:all .4s}
+.read-more:hover{background:#d4af37;color:#1a0033}
+.sidebar{display:flex;flex-direction:column;gap:30px}
+.sidebar-widget{background:linear-gradient(180deg,#1a0033,#0d001a);border:2px solid #4a0080;padding:25px;position:relative}
+.sidebar-widget::before{content:'';position:absolute;top:-2px;left:-2px;right:-2px;height:2px;background:#d4af37}
+.sidebar-widget h3{font-size:1.1em;color:#d4af37;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #4a0080;letter-spacing:3px}
+.sidebar-widget h3::before{content:'✝️ '}
+.occult-list{list-style:none}
+.occult-list li{padding:10px 0;border-bottom:1px solid rgba(74,0,128,0.3);font-size:0.85em;color:#c0a8c0;letter-spacing:1px}
+.occult-list li::before{content:'🕯️ '}
+.quote-box{font-style:italic;color:#8b0000;border-left:3px solid #d4af37;padding:15px 20px;line-height:1.8;font-size:0.9em}
+.gothic-cross{font-size:60px;text-align:center;color:#d4af37;opacity:0.3;padding:20px}
+footer{background:#0a0012;color:#6a5a6a;text-align:center;padding:50px 20px;border-top:4px double #d4af37}
+footer .ornament{font-size:30px;letter-spacing:20px;color:#d4af37;opacity:0.5;margin-bottom:15px}
+footer p{font-size:0.8em;letter-spacing:3px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<span class="hero-deco">✝️ 🕯️ ✝️ 🕯️ ✝️ 🕯️ ✝️ 🕯️ ✝️</span>
+<h1>✝️ 哥特萝莉 ✝️</h1>
+<p class="subtitle">— 暗夜中绽放的黑玫瑰 —</p>
+<span class="hero-deco">🕯️ ✝️ 🕯️ ✝️ 🕯️ ✝️ 🕯️ ✝️ 🕯️</span>
+</div>
+
+<div class="lace-divider"></div>
+
+<div class="main-layout">
+<div class="posts-area">
+
+<div class="post-card">
+<div class="post-img" style="background:linear-gradient(135deg,#2d004d 0%,#8b0000 50%,#1a0033 100%)">🌹</div>
+<div class="post-content">
+<h2>✝️ 午夜茶会：暗黑美学的极致演绎</h2>
+<div class="post-meta">
+<span>🕯️ 暗月十五</span>
+<span>📜 哥特美学</span>
+<span>🦇 23条评论</span>
+</div>
+<p>当午夜的钟声敲响第十二下，城堡深处的大厅亮起了摇曳的烛光。长桌上铺着黑色蕾丝桌布，银质餐具在烛光中泛着冷光。这就是我们每月举办一次的午夜茶会——一个属于黑暗美学信徒的聚会。今天的话题是：如何在日常穿搭中融入哥特元素而不显得过于沉重。</p>
+<p>答案其实很简单——细节决定一切。一枚维多利亚风格的胸针，一条暗色系的蕾丝choker，或者仅仅是一双深红色的玛丽珍鞋，都能在不经意间透露出你对暗黑美学的热爱。记住，哥特不是恐惧，而是一种对美的极致追求，在黑暗中发现光，在凋零中看到永恒。</p>
+<a href="#" class="read-more">阅读全文 ✝️</a>
+</div>
+</div>
+
+<div class="baroque-divider"></div>
+
+<div class="post-card">
+<div class="post-img" style="background:linear-gradient(135deg,#8b0000 0%,#1a0033 50%,#d4af37 100%)">🦇</div>
+<div class="post-content">
+<h2>🦇 维多利亚暗影：从历史中汲取的穿搭灵感</h2>
+<div class="post-meta">
+<span>🕯️ 雾月第三日</span>
+<span>📜 时尚</span>
+<span>🦇 47条评论</span>
+</div>
+<p>十九世纪的维多利亚时代，是哥特美学的黄金年代。那时候的女性穿着层层叠叠的黑色蕾丝，佩戴着精致的银饰，苍白的面容上点缀着深色的唇妆。她们不是在表达悲伤，而是在追求一种超越时代的优雅——那种只有在阴影中才能找到的美。</p>
+<p>如今的哥特萝莉风格，正是从那个时代汲取了大量灵感。高腰线、蓬蓬袖、层叠裙摆，这些都是维多利亚时代的经典元素。但我们用更现代的方式重新诠释了它们：更蓬松的裙撑，更夸张的蝴蝶结，更闪亮的配饰。黑暗从来不沉闷，它只是在等待被重新定义。</p>
+<a href="#" class="read-more">阅读全文 ✝️</a>
+</div>
+</div>
+
+<div class="baroque-divider"></div>
+
+<div class="post-card">
+<div class="post-img" style="background:linear-gradient(135deg,#0d001a 0%,#4a0080 50%,#d4af37 100%)">📜</div>
+<div class="post-content">
+<h2>📜 暗夜诗篇：五首适合雨天阅读的哥特诗歌</h2>
+<div class="post-meta">
+<span>🕯️ 雨月第七日</span>
+<span>📜 文学</span>
+<span>🦇 31条评论</span>
+</div>
+<p>"乌鸦说：永不复还。"爱伦·坡的这句诗，是每一个哥特爱好者的入门必读。但除了这首经典之作，还有许多值得在雨天细细品味的暗黑诗歌。今天我精选了五首，适合在一个阴雨绵绵的下午，泡一杯红茶，点一根蜡烛，蜷缩在窗边慢慢阅读。</p>
+<p>第二首推荐的是克里斯蒂娜·罗塞蒂的《歌》——"当我死去的时候，亲爱的，不要为我唱悲伤的歌。"这首诗用最温柔的笔触写出了最深沉的告别。没有嚎啕大哭，没有撕心裂肺，只有平静的接受和淡淡的忧伤。这才是真正的哥特精神——不是沉溺于悲伤，而是在悲伤中找到美。</p>
+<a href="#" class="read-more">阅读全文 ✝️</a>
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+<div class="sidebar-widget">
+<div class="gothic-cross">✝️</div>
+<h3>关于暗夜旅人</h3>
+<p style="line-height:1.8;font-size:0.85em;color:#c0a8c0">一个热爱黑暗美学的灵魂，在午夜的烛光下记录关于哥特时尚、暗黑文学和一切美好而忧伤的事物。</p>
+</div>
+
+<div class="sidebar-widget">
+<h3>暗黑书签</h3>
+<ul class="occult-list">
+<li>哥特萝莉入门指南</li>
+<li>维多利亚时尚图鉴</li>
+<li>暗黑文学推荐</li>
+<li>午夜茶会食谱</li>
+<li>银饰保养手册</li>
+</ul>
+</div>
+
+<div class="sidebar-widget">
+<h3>暗夜箴言</h3>
+<div class="quote-box">
+"我们不是因为黑暗才美丽，而是因为我们在黑暗中依然选择绽放。"<br>
+<span style="color:#d4af37;font-size:0.8em">—— 某个午夜的呢喃</span>
+</div>
+</div>
+
+<div class="sidebar-widget">
+<h3>暗色标签</h3>
+<div style="display:flex;flex-wrap:wrap;gap:5px">
+<span style="padding:4px 12px;border:1px solid #4a0080;font-size:0.75em;color:#8b0000">🦇 哥特</span>
+<span style="padding:4px 12px;border:1px solid #4a0080;font-size:0.75em;color:#8b0000">🌹 蕾丝</span>
+<span style="padding:4px 12px;border:1px solid #4a0080;font-size:0.75em;color:#8b0000">✝️ 十字</span>
+<span style="padding:4px 12px;border:1px solid #4a0080;font-size:0.75em;color:#8b0000">🕯️ 蜡烛</span>
+<span style="padding:4px 12px;border:1px solid #4a0080;font-size:0.75em;color:#8b0000">📜 诗歌</span>
+<span style="padding:4px 12px;border:1px solid #4a0080;font-size:0.75em;color:#8b0000">🦇 暗夜</span>
+</div>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="ornament">✝️ 🕯️ ✝️ 🕯️ ✝️</div>
+<p>© 2026 哥特萝莉 · 暗夜中的华丽绽放</p>
+<p style="margin-top:10px;color:#4a0080;font-size:0.7em">在黑暗中，我们找到了光 ✝️</p>
+</footer>
+</body>
+</html>

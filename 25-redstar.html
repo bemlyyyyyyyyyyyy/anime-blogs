@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>红星照耀 — 信念之光</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#000;color:#fff;overflow-x:hidden}
+a{color:#b91c1c;text-decoration:none}
+a:hover{color:#92400e}
+
+nav{position:fixed;top:0;left:0;width:100%;background:#000;z-index:1000;padding:12px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #b91c1c}
+nav .logo{font-size:1.3rem;font-weight:700;color:#b91c1c;letter-spacing:5px}
+nav .logo::before{content:'★';margin-right:8px;color:#92400e}
+nav .nav-links{display:flex;gap:24px}
+nav .nav-links a{color:#fff;font-weight:400;font-size:0.85rem;letter-spacing:3px}
+nav .nav-links a:hover{color:#b91c1c}
+
+.back-link{position:fixed;top:55px;left:20px;z-index:999;background:#b91c1c;color:#fff;padding:8px 16px;font-weight:700;font-size:0.85rem;letter-spacing:2px}
+
+/* Hero with CSS star */
+.hero{margin-top:50px;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle at 50% 40%,#1a0000 0%,#000 70%)}
+.star-container{position:relative;width:300px;height:300px;margin-bottom:40px}
+.star{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0}
+.star-shape{width:200px;height:200px;background:#b91c1c;position:relative;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:starGlow 3s ease-in-out infinite}
+@keyframes starGlow{0%,100%{filter:drop-shadow(0 0 20px rgba(185,28,28,0.5))}50%{filter:drop-shadow(0 0 40px rgba(185,28,28,0.8)) drop-shadow(0 0 80px rgba(146,64,14,0.3))}}
+.star-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:260px;height:260px;border:2px solid rgba(185,28,28,0.3);border-radius:50%;animation:ringPulse 3s ease-in-out infinite}
+@keyframes ringPulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.1);opacity:0.5}}
+.star-ring2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;border:1px solid rgba(146,64,14,0.2);border-radius:50%;animation:ringPulse 3s ease-in-out infinite 0.5s}
+.hero-slogan{text-align:center;position:relative;z-index:2}
+.hero-slogan h1{font-size:4rem;font-weight:700;letter-spacing:10px;line-height:1.3}
+.hero-slogan h1 .red{color:#b91c1c}
+.hero-slogan h1 .gold{color:#92400e}
+.hero-slogan .sub{font-size:1.2rem;color:#92400e;letter-spacing:8px;margin-top:15px;font-weight:700}
+.hero-rays{position:absolute;top:0;left:0;width:100%;height:100%;background:conic-gradient(from 0deg,transparent 0deg,rgba(185,28,28,0.03) 10deg,transparent 20deg,transparent 30deg,rgba(185,28,28,0.03) 40deg,transparent 50deg,transparent 60deg,rgba(185,28,28,0.03) 70deg,transparent 80deg,transparent 90deg,rgba(185,28,28,0.03) 100deg,transparent 110deg,transparent 120deg,rgba(185,28,28,0.03) 130deg,transparent 140deg,transparent 150deg,rgba(185,28,28,0.03) 160deg,transparent 170deg,transparent 180deg,rgba(185,28,28,0.03) 190deg,transparent 200deg,transparent 210deg,rgba(185,28,28,0.03) 220deg,transparent 230deg,transparent 240deg,rgba(185,28,28,0.03) 250deg,transparent 260deg,transparent 270deg,rgba(185,28,28,0.03) 280deg,transparent 290deg,transparent 300deg,rgba(185,28,28,0.03) 310deg,transparent 320deg,transparent 330deg,rgba(185,28,28,0.03) 340deg,transparent 350deg);pointer-events:none}
+
+/* Banner ribbon */
+.ribbon-banner{background:#b91c1c;padding:20px;text-align:center;position:relative;z-index:2}
+.ribbon-banner::before,.ribbon-banner::after{content:'';position:absolute;bottom:-15px;width:0;height:0}
+.ribbon-banner::before{left:0;border-left:0 solid transparent;border-right:30px solid transparent;border-top:15px solid #92400e}
+.ribbon-banner::after{right:0;border-right:0 solid transparent;border-left:30px solid transparent;border-top:15px solid #92400e}
+.ribbon-banner p{font-size:1.1rem;font-weight:700;letter-spacing:6px;color:#fff}
+.ribbon-banner p::before,.ribbon-banner p::after{content:'★';margin:0 12px;color:#92400e}
+
+/* Posts */
+.posts-section{padding:80px 40px;max-width:1000px;margin:0 auto;position:relative;z-index:2}
+.section-header{text-align:center;margin-bottom:50px}
+.section-header h2{font-size:2.5rem;font-weight:700;letter-spacing:8px;color:#b91c1c}
+.section-header .line{width:60px;height:3px;background:#92400e;margin:15px auto}
+.section-header p{color:#666;font-size:0.9rem;letter-spacing:4px}
+
+.post-card{background:#0a0a0a;border:1px solid rgba(185,28,28,0.3);margin-bottom:30px;padding:40px;position:relative;display:grid;grid-template-columns:auto 1fr;gap:30px;transition:all 0.3s}
+.post-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#b91c1c}
+.post-card:hover{border-color:#b91c1c;box-shadow:0 0 30px rgba(185,28,28,0.1)}
+.post-star{display:flex;flex-direction:column;align-items:center;padding-top:5px}
+.post-star .star-badge{width:50px;height:50px;background:#b91c1c;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.post-star .star-num{font-size:0.75rem;color:#92400e;margin-top:8px;letter-spacing:2px}
+.post-body h3{font-size:1.5rem;font-weight:700;margin-bottom:12px;color:#fff;letter-spacing:2px}
+.post-body .post-meta{font-size:0.75rem;color:#92400e;letter-spacing:3px;margin-bottom:10px;text-transform:uppercase}
+.post-body p{font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.7)}
+.post-body .post-tags{margin-top:15px;display:flex;gap:8px}
+.post-body .tag{background:rgba(185,28,28,0.2);border:1px solid rgba(185,28,28,0.5);color:#b91c1c;padding:4px 12px;font-size:0.75rem;letter-spacing:1px}
+
+/* Vertical line decorations */
+.vertical-accent{position:absolute;width:1px;height:200px;background:linear-gradient(to bottom,transparent,#b91c1c,transparent);z-index:1}
+.vertical-accent.va1{left:10%;top:20%}
+.vertical-accent.va2{right:10%;top:40%}
+
+/* Quote section */
+.quote-section{padding:80px 40px;text-align:center;position:relative;z-index:2;background:linear-gradient(180deg,transparent,rgba(185,28,28,0.05),transparent)}
+.quote-section blockquote{font-size:1.8rem;font-weight:700;color:#b91c1c;max-width:700px;margin:0 auto;line-height:1.5;letter-spacing:3px;position:relative}
+.quote-section blockquote::before{content:'"';display:block;font-size:4rem;color:#92400e;opacity:0.3}
+.quote-section .attr{margin-top:15px;color:#92400e;font-size:0.9rem;letter-spacing:4px}
+
+/* Footer */
+footer{background:#0a0a0a;padding:50px 40px;text-align:center;border-top:3px solid #b91c1c;position:relative;z-index:2}
+footer .footer-star{width:40px;height:40px;background:#b91c1c;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);margin:0 auto 15px}
+footer p{color:#666;font-size:0.85rem;letter-spacing:4px}
+footer .footer-motto{color:#b91c1c;font-weight:700;font-size:1rem;letter-spacing:6px;margin-top:10px}
+
+@media(max-width:768px){
+.hero-slogan h1{font-size:2rem}
+.star-shape{width:120px;height:120px}
+.star-ring{width:160px;height:160px}
+.star-ring2{width:190px;height:190px}
+.post-card{grid-template-columns:1fr}
+.post-star{flex-direction:row;gap:15px}
+nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">红星照耀</div>
+<div class="nav-links">
+<a href="#">信念</a><a href="#">历程</a><a href="#">理想</a><a href="#">未来</a>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="hero-rays"></div>
+<div class="star-container">
+<div class="star-ring2"></div>
+<div class="star-ring"></div>
+<div class="star-shape"></div>
+</div>
+<div class="hero-slogan">
+<h1><span class="red">红星</span><span class="gold">照耀</span><br>前行之路</h1>
+<div class="sub">理想 · 信念 · 未来</div>
+</div>
+</div>
+
+<div class="ribbon-banner">
+<p>永远的理想主义者</p>
+</div>
+
+<div class="posts-section">
+<div class="section-header">
+<h2>信念之声</h2>
+<div class="line"></div>
+<p>记录那些照亮前行道路的思想之光</p>
+</div>
+
+<div class="vertical-accent va1"></div>
+<div class="vertical-accent va2"></div>
+
+<div class="post-card">
+<div class="post-star">
+<div class="star-badge"></div>
+<span class="star-num">壹</span>
+</div>
+<div class="post-body">
+<div class="post-meta">2024年 · 理想</div>
+<h3>理想主义的不灭火种</h3>
+<p>在每一个时代，总有人仰望星空，不满足于脚下的泥泞。理想主义者不是空想家，而是那些敢于相信明天可以比今天更好的人。他们手中的火炬照亮了无数人前行的道路，即使在最黑暗的夜晚也不曾熄灭。这颗红星不仅是一个符号，更是一种永不妥协的精神——对更美好世界的永恒追求。历史证明，每一次伟大的变革都始于某个不肯向现实低头的理想。</p>
+<div class="post-tags">
+<span class="tag">理想</span><span class="tag">信念</span><span class="tag">变革</span>
+</div>
+</div>
+</div>
+
+<div class="post-card">
+<div class="post-star">
+<div class="star-badge"></div>
+<span class="star-num">贰</span>
+</div>
+<div class="post-body">
+<div class="post-meta">2024年 · 远见</div>
+<h3>面向未来的远见</h3>
+<p>真正的远见不是预测未来，而是创造未来。那些伟大的先行者们不是坐在那里等待变化发生，而是亲手塑造了他们所相信的明天。从荒原到城市，从贫困到繁荣，从封闭到开放——每一步前行都凝聚着无数人的汗水和智慧。面向未来意味着不被当下的困难所束缚，始终保持对可能性的信念。远见者看到的不是眼前的障碍，而是障碍背后的广阔天地。</p>
+<div class="post-tags">
+<span class="tag">远见</span><span class="tag">创造</span><span class="tag">未来</span>
+</div>
+</div>
+</div>
+
+<div class="post-card">
+<div class="post-star">
+<div class="star-badge"></div>
+<span class="star-num">叁</span>
+</div>
+<div class="post-body">
+<div class="post-meta">2024年 · 践行</div>
+<h3>从理想到行动的桥梁</h3>
+<p>理想如果不付诸行动，就只是空中楼阁。真正的信念必须经受现实的考验，在实践中不断修正和完善。每一代人都有属于自己的使命，而完成使命的唯一途径就是脚踏实地的行动。从小事做起，从身边做起，每一个微小的改变都可能引发蝴蝶效应般的连锁反应。践行理想的道路上没有捷径，唯有坚持和勇气才能将愿景转化为现实。行动是最好的宣言。</p>
+<div class="post-tags">
+<span class="tag">践行</span><span class="tag">行动</span><span class="tag">使命</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="quote-section">
+<blockquote>星星之火，可以燎原</blockquote>
+<div class="attr">—— 永恒的信念</div>
+</div>
+
+<footer>
+<div class="footer-star"></div>
+<p>红星照耀 · 2024</p>
+<div class="footer-motto">理想不灭 · 信念永存</div>
+</footer>
+<script>
+const starShape=document.querySelector('.star-shape');
+window.addEventListener('scroll',()=>{
+const scroll=window.scrollY;
+const rotation=scroll*0.1;
+starShape.style.transform=`rotate(${rotation}deg)`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>霓虹东京 - Neon Tokyo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans SC',sans-serif;background:#0f0c29;color:#e0e0e0;overflow-x:hidden;}
+a{text-decoration:none;color:#00ffff;}
+
+@keyframes neonFlicker{0%,19%,21%,23%,25%,54%,56%,100%{text-shadow:0 0 4px #fff,0 0 11px #fff,0 0 19px #fff,0 0 40px #ff00ff,0 0 80px #ff00ff,0 0 90px #ff00ff,0 0 100px #ff00ff,0 0 150px #ff00ff;}20%,24%,55%{text-shadow:none;}}
+@keyframes scanline{0%{top:-100%;}100%{top:100%;}}
+@keyframes borderGlow{0%{border-color:#ff00ff;box-shadow:0 0 10px #ff00ff,0 0 20px #ff00ff;}50%{border-color:#00ffff;box-shadow:0 0 10px #00ffff,0 0 20px #00ffff;}100%{border-color:#ff00ff;box-shadow:0 0 10px #ff00ff,0 0 20px #ff00ff;}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.5;}}
+@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+.scanline-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.15) 0px,rgba(0,0,0,0.15) 1px,transparent 1px,transparent 2px);}
+.scanline-overlay::after{content:'';position:absolute;width:100%;height:200%;background:linear-gradient(transparent 50%,rgba(0,255,255,0.03) 50%);animation:scanline 8s linear infinite;}
+
+nav{background:rgba(15,12,41,0.95);border-bottom:2px solid #ff00ff;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);}
+nav .inner{max-width:1200px;margin:0 auto;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;}
+nav .logo{font-size:1.5rem;font-weight:700;color:#ff00ff;animation:neonFlicker 3s infinite;}
+nav .links{display:flex;gap:25px;}
+nav .links a{color:#00ffff;font-size:0.9rem;transition:all 0.3s;position:relative;padding:5px 0;}
+nav .links a:hover{color:#ff00ff;text-shadow:0 0 10px #ff00ff;}
+nav .links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:#ff00ff;transition:width 0.3s;}
+nav .links a:hover::after{width:100%;}
+
+.back-link{display:inline-block;margin:20px 30px;padding:8px 20px;border:1px solid #00ffff;color:#00ffff;border-radius:3px;font-size:0.85rem;transition:all 0.3s;}
+.back-link:hover{background:#00ffff;color:#0f0c29;box-shadow:0 0 15px #00ffff;}
+
+.hero{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%);background-size:200% 200%;animation:gradientShift 8s ease infinite;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(255,0,255,0.15) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(0,255,255,0.15) 0%,transparent 50%);}
+.hero h1{font-size:4rem;color:#fff;animation:neonFlicker 4s infinite;position:relative;z-index:2;text-transform:uppercase;letter-spacing:8px;}
+.hero p{font-size:1.2rem;color:#00ffff;margin-top:15px;position:relative;z-index:2;text-shadow:0 0 10px rgba(0,255,255,0.5);}
+.hero .deco{position:absolute;font-size:6rem;opacity:0.1;color:#ff00ff;animation:float 6s ease-in-out infinite;}
+.hero .deco:nth-child(1){top:10%;left:10%;}
+.hero .deco:nth-child(2){bottom:10%;right:10%;animation-delay:3s;}
+
+.container{max-width:1200px;margin:0 auto;padding:40px 30px;display:grid;grid-template-columns:1fr 350px;gap:40px;}
+.main-content{display:flex;flex-direction:column;gap:40px;}
+
+.post-card{background:rgba(48,43,99,0.3);border:1px solid #ff00ff;border-radius:8px;padding:30px;animation:borderGlow 4s infinite,slideIn 0.6s ease-out both;position:relative;overflow:hidden;}
+.post-card:nth-child(2){animation-delay:0.2s;}
+.post-card:nth-child(3){animation-delay:0.4s;}
+.post-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:2px;background:linear-gradient(90deg,transparent,#ff00ff,#00ffff,transparent);animation:scanline 3s linear infinite;}
+.post-card .tag{display:inline-block;padding:3px 12px;background:rgba(255,0,255,0.2);border:1px solid #ff00ff;border-radius:20px;font-size:0.75rem;color:#ff00ff;margin-bottom:10px;}
+.post-card h2{font-size:1.6rem;color:#fff;margin-bottom:10px;text-shadow:0 0 5px rgba(255,0,255,0.3);}
+.post-card .meta{font-size:0.8rem;color:#888;margin-bottom:15px;}
+.post-card p{line-height:1.8;color:#c0c0c0;font-size:0.95rem;}
+.post-card .read-more{display:inline-block;margin-top:15px;padding:8px 25px;border:1px solid #00ffff;color:#00ffff;border-radius:3px;font-size:0.85rem;transition:all 0.3s;}
+.post-card .read-more:hover{background:#00ffff;color:#0f0c29;box-shadow:0 0 20px rgba(0,255,255,0.5);}
+.post-card .img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#1a1a3e,#302b63);border:1px solid rgba(255,0,255,0.3);border-radius:5px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;color:#ff00ff;font-size:2rem;position:relative;overflow:hidden;}
+.post-card .img-placeholder::after{content:'';position:absolute;width:50%;height:50%;border:2px solid rgba(0,255,255,0.2);border-radius:50%;animation:float 4s ease-in-out infinite;}
+
+.sidebar{display:flex;flex-direction:column;gap:25px;}
+.widget{background:rgba(48,43,99,0.3);border:1px solid rgba(0,255,255,0.3);border-radius:8px;padding:25px;}
+.widget h3{color:#00ffff;font-size:1.1rem;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(0,255,255,0.2);}
+.widget ul{list-style:none;}
+.widget ul li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.widget ul li a{color:#c0c0c0;font-size:0.9rem;transition:color 0.3s;}
+.widget ul li a:hover{color:#ff00ff;}
+.widget .tag-cloud{display:flex;flex-wrap:wrap;gap:8px;}
+.widget .tag-cloud span{padding:4px 12px;background:rgba(255,0,255,0.1);border:1px solid rgba(255,0,255,0.3);border-radius:20px;font-size:0.75rem;color:#ff00ff;cursor:pointer;transition:all 0.3s;}
+.widget .tag-cloud span:hover{background:rgba(255,0,255,0.3);box-shadow:0 0 10px rgba(255,0,255,0.3);}
+.widget .about-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#ff00ff,#00ffff);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:2rem;}
+.widget .about-text{font-size:0.85rem;color:#999;line-height:1.6;text-align:center;}
+
+footer{text-align:center;padding:40px 30px;border-top:1px solid rgba(255,0,255,0.2);margin-top:40px;background:rgba(0,0,0,0.3);}
+footer p{color:#666;font-size:0.8rem;}
+footer .neon-text{color:#ff00ff;animation:neonFlicker 5s infinite;}
+
+@media(max-width:900px){.container{grid-template-columns:1fr;}.hero h1{font-size:2.5rem;letter-spacing:4px;}}
+</style>
+</head>
+<body>
+<div class="scanline-overlay"></div>
+<nav>
+<div class="inner">
+<a href="#" class="logo">霓虹东京</a>
+<div class="links">
+<a href="#">首页</a><a href="#">文章</a><a href="#">关于</a><a href="#">联系</a>
+</div>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+<section class="hero">
+<div class="deco">霓</div>
+<div class="deco">虹</div>
+<h1>霓虹东京</h1>
+<p>在无尽的霓虹灯光下，寻找赛博朋克的灵魂</p>
+</section>
+<div class="container">
+<main class="main-content">
+<article class="post-card">
+<div class="img-placeholder">🌃</div>
+<span class="tag">夜生活</span>
+<h2>东京新宿歌舞伎町的霓虹之夜</h2>
+<div class="meta">2026-05-28 · 赛博旅人</div>
+<p>当夜幕降临，新宿歌舞伎町的霓虹灯牌开始闪烁。无数LED屏幕投射出五彩斑斓的光芒，将整条街道染成一条流动的光河。在这里，现实与虚拟的界限变得模糊，每一个转角都可能遇见未来的碎片。巨大的全息广告在头顶旋转，路过的行人眼中倒映着这个不夜城的万千色彩。这里不仅是东京的心脏，更是赛博朋克精神的现实映射。</p>
+<a href="#" class="read-more">阅读全文 →</a>
+</article>
+<article class="post-card">
+<div class="img-placeholder">🤖</div>
+<span class="tag">科技前沿</span>
+<h2>神经链接技术：意识上传的最后一步</h2>
+<div class="meta">2026-05-20 · 数据幽灵</div>
+<p>在东京湾畔的秘密实验室里，一组科学家正在测试最新的神经链接技术。这项技术声称可以将人类意识完整地数字化，上传到云端服务器中。实验对象的脑电波被转换成数据流，在虚拟空间中重新构建出一个完整的数字自我。这究竟是人类进化的下一阶段，还是对自然秩序的亵渎？当意识不再受限于肉体，"人"的定义又将如何改变？</p>
+<a href="#" class="read-more">阅读全文 →</a>
+</article>
+<article class="post-card">
+<div class="img-placeholder">⚡</div>
+<span class="tag">都市传说</span>
+<h2>涩谷十字路口的数字幽灵</h2>
+<div class="meta">2026-05-15 · 霓虹行者</div>
+<p>在涩谷最繁忙的十字路口，有传言说在凌晨三点十七分，如果你用特定的AR眼镜看向人群，会看到一些不属于这个时代的身影。他们穿着未来的服装，使用着尚未发明的设备，穿行在普通的行人之间。有人说这是时间裂缝的证据，也有人说这只是量子计算产生的数据残影。但越来越多的人声称自己目击了这些"数字幽灵"。</p>
+<a href="#" class="read-more">阅读全文 →</a>
+</article>
+</main>
+<aside class="sidebar">
+<div class="widget">
+<div class="about-avatar">🌐</div>
+<div class="about-text">记录赛博时代的城市脉搏，在霓虹与代码之间寻找诗意。一个来自2077年的旅人。</div>
+</div>
+<div class="widget">
+<h3>热门标签</h3>
+<div class="tag-cloud">
+<span>#赛博朋克</span><span>#东京</span><span>#霓虹</span><span>#人工智能</span><span>#虚拟现实</span><span>#夜生活</span><span>#科技</span><span>#未来</span>
+</div>
+</div>
+<div class="widget">
+<h3>最新文章</h3>
+<ul>
+<li><a href="#">东京湾的水下城市计划</a></li>
+<li><a href="#">当AI学会了做梦</a></li>
+<li><a href="#">秋叶原的最后一家实体书店</a></li>
+<li><a href="#">量子纠缠与心灵感应</a></li>
+<li><a href="#">银座的全息时装秀</a></li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p class="neon-text">霓虹东京 © 2026</p>
+<p style="margin-top:8px;">在光与影的交界处，我们都是赛博流浪者</p>
+</footer>
+</body>
+</html>

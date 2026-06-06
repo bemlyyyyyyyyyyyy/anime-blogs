@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>红星学院 — 苏维埃二次元学园</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff0f5;color:#333;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:#dc2626;color:#fff;font-weight:700;margin:20px;border-radius:0 0 20px 0;letter-spacing:2px;transition:all .3s}
+.back-link:hover{background:#f472b6}
+
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
+@keyframes march{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+@keyframes blush{0%,100%{opacity:0.3}50%{opacity:0.6}}
+
+.hero{position:relative;min-height:55vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#dc2626 0%,#f472b6 40%,#fff0f5 70%,#dc2626 100%);overflow:hidden}
+.hero::before{content:'★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★ ♥ ★';position:absolute;top:15px;left:0;width:200%;text-align:center;font-size:20px;color:rgba(255,255,255,0.3);letter-spacing:15px;animation:march 15s linear infinite}
+.hero .sparkle{position:absolute;font-size:20px;animation:sparkle 2s ease-in-out infinite}
+.hero .sparkle:nth-child(1){top:20%;left:10%;animation-delay:0s}
+.hero .sparkle:nth-child(2){top:40%;right:15%;animation-delay:0.5s}
+.hero .sparkle:nth-child(3){bottom:25%;left:20%;animation-delay:1s}
+.hero .sparkle:nth-child(4){top:15%;right:25%;animation-delay:1.5s}
+.hero .sparkle:nth-child(5){bottom:35%;right:10%;animation-delay:0.8s}
+.hero h1{font-size:4rem;color:#fff;text-shadow:4px 4px 0 #dc2626,8px 8px 0 rgba(0,0,0,0.1);letter-spacing:10px;position:relative;z-index:1;animation:float 3s ease-in-out infinite}
+.hero .sub{font-size:1.1rem;color:rgba(255,255,255,0.85);margin-top:15px;letter-spacing:4px;position:relative;z-index:1}
+.hero .badge{display:inline-block;margin-top:15px;padding:8px 25px;background:rgba(255,255,255,0.2);border:2px solid #fff;border-radius:30px;color:#fff;font-size:13px;letter-spacing:3px;position:relative;z-index:1}
+
+.propaganda{background:#dc2626;color:#fff;text-align:center;padding:15px;font-weight:700;letter-spacing:5px;font-size:1.1em;position:relative}
+.propaganda::before,.propaganda::after{content:'★';margin:0 15px;color:#f472b6}
+
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1200px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:35px}
+
+.anime-card{background:#fff;border-radius:25px;border:4px solid #dc2626;overflow:hidden;position:relative;transition:transform .3s}
+.anime-card:hover{transform:rotate(-1deg) scale(1.02)}
+.anime-card::before{content:'♥';position:absolute;top:15px;right:20px;font-size:25px;z-index:2;color:#f472b6;animation:blush 2s infinite}
+.anime-badge{position:absolute;top:15px;left:-5px;background:#dc2626;color:#fff;padding:5px 20px 5px 15px;font-weight:700;font-size:0.8em;clip-path:polygon(0 0,100% 0,95% 100%,0 100%);z-index:2}
+.anime-img{width:100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:80px}
+.anime-content{padding:30px}
+.anime-content h2{font-size:1.8em;color:#dc2626;margin-bottom:10px;font-weight:700}
+.anime-content .meta{color:#999;font-size:0.85em;margin-bottom:15px}
+.anime-content .meta span{background:#fff0f5;padding:3px 10px;border-radius:10px;margin-right:5px;border:1px solid #f472b6}
+.anime-content p{line-height:1.9;color:#555;font-size:15px;margin-bottom:15px}
+.anime-content .quote{border-left:4px solid #f472b6;padding:12px 18px;background:#fff0f5;font-style:italic;color:#dc2626;margin:15px 0;border-radius:0 10px 10px 0}
+.anime-content .read-more{display:inline-block;background:#dc2626;color:#fff;padding:10px 30px;border-radius:0 20px 20px 0;font-weight:700;letter-spacing:2px;transition:all .3s}
+.anime-content .read-more:hover{background:#f472b6;border-radius:20px 0 0 20px}
+
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-box{background:#fff;border-radius:25px;border:3px solid #dc2626;padding:25px;position:relative}
+.sidebar-box::after{content:'';position:absolute;bottom:-3px;right:-3px;width:40px;height:40px;background:#f472b6;border-radius:20px 0 20px 0}
+.sidebar-box h3{font-size:1.2em;color:#dc2626;margin-bottom:15px;padding-bottom:10px;border-bottom:3px solid #f472b6}
+.sidebar-box h3::before{content:'♥ '}
+.avatar{width:80px;height:80px;background:linear-gradient(135deg,#f472b6,#dc2626);border-radius:50%;border:4px solid #dc2626;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 15px}
+.sidebar-box ul{list-style:none}
+.sidebar-box ul li{padding:10px 0;border-bottom:1px dashed #f472b6;font-size:14px;color:#555}
+.sidebar-box ul li:last-child{border:none}
+.sidebar-box ul li::before{content:'★ ';color:#dc2626}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+.tag-cloud span{display:inline-block;padding:5px 15px;background:#fff0f5;border:2px solid #dc2626;border-radius:0 15px 15px 0;font-size:0.85em;transition:all .3s;cursor:pointer;color:#dc2626}
+.tag-cloud span:hover{background:#dc2626;color:#fff}
+.schedule{background:#fff0f5;border-radius:15px;padding:15px;text-align:center}
+.schedule .day{font-size:2em;color:#dc2626;font-weight:700}
+.schedule .event{color:#f472b6;font-size:0.85em;margin-top:5px}
+
+footer{background:#000;color:#fff;text-align:center;padding:40px 20px;margin-top:40px}
+footer .hearts{font-size:25px;letter-spacing:15px;margin-bottom:15px;opacity:0.5}
+footer p{font-size:0.85em;opacity:0.7}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<section class="hero">
+<div class="sparkle">✦</div><div class="sparkle">♥</div><div class="sparkle">✦</div>
+<div class="sparkle">★</div><div class="sparkle">♥</div>
+<div>
+<h1>红星学院</h1>
+<p class="sub">СОВЕТСКАЯ АНИМЕ АКАДЕМИЯ · 苏维埃二次元学园</p>
+<div class="badge">★ 第一届红星学院招生中 · 名额有限 ★</div>
+</div>
+</section>
+
+<div class="propaganda">★ 同志们！用二次元的力量建设美好明天！全世界的萌系联合起来！★</div>
+
+<div class="container">
+<main>
+
+<article class="anime-card">
+<div class="anime-badge">🔴 校园头条</div>
+<div class="anime-img" style="background:linear-gradient(135deg,#fff0f5 0%,#f472b6 50%,#dc2626 100%)">🎓</div>
+<div class="anime-content">
+<h2>🎓 开学典礼：红星学院的第一课</h2>
+<div class="meta">
+<span>📅 苏维埃纪元元年</span>
+<span>🏷️ 校园</span>
+<span>💬 1917条评论</span>
+</div>
+<p>当晨钟敲响，红星学院的大门缓缓打开。迎接新生的是一条铺满红色花瓣的林荫道，两旁的路灯上挂满了写着革命口号的粉色旗帜。校长——一位穿着改良版苏联军装的猫耳少女——站在讲台上，用她那甜美的声音宣读了学院的第一条规定："可爱即是力量，萌即是正义，所有同学必须以最高标准要求自己成为新时代的二次元先锋！"</p>
+<p>课程表令人眼花缭乱：上午是"马克思主义萌化原理"和"列宁主义与少女漫画的辩证关系"，下午是"猫耳制作工坊"和"萌系进行曲合唱团"。晚自习则是集体观看苏联经典动画，分析其中的萌化元素。一位来自莫斯科的老教授在角落里摇着头说："列宁同志看到这个可能会从墓里爬出来……然后戴上猫耳。"</p>
+<div class="quote">"在红星学院，每一个学生都是革命的火种，每一双猫耳都是理想的翅膀。" —— 校长娜塔莎·猫耳诺娃</div>
+<a href="#" class="read-more">继续阅读 →</a>
+</div>
+</article>
+
+<article class="anime-card">
+<div class="anime-img" style="background:linear-gradient(135deg,#000 0%,#dc2626 50%,#f472b6 100%)">🎭</div>
+<div class="anime-content">
+<h2>🎭 文化祭：当《天鹅湖》遇上美少女战士</h2>
+<div class="meta">
+<span>📅 苏维埃纪元二年</span>
+<span>🏷️ 文化祭</span>
+<span>💬 2048条评论</span>
+</div>
+<p>红星学院第一届文化祭在一片粉色与红色交织的海洋中拉开了序幕。最受欢迎的节目是话剧社改编的《天鹅湖》——白天鹅由一位银发红瞳的少女扮演，而黑天鹅则是一位戴着尖角发饰的哥特系学姐。最令人惊叹的是，王子殿下由一位穿着改良版苏联元帅服的帅气学长扮演，他在谢幕时高举红旗的瞬间，全场观众——包括几位被邀请来的退伍老兵——都热泪盈眶。</p>
+<p>美食区的"社会主义大食堂"提供了革命主题的可爱便当：五角星形状的饭团、镰刀锤子图案的煎蛋、还有写着"同志请用餐"的小饼干。最受欢迎的是"红色能量饮料"——其实就是加了草莓糖浆的苏打水，但因为包装上印着列宁的Q版头像而供不应求。</p>
+<a href="#" class="read-more">继续阅读 →</a>
+</div>
+</article>
+
+<article class="anime-card">
+<div class="anime-img" style="background:linear-gradient(135deg,#f472b6 0%,#fff0f5 50%,#dc2626 100%)">🎪</div>
+<div class="anime-content">
+<h2>🎪 社团招新：你想加入哪个革命组织？</h2>
+<div class="meta">
+<span>📅 苏维埃纪元元年</span>
+<span>🏷️ 社团</span>
+<span>💬 1337条评论</span>
+</div>
+<p>红星学院的社团招新日堪称一场视觉盛宴。操场上的摊位一个比一个华丽：动画社用投影仪在墙上放映着自制的萌化版《列宁在十月》；漫画社的摊位上摆满了用苏联宣传画风格绘制的美少女海报；最引人注目的是"萌化合唱团"，他们穿着粉色版的苏联军装，用甜美的声音演唱着改编版的《国际歌》——"起来，不愿做普通人的可爱们！"</p>
+<p>据说，学院中最神秘的社团是"猫耳研究协会"。这个社团不接受公开报名，只有被现任成员看中的人才会收到一封用粉色信封装着的邀请函。信封上印着一个猫爪印和一行小字："你已经被猫耳选中了。"没有人知道这个社团在研究什么，但他们的成员都有一种奇怪的特征——无论何时何地，都戴着猫耳。</p>
+<a href="#" class="read-more">继续阅读 →</a>
+</div>
+</article>
+
+</main>
+
+<aside>
+<div class="sidebar-box">
+<div class="avatar">🐱</div>
+<h3 style="text-align:center">关于学院</h3>
+<p style="text-align:center;line-height:1.8">欢迎来到红星学院！<br>在这里，革命精神与二次元文化完美融合。<br>用萌的力量改变世界！</p>
+</div>
+
+<div class="sidebar-box">
+<h3>萌化课程表</h3>
+<ul>
+<li>马克思主义萌化原理 (必修)</li>
+<li>列宁主义与少女漫画 (必修)</li>
+<li>猫耳制作工坊 (选修)</li>
+<li>萌系进行曲合唱 (必修)</li>
+<li>苏联动画赏析 (选修)</li>
+<li>肉垫触感实验 (限选)</li>
+</ul>
+</div>
+
+<div class="sidebar-box">
+<h3>萌化标签</h3>
+<div class="tag-cloud">
+<span>🐱 猫耳</span>
+<span>♥ 萌化</span>
+<span>★ 红星</span>
+<span>🎀 蝴蝶结</span>
+<span>🍓 草莓味</span>
+<span>🎶 进行曲</span>
+<span>💌 情书</span>
+<span>🎓 毕业</span>
+</div>
+</div>
+
+<div class="sidebar-box">
+<h3>学院日历</h3>
+<div class="schedule">
+<div style="background:#dc2626;color:#fff;padding:5px;border-radius:10px 10px 0 0">六月</div>
+<div style="background:#fff0f5;padding:15px;border:2px solid #dc2626;border-top:none;border-radius:0 0 10px 10px">
+<div class="day">06</div>
+<div class="event">红星文化祭 🎪</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+
+<footer>
+<div class="hearts">♥ ★ ♥ ★ ♥ ★ ♥</div>
+<p>© 2026 红星学院 · 全世界的萌系，联合起来！</p>
+<p style="margin-top:10px;font-size:0.75em">用爱与革命精神打造 ♥</p>
+</footer>
+</body>
+</html>

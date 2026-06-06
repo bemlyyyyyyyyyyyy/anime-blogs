@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>故障少女 - Glitch Girl</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a1a2e;color:#e0e0e0;overflow-x:hidden;}
+a{text-decoration:none;color:#e94560;}
+
+@keyframes glitch1{0%{clip-path:inset(40% 0 61% 0);transform:translate(-2px,2px);}20%{clip-path:inset(92% 0 1% 0);transform:translate(1px,-1px);}40%{clip-path:inset(43% 0 1% 0);transform:translate(-1px,3px);}60%{clip-path:inset(25% 0 58% 0);transform:translate(3px,1px);}80%{clip-path:inset(54% 0 7% 0);transform:translate(-3px,-2px);}100%{clip-path:inset(58% 0 43% 0);transform:translate(2px,-3px);}}
+@keyframes glitch2{0%{clip-path:inset(65% 0 13% 0);transform:translate(3px,-1px);}20%{clip-path:inset(15% 0 62% 0);transform:translate(-2px,2px);}40%{clip-path:inset(79% 0 2% 0);transform:translate(1px,3px);}60%{clip-path:inset(2% 0 78% 0);transform:translate(-3px,-1px);}80%{clip-path:inset(33% 0 45% 0);transform:translate(2px,2px);}100%{clip-path:inset(10% 0 75% 0);transform:translate(-1px,-3px);}}
+@keyframes rgbShift{0%{text-shadow:2px 0 #e94560,-2px 0 #0f3460;}25%{text-shadow:-2px 2px #e94560,2px -2px #0f3460;}50%{text-shadow:2px -2px #e94560,-2px 2px #0f3460;}75%{text-shadow:-2px 0 #e94560,2px 0 #0f3460;}100%{text-shadow:2px 0 #e94560,-2px 0 #0f3460;}}
+@keyframes noise{0%{background-position:0 0;}10%{background-position:-5% -10%;}20%{background-position:-15% 5%;}30%{background-position:7% -25%;}40%{background-position:-5% 25%;}50%{background-position:-15% 10%;}60%{background-position:15% 0%;}70%{background-position:0% 15%;}80%{background-position:3% 35%;}90%{background-position:-10% 10%;}100%{background-position:0 0;}}
+@keyframes slideIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes distort{0%,100%{transform:skewX(0deg);}25%{transform:skewX(1deg);}75%{transform:skewX(-1deg);}}
+@keyframes flicker{0%,100%{opacity:1;}41%{opacity:1;}42%{opacity:0.8;}43%{opacity:1;}45%{opacity:0.3;}46%{opacity:1;}50%{opacity:1;}55%{opacity:0.7;}56%{opacity:1;}}
+
+.noise-overlay{position:fixed;top:-50%;left:-50%;width:200%;height:200%;pointer-events:none;z-index:9999;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:noise 0.5s steps(10) infinite;}
+
+nav{background:rgba(26,26,46,0.95);border-bottom:2px solid #e94560;position:sticky;top:0;z-index:100;}
+nav .inner{max-width:1200px;margin:0 auto;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;}
+nav .logo{font-size:1.5rem;font-weight:700;color:#e94560;animation:rgbShift 2s infinite;}
+nav .links{display:flex;gap:25px;}
+nav .links a{color:#0f3460;font-size:0.9rem;transition:all 0.3s;}
+nav .links a:hover{color:#e94560;animation:glitch1 0.3s infinite;}
+
+.back-link{display:inline-block;margin:20px 30px;padding:8px 20px;border:1px solid #e94560;color:#e94560;font-size:0.85rem;transition:all 0.3s;}
+.back-link:hover{background:#e94560;color:#1a1a2e;}
+
+.hero{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;background:#1a1a2e;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(233,69,96,0.03) 2px,rgba(233,69,96,0.03) 4px);}
+.hero .glitch-title{font-size:4rem;font-weight:700;color:#fff;position:relative;animation:rgbShift 3s infinite;}
+.hero .glitch-title::before{content:attr(data-text);position:absolute;left:0;top:0;color:#e94560;z-index:-1;animation:glitch1 2s infinite linear;}
+.hero .glitch-title::after{content:attr(data-text);position:absolute;left:0;top:0;color:#0f3460;z-index:-2;animation:glitch2 3s infinite linear;}
+.hero p{font-size:1.1rem;color:#e94560;margin-top:15px;animation:flicker 4s infinite;}
+.hero .distortion-blocks{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;}
+.hero .distortion-blocks div{position:absolute;background:rgba(233,69,96,0.1);animation:distort 3s infinite;}
+.hero .distortion-blocks div:nth-child(1){width:100px;height:30px;top:20%;left:10%;animation-delay:0s;}
+.hero .distortion-blocks div:nth-child(2){width:150;height:20px;top:60%;right:15%;animation-delay:1s;}
+.hero .distortion-blocks div:nth-child(3){width:80px;height:40px;bottom:20%;left:40%;animation-delay:2s;}
+
+.container{max-width:1200px;margin:0 auto;padding:40px 30px;display:grid;grid-template-columns:1fr 350px;gap:40px;}
+.main-content{display:flex;flex-direction:column;gap:40px;}
+
+.post-card{background:rgba(15,52,96,0.2);border-left:3px solid #e94560;padding:30px;animation:slideIn 0.6s ease-out both;position:relative;}
+.post-card:nth-child(2){animation-delay:0.2s;}
+.post-card:nth-child(3){animation-delay:0.4s;}
+.post-card::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(90deg,rgba(233,69,96,0.05),transparent);pointer-events:none;}
+.post-card .tag{display:inline-block;padding:3px 12px;background:rgba(233,69-96,0.2);border:1px solid #e94560;font-size:0.75rem;color:#e94560;margin-bottom:10px;}
+.post-card h2{font-size:1.5rem;color:#fff;margin-bottom:10px;animation:rgbShift 5s infinite;}
+.post-card .meta{font-size:0.8rem;color:#666;margin-bottom:15px;}
+.post-card p{line-height:1.8;color:#aaa;font-size:0.95rem;}
+.post-card .img-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#1a1a2e,#0f3460);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden;animation:distort 4s infinite;}
+.post-card .img-placeholder::before{content:'';position:absolute;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(233,69,96,0.1) 3px,rgba(233,69,96,0.1) 6px);}
+.post-card .read-more{display:inline-block;margin-top:15px;padding:8px 25px;background:transparent;border:1px solid #e94560;color:#e94560;font-size:0.85rem;transition:all 0.3s;}
+.post-card .read-more:hover{background:#e94560;color:#1a1a2e;box-shadow:0 0 20px rgba(233,69,96,0.5);}
+
+.sidebar{display:flex;flex-direction:column;gap:25px;}
+.widget{background:rgba(15,52,96,0.2);border:1px solid rgba(233,69,96,0.3);padding:25px;}
+.widget h3{color:#e94560;font-size:1.1rem;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid rgba(233,69,96,0.2);}
+.widget ul{list-style:none;}
+.widget ul li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.widget ul li a{color:#aaa;font-size:0.9rem;transition:color 0.3s;}
+.widget ul li a:hover{color:#e94560;}
+.widget .tag-cloud{display:flex;glitch-wrap:wrap;gap:8px;flex-wrap:wrap;}
+.widget .tag-cloud span{padding:4px 12px;background:rgba(233,69,96,0.1);border:1px solid rgba(233,69,96,0.3);font-size:0.75rem;color:#e94560;cursor:pointer;transition:all 0.3s;}
+.widget .tag-cloud span:hover{background:rgba(233,69,96,0.3);}
+.widget .avatar{width:80px;height:80px;margin:0 auto 15px;background:linear-gradient(135deg,#e94560,#0f3460);display:flex;align-items:center;justify-content:center;font-size:2rem;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);}
+.widget .about-text{font-size:0.85rem;color:#888;line-height:1.6;text-align:center;}
+
+footer{text-align:center;padding:40px 30px;border-top:1px solid rgba(233,69,96,0.2);margin-top:40px;}
+footer p{color:#555;font-size:0.8rem;}
+footer .glitch-text{color:#e94560;animation:rgbShift 3s infinite;}
+
+@media(max-width:900px){.container{grid-template-columns:1fr;}.hero .glitch-title{font-size:2.5rem;}}
+</style>
+</head>
+<body>
+<div class="noise-overlay"></div>
+<nav>
+<div class="inner">
+<a href="#" class="logo">故障少女</a>
+<div class="links">
+<a href="#">首页</a><a href="#">作品</a><a href="#">故障艺术</a><a href="#">关于</a>
+</div>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+<section class="hero">
+<div class="distortion-blocks"><div></div><div></div><div></div></div>
+<div>
+<h1 class="glitch-title" data-text="故障少女">故障少女</h1>
+<p>// 在错误中寻找美 //</p>
+</div>
+</section>
+<div class="glitch-container"></div>
+<div class="container">
+<main class="main-content">
+<article class="post-card">
+<div class="img-placeholder">🖥️</div>
+<span class="tag">数字艺术</span>
+<h2>故障美学：当像素开始跳舞</h2>
+<div class="完美meta">2026-05-25 · 数据裂缝</div>
+<p>故障艺术（Glitch Art）是一种将数字错误转化为美学表达的创作方式。通过故意破坏图像数据、制造信号干扰、篡改文件结构，艺术家们在数字废墟中发现了一种独特的美感。每一帧破碎的画面都是对完美主义的反叛，每一条色差都是对数字秩序的嘲讽。在这个万物皆可数字化的时代，故障美学提醒我们：不完美，才是最真实的美。</p>
+<a href="#" class="read-more">阅读全文 →</a>
+</article>
+<article class="post-card">
+<div class="img-placeholder">🎨</div>
+<span class="tag">创作手记</span>
+<h2>用代码生成故障：Processing故障艺术入门</h2>
+<div class="meta">2026-05-18 · 像素破碎者</div>
+<p>想要创造属于自己的故障艺术吗？Processing是一个完美的起点。通过简单的代码，你可以将任何图像转化为故障风格的数字作品。关键技巧包括：像素排序（pixel sorting）、数据偏移（data bending）、通道分离（channel splitting）。本文将带你从零开始，用不到50行代码，创造出令人惊叹的故障艺术作品。准备好让你的像素开始跳舞了吗？</p>
+<a href="#" class="read-more">阅读全文 →</a>
+</article>
+<article class="post-pixel-card">
+<div class="img-placeholder">⚡</div>
+<span class="tag">理论探讨</span>
+<h2>数字废墟中的禅意：故障哲学</h2>
+<div class="meta">2026-05-10 · 赛博禅师</div>
+<p>在东方哲学中，"侘寂"（wabi-sabi）强调在不完美中发现美。故障艺术与这一理念有着惊人的相似之处。当一幅图像被故意破坏，当数据流出现意外的偏差，一种新的美感便从混乱中诞生。这不是对完美的追求，而是对真实性的拥抱。在数字世界中，故障就是裂缝，而正如莱昂纳德·科恩所说："万物皆有裂缝，那是光照进来的地方。"</p>
+<a href="#" class="read-more">阅读全文 →</a>
+</article>
+</main>
+<aside class="sidebar">
+<div class="widget">
+<div class="avatar">💥</div>
+<div class="about-text">在数字裂缝中游走，收集每一个美丽的错误。故障不是bug，是feature。</div>
+</div>
+<div class="widget">
+<h3>故障标签</h3>
+<div class="tag-cloud">
+<span>#故障艺术</span><span>#数字艺术</span><span>#像素</span><span>#代码艺术</span><span>#数据弯曲</span><span>#赛博</span><span>#美学</span><span>#错误</span>
+</div>
+</div>
+<div class="widget">
+<h3>数据流</h3>
+<ul>
+<li><a href="#">像素排序算法详解</a></li>
+<li><a href="#">VHS录像带故障效果</a></li>
+<li><a href="#">实时故障效果Shader</a></li>
+<li><a href="#">故障字体设计</a></li>
+<li><a href="#">0xERROR: 文件损坏</a></li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p class="glitch-text">故障少女 © 2026</p>
+<p style="margin-top:8px;">ERR0R_IS_BEAUTIFUL</p>
+</footer>
+<script>
+document.querySelectorAll('.post-card').forEach(card=>{
+card.addEventListener('mouseenter',()=>{
+card.style.animation='distort 0.5s infinite';
+});
+card.addEventListener('mouseleave',()=>{
+card.style.animation='slideIn 0.6s ease-out both';
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>50个博客网页鉴赏</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+  body{font-family:'Noto Sans SC',sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh;overflow-x:hidden}
+  .bg-grid{position:fixed;inset:0;background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:60px 60px;pointer-events:none;z-index:0}
+  .container{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:40px 20px}
+  header{text-align:center;margin-bottom:60px}
+  header h1{font-size:3rem;font-weight:700;background:linear-gradient(135deg,#ff6b9d,#c44dff,#6e8efb,#43e97b);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin-bottom:16px;letter-spacing:2px}
+  header p{font-size:1.1rem;color:#888;max-width:600px;margin:0 auto;line-height:1.8}
+  .filters{display:flex;justify-content:center;gap:12px;margin-bottom:40px;flex-wrap:wrap}
+  .filters button{padding:10px 24px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);
+    color:#ccc;border-radius:30px;cursor:pointer;font-size:.9rem;transition:.3s;font-family:inherit}
+  .filters button:hover,.filters button.active{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)}
+  .filters button[data-cat="all"].active{background:linear-gradient(135deg,#ff6b9d,#c44dff);border-color:transparent}
+  .filters button[data-cat="a"].active{background:linear-gradient(135deg,#ff9a9e,#fecfef);border-color:transparent;color:#333}
+  .filters button[data-cat="b"].active{background:linear-gradient(135deg,#a855f7,#06b6d4);border-color:transparent}
+  .filters button[data-cat="c"].active{background:linear-gradient(135deg,#dc2626,#fbbf24);border-color:transparent}
+  .filters button[data-cat="d"].active{background:linear-gradient(135deg,#86efac,#67e8f9);border-color:transparent;color:#333}
+  .filters button[data-cat="e"].active{background:linear-gradient(135deg,#f97316,#ec4899);border-color:transparent}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+  .card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:.4s;
+    border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+  .card:hover{transform:translateY(-8px);border-color:rgba(255,255,255,.2);
+    box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .card .preview{height:180px;position:relative;overflow:hidden}
+  .card .preview .overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:4rem;opacity:.6}
+  .card .info{padding:20px}
+  .card .info .num{font-size:.75rem;color:#666;font-weight:700;letter-spacing:2px;margin-bottom:6px}
+  .card .info h3{font-size:1.1rem;font-weight:700;margin-bottom:8px;color:#f0f0f0}
+  .card .info .tags{display:flex;gap:6px;flex-wrap:wrap}
+  .card .info .tags span{font-size:.7rem;padding:3px 10px;border-radius:20px;
+    background:rgba(255,255,255,.06);color:#999}
+  .card.hidden{display:none}
+  footer{text-align:center;margin-top:80px;padding:40px 0;color:#444;font-size:.85rem;
+    border-top:1px solid rgba(255,255,255,.05)}
+  @media(max-width:768px){
+    header h1{font-size:2rem}
+    .grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="container">
+  <header>
+    <h1>50 个博客网页鉴赏</h1>
+    <p>简约大气 × 二次元 × 苏联解构 — 每一页都是独立设计的博客模板，点击任意卡片开始鉴赏</p>
+  </header>
+  <div class="filters">
+    <button class="active" data-cat="all">全部</button>
+    <button data-cat="a">日系二次元</button>
+    <button data-cat="b">赛博朋克</button>
+    <button data-cat="c">苏联解构</button>
+    <button data-cat="d">文艺清新</button>
+    <button data-cat="e">混合实验</button>
+  </div>
+  <div class="grid" id="grid"></div>
+  <footer>50 Blog Pages Collection — 手工制作，逐一鉴赏</footer>
+</div>
+<script>
+const blogs=[
+  {n:"01",file:"01-sakura.html",name:"樱花和风",cat:"a",emoji:"🌸",tags:["粉色","和风","花瓣飘落"],
+   gradient:"linear-gradient(135deg,#ffecd2,#fcb69f)"},
+  {n:"02",file:"02-tsuki.html",name:"月夜静谧",cat:"a",emoji:"🌙",tags:["深蓝","月亮","星空"],
+   gradient:"linear-gradient(135deg,#0c1445,#2d1b69)"},
+  {n:"03",file:"03-neko.html",name:"猫咪日常",cat:"a",emoji:"🐱",tags:["暖黄","猫咪","可爱"],
+   gradient:"linear-gradient(135deg,#f6d365,#fda085)"},
+  {n:"04",file:"04-umi.html",name:"大海蔚蓝",cat:"a",emoji:"🌊",tags:["水蓝","海洋","波浪"],
+   gradient:"linear-gradient(135deg,#667eea,#764ba2)"},
+  {n:"05",file:"05-yuki.html",name:"冬日纯白",cat:"a",emoji:"❄️",tags:["纯白","雪花","极简"],
+   gradient:"linear-gradient(135deg,#e8eaf6,#c5cae9)"},
+  {n:"06",file:"06-hana.html",name:"花卉物语",cat:"a",emoji:"🌺",tags:["水彩","花卉","柔和"],
+   gradient:"linear-gradient(135deg,#a8edea,#fed6e3)"},
+  {n:"07",file:"07-kumo.html",name:"云朵幻想",cat:"a",emoji:"☁️",tags:["天蓝","云朵","梦幻"],
+   gradient:"linear-gradient(135deg,#89f7fe,#66a6ff)"},
+  {n:"08",file:"08-suzume.html",name:"麻雀日记",cat:"a",emoji:"🐦",tags:["米色","纸感","手写"],
+   gradient:"linear-gradient(135deg,#f5f0e1,#e6d5b8)"},
+  {n:"09",file:"09-niji.html",name:"彩虹糖果",cat:"a",emoji:"🌈",tags:["七彩","糖果","活力"],
+   gradient:"linear-gradient(135deg,#fa709a,#fee140,#a8edea)"},
+  {n:"10",file:"10-kaze.html",name:"风铃清响",cat:"a",emoji:"🎐",tags:["透明","风铃","禅意"],
+   gradient:"linear-gradient(135deg,#d4fc79,#96e6a1)"},
+  {n:"11",file:"11-neon.html",name:"霓虹东京",cat:"b",emoji:"💜",tags:["霓虹","发光","深紫"],
+   gradient:"linear-gradient(135deg,#0f0c29,#302b63,#24243e)"},
+  {n:"12",file:"12-glitch.html",name:"故障少女",cat:"b",emoji:"📺",tags:["故障","RGB偏移","动画"],
+   gradient:"linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)"},
+  {n:"13",file:"13-matrix.html",name:"代码雨幕",cat:"b",emoji:"💚",tags:["绿色","代码雨","矩阵"],
+   gradient:"linear-gradient(135deg,#000000,#0d3b0d)"},
+  {n:"14",file:"14-cyber.html",name:"赛博街道",cat:"b",emoji:"🌆",tags:["HUD","网格","赛博"],
+   gradient:"linear-gradient(135deg,#141e30,#243b55)"},
+  {n:"15",file:"15-pixel.html",name:"像素冒险",cat:"b",emoji:"🕹️",tags:["8-bit","像素","复古"],
+   gradient:"linear-gradient(135deg,#2d1b69,#11998e)"},
+  {n:"16",file:"16-tunguska.html",name:"通古斯档案",cat:"c",emoji:"🗂️",tags:["苏联","超自然","机密"],
+   gradient:"linear-gradient(135deg,#1a1510,#c4b59a)"},
+  {n:"17",file:"17-lovecraft.html",name:"疯狂山脉",cat:"e",emoji:"🐙",tags:["克苏鲁","恐怖","神话"],
+   gradient:"linear-gradient(135deg,#0a0f0a,#50c878)"},
+  {n:"18",file:"18-mordor.html",name:"中土纪年",cat:"e",emoji:"💍",tags:["中土","魔戒","史诗"],
+   gradient:"linear-gradient(135deg,#1a1410,#ffaa32)"},
+  {n:"19",file:"19-soviet-anime.html",name:"红星学院",cat:"e",emoji:"☭",tags:["苏联","二次元","校园"],
+   gradient:"linear-gradient(135deg,#dc2626,#f472b6)"},
+  {n:"20",file:"20-dreamlands.html",name:"梦幻深渊",cat:"e",emoji:"🌙",tags:["克苏鲁","二次元","梦境"],
+   gradient:"linear-gradient(135deg,#0d0a1a,#b864ff)"},
+  {n:"21",file:"21-construct.html",name:"构成主义",cat:"c",emoji:"▲",tags:["红黑","几何","斜线"],
+   gradient:"linear-gradient(135deg,#dc2626,#1f2937)"},
+  {n:"22",file:"22-propoganda.html",name:"宣传海报",cat:"c",emoji:"⚑",tags:["木刻","海报","旗帜"],
+   gradient:"linear-gradient(135deg,#991b1b,#7f1d1d)"},
+  {n:"23",file:"23-brutalist.html",name:"野兽派",cat:"c",emoji:"⬛",tags:["粗犷","裸露","网格"],
+   gradient:"linear-gradient(135deg,#1f2937,#111827)"},
+  {n:"24",file:"24-deconstruct.html",name:"解构主义",cat:"c",emoji:"💥",tags:["破碎","旋转","错位"],
+   gradient:"linear-gradient(135deg,#dc2626,#000000)"},
+  {n:"25",file:"25-redstar.html",name:"红星照耀",cat:"c",emoji:"★",tags:["红金","五角星","标语"],
+   gradient:"linear-gradient(135deg,#b91c1c,#92400e)"},
+  {n:"26",file:"26-bauhaus.html",name:"包豪斯",cat:"c",emoji:"●",tags:["三原色","圆方三角","功能"],
+   gradient:"linear-gradient(135deg,#dc2626,#2563eb,#eab308)"},
+  {n:"27",file:"27-avant.html",name:"前卫艺术",cat:"c",emoji:"◆",tags:["超大字体","不对称","冲击"],
+   gradient:"linear-gradient(135deg,#000000,#dc2626)"},
+  {n:"28",file:"28-modernist.html",name:"现代主义",cat:"c",emoji:"▦",tags:["网格","衬线","克制"],
+   gradient:"linear-gradient(135deg,#1f2937,#374151)"},
+  {n:"29",file:"29-industrial.html",name:"工业美学",cat:"c",emoji:"⚙️",tags:["钢铁灰","铆钉","机械"],
+   gradient:"linear-gradient(135deg,#374151,#6b7280)"},
+  {n:"30",file:"30-manifesto.html",name:"宣言风格",cat:"c",emoji:"📰",tags:["报纸","密集","黑白红"],
+   gradient:"linear-gradient(135deg,#f5f5f5,#000000)"},
+  {n:"31",file:"31-watercolor.html",name:"水彩梦境",cat:"d",emoji:"🎨",tags:["水彩","渐变","淡雅"],
+   gradient:"linear-gradient(135deg,#a8edea,#d4fc79)"},
+  {n:"32",file:"32-sketch.html",name:"素描日记",cat:"d",emoji:"✏️",tags:["手绘","铅笔灰","素描"],
+   gradient:"linear-gradient(135deg,#e8e8e8,#bdbdbd)"},
+  {n:"33",file:"33-diary.html",name:"私密日记",cat:"d",emoji:"📔",tags:["笔记本","手写","便签"],
+   gradient:"linear-gradient(135deg,#fff9c4,#fff176)"},
+  {n:"34",file:"34-garden.html",name:"秘密花园",cat:"d",emoji:"🌿",tags:["绿色","藤蔓","自然"],
+   gradient:"linear-gradient(135deg,#134e5e,#71b280)"},
+  {n:"35",file:"35-library.html",name:"古书阁",cat:"d",emoji:"📚",tags:["纸张","书脊","复古"],
+   gradient:"linear-gradient(135deg,#8b6914,#d4a843)"},
+  {n:"36",file:"36-cafe.html",name:"午后咖啡",cat:"d",emoji:"☕",tags:["棕暖","咖啡","慵懒"],
+   gradient:"linear-gradient(135deg,#6f4e37,#a67b5b)"},
+  {n:"37",file:"37-rain.html",name:"雨窗遐想",cat:"d",emoji:"🌧️",tags:["灰蓝","雨滴","朦胧"],
+   gradient:"linear-gradient(135deg,#4b6584,#a5b1c2)"},
+  {n:"38",file:"38-polaroid.html",name:"拍立得",cat:"d",emoji:"📷",tags:["胶片","复古","照片墙"],
+   gradient:"linear-gradient(135deg,#f5af19,#f12711)"},
+  {n:"39",file:"39-letter.html",name:"手写信笺",cat:"d",emoji:"✉️",tags:["信纸","邮戳","书信"],
+   gradient:"linear-gradient(135deg,#f5f0e1,#d7ccc8)"},
+  {n:"40",file:"40-starlight.html",name:"星光夜话",cat:"d",emoji:"⭐",tags:["星空","星座","流星"],
+   gradient:"linear-gradient(135deg,#0f0c29,#302b63)"},
+  {n:"41",file:"41-soviet-moe.html",name:"苏系萌化",cat:"e",emoji:"☭",tags:["红色","可爱","融合"],
+   gradient:"linear-gradient(135deg,#dc2626,#f472b6)"},
+  {n:"42",file:"42-gothic-lolita.html",name:"哥特萝莉",cat:"e",emoji:"🦇",tags:["暗紫","蕾丝","华丽"],
+   gradient:"linear-gradient(135deg,#1a0033,#4a0080)"},
+  {n:"43",file:"43-zen.html",name:"禅意极简",cat:"e",emoji:"☯️",tags:["枯山水","黑白灰","留白"],
+   gradient:"linear-gradient(135deg,#f5f5f5,#9e9e9e)"},
+  {n:"44",file:"44-comic.html",name:"漫画分镜",cat:"e",emoji:"💬",tags:["分镜","气泡","网点"],
+   gradient:"linear-gradient(135deg,#fff,#000)"},
+  {n:"45",file:"45-scrapbook.html",name:"手账拼贴",cat:"e",emoji:"📎",tags:["胶带","贴纸","拼贴"],
+   gradient:"linear-gradient(135deg,#ffecd2,#fcb69f)"},
+  {n:"46",file:"46-terminal.html",name:"终端二次元",cat:"e",emoji:"$_",tags:["命令行","ASCII","绿色"],
+   gradient:"linear-gradient(135deg,#000000,#003300)"},
+  {n:"47",file:"47-art-deco.html",name:"装饰艺术",cat:"e",emoji:"♛",tags:["金色","几何","对称"],
+   gradient:"linear-gradient(135deg,#1a1a1a,#d4af37)"},
+  {n:"48",file:"48-origami.html",name:"折纸世界",cat:"e",emoji:"🦢",tags:["折纸","三角","立体"],
+   gradient:"linear-gradient(135deg,#e0e0e0,#ffffff)"},
+  {n:"49",file:"49-stained-glass.html",name:"彩色玻璃",cat:"e",emoji:"🏛️",tags:["教堂","玻璃窗","彩绘"],
+   gradient:"linear-gradient(135deg,#1a0033,#dc2626,#2563eb)"},
+  {n:"50",file:"50-fusion.html",name:"终极融合",cat:"e",emoji:"🔥",tags:["混搭","全风格","实验"],
+   gradient:"linear-gradient(135deg,#ff6b9d,#c44dff,#6e8efb)"}
+];
+const grid=document.getElementById('grid');
+blogs.forEach(b=>{
+  const card=document.createElement('div');
+  card.className='card';
+  card.dataset.cat=b.cat;
+  card.innerHTML=`<div class="preview" style="background:${b.gradient}"><div class="overlay">${b.emoji}</div></div>
+    <div class="info"><div class="num">NO.${b.n}</div><h3>${b.name}</h3>
+    <div class="tags">${b.tags.map(t=>`<span>${t}</span>`).join('')}</div></div>`;
+  card.onclick=()=>location.href=b.file;
+  grid.appendChild(card);
+});
+document.querySelectorAll('.filters button').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.cat;
+    document.querySelectorAll('.card').forEach(c=>{
+      c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat);
+    });
+  };
+});
+</script>
+</body>
+</html>

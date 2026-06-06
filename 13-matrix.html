@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代码雨幕 - Matrix Rain</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Courier New',monospace;background:#000;color:#00ff00;overflow-x:hidden;}
+a{text-decoration:none;color:#00ff00;}
+
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes glow{0%,100%{text-shadow:0 0 5px #00ff00,0 0 10px #00ff00;}50%{text-shadow:0 0 10px #00ff00,0 0 20px #00ff00,0 0 40px #00ff00;}}
+@keyframes terminalCursor{0%,100%{border-right-color:#00ff00;}50%{border-right-color:transparent;}}
+@keyframes typewriter{from{width:0;}to{width:100%;}}
+@keyframes rain{0%{transform:translateY(-100%);opacity:1;}100%{transform:translateY(100vh);opacity:0;}}
+
+#matrix-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:0.15;}
+.content-wrapper{position:relative;z-index:1;}
+
+nav{background:rgba(0,0,0,0.9);border-bottom:1px solid #00ff00;position:sticky;top:0;z-index:100;}
+nav .inner{max-width:1200px;margin:0 auto;padding:12px 30px;display:flex;justify-content:space-between;align-items:center;}
+nav .logo{font-size:1.3rem;color:#00ff00;animation:glow 3s infinite;}
+nav .links{display:flex;gap:25px;}
+nav .links a{color:#00ff00;font-size:0.85rem;transition:all 0.3s;opacity:0.7;}
+nav .links a:hover{opacity:1;text-shadow:0 0 10px #00ff00;}
+
+.back-link{display:inline-block;margin:20px 30px;padding:6px 15px;border:1px solid #00ff00;color:#00ff00;font-size:0.8rem;transition:all 0.3s;}
+.back-link:hover{background:#00ff00;color:#000;box-shadow:0 0 15px rgba(0,255,0,0.5);}
+
+.hero{position:relative;min-height:55vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#000 0%,#001a00 50%,#000 100%);border-bottom:1px solid rgba(0,255,0,0.2);}
+.hero .ascii-art{font-size:0.6rem;line-height:1;color:#00ff00;opacity:0.6;white-space:pre;position:absolute;top:20px;left:50%;transform:translateX(-50%);}
+.hero h1{font-size:3rem;color:#00ff00;animation:glow 4s infinite;letter-spacing:10px;text-transform:uppercase;}
+.hero .terminal-text{margin-top:20px;color:#00ff00;font-size:0.9rem;opacity:0.8;}
+.hero .terminal-text .cursor{display:inline-block;width:10px;height:18px;background:#00ff00;animation:blink 1s infinite;vertical-align:middle;margin-left:2px;}
+.hero .scanlines{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 1px,rgba(0,255,0,0.03) 1px,rgba(0,255,0,0.03) 2px);pointer-events:none;}
+
+.container{max-width:1200px;margin:0 auto;padding:40px 30px;display:grid;grid-template-columns:1fr 320px;gap:40px;}
+.main-content{display:flex;flex-direction:column:gap:35px;}
+
+.post-card{background:rgba(0,51,0,0.2);border:1px solid rgba(0,255,0,0.2);padding:25px;margin-bottom:35px;position:relative;animation:slideUp 0.6s ease-out both;}
+.post-card:nth-child(2){animation-delay:0.2s;}
+.post-card:nth-child(3){animation-delay:0.4s;}
+.post-card::before{content:'>';position:absolute;top:25px;left:-20px;color:#00ff00;font-size:1.2rem;}
+.post-card .tag{display:inline-block;padding:2px 10px;border:1px solid #00ff00;font-size:0.7rem;color:#00ff00;margin-bottom:10px;}
+.post-card h2{font-size:1.3rem;color:#00ff00;margin-bottom:10px;text-shadow:0 0 5px rgba(0,255,0,0.3);}
+.post-card .meta{font-size:0.75rem;color:#006600;margin-bottom:15px;}
+.post-card p{line-height:1.8;color:#00cc00;font-size:0.9rem;}
+.post-card .terminal-deco{margin-top:15px;padding:10px;background:rgba(0,0,0,0.5);border:1px solid rgba(0,255,0,0.2);font-size:0.8rem;color:#00ff00;}
+.post-card .terminal-deco .prompt{color:#00ff00;}
+.post-card .terminal-deco .cmd{color:#00cc00;}
+.post-card .read-more{display:inline-block;margin-top:15px;padding:6px 20px;border:1px solid #00ff00;color:#00ff00;font-size:0.8rem;transition:all 0.3s;font-family:'Courier New',monospace;}
+.post-card .read-more:hover{background:#00ff00;color:#000;}
+
+.sidebar{display:flex;flex-direction:column;gap:25px;}
+.widget{background:rgba(0,51,0,0.2);border:1px solid rgba(0,255,0,0.2);padding:20px;}
+.widget h3{color:#00ff00;font-size:0.95rem;margin-bottom:15px;padding-bottom:8px;border-bottom:1px solid rgba(0,255,0,0.2);}
+.widget h3::before{content:'# ';color:#006600;}
+.widget ul{list-style:none;}
+.widget ul li{padding:6px 0;border-bottom:1px solid rgba(0,255,0,0.05);}
+.widget ul li::before{content:'→ ';color:#006600;}
+.widget ul li a{color:#00cc00;font-size:0.85rem;transition:color 0.3s;}
+.widget ul li a:hover{color:#00ff00;text-shadow:0 0 5px #00ff00;}
+.widget .tag-cloud{display:flex;flex-wrap:wrap;gap:8px;}
+.widget .tag-cloud span{padding:3px 10px;border:1px solid rgba(0,255,0,0.3);font-size:0.7rem;color:#00ff00;cursor:pointer;transition:all 0.3s;}
+.widget .tag-cloud span:hover{background:rgba(0,255,0,0.1);box-shadow:0 0 5px rgba(0,255,0,0.3);}
+.widget .sys-info{font-size:0.75rem;color:#006600;line-height:2;}
+.widget .sys-info span{color:#00ff00;}
+
+footer{text-align:center;padding:30px;border-top:1px solid rgba(0,255,0,0.2);margin-top:40px;}
+footer p{color:#004400;font-size:0.75rem;}
+footer .glow{color:#00ff00;animation:glow 3s infinite;}
+
+@media(max-width:900px){.container{grid-template-columns:1fr;}.hero h1{font-size:2rem;letter-spacing:5px;}}
+</style>
+</head>
+<body>
+<canvas id="matrix-canvas"></canvas>
+<div class="content-wrapper">
+<nav>
+<div class="inner">
+<a href="#" class="logo">[代码雨幕]</a>
+<div class="links">
+<a href="#">~/首页</a><a href="#">~/日志</a><a href="#">~/终端</a><a href="#">~/关于</a>
+</div>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+<section class="hero">
+<div class="scanlines"></div>
+<div class="ascii-art">
+ _    ___  ___  ___  ___  _   _ ___ _____ _  _ ___ ___
+| |  | _ \/ _ \| _ )/ _ \| | | | __|_   _| || | __| _ \
+| |__|   | (_) | _ | (_) | |_| | _|  | | | __ | _||   /
+|____|_|_|\___/|___|\___/ \___/|___| |_| |_|_|___|_|_\
+</div>
+<div>
+<h1>代码雨幕</h1>
+<div class="terminal-text">
+<span style="color:#006600;">root@matrix:~$</span> echo "欢迎来到代码雨幕" <span class="cursor"></span>
+</div>
+</div>
+</section>
+<div class="container">
+<main class="main-content">
+<article class="post-card">
+<span class="tag">[黑客哲学]</span>
+<h2>矩阵中的觉醒：当代码成为现实</h2>
+<div class="meta">2026-05-25 :: sys_philosopher :: 深度:7</div>
+<p>当你凝视代码雨时，代码雨也在凝视你。在这个由零和一构成的世界里，每一个字符都承载着某种深层的含义。我们编写代码，代码也在塑造我们。当你沉浸在终端的绿色光芒中足够久，你会开始质疑：究竟是我们在控制计算机，还是计算机在控制我们？矩阵无处不在，而觉醒，从敲下第一行代码开始。</p>
+<div class="terminal-deco">
+<div><span class="prompt">$</span> <span class="cmd">cat /dev/philosophy/reality.txt</span></div>
+<div style="color:#006600;">现实不过是一个可以被编译的程序...</div>
+</div>
+<a href="#" class="read-more">[读取更多]</a>
+</article>
+<article class="post-card">
+<span class="tag">[数字冥想]</span>
+<h2>终端里的禅：命令行的冥想之道</h2>
+<div class="meta">2026-05-18 :: zen_hacker :: 深度:5</div>
+<p>在古老的东方，僧侣们通过打坐来寻找内心的平静。在数字时代，黑客们在终端中找到了类似的宁静。当你专注于一行行滚动的代码，当你的手指在键盘上舞动，一种冥想般的状态便会降临。没有图形界面的干扰，没有社交媒体的噪音，只有你和那个绿色光标在黑暗中对话。这就是命令行禅修。</p>
+<div class="terminal-deco">
+<div><span class="prompt">$</span> <span class="cmd">meditate --level=deep --duration=∞</span></div>
+<div style="color:#006600;">正在进入深度冥想状态...</div>
+</div>
+<a href="#" class="read-more">[读取更多]</a>
+</article>
+<article class="post-card">
+<span class="tag">[密码学]</span>
+<h2>零知识证明：无需信任的信任</h2>
+<div class="meta">2026-05-10 :: crypto_monk :: 深度:9</div>
+<p>在密码学的世界里，有一种神奇的协议叫做"零知识证明"。它允许你向别人证明你知道某个秘密，却不需要透露任何关于秘密本身的信息。这就像告诉别人你知道一个房间的密码，却不告诉他们密码是什么，同时还能让他们确信你确实知道。这种看似矛盾的能力，正是现代加密技术的基石。</p>
+<div class="terminal-deco">
+<div><span class="prompt">$</span> <span class="cmd">verify --proof=zk --secret=████████</span></div>
+<div style="color:#006600;">验证通过。秘密未被泄露。</div>
+</div>
+<a href="#" class="read-more">[读取更多]</a>
+</article>
+</main>
+<aside class="sidebar">
+<div class="widget">
+<h3>系统状态</h3>
+<div class="sys-info">
+<div>主机: <span>matrix-rain</span></div>
+<div>运行: <span>2077天</span></div>
+<div>状态: <span style="color:#00ff00;">在线</span></div>
+<div>等级: <span>root</span></div>
+<div>编码: <span>UTF-∞</span></div>
+</div>
+</div>
+<div class="widget">
+<h3>标签索引</h3>
+<div class="tag-cloud">
+<span>#黑客</span><span>#终端</span><span>#密码学</span><span>#Linux</span><span>#AI</span><span>#哲学</span><span>#开源</span><span>#量子</span>
+</div>
+</div>
+<div class="widget">
+<h3>数据日志</h3>
+<ul>
+<li><a href="#">内核恐慌的记忆</a></li>
+<li><a href="#">编译时间的哲学</a></li>
+<li><a href="#">段错误与人生</a></li>
+<li><a href="#">递归的尽头是什么</a></li>
+<li><a href="#">404: 找不到答案</a></li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p class="glow">[ 代码雨幕 :: MATRIX RAIN ]</p>
+<p style="margin-top:8px;">WAKE UP, NEO... THE MATRIX HAS YOU.</p>
+</footer>
+</div>
+<script>
+const canvas=document.getElementById('matrix-canvas');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const chars='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF';
+const fontSize=14;
+const columns=Math.floor(canvas.width/fontSize);
+const drops=[];
+for(let i=0;i<columns;i++){drops[i]=Math.random()*-100;}
+function drawMatrix(){
+ctx.fillStyle='rgba(0,0,0,0.05)';
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle='#00ff00';
+ctx.font=fontSize+'px Courier New';
+for(let i=0;i<drops.length;i++){
+const char=chars[Math.floor(Math.random()*chars.length)];
+ctx.fillStyle=i%3===0?'#00ff00':'#003300';
+ctx.fillText(char,i*fontSize,drops[i]*fontSize);
+if(drops[i]*fontSize>canvas.height&&Math.random()>0.975){drops[i]=0;}
+drops[i]++;}}
+setInterval(drawMatrix,50);
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+</script>
+</body>
+</html>

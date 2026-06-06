@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雨窗遐想 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#2c3e50;color:#c8d6e5;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rainDrop{0%{top:-10px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100vh;opacity:0}}
+@keyframes lightning{0%,95%,100%{opacity:0}96%{opacity:0.3}97%{opacity:0}98%{opacity:0.15}99%{opacity:0}}
+@keyframes fogDrift{0%{transform:translateX(-10%)}50%{transform:translateX(10%)}100%{transform:translateX(-10%)}}
+.rain-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:50;overflow:hidden}
+.raindrop{position:absolute;width:1px;background:linear-gradient(to bottom,transparent,rgba(165,177,194,0.4));animation:rainDrop linear infinite}
+.lightning{position:fixed;top:0;left:0;width:100%;height:100%;background:#fff;pointer-events:none;z-index:49;animation:lightning 15s ease infinite;opacity:0}
+.fog{position:fixed;top:0;left:0;width:200%;height:100%;background:radial-gradient(ellipse at center,rgba(165,177,194,0.08),transparent 50%);pointer-events:none;z-index:1;animation:fogDrift 20s ease-in-out infinite}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(44,62,80,0.9);backdrop-filter:blur(10px);z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(165,177,194,0.2);animation:fadeIn 0.8s ease}
+.nav a{color:#a5b1c2;text-decoration:none;font-size:0.9rem}
+.nav a:hover{color:#c8d6e5}
+.nav-links{display:flex;gap:25px}
+.nav-links a{color:#a5b1c2;text-decoration:none;font-size:0.9rem}
+.hero{position:relative;height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#2c3e50,#34495e,#2c3e50);animation:fadeIn 1s ease;overflow:hidden}
+.window-frame{position:absolute;top:10%;left:15%;right:15%;bottom:10%;border:8px solid rgba(165,177,194,0.2);border-radius:5px;z-index:2}
+.window-frame::before{content:'';position:absolute;top:0;left:50%;width:4px;height:100%;background:rgba(165,177,194,0.15);transform:translateX(-50%)}
+.window-frame::after{content:'';position:absolute;top:50%;left:0;width:100%;height:4px;background:rgba(165,177,194,0.15);transform:translateY(-50%)}
+.hero-content{position:relative;z-index:3}
+.hero h1{font-size:3.5rem;font-weight:700;color:#c8d6e5;margin-bottom:15px;text-shadow:0 0 30px rgba(75,101,132,0.5)}
+.hero p{font-size:1.1rem;color:#a5b1c2;font-weight:300;letter-spacing:3px}
+.rain-emoji{position:absolute;font-size:1.5rem;opacity:0.2;z-index:1}
+.container{max-width:800px;margin:0 auto;padding:60px 20px;position:relative;z-index:10}
+.post{background:rgba(200,214,229,0.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(165,177,194,0.15);border-radius:12px;padding:40px;margin-bottom:45px;animation:fadeIn 1s ease;transition:transform 0.3s}
+.post:hover{transform:translateY(-3px);background:rgba(200,214,229,0.12)}
+.post-date{font-size:0.85rem;color:#7f8fa6;margin-bottom:10px}
+.post h2{font-size:1.7rem;color:#c8d6e5;margin-bottom:15px;font-weight:700}
+.post p{line-height:2;color:#a5b1c2;margin-bottom:15px;font-weight:300}
+.post-tag{display:inline-block;padding:4px 14px;background:rgba(75,101,132,0.2);border:1px solid rgba(165,177,194,0.15);border-radius:20px;font-size:0.8rem;color:#a5b1c2;margin-right:8px;margin-bottom:8px}
+.rain-sound{text-align:center;padding:30px;color:#7f8fa6;font-style:italic;font-size:0.9rem;letter-spacing:5px}
+footer{text-align:center;padding:40px;color:#7f8fa6;font-size:0.85rem;position:relative;z-index:10}
+footer .rain-line{height:1px;background:linear-gradient(90deg,transparent,#4b6584,transparent);margin-bottom:20px;opacity:0.3}
+</style>
+</head>
+<body>
+<div class="rain-container" id="rain"></div>
+<div class="lightning"></div>
+<div class="fog"></div>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">雨声</a>
+<a href="#">随笔</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="window-frame"></div>
+<div class="rain-emoji" style="top:20%;left:20%">🌧️</div>
+<div class="rain-emoji" style="top:40%;right:25%">💧</div>
+<div class="rain-emoji" style="bottom:30%;left:30%">🌧️</div>
+<div class="hero-content">
+<h1>雨窗遐想</h1>
+<p>听雨声，读闲书，想心事 🌧️</p>
+</div>
+</section>
+<div class="container">
+<div class="rain-sound">🌧️ · · · 滴 答 滴 答 · · · 🌧️</div>
+<article class="post">
+<div class="post-date">2025年3月13日 · 阴雨</div>
+<h2>🌧️ 雨是天空写给大地的信</h2>
+<p>今天又下雨了。连续第三天。很多人讨厌雨天，觉得出行不便、衣服难干、心情压抑。但我一直很喜欢雨，尤其是那种不大不小的绵绵细雨。它让整个世界变得安静，仿佛有人给城市按下了静音键。</p>
+<p>坐在窗前看雨，会发现每一场雨都不一样。春雨是轻柔的，像是天空在低语；夏雨是猛烈的，像是天空在宣泄；秋雨是缠绵的，像是天空在思念；冬雨是冰冷的，像是天空在叹息。</p>
+<p>如果雨真的是天空写给大地的信，那每一封都值得好好阅读。那些落在树叶上的、落在水洼里的、落在窗玻璃上的雨滴，都在诉说着不同的故事。</p>
+<div class="post-tag">雨天</div>
+<div class="post-tag">随想</div>
+<div class="post-tag">自然</div>
+</article>
+<article class="post">
+<div class="post-date">2025年3月10日 · 大雨</div>
+<h2>☔ 雨中漫步</h2>
+<p>今天做了一件"疯狂"的事——故意不带伞走进了雨里。一开始还担心路人异样的目光，后来发现下大雨的时候街上根本没什么人。整个城市仿佛是我的独享舞台。</p>
+<p>雨水打在脸上，流进衣领里，鞋子湿透了。但奇怪的是，我一点也不觉得难受。反而有一种久违的自由感。像是回到了小时候，那个不在乎衣服脏不脏、头发乱不乱的年纪。</p>
+<p>在雨中走了大概二十分钟，回家洗了个热水澡，换上干衣服，泡了一杯热茶。此刻裹着毯子坐在窗前，听着外面还在下着的雨，感觉世界特别温柔。有时候幸福就是这么简单——淋一场雨，然后暖和过来。</p>
+<div class="post-tag">雨中漫步</div>
+<div class="post-tag">自由</div>
+<div class="post-tag">简单幸福</div>
+</article>
+<article class="post">
+<div class="post-date">2025年3月6日 · 小雨转阴</div>
+<h2>📖 雨天的阅读时光</h2>
+<p>雨天和阅读真的是绝配。雨声是最好的背景音乐，不会太吵也不会太安静。在这样的氛围里读书，文字仿佛都变得更加生动了。</p>
+<p>今天读完了一本关于日本文化的随笔集。作者写到日本人的"物哀"美学——对转瞬即逝之美的感悟。雨本身就是物哀的最佳体现：它从天而降，短暂地触碰大地，然后消失无踪。每一场雨都是一期一会。</p>
+<p>合上书，窗外的雨不知什么时候已经停了。天空依然是灰色的，但远处隐隐透出一丝光亮。也许明天会放晴，也许还会继续下雨。无论哪种，都是好的。</p>
+<div class="post-tag">阅读</div>
+<div class="post-tag">物哀</div>
+<div class="post-tag">雨天书单</div>
+</article>
+</div>
+<footer>
+<div class="rain-line"></div>
+<p>🌧️ 雨窗遐想 · 在雨声中找到内心的宁静</p>
+<p style="margin-top:8px;opacity:0.5">© 2025 All rights reserved</p>
+</footer>
+<script>
+(function(){
+var c=document.getElementById('rain');
+for(var i=0;i<60;i++){
+var d=document.createElement('div');
+d.className='raindrop';
+d.style.left=Math.random()*100+'%';
+d.style.height=(15+Math.random()*25)+'px';
+d.style.animationDuration=(0.8+Math.random()*0.7)+'s';
+d.style.animationDelay=Math.random()*3+'s';
+d.style.opacity=0.2+Math.random()*0.3;
+c.appendChild(d);
+}
+})();
+</script>
+</body>
+</html>

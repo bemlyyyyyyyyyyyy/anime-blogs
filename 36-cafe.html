@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>午后咖啡 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff8f0;color:#5d4037;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes steam{0%{opacity:0;transform:translateY(0) scaleX(1)}50%{opacity:0.6;transform:translateY(-30px) scaleX(1.3)}100%{opacity:0;transform:translateY(-60px) scaleX(0.8)}}
+@keyframes steam2{0%{opacity:0;transform:translateY(0) scaleX(1)}50%{opacity:0.4;transform:translateY(-25px) scaleX(1.2)}100%{opacity:0;transform:translateY(-50px) scaleX(0.7)}}
+@keyframes warmGlow{0%,100%{box-shadow:0 5px 30px rgba(111,78,55,0.08)}50%{box-shadow:0 10px 50px rgba(111,78,55,0.15)}}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(255,248,240,0.95);backdrop-filter:blur(8px);z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(111,78,55,0.15);animation:fadeIn 0.8s ease}
+.nav a{color:#6f4e37;text-decoration:none;font-size:0.9rem}
+.nav a:hover{color:#a67b5b}
+.nav-links{display:flex;gap:25px}
+.nav-links a{color:#6f4e37;text-decoration:none;font-size:0.9rem}
+.hero{position:relative;height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#fff8f0,#f5e6d3,#fff8f0);animation:fadeIn 1s ease;overflow:hidden}
+.coffee-cup{position:absolute;bottom:20%;left:50%;transform:translateX(-50%);width:80px;height:60px;background:#6f4e37;border-radius:0 0 40px 40px;position:relative}
+.coffee-cup::before{content:'';position:absolute;right:-20px;top:10px;width:20px;height:30px;border:4px solid #6f4e37;border-left:none;border-radius:0 15px 15px 0}
+.steam-container{position:absolute;top:-60px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.steam-line{width:3px;height:40px;background:rgba(111,78,55,0.15);border-radius:50%;animation:steam 2s ease-in-out infinite}
+.steam-line:nth-child(2){animation-delay:0.4s;height:35px;animation-name:steam2}
+.steam-line:nth-child(3){animation-delay:0.8s;height:30px}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:3.5rem;font-weight:700;color:#6f4e37;margin-bottom:15px}
+.hero p{font-size:1.1rem;color:#a67b5b;font-weight:300;letter-spacing:2px}
+.coffee-stain{position:absolute;border-radius:50%;border:2px solid rgba(111,78,55,0.06);pointer-events:none}
+.cs1{width:150px;height:150px;top:15%;left:8%}
+.cs2{width:100px;height:100px;bottom:20%;right:12%}
+.cs3{width:120px;height:120px;top:50%;right:5%}
+.container{max-width:850px;margin:0 auto;padding:60px 20px;position:relative;z-index:1}
+.post{background:#fff;border-radius:20px;padding:40px;margin-bottom:45px;animation:fadeIn 1s ease;border:1px solid rgba(111,78,55,0.08);transition:transform 0.3s,box-shadow 0.3s}
+.post:hover{transform:translateY(-5px);animation:warmGlow 2s ease-in-out infinite}
+.post-date{font-size:0.85rem;color:#d4a574;margin-bottom:10px}
+.post h2{font-size:1.7rem;color:#6f4e37;margin-bottom:15px;font-weight:700}
+.post p{line-height:2;color:#8d6e63;margin-bottom:15px;font-weight:300}
+.post-tag{display:inline-block;padding:4px 14px;background:rgba(212,165,116,0.15);border-radius:20px;font-size:0.8rem;color:#a67b5b;margin-right:8px;margin-bottom:8px}
+.sidebar-menu{background:linear-gradient(135deg,#6f4e37,#8b6b4a);border-radius:15px;padding:30px;margin-bottom:45px;color:#fff8f0;animation:fadeIn 1s ease}
+.sidebar-menu h3{font-size:1.2rem;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid rgba(255,248,240,0.2)}
+.menu-item{padding:10px 0;border-bottom:1px dashed rgba(255,248,240,0.15);display:flex;justify-content:space-between;font-size:0.9rem}
+.menu-item:last-child{border-bottom:none}
+.menu-price{color:#d4a574}
+footer{text-align:center;padding:40px;color:#a67b5b;font-size:0.85rem;position:relative;z-index:1}
+footer .coffee-line{height:2px;background:linear-gradient(90deg,transparent,#d4a574,transparent);margin-bottom:20px;opacity:0.3}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">菜单</a>
+<a href="#">故事</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="coffee-stain cs1"></div>
+<div class="coffee-stain cs2"></div>
+<div class="coffee-stain cs3"></div>
+<div class="hero-content">
+<h1>☕ 午后咖啡</h1>
+<p>一杯咖啡，一段时光，一个故事</p>
+<div style="margin-top:40px;position:relative">
+<div style="width:80px;height:55px;background:#6f4e37;border-radius:0 0 40px 40px;margin:0 auto;position:relative">
+<div style="position:absolute;right:-18px;top:8px;width:18px;height:28px;border:4px solid #6f4e37;border-left:none;border-radius:0 14px 14px 0"></div>
+</div>
+<div style="display:flex;justify-content:center;gap:10px;margin-top:-50px;margin-bottom:10px">
+<div style="width:3px;height:35px;background:rgba(111,78,55,0.15);border-radius:50%;animation:steam 2s ease-in-out infinite"></div>
+<div style="width:3px;height:30px;background:rgba(111,78,55,0.12);border-radius:50%;animation:steam2 2s ease-in-out infinite 0.3s"></div>
+<div style="width:3px;height:25px;background:rgba(111,78,55,0.1);border-radius:50%;animation:steam 2s ease-in-out infinite 0.6s"></div>
+</div>
+</div>
+</div>
+</section>
+<div class="container">
+<div class="sidebar-menu">
+<h3>☕ 今日特调</h3>
+<div class="menu-item"><span>焦糖玛奇朵</span><span class="menu-price">¥32</span></div>
+<div class="menu-item"><span>桂花拿铁</span><span class="menu-price">¥28</span></div>
+<div class="menu-item"><span>手冲埃塞俄比亚</span><span class="menu-price">¥38</span></div>
+<div class="menu-item"><span>抹茶燕麦奶</span><span class="menu-price">¥30</span></div>
+<div class="menu-item"><span>热巧克力</span><span class="menu-price">¥26</span></div>
+</div>
+<article class="post">
+<div class="post-date">2025年3月14日 · 下午三点</div>
+<h2>☕ 第一次喝手冲咖啡</h2>
+<p>朋友带我去了一家隐藏在小巷里的手冲咖啡馆。店主是一个留着络腮胡的中年男人，动作很慢，像是在进行某种仪式。磨豆、称重、闷蒸、注水，每一步都不紧不慢。</p>
+<p>当那杯咖啡终于端到面前时，我被它的香气迷住了。不同于速溶咖啡的单一苦味，这杯手冲有着丰富的层次——先是微酸的果香，然后是淡淡的花香，最后回甘中带着一丝巧克力的味道。</p>
+<p>从那以后我就迷上了手冲咖啡。不是因为它"高级"，而是因为那个慢慢等待的过程本身就是一种享受。在这个什么都要快的时代，能够为一杯咖啡花上十分钟，已经是一种小小的奢侈了。</p>
+<div class="post-tag">手冲咖啡</div>
+<div class="post-tag">慢生活</div>
+<div class="post-tag">咖啡馆</div>
+</article>
+<article class="post">
+<div class="post-date">2025年3月9日 · 慵懒的周日</div>
+<h2>🛋️ 咖啡馆里的写作时光</h2>
+<p>周日的下午，找了一个靠窗的位置坐下来。面前是一杯还冒着热气的拿铁，笔记本电脑打开着，光标闪烁着等待我写下第一个字。窗外的行人来来往往，每个人都有自己的节奏。</p>
+<p>咖啡馆有一种神奇的白噪音效果——磨豆机的嗡嗡声、杯碟碰撞的叮当声、低声交谈的嗡嗡声——这些声音混合在一起，反而让人格外专注。在家里总是坐不住，但在咖啡馆里却能写上好几个小时。</p>
+<p>也许是因为花了钱买咖啡，所以不好意思不做事？又或者，只是需要一个离开家的仪式感。无论如何，这杯拿铁见证了三千字的诞生，值了。</p>
+<div class="post-tag">写作</div>
+<div class="post-tag">咖啡馆</div>
+<div class="post-tag">创作</div>
+</article>
+<article class="post">
+<div class="post-date">2025年3月2日 · 傍晚</div>
+<h2>🌆 关于咖啡与人</h2>
+<p>每个人喝咖啡的方式都不一样。有人喜欢黑咖啡的纯粹，有人喜欢加很多奶和糖的甜蜜，有人只喝冰的，有人只喝热的。我觉得从一个人喝咖啡的习惯可以看出他的性格——虽然这并没有什么科学依据。</p>
+<p>我认识一个朋友，每次点咖啡都要纠结很久，最后永远点同一杯。还有一个朋友，每次都要尝试新品，哪怕上次踩了雷也不长记性。而我呢，大概属于那种有固定的几款轮换着喝的类型。</p>
+<p>咖啡的意义从来不只是一杯饮料。它是清晨的启动仪式，是午后的能量补给，是朋友聚会的借口，是独处时光的伴侣。每一杯咖啡背后，都有一段属于自己的故事。</p>
+<div class="post-tag">咖啡文化</div>
+<div class="post-tag">生活方式</div>
+<div class="post-tag">人情味</div>
+</article>
+</div>
+<footer>
+<div class="coffee-line"></div>
+<p>☕ 午后咖啡 · 慢下来，品味生活</p>
+<p style="margin-top:8px;opacity:0.5">© 2025 All rights reserved</p>
+</footer>
+</body>
+</html>

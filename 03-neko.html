@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>猫咪日常 — 喵呜物语</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff8e1;color:#5d4037;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.7);border-radius:20px;color:#f57c00;font-size:14px;transition:all .3s}
+.back-link:hover{background:#fda085;color:#fff}
+nav{background:linear-gradient(135deg,#f6d365,#fda085);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 15px rgba(253,160,133,0.4)}
+nav .logo{font-size:24px;font-weight:700;color:#fff;display:flex;align-items:center;gap:5px}
+.ear-left,.ear-right{display:inline-block;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:18px solid #fff;position:relative;top:-8px}
+.ear-left{transform:rotate(-15deg);margin-right:3px}
+.ear-right{transform:rotate(15deg);margin-left:3px}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#fff;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s}
+nav ul li a:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}
+.hero{position:relative;height:400px;background:linear-gradient(180deg,#f6d365 0%,#fda085 50%,#fff8e1 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.hero h1{font-size:56px;color:#fff;text-shadow:2px 3px 8px rgba(200,100,50,0.3);z-index:2}
+.hero p{font-size:18px;color:rgba(255,255,255,0.85);margin-top:10px;z-index:2}
+.paw{position:absolute;font-size:24px;opacity:0.2;animation:pawPrint 6s ease-in-out infinite}
+.paw:nth-child(1){top:20%;left:10%;animation-delay:0s}
+.paw:nth-child(2){top:60%;left:20%;animation-delay:1s;font-size:18px}
+.paw:nth-child(3){top:30%;left:80%;animation-delay:2s}
+.paw:nth-child(4){top:70%;left:70%;animation-delay:3s;font-size:20px}
+.paw:nth-child(5){top:15%;left:50%;animation-delay:4s;font-size:16px}
+.paw:nth-child(6){top:80%;left:40%;animation-delay:5s}
+@keyframes pawPrint{
+0%,100%{opacity:0.1;transform:scale(0.8) rotate(0deg)}
+50%{opacity:0.3;transform:scale(1.1) rotate(10deg)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:#fff;border-radius:24px;padding:30px;box-shadow:0 6px 25px rgba(253,160,133,0.12);transition:all .4s ease;border:2px solid transparent;position:relative}
+.card:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 12px 35px rgba(253,160,133,0.2);border-color:#fda085}
+.card h2{font-size:22px;color:#e65100;margin-bottom:10px}
+.card .date{font-size:13px;color:#bcaaa4;margin-bottom:15px}
+.card p{line-height:1.8;color:#6d4c41;font-size:15px}
+.card .tag{display:inline-block;padding:5px 14px;background:linear-gradient(135deg,#f6d365,#fda085);border-radius:20px;font-size:12px;color:#fff;margin-top:12px;margin-right:5px;transition:all .3s}
+.card .tag:hover{transform:scale(1.05);box-shadow:0 3px 10px rgba(253,160,133,0.3)}
+.cat-divider{text-align:center;font-size:30px;margin:10px 0;letter-spacing:15px;opacity:0.3}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:#fff;border-radius:24px;padding:25px;box-shadow:0 6px 20px rgba(253,160,133,0.1);text-align:center;transition:all .3s}
+.sidebar-card:hover{transform:translateY(-3px)}
+.sidebar-card h3{font-size:18px;color:#e65100;margin-bottom:15px}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#f6d365,#fda085);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:45px;box-shadow:0 5px 15px rgba(253,160,133,0.2)}
+.sidebar-card p{font-size:14px;color:#6d4c41;line-height:1.7}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:10px 0;border-bottom:1px dashed #ffe0b2;font-size:14px;color:#6d4c41;transition:all .3s;cursor:default}
+.sidebar-card ul li:hover{padding-left:8px;color:#e65100}
+.sidebar-card ul li:last-child{border:none}
+.cat-facts{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px dashed #fda085}
+.cat-facts li::before{content:'🐾 '}
+footer{text-align:center;padding:40px;background:linear-gradient(135deg,#f6d365,#fda085);color:#fff;margin-top:50px;font-size:14px}
+footer .paws{font-size:24px;letter-spacing:10px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo"><span class="ear-left"></span>🐱 猫咪日常<span class="ear-right"></span></div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">喵呜日记</a></li>
+<li><a href="#">猫咪图鉴</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="paw">🐾</div><div class="paw">🐾</div><div class="paw">🐾</div>
+<div class="paw">🐾</div><div class="paw">🐾</div><div class="paw">🐾</div>
+<h1>猫咪日常</h1>
+<p>每一只猫咪都是一个小天使 🐾</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>🐱 今天又被猫咪支配了</h2>
+<div class="date">2026年3月15日 · 喵呜日记</div>
+<p>早上六点，准时被猫咪的肉垫踩脸叫醒。睁开眼，一双圆溜溜的大眼睛正盯着我看，尾巴在我脸上扫来扫去。好吧，又是被猫咪支配的一天。给它倒了猫粮，它闻了闻，转身走了——意思大概是"就这？"我只好又开了一个罐头，它才满意地开始吃。养猫就是这样，你以为你是主人，其实你只是铲屎官。</p>
+<p>下午它又找到了一个新的纸箱，把自己塞了进去。明明那个箱子比它小了两圈，它就是有办法把自己折叠进去。我怀疑猫咪是液体做的。拍了张照片发朋友圈，收获了五十个赞。看来猫咪才是真正的流量密码。</p>
+<div class="cat-divider">🐾 🐾 🐾</div>
+<span class="tag">日常</span><span class="tag">猫咪</span><span class="tag">搞笑</span>
+</article>
+<article class="card">
+<h2>😺 猫咪的十八种睡姿</h2>
+<div class="date">2026年3月22日 · 猫咪图鉴</div>
+<p>经过长期观察，我发现猫咪至少有十八种经典睡姿。第一种：面包 loaf——把四肢全部藏在身体下面，变成一个完美的猫面包。第二种：仰天大睡——四脚朝天，露出最柔软的肚皮，这是猫咪对你的最高信任。第三种：液体猫——完美贴合任何容器的形状，不管是碗、盒子还是花瓶。</p>
+<p>最让我感动的是，自从养了猫之后，每天回家都有一个小家伙在门口等我。它不会说话，但那双眼睛里的期待，比任何语言都温暖。有时候我觉得，不是我养了猫，而是猫咪选择了陪伴我。在这个孤独的城市里，有一个毛茸茸的小生命在等你回家，这大概就是最简单的幸福吧。</p>
+<div class="cat-divider">😺 😸 😻</div>
+<span class="tag">猫咪</span><span class="tag">观察</span><span class="tag">温暖</span>
+</article>
+<article class="card">
+<h2>🧶 自制猫咪玩具大作战</h2>
+<div class="date">2026年4月1日 · DIY手作</div>
+<p>周末心血来潮，决定给猫咪做一些手工玩具。用了旧袜子做了个逗猫棒，毛线团缠了个球，纸板箱搭了个城堡。结果呢？猫咪对逗猫棒看了三秒，对毛线球闻了闻，然后——一头钻进了装材料的塑料袋里。</p>
+<p>猫咪果然是一种让人又爱又恨的生物。你花心思做的玩具它不屑一顾，但一个塑料袋、一根数据线、一个瓶盖就能让它玩上半天。不过看着它在塑料袋里钻进钻出的傻样子，我觉得这个周末也值了。下次还是直接买个纸箱吧，省钱省力，猫咪还开心。</p>
+<div class="cat-divider">🧶 🎾 🎁</div>
+<span class="tag">DIY</span><span class="tag">玩具</span><span class="tag">猫咪</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">😺</div>
+<h3>关于我</h3>
+<p>资深铲屎官<br>家里有两只主子<br>日常被猫咪支配的快乐人</p>
+</div>
+<div class="sidebar-card cat-facts">
+<h3>🐾 猫咪冷知识</h3>
+<ul>
+<li>猫咪每天睡12-16小时</li>
+<li>猫的胡须宽度=身体宽度</li>
+<li>猫咪不能感知甜味</li>
+<li>猫有230块骨头（人206）</li>
+<li>猫咪呼噜声有助愈合</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>📸 我家主子</h3>
+<ul>
+<li>🍙 饭团 — 英短蓝猫</li>
+<li>🍡 丸子 — 橘猫</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<div class="paws">🐾 🐾 🐾</div>
+<p>猫咪日常 — 喵呜，今天也要加油鸭！</p>
+<p style="margin-top:8px;opacity:0.8">© 2026 All Rights Reserved</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>风铃清响 — 禅意生活</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:linear-gradient(180deg,#f0fff0,#e8f5e9,#f5f5f5);color:#37474f;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);border-radius:20px;color:#66bb6a;font-size:14px;transition:all .3s;border:1px solid rgba(102,187,106,0.2)}
+.back-link:hover{background:rgba(102,187,106,0.1);border-color:#66bb6a}
+nav{background:rgba(255,255,255,0.6);backdrop-filter:blur(20px);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(102,187,106,0.1)}
+nav .logo{font-size:24px;font-weight:300;color:#66bb6a;letter-spacing:5px}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#81c784;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s;letter-spacing:2px}
+nav ul li a:hover{color:#43a047}
+.hero{position:relative;height:450px;background:linear-gradient(180deg,rgba(212,252,121,0.3),rgba(150,230,161,0.2),rgba(245,245,245,0.1));display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.hero h1{font-size:52px;color:#66bb6a;z-index:2;letter-spacing:12px;font-weight:300}
+.hero p{font-size:16px;color:rgba(102,187,106,0.6);margin-top:15px;z-index:2;letter-spacing:5px}
+.windchime-container{position:absolute;top:0;display:flex;gap:80px;z-index:1}
+.windchime{display:flex;flex-direction:column;align-items:center;animation:swing 4s ease-in-out infinite;transform-origin:top center}
+.windchime:nth-child(1){animation-delay:0s}
+.windchime:nth-child(2){animation-delay:0.8s;animation-duration:4.5s}
+.windchime:nth-child(3){animation-delay:1.6s;animation-duration:3.8s}
+.windchime:nth-child(4){animation-delay:0.4s;animation-duration:4.2s}
+.windchime:nth-child(5){animation-delay:1.2s;animation-duration:3.5s}
+.chime-line{width:1px;height:80px;background:rgba(102,187,106,0.3)}
+.chime-body{width:20px;height:30px;background:linear-gradient(180deg,rgba(212,252,121,0.4),rgba(150,230,161,0.6));border-radius:0 0 10px 10px;border:1px solid rgba(102,187,106,0.2);position:relative}
+.chime-body::after{content:'';position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);width:1px;height:15px;background:rgba(102,187,106,0.3)}
+.chime-tail{width:8px;height:25px;background:linear-gradient(180deg,rgba(150,230,161,0.3),rgba(102,187,106,0.4));border-radius:0 0 4px 4px;margin-top:15px}
+@keyframes swing{
+0%,100%{transform:rotate(3deg)}
+50%{transform:rotate(-3deg)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:40px;max-width:1100px;margin:50px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:40px}
+.card{background:rgba(255,255,255,0.5);backdrop-filter:blur(10px);border:1px solid rgba(102,187,106,0.1);border-radius:20px;padding:35px;transition:all .5s ease;position:relative}
+.card:hover{background:rgba(255,255,255,0.7);box-shadow:0 10px 30px rgba(102,187,106,0.08);transform:translateY(-3px)}
+.card h2{font-size:22px;color:#66bb6a;margin-bottom:10px;font-weight:400;letter-spacing:2px}
+.card .date{font-size:13px;color:#a5d6a7;margin-bottom:20px}
+.card p{line-height:2.2;color:#607d8b;font-size:15px;font-weight:300}
+.card .tag{display:inline-block;padding:4px 14px;border:1px solid rgba(102,187,106,0.2);border-radius:15px;font-size:12px;color:#81c784;margin-top:15px;margin-right:5px;background:rgba(255,255,255,0.5)}
+.zen-divider{display:flex;align-items:center;justify-content:center;gap:15px;margin:25px 0;color:#c8e6c9;font-size:12px;letter-spacing:5px}
+.zen-divider::before,.zen-divider::after{content:'';width:60px;height:1px;background:linear-gradient(90deg,transparent,#c8e6c9,transparent)}
+.sidebar{display:flex;flex-direction:column;gap:30px}
+.sidebar-card{background:rgba(255,255,255,0.5);backdrop-filter:blur(10px);border:1px solid rgba(102,187,106,0.1);border-radius:20px;padding:30px;text-align:center}
+.sidebar-card h3{font-size:18px;color:#66bb6a;margin-bottom:15px;font-weight:400;letter-spacing:3px}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(212,252,121,0.3),rgba(150,230,161,0.4));border:1px solid rgba(102,187,106,0.2);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.sidebar-card p{font-size:14px;color:#90a4ae;line-height:1.8;font-weight:300}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:10px 0;border-bottom:1px solid rgba(102,187,106,0.08);font-size:14px;color:#90a4ae;font-weight:300;letter-spacing:1px}
+.sidebar-card ul li:last-child{border:none}
+.zen-quote{background:rgba(255,255,255,0.3);border:1px dashed rgba(102,187,106,0.2);font-style:italic}
+.zen-quote blockquote{font-size:16px;color:#81c784;line-height:2;padding:10px 0}
+footer{text-align:center;padding:50px;background:rgba(255,255,255,0.3);color:rgba(102,187,106,0.5);margin-top:50px;font-size:14px;font-weight:300;letter-spacing:3px;border-top:1px solid rgba(102,187,106,0.1)}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">🎐 风铃清响</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">禅意笔记</a></li>
+<li><a href="#">风之物语</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="windchime-container">
+<div class="windchime">
+<div class="chime-line"></div>
+<div class="chime-body"></div>
+<div class="chime-tail"></div>
+</div>
+<div class="windchime">
+<div class="chime-line"></div>
+<div class="chime-body"></div>
+<div class="chime-tail"></div>
+</div>
+<div class="windchime">
+<div class="chime-line"></div>
+<div class="chime-body"></div>
+<div class="chime-tail"></div>
+</div>
+<div class="windchime">
+<div class="chime-line"></div>
+<div class="chime-body"></div>
+<div class="chime-tail"></div>
+</div>
+<div class="windchime">
+<div class="chime-line"></div>
+<div class="chime-body"></div>
+<div class="chime-tail"></div>
+</div>
+</div>
+<h1>风铃清响</h1>
+<p>一念清风起，万般皆自在</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>🎐 檐下风铃声</h2>
+<div class="date">2026年5月8日 · 禅意笔记</div>
+<p>在屋檐下挂了一串玻璃风铃。每当微风吹过，它就会发出清脆的叮当声，像是大自然在低声细语。我常常坐在廊下，闭上眼睛，听着风铃声发呆。那声音不急不缓，随风而来，随风而去，就像是时间本身在流动。</p>
+<p>日本人喜欢在夏天挂风铃，因为他们相信风铃的声音能带来清凉。我觉得风铃的意义不止于此——它提醒我们，即使是最微小的风，也值得被感知。在这个喧嚣的世界里，我们太习惯于忽略那些细微的感受了。一阵风、一声铃响、一片落叶，这些微不足道的事物，恰恰是生活中最珍贵的部分。</p>
+<div class="zen-divider">·</div>
+<span class="tag">风铃</span><span class="tag">禅意</span><span class="tag">感知</span>
+</article>
+<article class="card">
+<h2>🍃 做一阵自由的风</h2>
+<div class="date">2026年5月18日 · 风之物语</div>
+<p>今天在公园里，看到一片树叶被风吹起，在空中旋转了很久很久才缓缓落地。我突然很羡慕风——它无形无色，却无处不在；它没有目的地，却走遍了世界的每一个角落。风吹过山峦，吹过海洋，吹过城市的每一条街道，它是这个世界上最自由的旅行者。</p>
+<p>我们也可以像风一样生活——不执着于某个目的地，不焦虑于未来的不确定，只是享受当下的每一刻。风不会问"我要去哪里"，它只是自在地流动。也许人生的最高境界，就是像风一样——来去自如，无挂无碍。闭上眼睛，感受风拂过脸颊的温柔，这一刻，你就是自由的。</p>
+<div class="zen-divider">·</div>
+<span class="tag">风</span><span class="tag">自由</span><span class="tag">哲学</span>
+</article>
+<article class="card">
+<h2>🧘 晨间十分钟冥想</h2>
+<div class="date">2026年5月25日 · 内在修行</div>
+<p>开始了一个新的习惯——每天早起十分钟做冥想。找一个安静的角落坐下来，闭上眼睛，专注于自己的呼吸。吸气……呼气……不需要控制什么，也不需要思考什么，只是感受空气进出身体的感觉。刚开始的时候，脑子里总是会冒出各种杂念，但我学会了不评判它们，只是让它们像云一样飘过。</p>
+<p>坚持了一个月之后，我明显感觉到了变化。不是说我变成了一个完全不同的人，而是我多了一种能力——在纷乱中找到安静的能力。当工作压力大的时候，当心情烦躁的时候，我只需要闭上眼睛，做几次深呼吸，就能回到那个安静的内在空间。这十分钟，是我每天送给自己最好的礼物。</p>
+<div class="zen-divider">·</div>
+<span class="tag">冥想</span><span class="tag">晨间</span><span class="tag">修行</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">🍃</div>
+<h3>关于我</h3>
+<p>一个寻找内心平静的人<br>在简单中发现美好<br>在安静中感受力量</p>
+</div>
+<div class="sidebar-card zen-quote">
+<h3>📜 禅语</h3>
+<blockquote>"春有百花秋有月<br>夏有凉风冬有雪<br>若无闲事挂心头<br>便是人间好时节"</blockquote>
+</div>
+<div class="sidebar-card">
+<h3>🎐 生活禅</h3>
+<ul>
+<li>🧘 每日十分钟冥想</li>
+<li>🍵 专注地喝一杯茶</li>
+<li>📖 睡前阅读半小时</li>
+<li>🌿 给植物浇水说话</li>
+<li>🎐 听风铃声发呆</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p>🎐 风铃清响 — 心若清净，风雅自来 🍃</p>
+<p style="margin-top:10px;opacity:0.5">© 2026 All Rights Reserved</p>
+</footer>
+</body>
+</html>

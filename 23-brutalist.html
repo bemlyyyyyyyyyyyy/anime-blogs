@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>野兽派 — 粗粝之美</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Courier New',monospace;background:#f5f5f5;color:#111827;overflow-x:hidden}
+a{color:#dc2626;text-decoration:none;font-weight:700}
+a:hover{text-decoration:underline}
+
+nav{position:fixed;top:0;left:0;width:100%;background:#111827;z-index:1000;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid #000}
+nav .logo{font-size:1.3rem;font-weight:700;color:#f5f5f5;letter-spacing:6px;text-transform:uppercase;font-family:'Courier New',monospace}
+nav .nav-links{display:flex;gap:24px}
+nav .nav-links a{color:#f5f5f5;font-weight:700;font-size:0.85rem;letter-spacing:3px;text-transform:uppercase}
+nav .nav-links a:hover{color:#dc2626}
+
+.back-link{position:fixed;top:60px;left:20px;z-index:999;background:#111827;color:#f5f5f5;padding:8px 16px;font-weight:700;font-size:0.85rem;border:4px solid #000;font-family:'Courier New',monospace;letter-spacing:2px}
+
+/* Grid overlay */
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 99px,rgba(0,0,0,0.05) 99px,rgba(0,0,0,0.05) 100px),repeating-linear-gradient(90deg,transparent,transparent 99px,rgba(0,0,0,0.05) 99px,rgba(0,0,0,0.05) 100px);pointer-events:none;z-index:9998}
+
+/* Hero */
+.hero{margin-top:55px;min-height:80vh;background:#111827;position:relative;display:flex;align-items:flex-start;justify-content:flex-start;padding:80px 60px;border-bottom:4px solid #000}
+.hero::before{content:'';position:absolute;top:0;right:0;width:40%;height:100%;background:#1f2937;border-left:4px solid #000}
+.hero-content{position:relative;z-index:2;max-width:55%}
+.hero-content h1{font-size:5rem;font-weight:700;color:#f5f5f5;line-height:0.95;letter-spacing:-3px;font-family:'Courier New',monospace}
+.hero-content h1 .accent{color:#dc2626;display:block}
+.hero-content .tagline{font-size:1rem;color:#6b7280;margin-top:20px;letter-spacing:4px;text-transform:uppercase;border-top:4px solid #dc2626;padding-top:15px;max-width:400px}
+.hero-content .tagline span{display:block;margin-top:5px;color:#f5f5f5;font-size:1.1rem}
+.hero-grid{position:absolute;top:20px;right:60px;z-index:2;display:grid;grid-template-columns:repeat(3,80px);grid-template-rows:repeat(4,80px);gap:0}
+.hero-grid div{border:2px solid rgba(220,38,38,0.3)}
+.hero-grid div:nth-child(1){background:rgba(220,38,38,0.15);grid-row:span 2}
+.hero-grid div:nth-child(5){background:rgba(245,245,245,0.05);grid-column:span 2}
+
+/* Section header */
+.section-header{font-family:'Courier New',monospace;font-size:2.5rem;font-weight:700;color:#111827;margin-bottom:8px;letter-spacing:-1px;text-transform:uppercase}
+.section-line{width:100%;height:4px;background:#000;margin-bottom:40px}
+.section-meta{font-size:0.8rem;color:#6b7280;letter-spacing:3px;text-transform:uppercase;margin-bottom:30px}
+
+/* Posts */
+.posts-container{max-width:1100px;margin:0 auto;padding:80px 40px;position:relative;z-index:2}
+.post-row{display:grid;grid-template-columns:1fr 1fr;border:4px solid #000;margin-bottom:0}
+.post-row+.post-row{border-top:0}
+.post-item{padding:35px;border-right:4px solid #000;position:relative}
+.post-item:last-child{border-right:none}
+.post-item .post-label{position:absolute;top:0;left:0;background:#111827;color:#f5f5f5;padding:5px 12px;font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;font-family:'Courier New',monospace}
+.post-item .post-label.red{background:#dc2626;color:#fff}
+.post-item h3{font-size:1.4rem;font-weight:700;margin-bottom:12px;margin-top:20px;font-family:'Courier New',monospace;line-height:1.3;text-transform:uppercase}
+.post-item p{font-size:0.9rem;line-height:1.8;color:#1f2937}
+.post-item .post-footer{margin-top:15px;padding-top:12px;border-top:2px solid #000;display:flex;justify-content:space-between;align-items:center}
+.post-item .post-footer .date{font-size:0.75rem;color:#6b7280;letter-spacing:2px;font-family:'Courier New',monospace}
+.post-item .post-footer .read{font-size:0.8rem;font-weight:700;color:#dc2626;letter-spacing:2px;text-transform:uppercase}
+
+/* Full width post */
+.post-full{border:4px solid #000;padding:50px;position:relative;background:#f5f5f5;margin-bottom:0}
+.post-full::before{content:'';position:absolute;top:0;left:0;width:12px;height:100%;background:#dc2626}
+.post-full .inner{padding-left:20px}
+.post-full h3{font-size:1.8rem;font-weight:700;font-family:'Courier New',monospace;text-transform:uppercase;margin-bottom:15px}
+.post-full p{font-size:0.95rem;line-height:1.9;max-width:700px;color:#1f2937}
+
+/* Stats bar */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border:4px solid #000;background:#111827;position:relative;z-index:2}
+.stats-bar .stat{padding:30px;text-align:center;border-right:4px solid #000}
+.stats-bar .stat:last-child{border-right:none}
+.stats-bar .stat .num{font-size:2.5rem;font-weight:700;color:#dc2626;font-family:'Courier New',monospace}
+.stats-bar .stat .label{font-size:0.75rem;color:#6b7280;letter-spacing:3px;text-transform:uppercase;margin-top:5px}
+
+/* Manifesto */
+.manifesto{max-width:1100px;margin:0 auto;padding:60px 40px;position:relative;z-index:2}
+.manifesto-block{border:4px solid #000;padding:40px;background:#1f2937;position:relative}
+.manifesto-block h2{font-size:2rem;color:#f5f5f5;font-family:'Courier New',monospace;text-transform:uppercase;letter-spacing:4px;margin-bottom:15px}
+.manifesto-block p{color:#9ca3af;line-height:1.9;font-size:0.95rem;max-width:600px}
+.manifesto-block .accent-line{position:absolute;top:0;left:0;width:6px;height:100%;background:#dc2626}
+
+/* Footer */
+footer{background:#111827;padding:40px;border-top:4px solid #000;position:relative;z-index:2}
+footer .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+footer p{color:#6b7280;font-size:0.8rem;letter-spacing:3px;font-family:'Courier New',monospace;text-transform:uppercase}
+footer .footer-links{display:flex;gap:20px}
+footer .footer-links a{color:#f5f5f5;font-size:0.8rem;letter-spacing:2px}
+
+@media(max-width:768px){
+.hero-content h1{font-size:2.5rem;max-width:100%}
+.hero-content{max-width:100%}
+.hero::before{display:none}
+.hero-grid{display:none}
+.post-row{grid-template-columns:1fr}
+.post-item{border-right:none;border-bottom:4px solid #000}
+.stats-bar{grid-template-columns:repeat(2,1fr)}
+nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">BRUTALIST</div>
+<div class="nav-links">
+<a href="#">首页</a><a href="#">建筑</a><a href="#">设计</a><a href="#">理论</a>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="hero-content">
+<h1>RAW<span class="accent">CONCRETE</span>DESIGN</h1>
+<div class="tagline">粗粝即真实<div>野兽派设计美学宣言</div></div>
+</div>
+<div class="hero-grid">
+<div></div><div></div><div></div>
+<div></div><div></div><div></div>
+<div></div><div></div><div></div>
+<div></div><div></div><div></div>
+</div>
+</div>
+
+<div class="stats-bar">
+<div class="stat"><div class="num">127</div><div class="label">混凝土建筑</div></div>
+<div class="stat"><div class="num">43</div><div class="label">设计项目</div></div>
+<div class="stat"><div class="num">89</div><div class="label">理论文章</div></div>
+<div class="stat"><div class="num">12</div><div class="label">国际展览</div></div>
+</div>
+
+<div class="posts-container">
+<div class="section-meta">VOL. 01 — 2024</div>
+<h2 class="section-header">混凝土诗学</h2>
+<div class="section-line"></div>
+
+<div class="post-row">
+<div class="post-item">
+<div class="post-label red">建筑</div>
+<h3>混凝土的诚实表达</h3>
+<p>清水混凝土是野兽派建筑最核心的材料语言。不加修饰的表面、模板留下的纹理、材料本身的质感——这一切构成了一种诚实到近乎残酷的美学。混凝土不会说谎，它展示着自己被浇筑、凝固的每一个过程。在当代建筑中，安藤忠雄和扎哈·哈迪德等建筑师将混凝土的表现力推向了新的高度。</p>
+<div class="post-footer">
+<span class="date">2024.01</span>
+<a href="#" class="read">阅读 →</a>
+</div>
+</div>
+<div class="post-item">
+<div class="post-label">设计</div>
+<h3>去装饰化的界面设计</h3>
+<p>在数字设计领域，野兽派美学正在经历一场复兴。设计师们开始摒弃精致的渐变和圆角，转而拥抱粗粝的边框、系统字体和高对比度的色彩。这种"反设计"的趋势实际上是对过度拟物化和装饰化的一种回应。当界面不再试图模仿现实世界的材质时，它反而获得了更强的数字原生感。</p>
+<div class="post-footer">
+<span class="date">2024.02</span>
+<a href="#" class="read">阅读 →</a>
+</div>
+</div>
+</div>
+
+<div class="post-full">
+<div class="inner">
+<h3>马赛公寓：居住的机器</h3>
+<p>勒·柯布西耶设计的马赛公寓是野兽派建筑的里程碑。这座容纳三百多户家庭的巨型建筑如同一座竖立的城市，内部设有商店、学校和屋顶花园。粗糙的混凝土表面被称为" béton brut"（清水混凝土），这也是"野兽派"名称的由来。柯布西耶将建筑定义为"居住的机器"，这一理念在马赛公寓中得到了最彻底的实现。建筑不再是装饰的载体，而是功能的直接表达。每一个结构元素都承担着实际的荷载任务，没有任何多余的构件。这种赤裸裸的结构真实感正是野兽派美学的核心。</p>
+</div>
+</div>
+
+<div class="post-row">
+<div class="post-item">
+<div class="post-label">理论</div>
+<h3>丑陋之美的哲学</h3>
+<p>野兽派美学挑战了传统意义上的"美"的定义。它不追求视觉上的愉悦，而是追求真实和力量。粗糙的混凝土、暴露的管道、未加修饰的结构——这些在传统审美中被视为"丑陋"的元素，在野兽派的语境中获得了全新的价值。这种美学观念与存在主义哲学有着深刻的关联。</p>
+<div class="post-footer">
+<span class="date">2024.03</span>
+<a href="#" class="read">阅读 →</a>
+</div>
+</div>
+<div class="post-item">
+<div class="post-label red">评论</div>
+<h3>数字时代的粗粝复兴</h3>
+<p>当所有人都在追求像素级完美的设计时，一股逆流正在涌动。新一代的网页设计师开始故意使用粗糙的边框、错位的网格和不协调的色彩。这种数字野兽派运动不仅是对主流设计的反叛，更是对数字本质的回归——屏幕就是屏幕，像素就是像素，为什么要假装它们是别的东西？</p>
+<div class="post-footer">
+<span class="date">2024.04</span>
+<a href="#" class="read">阅读 →</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="manifesto">
+<div class="manifesto-block">
+<div class="accent-line"></div>
+<h2>粗粝宣言</h2>
+<p>我们拒绝精致的谎言。我们拥抱材料的真相。混凝土的粗糙是它的尊严，钢铁的锈迹是它的勋章。在虚假的光滑中，我们选择诚实的粗粝。每一个暴露的结构都是对虚伪的抗议，每一道裂纹都是时间的签名。</p>
+</div>
+</div>
+
+<footer>
+<div class="footer-inner">
+<p>BRUTALIST © 2024</p>
+<div class="footer-links">
+<a href="#">首页</a><a href="#">存档</a><a href="#">关于</a>
+</div>
+</div>
+</footer>
+<script>
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
+},{threshold:0.1});
+document.querySelectorAll('.post-item,.post-full,.manifesto-block').forEach(el=>{
+el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 0.6s,transform 0.6s';
+observer.observe(el);
+});
+</script>
+</body>
+</html>

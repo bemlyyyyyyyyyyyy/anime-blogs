@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>冬日纯白 — 雪之物语</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#f0f2f9;color:#37474f;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.6);backdrop-filter:blur(10px);border:1px solid rgba(200,210,230,0.5);border-radius:20px;color:#7986cb;font-size:14px;transition:all .3s}
+.back-link:hover{background:rgba(200,210,230,0.3)}
+nav{background:rgba(255,255,255,0.7);backdrop-filter:blur(20px);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(200,210,230,0.3)}
+nav .logo{font-size:24px;font-weight:700;color:#7986cb;letter-spacing:3px}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#9fa8da;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s;border:1px solid transparent}
+nav ul li a:hover{border-color:rgba(121,134,203,0.3);color:#7986cb}
+.hero{position:relative;height:450px;background:linear-gradient(180deg,#e8eaf6 0%,#c5cae9 50%,#f0f2f9 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden}
+.hero h1{font-size:54px;color:#7986cb;text-shadow:0 2px 10px rgba(121,134,203,0.2);z-index:2;letter-spacing:10px;font-weight:300}
+.hero p{font-size:16px;color:rgba(121,134,203,0.6);margin-top:15px;z-index:2;letter-spacing:5px}
+.snowflake{position:absolute;color:rgba(200,210,230,0.6);font-size:14px;animation:snowfall linear infinite;z-index:1}
+.snowflake:nth-child(1){left:5%;animation-duration:10s;animation-delay:0s;font-size:12px}
+.snowflake:nth-child(2){left:15%;animation-duration:14s;animation-delay:2s;font-size:16px}
+.snowflake:nth-child(3){left:25%;animation-duration:11s;animation-delay:4s}
+.snowflake:nth-child(4){left:35%;animation-duration:13s;animation-delay:1s;font-size:10px}
+.snowflake:nth-child(5){left:45%;animation-duration:9s;animation-delay:3s;font-size:18px}
+.snowflake:nth-child(6){left:55%;animation-duration:12s;animation-delay:5s;font-size:11px}
+.snowflake:nth-child(7){left:65%;animation-duration:10s;animation-delay:0.5s;font-size:15px}
+.snowflake:nth-child(8){left:75%;animation-duration:15s;animation-delay:2.5s}
+.snowflake:nth-child(9){left:85%;animation-duration:11s;animation-delay:4.5s;font-size:13px}
+.snowflake:nth-child(10){left:95%;animation-duration:13s;animation-delay:1.5s;font-size:17px}
+@keyframes snowfall{
+0%{top:-5%;opacity:0;transform:rotate(0deg) translateX(0)}
+10%{opacity:0.8}
+90%{opacity:0.4}
+100%{top:105%;opacity:0;transform:rotate(360deg) translateX(50px)}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:rgba(255,255,255,0.6);backdrop-filter:blur(15px);border:1px solid rgba(200,210,230,0.3);border-radius:20px;padding:30px;transition:all .4s ease;position:relative}
+.card::before{content:'';position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;border-radius:20px;background:linear-gradient(135deg,rgba(200,210,230,0.5),transparent,rgba(200,210,230,0.3));z-index:-1;opacity:0;transition:opacity .4s}
+.card:hover::before{opacity:1}
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(121,134,203,0.1)}
+.card h2{font-size:22px;color:#7986cb;margin-bottom:10px;font-weight:400}
+.card .date{font-size:13px;color:#b0bec5;margin-bottom:15px}
+.card p{line-height:2;color:#546e7a;font-size:15px}
+.card .tag{display:inline-block;padding:4px 14px;border:1px solid rgba(121,134,203,0.2);border-radius:12px;font-size:12px;color:#7986cb;margin-top:12px;margin-right:5px;background:rgba(255,255,255,0.5)}
+.ice-border{height:2px;background:linear-gradient(90deg,transparent,rgba(121,134,203,0.2),rgba(200,210,230,0.4),rgba(121,134,203,0.2),transparent);margin:30px 0;position:relative}
+.ice-border::before{content:'❄';position:absolute;left:50%;top:-10px;transform:translateX(-50%);color:rgba(121,134,203,0.3);font-size:18px}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:rgba(255,255,255,0.6);backdrop-filter:blur(15px);border:1px solid rgba(200,210,230,0.3);border-radius:20px;padding:25px;text-align:center}
+.sidebar-card h3{font-size:18px;color:#7986cb;margin-bottom:15px;font-weight:400}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#e8eaf6,#c5cae9);border:2px solid rgba(200,210,230,0.4);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.sidebar-card p{font-size:14px;color:#78909c;line-height:1.7}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:10px 0;border-bottom:1px solid rgba(200,210,230,0.2);font-size:14px;color:#78909c}
+.sidebar-card ul li:last-child{border:none}
+footer{text-align:center;padding:50px;background:rgba(232,234,246,0.5);color:rgba(121,134,203,0.6);margin-top:50px;font-size:14px;border-top:1px solid rgba(200,210,230,0.2)}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">❄ 冬日纯白</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">雪之物语</a></li>
+<li><a href="#">冬日摄影</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="snowflake">❄</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
+<div class="snowflake">❄</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
+<div class="snowflake">❄</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
+<div class="snowflake">❄</div>
+<h1>冬日纯白</h1>
+<p>雪落无声，岁月静好</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>❄ 今年的第一场雪</h2>
+<div class="date">2026年1月12日 · 雪之物语</div>
+<p>清晨拉开窗帘，外面已经是白茫茫的一片。今年的第一场雪，比往年来得更早一些。雪花还在纷纷扬扬地飘落，像是天空洒下的无数白色花瓣。我穿上厚厚的羽绒服，走进了这个银装素裹的世界。脚下踩着松软的雪，发出"咯吱咯吱"的声音，这是冬天独有的音乐。</p>
+<p>街上的行人都走得很慢，仿佛也被这场雪温柔地安抚了。孩子们在雪地里堆雪人、打雪仗，笑声在清冷的空气中格外清脆。我找了一张长椅坐下，仰起头，让雪花落在脸上——冰冰凉凉的，却让人心里暖暖的。冬天的美，在于它的纯净和安静。</p>
+<div class="ice-border"></div>
+<span class="tag">冬天</span><span class="tag">初雪</span><span class="tag">日记</span>
+</article>
+<article class="card">
+<h2>🤫 雪夜的寂静</h2>
+<div class="date">2026年1月28日 · 冬日随笔</div>
+<p>大雪过后的夜晚，世界变得格外安静。所有的声音都被厚厚的雪层吸收了，只剩下自己的心跳声。我站在窗前，看着路灯下飘落的雪花，它们在橘黄色的光晕中旋转、飞舞，像是无数个小精灵在表演一场无声的芭蕾。</p>
+<p>这种寂静不是空虚的，而是充满了一种说不出的安宁。在这样的夜晚，人会不自觉地放慢呼吸，放空思绪，让自己完全沉浸在这份宁静之中。手机被我放在了另一个房间，电脑也关了，只有我和窗外的雪，共享这个安静的夜晚。原来，最好的休息，就是让世界安静下来。</p>
+<div class="ice-border"></div>
+<span class="tag">雪夜</span><span class="tag">安静</span><span class="tag">感悟</span>
+</article>
+<article class="card">
+<h2>☕ 围炉煮茶的下午</h2>
+<div class="date">2026年2月5日 · 冬日温暖</div>
+<p>外面飘着小雪，屋里炉火正旺。几个好友围坐在一起，炉子上煮着老白茶，茶香和炭火的温暖弥漫了整个房间。桌上摆着烤红薯、橘子和花生，都是冬天最应景的小食。我们聊着近况，偶尔陷入舒适的沉默，谁也不觉得尴尬。</p>
+<p>窗外的雪越下越大，把整个世界都变成了白色。而在这间小屋里，我们拥有最温暖的角落。这就是冬天最好的样子——外面天寒地冻，里面温暖如春。有人说冬天是孤独的季节，我却觉得，正因为寒冷，我们才更懂得珍惜身边的温暖。</p>
+<div class="ice-border"></div>
+<span class="tag">围炉</span><span class="tag">煮茶</span><span class="tag">温暖</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">❄</div>
+<h3>关于我</h3>
+<p>一个喜欢冬天的人<br>享受安静和纯净<br>在雪中寻找诗意</p>
+</div>
+<div class="sidebar-card">
+<h3>🏷 热门标签</h3>
+<ul>
+<li>❄ 雪之物语 (14)</li>
+<li>☕ 冬日温暖 (9)</li>
+<li>📷 雪景摄影 (11)</li>
+<li>🤫 独处时光 (7)</li>
+<li>📖 冬日阅读 (5)</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>🎵 冬日歌单</h3>
+<ul>
+<li>《雪之华》— 中岛美嘉</li>
+<li>《Winter Song》</li>
+<li>《十二月的奇迹》</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p>❄ 冬日纯白 — 在纯白的世界里，一切都可以重新开始 ❄</p>
+<p style="margin-top:8px;opacity:0.6">© 2026 All Rights Reserved</p>
+</footer>
+</body>
+</html>

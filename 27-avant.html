@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>前卫艺术 — 视觉的极限</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff;color:#000;overflow-x:hidden}
+a{color:#dc2626;text-decoration:none}
+a:hover{text-decoration:underline}
+
+nav{position:fixed;top:0;left:0;width:100%;background:#000;z-index:1000;padding:12px 30px;display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-size:1.3rem;font-weight:700;color:#dc2626;letter-spacing:8px}
+nav .nav-links{display:flex;gap:20px}
+nav .nav-links a{color:#fff;font-size:0.85rem;letter-spacing:3px}
+
+.back-link{position:fixed;top:55px;left:20px;z-index:999;background:#000;color:#dc2626;padding:8px 16px;font-weight:700;font-size:0.85rem;letter-spacing:2px}
+
+/* Hero - extreme typography */
+.hero{margin-top:50px;min-height:100vh;position:relative;overflow:hidden;background:#000;display:flex;align-items:flex-end;justify-content:flex-start;padding:0 60px 60px}
+.hero-text{position:relative;z-index:3}
+.hero-text h1{font-size:12vw;font-weight:700;color:#fff;line-height:0.85;letter-spacing:-0.05em}
+.hero-text h1 .red{color:#dc2626}
+.hero-text h1 .outline{-webkit-text-stroke:2px #fff;color:transparent}
+.hero-text .vertical-text{position:absolute;top:0;right:-80px;writing-mode:vertical-rl;font-size:1.5rem;color:#dc2626;letter-spacing:15px;font-weight:700}
+.hero-overlay-text{position:absolute;top:10%;right:5%;font-size:20vw;font-weight:700;color:rgba(220,38,38,0.06);line-height:1;letter-spacing:-0.05em;z-index:1}
+.hero-line{position:absolute;top:30%;left:0;width:100%;height:2px;background:#dc2626;z-index:2}
+.hero-line2{position:absolute;top:70%;left:0;width:100%;height:1px;background:rgba(220,38,38,0.3);z-index:2}
+.hero-corner{position:absolute;top:20px;right:60px;z-index:3}
+.hero-corner p{color:#fff;font-size:0.8rem;letter-spacing:4px;text-align:right;line-height:1.8}
+.hero-corner p span{color:#dc2626}
+
+/* Extreme asymmetric section */
+.section-asym{position:relative;min-height:60vh;display:flex;z-index:2}
+.section-asym .left-col{width:30%;background:#dc2626;display:flex;align-items:center;justify-content:center;padding:60px 30px}
+.section-asym .left-col h2{font-size:3rem;font-weight:700;color:#fff;writing-mode:vertical-rl;letter-spacing:10px;transform:rotate(180deg)}
+.section-asym .right-col{width:70%;padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+.section-asym .right-col p{font-size:1.05rem;line-height:2;color:#333;max-width:500px}
+
+/* Posts - extreme layout */
+.posts-container{position:relative;z-index:2;padding:0}
+.post-extreme{display:grid;min-height:50vh;border-bottom:3px solid #000}
+.post-extreme:nth-child(odd){grid-template-columns:2fr 1fr}
+.post-extreme:nth-child(even){grid-template-columns:1fr 2fr}
+.post-extreme .post-main{padding:60px;display:flex;flex-direction:column;justify-content:center}
+.post-extreme .post-side-img{background:#000;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.post-extreme .post-side-img .big-char{font-size:15rem;font-weight:700;color:rgba(220,38,38,0.1);line-height:1}
+.post-extreme .post-side-img .accent-line{position:absolute;width:100%;height:3px;background:#dc2626;top:50%}
+.post-extreme .post-main .post-label{font-size:0.7rem;letter-spacing:5px;text-transform:uppercase;color:#dc2626;margin-bottom:10px}
+.post-extreme .post-main h3{font-size:2rem;font-weight:700;line-height:1.2;margin-bottom:15px}
+.post-extreme .post-main p{font-size:0.95rem;line-height:1.8;color:#444;max-width:500px}
+.post-extreme .post-main .extreme-link{display:inline-block;margin-top:20px;font-size:0.85rem;font-weight:700;color:#dc2626;letter-spacing:3px;text-transform:uppercase;border-bottom:3px solid #dc2626;padding-bottom:3px}
+
+/* Tension section */
+.tension-section{background:#000;padding:100px 60px;position:relative;z-index:2;overflow:hidden}
+.tension-section::before{content:'前卫';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:25vw;font-weight:700;color:rgba(220,38,38,0.05);line-height:1}
+.tension-inner{position:relative;z-index:2;max-width:600px;margin-left:auto}
+.tension-inner h2{font-size:2.5rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:15px}
+.tension-inner h2 span{color:#dc2626;display:block;font-size:1.5rem;margin-top:5px}
+.tension-inner p{color:#999;font-size:0.95rem;line-height:1.8}
+
+/* Mixed orientation gallery */
+.orientation-gallery{display:grid;grid-template-columns:repeat(5,1fr);height:60vh;position:relative;z-index:2}
+.orientation-gallery .gallery-item{border:1px solid #000;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.orientation-gallery .gallery-item:nth-child(1){background:#dc2626}
+.orientation-gallery .gallery-item:nth-child(2){background:#000}
+.orientation-gallery .gallery-item:nth-child(3){background:#fff}
+.orientation-gallery .gallery-item:nth-child(4){background:#000}
+.orientation-gallery .gallery-item:nth-child(5){background:#dc2626}
+.orientation-gallery .gallery-item .gi-text{font-weight:700;font-size:1.2rem;letter-spacing:5px}
+.orientation-gallery .gallery-item:nth-child(1) .gi-text{color:#fff;writing-mode:vertical-rl}
+.orientation-gallery .gallery-item:nth-child(2) .gi-text{color:#dc2626;transform:rotate(-90deg)}
+.orientation-gallery .gallery-item:nth-child(3) .gi-text{color:#000;writing-mode:vertical-rl;transform:rotate(180deg)}
+.orientation-gallery .gallery-item:nth-child(4) .gi-text{color:#fff;transform:rotate(45deg)}
+.orientation-gallery .gallery-item:nth-child(5) .gi-text{color:#000;writing-mode:vertical-rl}
+
+/* Footer */
+footer{background:#000;padding:50px 60px;position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end}
+footer .footer-left h3{font-size:2rem;color:#fff;font-weight:700}
+footer .footer-left h3 span{color:#dc2626}
+footer .footer-left p{color:#666;font-size:0.85rem;margin-top:5px;letter-spacing:3px}
+footer .footer-right{display:flex;gap:20px}
+footer .footer-right a{color:#fff;font-size:0.85rem;letter-spacing:2px}
+
+@media(max-width:768px){
+.hero-text h1{font-size:15vw}
+.section-asym{flex-direction:column}
+.section-asym .left-col{width:100%;min-height:150px}
+.section-asym .left-col h2{writing-mode:horizontal-tb;transform:none}
+.section-asym .right-col{width:100%;padding:40px}
+.post-extreme:nth-child(odd),.post-extreme:nth-child(even){grid-template-columns:1fr}
+.post-extreme .post-side-img{min-height:200px}
+.orientation-gallery{grid-template-columns:1fr;height:auto}
+.orientation-gallery .gallery-item{min-height:120px}
+.tension-section .tension-inner{margin-left:0}
+nav .nav-links{display:none}
+footer{flex-direction:column;gap:20px}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">前卫艺术</div>
+<div class="nav-links">
+<a href="#">先锋</a><a href="#">未来</a><a href="#">反叛</a><a href="#">宣言</a>
+</div>
+</nav>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="hero-overlay-text">前卫</div>
+<div class="hero-line"></div>
+<div class="hero-line2"></div>
+<div class="hero-text">
+<h1><span class="red">前卫</span><span class="outline">艺术</span></h1>
+<div class="vertical-text">AVANT—GARDE</div>
+</div>
+<div class="hero-corner">
+<p><span>█</span> 视觉的极限<br><span>█</span> 美学的越界<br><span>█</span> 传统的断裂<br><span>█</span> 未来的先锋</p>
+</div>
+</div>
+
+<div class="section-asym">
+<div class="left-col">
+<h2>俄国未来主义宣言</h2>
+</div>
+<div class="right-col">
+<p>一九一二年，马列维奇、塔特林和他们的同道者们在莫斯科发出了前卫艺术的第一声呐喊。他们拒绝模仿自然，拒绝继承传统，要创造一个全新的视觉世界。从立体主义的碎片中，他们发展出了至上主义和构成主义两条截然不同又相互关联的道路。这些前卫艺术家不仅改变了我们看待世界的方式，更改变了我们理解艺术本身的定义。</p>
+</div>
+</div>
+
+<div class="posts-container">
+<div class="post-extreme">
+<div class="post-main">
+<div class="post-label">2024 · 未来主义</div>
+<h3>速度、机器与新的美学</h3>
+<p>意大利未来主义者歌颂速度和机器的力量，俄国未来主义者则将其转化为具体的视觉语言。他们用几何形体表现运动的轨迹，用色彩的碰撞模拟机器的节奏。马里内蒂的宣言在俄罗斯的土地上生长出了完全不同的果实——不是对暴力的崇拜，而是对新秩序的渴望。这种对"新"的执念成为了整个前卫运动的共同基因。</p>
+<a href="#" class="extreme-link">深入阅读 →</a>
+</div>
+<div class="post-side-img">
+<span class="big-char">未</span>
+<div class="accent-line"></div>
+</div>
+</div>
+
+<div class="post-extreme">
+<div class="post-side-img">
+<span class="big-char">来</span>
+<div class="accent-line"></div>
+</div>
+<div class="post-main">
+<div class="post-label">2024 · 反叛</div>
+<h3>对传统的全面反叛</h3>
+<p>前卫艺术的核心姿态是反叛。反叛学院派的陈规，反叛资产阶级的审美趣味，反叛艺术为艺术而存在的观念。马列维奇将绘画简化为一个黑色方块，塔特林用工业材料取代了大理石和青铜，罗德琴科宣称绘画已经死亡。这些激进的姿态不是虚无主义，而是一种建设性的破坏——只有清空旧的容器，才能注入新的内容。</p>
+<a href="#" class="extreme-link">深入阅读 →</a>
+</div>
+</div>
+
+<div class="post-extreme">
+<div class="post-main">
+<div class="post-label">2024 · 超越</div>
+<h3>超越画框的艺术</h3>
+<p>前卫艺术家们最激进的贡献在于打破了艺术与生活的界限。构成主义者将设计应用于工业生产，至上主义者将抽象原则推广到建筑和日常用品。艺术不再是一个孤立的审美领域，而是改造社会的工具。这种将艺术与社会实践相结合的理想，在当代设计思维和社会创新中找到了新的表达形式。</p>
+<a href="#" class="extreme-link">深入阅读 →</a>
+</div>
+<div class="post-side-img">
+<span class="big-char">超</span>
+<div class="accent-line"></div>
+</div>
+</div>
+</div>
+
+<div class="tension-section">
+<div class="tension-inner">
+<h2>在视觉的边缘<span>寻找新的可能性</span></h2>
+<p>前卫不是一种风格，而是一种态度。它意味着永远站在已知的边界上，向未知的领域伸出手。当代前卫艺术的面貌已经与百年前大不相同，但那种不满足于现状、不断突破界限的精神内核从未改变。在数字时代，前卫的战场从画布转移到了屏幕，从美术馆转移到了网络空间，但先锋们提出的问题依然有效：艺术能做什么？设计应该为谁服务？美的定义是否可以被不断改写？</p>
+</div>
+</div>
+
+<div class="orientation-gallery">
+<div class="gallery-item"><span class="gi-text">打破</span></div>
+<div class="gallery-item"><span class="gi-text">超越</span></div>
+<div class="gallery-item"><span class="gi-text">重构</span></div>
+<div class="gallery-item"><span class="gi-text">先锋</span></div>
+<div class="gallery-item"><span class="gi-text">未来</span></div>
+</div>
+
+<footer>
+<div class="footer-left">
+<h3>AVANT<span>—GARDE</span></h3>
+<p>© 2024 前卫视觉工作室</p>
+</div>
+<div class="footer-right">
+<a href="#">存档</a><a href="#">宣言</a><a href="#">关于</a>
+</div>
+</footer>
+<script>
+window.addEventListener('scroll',()=>{
+const hero=document.querySelector('.hero');
+const scroll=window.scrollY;
+const overlayText=document.querySelector('.hero-overlay-text');
+if(overlayText){overlayText.style.transform=`translate(-50%,-50%) translateX(${scroll*0.1}px)`}
+});
+</script>
+</body>
+</html>

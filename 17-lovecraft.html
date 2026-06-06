@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>疯狂山脉 — 克苏鲁神话档案</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#0a0f0a;color:#7a9a7a;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:rgba(80,120,80,0.15);border:1px solid #4a6a4a;color:#7a9a7a;margin:20px;font-size:14px;transition:all .3s}
+.back-link:hover{background:#4a6a4a;color:#0a0f0a}
+
+@keyframes tentacle{0%,100%{transform:rotate(0deg) scaleY(1)}25%{transform:rotate(2deg) scaleY(1.02)}50%{transform:rotate(-1deg) scaleY(0.98)}75%{transform:rotate(1.5deg) scaleY(1.01)}}
+@keyframes glow{0%,100%{text-shadow:0 0 10px rgba(80,200,120,0.3)}50%{text-shadow:0 0 30px rgba(80,200,120,0.6),0 0 60px rgba(80,200,120,0.2)}}
+@keyframes drip{0%{transform:translateY(-10px);opacity:0}10%{opacity:1}100%{transform:translateY(100vh);opacity:0}}
+@keyframes eyes{0%,90%,100%{opacity:0}95%{opacity:1}}
+
+.hero{position:relative;min-height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(ellipse at center bottom,#0a1f0a 0%,#050a05 50%,#000 100%);overflow:hidden}
+.hero .eye{position:absolute;width:60px;height:30px;background:radial-gradient(ellipse,#50c878,#1a3a1a);border-radius:50%;animation:eyes 8s infinite}
+.hero .eye:nth-child(1){top:20%;left:15%;animation-delay:0s}
+.hero .eye:nth-child(2){top:30%;right:20%;animation-delay:3s}
+.hero .eye:nth-child(3){bottom:25%;left:25%;animation-delay:5s}
+.hero .eye:nth-child(4){top:15%;right:30%;animation-delay:2s}
+.hero .eye:nth-child(5){bottom:30%;right:15%;animation-delay:7s}
+.hero .slime{position:absolute;width:3px;background:linear-gradient(180deg,rgba(80,200,120,0.4),transparent);animation:drip 6s linear infinite}
+.hero .slime:nth-child(6){left:20%;height:100px;animation-delay:0s}
+.hero .slime:nth-child(7){left:40%;height:150px;animation-delay:2s}
+.hero .slime:nth-child(8){left:60%;height:80px;animation-delay:4s}
+.hero .slime:nth-child(9){left:80%;height:120px;animation-delay:1s}
+.hero h1{font-size:4.5rem;color:#50c878;letter-spacing:20px;text-shadow:0 0 40px rgba(80,200,120,0.4),0 0 80px rgba(80,200,120,0.1);animation:glow 4s infinite;position:relative;z-index:1;font-weight:700}
+.hero .sub{font-size:1rem;color:rgba(80,200,120,0.4);margin-top:15px;letter-spacing:6px;position:relative;z-index:1;font-style:italic}
+
+.cthulhu-banner{background:linear-gradient(90deg,rgba(10,15,10,0.95),rgba(26,40,26,0.95),rgba(10,15,10,0.95));border-top:1px solid rgba(80,200,120,0.2);border-bottom:1px solid rgba(80,200,120,0.2);padding:15px;text-align:center;font-size:13px;color:rgba(80,200,120,0.4);letter-spacing:4px;animation:tentacle 8s ease-in-out infinite}
+
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1200px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:35px}
+
+.grimoire{background:rgba(10,15,10,0.9);border:1px solid rgba(80,200,120,0.15);padding:30px;position:relative;overflow:hidden}
+.grimoire::after{content:'';position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle at top right,rgba(80,200,120,0.05),transparent);pointer-events:none}
+.grimoire h2{font-size:1.6rem;color:#50c878;margin-bottom:8px;text-shadow:0 0 10px rgba(80,200,120,0.2)}
+.grimoire .meta{font-size:12px;color:rgba(80,200,120,0.3);margin-bottom:18px;letter-spacing:2px;font-style:italic}
+.grimoire p{line-height:2;color:#5a8a5a;font-size:15px;margin-bottom:15px}
+.grimoire .eldritch{font-family:'Courier New',monospace;background:rgba(80,200,120,0.05);border:1px solid rgba(80,200,120,0.1);padding:15px;margin-top:15px;font-size:13px;color:rgba(80,200,120,0.5);letter-spacing:2px;line-height:2;overflow:hidden;white-space:nowrap}
+.grimoire .sigil{display:inline-block;font-size:2rem;margin:10px 5px;opacity:0.4;transition:opacity .3s}
+.grimoire .sigil:hover{opacity:0.8}
+
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-box{background:rgba(10,15,10,0.9);border:1px solid rgba(80,200,120,0.15);padding:25px}
+.sidebar-box h3{font-size:1rem;color:#50c878;margin-bottom:15px;letter-spacing:3px;padding-bottom:10px;border-bottom:1px solid rgba(80,200,120,0.15)}
+.sidebar-box h3::before{content:'◈ '}
+.sidebar-box ul{list-style:none}
+.sidebar-box ul li{padding:8px 0;border-bottom:1px solid rgba(80,200,120,0.06);font-size:13px;color:#5a8a5a;transition:color .3s}
+.sidebar-box ul li:hover{color:#50c878}
+.sidebar-box ul li::before{content:'⊘ '}
+.sidebar-box p{font-size:13px;color:#5a8a5a;line-height:1.8}
+.mythos-list{list-style:none}
+.mythos-list li{padding:10px;margin-bottom:8px;background:rgba(80,200,120,0.03);border-left:3px solid rgba(80,200,120,0.3);font-size:13px;color:#5a8a5a}
+.mythos-list li span{color:#50c878;font-weight:700}
+
+footer{text-align:center;padding:40px;border-top:1px solid rgba(80,200,120,0.1);margin-top:40px}
+footer p{font-size:12px;color:rgba(80,200,120,0.3);letter-spacing:4px}
+footer .ph{font-family:'Courier New',monospace;font-size:14px;color:rgba(80,200,120,0.2);margin-top:10px;letter-spacing:5px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<section class="hero">
+<div class="eye"></div><div class="eye"></div><div class="eye"></div>
+<div class="eye"></div><div class="eye"></div>
+<div class="slime"></div><div class="slime"></div>
+<div class="slime"></div><div class="slime"></div>
+<div>
+<h1>疯狂山脉</h1>
+<p class="sub">AT THE MOUNTAINS OF MADNESS · 克苏鲁神话档案</p>
+</div>
+</section>
+
+<div class="cthulhu-banner">Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn · 在拉莱耶的宅邸中，长眠的克苏鲁候汝入梦</div>
+
+<div class="container">
+<main>
+
+<article class="grimoire">
+<h2>死灵之书 — 阿卜杜尔·阿尔哈萨德的噩梦</h2>
+<div class="meta">📖 原作: 阿卜杜尔·阿尔哈萨德 · 公元730年 · 大马士革</div>
+<p>在大马士革的灼热阳光下，一位被称为"疯阿拉伯人"的诗人写下了一部注定改变人类认知边界的著作。《死灵之书》——这个名字本身就带着某种令人不安的韵律——记录了那些不应被人类知晓的真相。阿尔哈萨德在书中描述了"旧日支配者"的伟大种族，它们在人类诞生前的亿万年就已经存在，它们的智慧超越了人类理解的极限。</p>
+<p>传说阿尔哈萨德在完成此书后，在大马士革的市场上被一群看不见的生物活活吞噬，在场的数百名目击者都声称看到了"空气中张开的嘴"。他的手稿辗转流传于各种神秘学派之间，每一次翻译都会带来新的灾难。拉丁文译本导致了中世纪的大瘟疫，而阿拉伯文原稿据说至今仍被封存在开罗的某个地下室中。</p>
+<div class="eldritch">Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn · 那永恒长眠的并非亡者 · 在奇妙的万古之中 · 即使死亡本身亦会消逝</div>
+</article>
+
+<article class="grimoire">
+<h2>印斯茅斯的阴影 — 深潜者的血脉</h2>
+<div class="meta">🌊 事件地点: 马萨诸塞州印斯茅斯 · 1927年调查报告</div>
+<p>印斯茅斯是一个被诅咒的渔村。当你沿着那条散发着鱼腥味的破旧街道行走时，你会发现这里的居民有着一种令人不安的特征——他们的眼睛异常突出，皮肤呈现出一种不健康的灰绿色，仿佛永远浸泡在海水中。他们不与外人交流，只是用那双无神的眼睛盯着你，嘴角挂着一丝似笑非笑的表情。</p>
+<p>1927年的秘密调查显示，这个村庄的居民与一种被称为"深潜者"的海底生物有着血缘关系。早在1692年，村中的马什家族就与这些生物签订了某种契约——以人类的血统换取大海的馈赠。随着时间推移，混血后代越来越接近他们的海洋祖先，最终将完全转化为深潜者，永远沉入海底的城市——幽暗的尤尔斯(Y'ha-nthlei)。</p>
+<div class="eldritch">Iä! Iä! Cthulhu fhtagn! · 那深海之城尤尔斯 · 在印斯茅斯的暗礁之下 · 等待着最后的回归</div>
+</article>
+
+<article class="grimoire">
+<h2>克苏鲁的呼唤 — 拉莱耶的沉没之城</h2>
+<div class="meta">🐙 发现时间: 1925年 · 太平洋海域 · 坐标: 47°9'S 126°43'W</div>
+<p>在太平洋的某个角落，沉睡着一座不应存在的城市。拉莱耶——这座由非欧几里得几何构成的海底都市，是旧日支配者克苏鲁的永恒牢笼。它的建筑遵循着一种人类大脑无法理解的空间法则：角度既大于又小于九十度，墙壁既平行又相交，走廊既通向目的地又永远循环。</p>
+<p>1925年，一艘挪威籍货轮偶然发现了从海底升起的拉莱耶。船上的船员们发出了语无伦次的电报，描述了一座"用活的石头建造的城市"，以及一个"比山还要巨大的生物"从海面升起。电报在中断前的最后一句话是："它看到了我们。"此后，该海域被列为永久禁区，所有试图前往调查的船只都神秘失踪。</p>
+<div class="sigil">🐙</div><div class="sigil">🦑</div><div class="sigil">👁️</div><div class="sigil">🌊</div><div class="sigil">💀</div>
+</article>
+
+</main>
+
+<aside>
+<div class="sidebar-box">
+<div style="width:80px;height:80px;background:radial-gradient(circle,#1a3a1a,#0a0f0a);border:2px solid rgba(80,200,120,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:35px;margin:0 auto 15px">🐙</div>
+<h3 style="text-align:center">关于本站</h3>
+<p style="text-align:center">记录那些不应被知晓的真相。<br>在知识与疯狂之间，只有一线之隔。<br>阅读即冒险，请谨慎前行。</p>
+</div>
+
+<div class="sidebar-box">
+<h3>旧日支配者名录</h3>
+<ul class="mythos-list">
+<li><span>克苏鲁</span> — 沉睡于拉莱耶的深海之主</li>
+<li><span>哈斯塔</span> — 不可名状者，黄衣之王</li>
+<li><span>犹格·索托斯</span> — 门之钥匙，万物之主</li>
+<li><span>奈亚拉托提普</span> — 伏行之混沌，千面之神</li>
+<li><span>阿撒托斯</span> — 盲痴之神，混沌之核</li>
+<li><span>达贡</span> — 深潜者之父，海渊之王</li>
+</ul>
+</div>
+
+<div class="sidebar-box">
+<h3>禁忌知识</h3>
+<ul>
+<li>《死灵之书》阿卜杜尔·阿尔哈萨德</li>
+<li>《无名祭祀书》冯·容茨</li>
+<li>《伊波恩之书》伊波恩</li>
+<li>《纳克特手抄本》纳克特</li>
+<li>《塞拉伊诺断章》塞拉伊诺</li>
+</ul>
+</div>
+
+<div class="sidebar-box">
+<h3>精神状态检查</h3>
+<div style="font-family:'Courier New',monospace;font-size:12px;color:rgba(80,200,120,0.5);line-height:2.2">
+<div>理智值 (SAN): <span style="color:#50c878">███████░░░</span> 70/100</div>
+<div>克苏鲁神话知识: <span style="color:#50c878">████░░░░░░</span> 35/100</div>
+<div>精神状态: <span style="color:#50c878">边缘稳定</span></div>
+<div>警告: 继续阅读可能导致</div>
+<div style="color:#50c878">永久性理智损失</div>
+</div>
+</div>
+</aside>
+</div>
+
+<footer>
+<p>★ 疯狂山脉 · AT THE MOUNTAINS OF MADNESS ★</p>
+<div class="ph">That is not dead which can eternal lie, and with strange aeons even death may die.</div>
+<p style="margin-top:15px;font-size:10px">那永恒长眠的并非亡者，在奇妙的万古之中，即使死亡本身亦会消逝。</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通古斯档案 — 西伯利亚的秘密</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#0a0a0a;color:#c4b59a;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:rgba(196,181,154,0.15);border:1px solid #c4b59a;color:#c4b59a;margin:20px;font-size:14px;letter-spacing:2px;transition:all .3s}
+.back-link:hover{background:#c4b59a;color:#0a0a0a}
+.hero{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#0a0a0a 0%,#1a1510 40%,#2a1f10 70%,#0a0a0a 100%);overflow:hidden}
+.hero::before{content:'';position:absolute;top:50%;left:50%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,180,50,0.15) 0%,transparent 70%);transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.3}50%{transform:translate(-50%,-50%) scale(1.3);opacity:0.6}}
+.hero::after{content:'◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆ ◇ ◆';position:absolute;bottom:30px;left:0;width:100%;text-align:center;color:rgba(196,181,154,0.2);letter-spacing:15px;font-size:12px}
+.hero h1{font-size:4rem;color:#c4b59a;letter-spacing:15px;text-shadow:0 0 40px rgba(196,181,154,0.3);position:relative;z-index:1}
+.hero .sub{font-size:1rem;color:rgba(196,181,154,0.5);margin-top:15px;letter-spacing:8px;position:relative;z-index:1}
+.classification{background:#1a1510;border-top:1px solid rgba(196,181,154,0.2);border-bottom:1px solid rgba(196,181,154,0.2);padding:12px;text-align:center;font-size:13px;color:rgba(196,181,154,0.5);letter-spacing:6px}
+.classification span{color:#8b4513}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1200px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:35px}
+.article{background:rgba(26,21,16,0.8);border:1px solid rgba(196,181,154,0.15);padding:30px;position:relative}
+.article::before{content:'СЕКРЕТНО';position:absolute;top:12px;right:15px;color:rgba(139,69,19,0.4);font-size:11px;letter-spacing:4px;font-weight:700}
+.article h2{font-size:1.5rem;color:#c4b59a;margin-bottom:8px;letter-spacing:2px}
+.article .meta{font-size:12px;color:rgba(196,181,154,0.4);margin-bottom:18px;letter-spacing:3px}
+.article .meta span{margin-right:15px}
+.article p{line-height:2;color:#a89a80;font-size:15px;margin-bottom:15px}
+.article .redacted{background:#c4b59a;color:#c4b59a;padding:0 4px;cursor:default;user-select:none}
+.article .stamp{display:inline-block;padding:5px 15px;border:2px solid #8b4513;color:#8b4513;font-size:11px;letter-spacing:3px;margin-top:10px;transform:rotate(-3deg)}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-box{background:rgba(26,21,16,0.8);border:1px solid rgba(196,181,154,0.15);padding:25px}
+.sidebar-box h3{font-size:1rem;color:#c4b59a;margin-bottom:15px;letter-spacing:3px;padding-bottom:10px;border-bottom:1px solid rgba(196,181,154,0.15)}
+.sidebar-box h3::before{content:'// '}
+.sidebar-box ul{list-style:none}
+.sidebar-box ul li{padding:8px 0;border-bottom:1px solid rgba(196,181,154,0.06);font-size:13px;color:#a89a80}
+.sidebar-box ul li::before{content:'▸ ';color:#8b4513}
+.sidebar-box p{font-size:13px;color:#a89a80;line-height:1.8}
+.dossier{font-family:'Courier New',monospace;font-size:12px;color:rgba(196,181,154,0.5);line-height:2}
+.dossier .label{color:#8b4513}
+footer{text-align:center;padding:40px;border-top:1px solid rgba(196,181,154,0.1);margin-top:40px}
+footer p{font-size:12px;color:rgba(196,181,154,0.3);letter-spacing:4px}
+@keyframes scanline{0%{top:-100%}100%{top:100%}}
+.scan-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:999;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px)}
+</style>
+</head>
+<body>
+<div class="scan-overlay"></div>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<section class="hero">
+<div>
+<h1>通古斯档案</h1>
+<p class="sub">ТУНГУССКИЙ АРХИВ · 1908-2026</p>
+</div>
+</section>
+
+<div class="classification">★ <span>СОВЕРШЕННО СЕКРЕТНО</span> · 绝密档案 · 仅供 authorized 人员查阅 · <span>УТВЕРЖДЕНО</span> ★</div>
+
+<div class="container">
+<main>
+
+<article class="article">
+<h2>1908年6月30日 — 通古斯大爆炸</h2>
+<div class="meta"><span>📁 档案编号: T-1908-0630</span><span>📍 叶尼塞河上游</span></div>
+<p>那天清晨，西伯利亚的天空被一道蓝白色的光芒撕裂。一个巨大的火球自东南方划过天际，其亮度甚至超过了太阳。几秒钟后，一股毁灭性的冲击波席卷了方圆两千平方公里的针叶林，八千万棵树木如同被巨人之手推倒的多米诺骨牌，整齐地向外倒下。</p>
+<p>奇怪的是，爆炸中心并未发现陨石坑。官方报告将其归因于一颗小行星在大气层中的空中爆炸，但那些在废墟中工作的科学家们发现了一些令人不安的东西——<span class="redacted">无法识别的金属碎片</span>，以及一些树木的年轮中出现了<span class="redacted">不属于地球的同位素</span>。</p>
+<div class="stamp">АРХИВ ЗАКРЫТ</div>
+</article>
+
+<article class="article">
+<h2>二次调查：1927年的秘密考察</h2>
+<div class="meta"><span>📁 档案编号: T-1927-KULIK</span><span>🔬 领队: 库利克</span></div>
+<p>苏联科学院派出的库利克考察队是第一支正式进入爆炸区域的科学团队。他们期望找到一个巨大的陨石坑，但当他们抵达震中时，看到的景象让所有人都沉默了。沼泽地中散布着奇异的金属碎片，这些碎片的成分分析结果被列为<span class="redacted">最高机密</span>。</p>
+<p>库利克在日记中写道："这里的树木并非被烧毁，而是被某种力量从内部转化了。木质纤维呈现出一种我从未见过的结晶结构，仿佛时间在这里被冻结了。当地埃文基人告诉我，那天'天空之神'降临了。他们拒绝靠近爆炸中心，说那里是'亡灵的居所'。"</p>
+<p>考察队的最终报告被送往莫斯科后便石沉大海。有传言说，斯大林本人亲自审阅了报告，并下令将所有相关文件封存。报告中关于<span class="redacted">非地球文明技术</span>的推测部分，至今仍是未解之谜。</p>
+</article>
+
+<article class="article">
+<h2>异常现象：穿越时空的森林</h2>
+<div class="meta"><span>📁 档案编号: T-1958-ANOMALY</span><span>⚠️ 异常等级: Ω</span></div>
+<p>1958年，一支苏联军事测绘队在通古斯爆炸区域进行例行测量时，发现了一片"不可能存在"的森林。这片区域的树木品种与周围的西伯利亚针叶林完全不同——它们更像是来自<span class="redacted">数百万年前的白垩纪</span>。更令人困惑的是，这片森林中的温度比周围环境高出整整15度，且始终笼罩在一层薄雾之中。</p>
+<p>测绘队的报告中记录了一个更加离奇的现象：在森林深处，指南针会疯狂旋转，手表会突然停止或倒转。一名队员声称在薄雾中看到了"另一个时代的天空"——一片布满陌生星座的夜空，尽管当时是正午时分。</p>
+<p>该区域随即被列为军事禁区，代号"Зеркало"（镜子）。据不愿透露姓名的前军官透露，苏联曾在该区域进行过多次秘密实验，试图利用这里的<span class="redacted">时空异常</span>。实验结果从未被公开。</p>
+</article>
+
+</main>
+
+<aside>
+<div class="sidebar-box">
+<h3>档案管理员</h3>
+<div style="width:70px;height:70px;background:linear-gradient(135deg,#1a1510,#8b4513);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 15px">🗂️</div>
+<p style="text-align:center">伊万诺夫·彼得·谢尔盖耶维奇<br>前苏联科学院档案管理员<br>1952-1991</p>
+</div>
+
+<div class="sidebar-box">
+<h3>相关档案</h3>
+<div class="dossier">
+<div><span class="label">档案编号:</span> T-1908-0630</div>
+<div><span class="label">密级:</span> 绝密 (СОВЕРШЕННО СЕКРЕТНО)</div>
+<div><span class="label">解密日期:</span> 未定</div>
+<div><span class="label">创建日期:</span> 1908年7月</div>
+<div><span class="label">最后更新:</span> 1991年12月</div>
+<div><span class="label">状态:</span> 封存</div>
+</div>
+</div>
+
+<div class="sidebar-box">
+<h3>分类标签</h3>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+<span style="padding:4px 12px;border:1px solid rgba(196,181,154,0.2);font-size:11px;color:#a89a80">通古斯</span>
+<span style="padding:4px 12px;border:1px solid rgba(196,181,154,0.2);font-size:11px;color:#a89a80">西伯利亚</span>
+<span style="padding:4px 12px;border:1px solid rgba(196,181,154,0.2);font-size:11px;color:#a89a80">超自然</span>
+<span style="padding:4px 12px;border:1px solid rgba(196,181,154,0.2);font-size:11px;color:#a89a80">苏联机密</span>
+<span style="padding:4px 12px;border:1px solid rgba(196,181,154,0.2);font-size:11px;color:#a89a80">时空异常</span>
+<span style="padding:4px 12px;border:1px solid rgba(196,181,154,0.2);font-size:11px;color:#a89a80">外星技术</span>
+</div>
+</div>
+
+<div class="sidebar-box">
+<h3>警告</h3>
+<p>⚠️ 本档案内容涉及国家安全机密。未经授权的查阅、复制或传播均违反《苏联国家机密保护法》第 17 条。违者将面临最高 15 年的监禁。</p>
+</div>
+</aside>
+</div>
+
+<footer>
+<p>★ 通古斯档案 · ТУНГУССКИЙ АРХИВ ★</p>
+<p style="margin-top:10px;font-size:10px;letter-spacing:3px">ПРАВДА ГДЕ-ТО РЯДОМ — 真相就在不远处</p>
+</footer>
+</body>
+</html>

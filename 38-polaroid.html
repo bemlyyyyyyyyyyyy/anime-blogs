@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拍立得 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff8e1;color:#5d4037;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px) rotate(0deg)}to{opacity:1;transform:translateY(0) rotate(var(--rot,0deg))}}
+@keyframes filmGrain{0%{transform:translate(0,0)}10%{transform:translate(-1px,1px)}20%{transform:translate(1px,-1px)}30%{transform:translate(-1px,0)}40%{transform:translate(0,1px)}50%{transform:translate(1px,0)}60%{transform:translate(0,-1px)}70%{transform:translate(-1px,-1px)}80%{transform:translate(1px,1px)}90%{transform:translate(0,0)}100%{transform:translate(-1px,1px)}}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999;animation:filmGrain 0.5s steps(5) infinite}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(255,248,225,0.95);backdrop-filter:blur(8px);z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(141,110,99,0.2);animation:fadeIn 0.8s ease}
+.nav a{color:#5d4037;text-decoration:none;font-size:0.9rem}
+.nav a:hover{color:#8d6e63}
+.nav-links{display:flex;gap:25px}
+.nav-links a{color:#5d4037;text-decoration:none;font-size:0.9rem}
+.hero{position:relative;height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#fff8e1,#ffe0b2,#fff8e1);animation:fadeIn 1s ease}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:3.5rem;font-weight:700;color:#5d4037;margin-bottom:15px}
+.hero p{font-size:1.1rem;color:#8d6e63;font-weight:300}
+.hero .camera{font-size:4rem;margin-bottom:20px;display:block}
+.gallery{max-width:1100px;margin:0 auto;padding:60px 20px;position:relative;z-index:1}
+.gallery-wall{display:flex;flex-wrap:wrap;justify-content:center;gap:40px;align-items:flex-start}
+.polaroid{background:#fff;padding:15px 15px 50px 15px;box-shadow:0 4px 20px rgba(0,0,0,0.1);transition:transform 0.3s;cursor:pointer;position:relative;animation:fadeIn 0.8s ease forwards;opacity:0}
+.polaroid:nth-child(1){--rot:-3deg;transform:rotate(-3deg);animation-delay:0.2s}
+.polaroid:nth-child(2){--rot:2deg;transform:rotate(2deg);animation-delay:0.4s}
+.polaroid:nth-child(3){--rot:-1.5deg;transform:rotate(-1.5deg);animation-delay:0.6s}
+.polaroid:nth-child(4){--rot:3.5deg;transform:rotate(3.5deg);animation-delay:0.8s}
+.polaroid:nth-child(5){--rot:-2deg;transform:rotate(-2deg);animation-delay:1s}
+.polaroid:nth-child(6){--rot:1deg;transform:rotate(1deg);animation-delay:1.2s}
+.polaroid:hover{transform:rotate(0deg) scale(1.05)!important;z-index:10}
+.polaroid-img{width:280px;height:220px;position:relative;overflow:hidden}
+.polaroid-img-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.polaroid-img-inner.vintage{background:linear-gradient(135deg,rgba(245,175,25,0.2),rgba(241,39,17,0.1));position:relative}
+.polaroid-img-inner.vintage::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(245,175,25,0.1),rgba(141,110,99,0.15))}
+.polaroid-caption{position:absolute;bottom:10px;left:15px;right:15px;font-size:0.85rem;color:#8d6e63;text-align:center;font-style:italic}
+.polaroid-date{position:absolute;bottom:30px;left:15px;right:15px;font-size:0.7rem;color:#bdbdbd;text-align:center}
+.post-section{max-width:800px;margin:0 auto;padding:20px 20px 60px;position:relative;z-index:1}
+.post{background:rgba(255,255,255,0.7);border-radius:10px;padding:35px;margin-bottom:40px;border:1px solid rgba(141,110,99,0.1)}
+.post-date{font-size:0.85rem;color:#d4a574;margin-bottom:10px}
+.post h2{font-size:1.6rem;color:#5d4037;margin-bottom:15px}
+.post p{line-height:2;color:#795548;margin-bottom:15px;font-weight:300}
+.post-tag{display:inline-block;padding:4px 12px;background:rgba(245,175,25,0.1);border-radius:20px;font-size:0.8rem;color:#8d6e63;margin-right:8px;margin-bottom:8px}
+footer{text-align:center;padding:40px;color:#8d6e63;font-size:0.85rem;position:relative;z-index:1}
+footer .film-strip{height:12px;background:repeating-linear-gradient(90deg,#5d4037 0,#5d4037 20px,transparent 20px,transparent 25px);margin-bottom:20px;opacity:0.1;border-radius:2px}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">相册</a>
+<a href="#">故事</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="hero-content">
+<span class="camera">📷</span>
+<h1>拍立得</h1>
+<p>用快门定格时光的温度 ✨</p>
+</div>
+</section>
+<div class="gallery">
+<div class="gallery-wall">
+<div class="polaroid">
+<div class="polaroid-img"><div class="polaroid-img-inner vintage">🌸</div></div>
+<div class="polaroid-date">2025.03.15</div>
+<div class="polaroid-caption">樱花树下的约定</div>
+</div>
+<div class="polaroid">
+<div class="polaroid-img"><div class="polaroid-img-inner vintage" style="background:linear-gradient(135deg,rgba(144,202,249,0.2),rgba(100,181,246,0.1))">☕</div></div>
+<div class="polaroid-date">2025.03.10</div>
+<div class="polaroid-caption">街角的咖啡馆</div>
+</div>
+<div class="polaroid">
+<div class="polaroid-img"><div class="polaroid-img-inner vintage" style="background:linear-gradient(135deg,rgba(255,183,77,0.2),rgba(255,138,101,0.1))">🌅</div></div>
+<div class="polaroid-date">2025.03.05</div>
+<div class="polaroid-caption">日落时分的屋顶</div>
+</div>
+<div class="polaroid">
+<div class="polaroid-img"><div class="polaroid-img-inner vintage" style="background:linear-gradient(135deg,rgba(129,199,132,0.2),rgba(76,175,80,0.1))">🐱</div></div>
+<div class="polaroid-date">2025.02.28</div>
+<div class="polaroid-caption">公园里的猫咪</div>
+</div>
+<div class="polaroid">
+<div class="polaroid-img"><div class="polaroid-img-inner vintage" style="background:linear-gradient(135deg,rgba(186,104,200,0.2),rgba(156,39,176,0.1))">📚</div></div>
+<div class="polaroid-date">2025.02.20</div>
+<div class="polaroid-caption">旧书店的角落</div>
+</div>
+<div class="polaroid">
+<div class="polaroid-img"><div class="polaroid-img-inner vintage" style="background:linear-gradient(135deg,rgba(255,213,79,0.2),rgba(255,179,0,0.1))">🌙</div></div>
+<div class="polaroid-date">2025.02.14</div>
+<div class="polaroid-caption">元宵节的灯笼</div>
+</div>
+</div>
+</div>
+<div class="post-section">
+<article class="post">
+<div class="post-date">2025年3月15日</div>
+<h2>📸 关于拍立得的执念</h2>
+<p>不知道从什么时候开始，我对拍立得有了一种执念。也许是因为它独特的即时性——按下快门，等待片刻，一张小小的相纸从相机里慢慢吐出，影像一点一点浮现。这个过程本身就充满了仪式感。</p>
+<p>数码摄影太方便了，方便到我们不再珍惜每一张照片。但拍立得不一样，每一张相纸都是有成本的，所以你会更认真地构图、等待光线、选择角度。更重要的是，拍立得只有一张——没有备份，没有滤镜，没有美颜。它记录的是最真实的瞬间。</p>
+<div class="post-tag">拍立得</div>
+<div class="post-tag">摄影</div>
+<div class="post-tag">即时摄影</div>
+</article>
+<article class="post">
+<div class="post-date">2025年3月8日</div>
+<h2>🎞️ 胶片里的旧时光</h2>
+<p>整理房间时翻出了一盒老照片。有些是用胶片相机拍的，有些是早期的数码照片打印出来的。照片已经有些泛黄，但画面上的笑容依然鲜活。</p>
+<p>看着这些照片，很多几乎已经遗忘的记忆重新浮现。那年夏天的海边之旅、生日派对上夸张的蛋糕、毕业典礼上同学们的笑脸——时间在照片里凝固，而照片外的我们已经走了很远。</p>
+<div class="post-tag">胶片</div>
+<div class="post-tag">回忆</div>
+<div class="post-tag">旧照片</div>
+</article>
+</div>
+<footer>
+<div class="film-strip"></div>
+<p>📷 拍立得 · 用快门定格每一个值得记住的瞬间</p>
+<p style="margin-top:8px;opacity:0.5">© 2025 All rights reserved</p>
+</footer>
+</body>
+</html>

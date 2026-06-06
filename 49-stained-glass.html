@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彩色玻璃 — 彩窗之光</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#0d0015;color:#e0d0f0;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:#1a0033;color:#eab308;font-weight:700;margin:20px;border:2px solid #4a0080;font-size:0.85em}
+.back-link:hover{background:#eab308;color:#1a0033}
+.hero{background:#0d0015;padding:80px 20px;text-align:center;position:relative;overflow:hidden;border-bottom:5px solid #1a0033}
+.stained-glass-hero{display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:repeat(3,40px);gap:3px;max-width:600px;margin:0 auto 30px;border:5px solid #1a0033;border-radius:100px 100px 0 0;overflow:hidden}
+.glass-pane{display:flex;align-items:center;justify-content:center;font-size:20px;opacity:0.8}
+.glass-red{background:#dc2626}
+.glass-blue{background:#2563eb}
+.glass-green{background:#16a34a}
+.glass-yellow{background:#eab308}
+.glass-purple{background:#7c3aed}
+.glass-orange{background:#ea580c}
+.glass-teal{background:#0d9488}
+.glass-pink{background:#ec4899}
+.glass-empty{background:#1a0033}
+.hero h1{font-size:3em;color:#eab308;font-weight:700;letter-spacing:10px;text-shadow:0 0 30px rgba(234,179,8,0.3);position:relative;z-index:1}
+.hero .subtitle{color:#7c3aed;font-size:0.9em;margin-top:15px;letter-spacing:5px}
+.gothic-arch{width:200px;height:280px;margin:30px auto;position:relative;border:3px solid #4a0080;border-radius:100px 100px 0 0;background:linear-gradient(180deg,rgba(220,38,38,0.1),rgba(37,99,235,0.1),rgba(22,163,74,0.1));overflow:hidden}
+.gothic-arch::before{content:'✝️';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:60px;opacity:0.3}
+.gothic-arch::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,rgba(234,179,8,0.2),transparent 60%)}
+.main-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;max-width:1200px;margin:50px auto;padding:0 20px}
+.posts-area{display:flex;flex-direction:column;gap:50px}
+.post-card{background:#1a0033;border:4px solid #2d004d;position:relative;overflow:hidden}
+.post-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(234,179,8,0.05),transparent 50%);pointer-events:none}
+.post-mosaic{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:120px;gap:2px;border-bottom:4px solid #2d004d}
+.mosaic-cell{display:flex;align-items:center;justify-content:center;font-size:30px;opacity:0.7;position:relative}
+.mosaic-cell::after{content:'';position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,0.1),transparent)}
+.post-content{padding:30px}
+.post-content h2{font-size:1.5em;color:#eab308;margin-bottom:12px;font-weight:700;letter-spacing:2px}
+.post-meta{color:#7c3aed;font-size:0.8em;margin-bottom:18px;display:flex;gap:12px}
+.post-meta span{border:1px solid #4a0080;padding:3px 10px}
+.post-content p{line-height:2;color:#c0b0d8;margin-bottom:20px;text-align:justify}
+.read-more{display:inline-block;background:transparent;color:#eab308;padding:10px 30px;border:2px solid #eab308;font-weight:700;letter-spacing:3px;font-size:0.85em;transition:all .4s}
+.read-more:hover{background:#eab308;color:#1a0033}
+.glow-divider{height:20px;background:linear-gradient(90deg,transparent,rgba(234,179,8,0.2),rgba(220,38,38,0.2),rgba(37,99,235,0.2),rgba(22,163,74,0.2),transparent);margin:20px 0;position:relative}
+.glow-divider::after{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#4a0080,transparent)}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-widget{background:#1a0033;border:2px solid #2d004d;padding:25px;position:relative}
+.sidebar-widget::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#dc2626,#2563eb,#16a34a,#eab308)}
+.sidebar-widget h3{font-size:1.1em;color:#eab308;margin-bottom:15px;padding-bottom:10px;border-bottom:1px solid #2d004d}
+.sidebar-widget h3::before{content:'✦ '}
+.color-list{list-style:none}
+.color-list li{padding:10px 0;border-bottom:1px solid rgba(74,0,128,0.3);font-size:0.85em;display:flex;align-items:center;gap:10px;color:#c0b0d8}
+.color-list li:last-child{border:none}
+.color-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.arch-deco{text-align:center;padding:15px}
+.mini-arch{display:inline-block;width:40px;height:60px;border:2px solid #4a0080;border-radius:20px 20px 0 0;margin:0 5px}
+footer{background:#0d0015;color:#4a0080;text-align:center;padding:50px 20px;border-top:5px solid #1a0033}
+footer .glass-row{display:flex;justify-content:center;gap:3px;margin-bottom:15px}
+footer .glass-tile{width:15px;height:15px;border-radius:50%;opacity:0.5}
+footer p{font-size:0.8em;letter-spacing:3px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="stained-glass-hero">
+<div class="glass-pane glass-red">♦</div>
+<div class="glass-pane glass-blue">♦</div>
+<div class="glass-pane glass-green">♦</div>
+<div class="glass-pane glass-yellow">♦</div>
+<div class="glass-pane glass-purple">♦</div>
+<div class="glass-pane glass-blue">♦</div>
+<div class="glass-pane glass-red">♦</div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-orange">♦</div>
+<div class="glass-pane glass-teal">♦</div>
+<div class="glass-pane glass-pink">♦</div>
+<div class="glass-pane glass-teal">♦</div>
+<div class="glass-pane glass-orange">♦</div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-yellow">✝️</div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-empty"></div>
+<div class="glass-pane glass-empty"></div>
+</div>
+<h1>彩 色 玻 璃</h1>
+<p class="subtitle">光 · 色 · 神圣 · 彩窗之美</p>
+</div>
+
+<div class="glow-divider"></div>
+
+<div class="main-layout">
+<div class="posts-area">
+
+<div class="post-card">
+<div class="post-mosaic">
+<div class="mosaic-cell glass-red"></div>
+<div class="mosaic-cell glass-blue"></div>
+<div class="mosaic-cell glass-green"></div>
+<div class="mosaic-cell glass-yellow"></div>
+<div class="mosaic-cell glass-purple"></div>
+<div class="mosaic-cell glass-orange"></div>
+<div class="mosaic-cell glass-teal"></div>
+<div class="mosaic-cell glass-pink"></div>
+<div class="mosaic-cell glass-blue"></div>
+<div class="mosaic-cell glass-red"></div>
+</div>
+<div class="post-content">
+<h2>✦ 光的叙事：彩色玻璃窗的历史</h2>
+<div class="post-meta">
+<span>📅 圣月</span>
+<span>🏷️ 历史</span>
+<span>💬 39条评论</span>
+</div>
+<p>当阳光穿过彩色玻璃窗的那一刻，光不再是白的。它变成了红色、蓝色、绿色、金色，像液体一样流淌在教堂的石板地上。中世纪的人们相信，这是上帝赐予的彩色之光——一种超越物质世界的神圣体验。</p>
+<p>彩色玻璃窗最早出现在公元七世纪的教堂中，最初只是简单的几何图案。但随着技术的进步，艺匠们开始在玻璃上绘制圣经故事、圣徒肖像和天堂景象。到了哥特时期，彩色玻璃窗已经成为教堂最重要的艺术形式之一——它们不是装饰，而是用光写成的圣经。</p>
+<a href="#" class="read-more">阅读全文 ✦</a>
+</div>
+</div>
+
+<div class="glow-divider"></div>
+
+<div class="post-card">
+<div class="post-mosaic">
+<div class="mosaic-cell glass-purple"></div>
+<div class="mosaic-cell glass-yellow"></div>
+<div class="mosaic-cell glass-red"></div>
+<div class="mosaic-cell glass-teal"></div>
+<div class="mosaic-cell glass-green"></div>
+<div class="mosaic-cell glass-pink"></div>
+<div class="mosaic-cell glass-blue"></div>
+<div class="mosaic-cell glass-orange"></div>
+<div class="mosaic-cell glass-purple"></div>
+<div class="mosaic-cell glass-yellow"></div>
+</div>
+<div class="post-content">
+<h2>✦ 玻璃的炼金术：颜色背后的化学</h2>
+<div class="post-meta">
+<span>📅 铸月</span>
+<span>🏷️ 科学</span>
+<span>💬 26条评论</span>
+</div>
+<p>红色的秘密是金子——没错，古代的红色玻璃是用纳米级的金颗粒着色的。蓝色的秘密是钴，绿色的秘密是铜，紫色的秘密是锰。每一种颜色都对应一种金属氧化物，每一块彩色玻璃都是一次化学实验的成果。</p>
+<p>最神奇的是，同一种金属在不同温度和浓度下会产生完全不同的颜色。铜可以是绿色的，也可以是红色的（铜红玻璃）。铁可以是蓝色的，也可以是黄色的。古代的玻璃工匠们虽然不懂化学原理，但凭借几百年的经验积累，他们掌握了这些色彩的密码。</p>
+<a href="#" class="read-more">阅读全文 ✦</a>
+</div>
+</div>
+
+<div class="glow-divider"></div>
+
+<div class="post-card">
+<div class="post-mosaic">
+<div class="mosaic-cell glass-green"></div>
+<div class="mosaic-cell glass-red"></div>
+<div class="mosaic-cell glass-yellow"></div>
+<div class="mosaic-cell glass-purple"></div>
+<div class="mosaic-cell glass-blue"></div>
+<div class="mosaic-cell glass-teal"></div>
+<div class="mosaic-cell glass-orange"></field>
+<div class="mosaic-cell glass-pink"></div>
+<div class="mosaic-cell glass-green"></div>
+<div class="mosaic-cell glass-yellow"></div>
+</div>
+<div class="post-content">
+<h2>✦ 现代彩窗：从教堂到日常空间</h2>
+<div class="post-meta">
+<span>📅 当代</span>
+<span>🏷️ 设计</span>
+<span>💬 41条评论</span>
+</div>
+<p>彩色玻璃窗不只是中世纪的遗产。在当代设计中，彩窗元素正在经历一场文艺复兴。从高端餐厅的隔断，到私人住宅的玄关，从公共艺术装置到时尚配饰，彩色玻璃的美学正在渗透到生活的每一个角落。</p>
+<p>现代彩窗与古代的最大区别在于——它不再需要承载宗教叙事。它可以纯粹地为美而存在。一块由红色、蓝色、金色玻璃拼成的屏风，不需要讲述任何故事，它本身就是故事——一个关于光、色彩和人类审美本能的故事。</p>
+<a href="#" class="read-more">阅读全文 ✦</a>
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+<div class="sidebar-widget">
+<div class="arch-deco">
+<div class="mini-arch" style="background:rgba(220,38,38,0.2)"></div>
+<div class="mini-arch" style="background:rgba(37,99,235,0.2)"></div>
+<div class="mini-arch" style="background:rgba(22,163,74,0.2)"></div>
+</div>
+<h3>光与色的殿堂</h3>
+<p style="font-size:0.85em;line-height:1.8;color:#c0b0d8;text-align:center">探索彩色玻璃的千年历史，感受光穿过色彩的神圣瞬间。</p>
+</div>
+
+<div class="sidebar-widget">
+<h3>色彩密码</h3>
+<ul class="color-list">
+<li><span class="color-dot" style="background:#dc2626"></span>红色 — 金 · 牺牲之血</li>
+<li><span class="color-dot" style="background:#2563eb"></span>蓝色 — 钴 · 天堂之穹</li>
+<li><span class="color-dot" style="background:#16a34a"></span>绿色 — 铜 · 生命之树</li>
+<li><span class="color-dot" style="background:#eab308"></span>金色 — 银 · 神圣之光</li>
+<li><span class="color-dot" style="background:#7c3aed"></span>紫色 — 锰 · 皇室之色</li>
+</ul>
+</div>
+
+<div class="sidebar-widget">
+<h3>光之冥想</h3>
+<div style="font-style:italic;color:#7c3aed;border-left:2px solid #eab308;padding:15px;line-height:1.8;font-size:0.85em">
+"光是上帝的第一语言。"<br>
+<span style="color:#eab308;font-size:0.8em">— 某座古老教堂的铭文</span>
+</div>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="glass-row">
+<div class="glass-tile" style="background:#dc2626"></div>
+<div class="glass-tile" style="background:#2563eb"></div>
+<div class="glass-tile" style="background:#16a34a"></div>
+<div class="glass-tile" style="background:#eab308"></div>
+<div class="glass-tile" style="background:#7c3aed"></div>
+<div class="glass-tile" style="background:#ea580c"></div>
+<div class="glass-tile" style="background:#0d9488"></div>
+<div class="glass-tile" style="background:#ec4899"></div>
+</div>
+<p>© 2026 彩色玻璃 · 光穿过色彩，照亮灵魂</p>
+</footer>
+</body>
+</html>

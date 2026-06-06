@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>私密日记 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',cursive,sans-serif;background:#fffde7;color:#5d4037;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes stickyDrop{from{opacity:0;transform:rotate(-5deg) translateY(-30px)}to{opacity:1;transform:rotate(var(--rot)) translateY(0)}}
+@keyframes paperClipShine{0%,100%{opacity:0.6}50%{opacity:1}}
+body::before{content:'';position:fixed;top:0;left:80px;width:2px;height:100%;background:rgba(244,67,54,0.3);z-index:0}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(transparent,transparent 31px,#90caf9 31px,#90caf9 32px);opacity:0.15;pointer-events:none;z-index:0}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(255,249,196,0.95);backdrop-filter:blur(8px);z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid rgba(144,202,249,0.3);animation:fadeIn 0.8s ease}
+.nav a{color:#5d4037;text-decoration:none;font-size:0.9rem}
+.nav a:hover{color:#8d6e63}
+.nav-links{display:flex;gap:25px}
+.nav-links a{color:#5d4037;text-decoration:none;font-size:0.9rem}
+.hero{position:relative;height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#fff9c4,#fff8e1);animation:fadeIn 1s ease;padding-left:80px}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:3.2rem;font-weight:700;color:#5d4037;margin-bottom:15px;font-style:italic}
+.hero p{font-size:1.1rem;color:#8d6e63;font-weight:300}
+.hero .paperclip{position:absolute;font-size:2rem;animation:paperClipShine 3s ease-in-out infinite}
+.hero .pc1{top:10%;right:20%;transform:rotate(30deg)}
+.hero .pc2{bottom:15%;left:25%;transform:rotate(-20deg)}
+.container{max-width:850px;margin:0 auto;padding:60px 20px 60px 100px;position:relative;z-index:1}
+.sticky{padding:30px 35px;margin-bottom:45px;position:relative;animation:stickyDrop 0.8s ease forwards;opacity:0;box-shadow:3px 3px 15px rgba(0,0,0,0.1);transition:transform 0.3s}
+.sticky:nth-child(1){--rot:-2deg;background:#fff9c4;transform:rotate(-2deg);animation-delay:0.2s}
+.sticky:nth-child(2){--rot:1.5deg;background:#bbdefb;transform:rotate(1.5deg);animation-delay:0.4s}
+.sticky:nth-child(3){--rot:-1deg;background:#f8bbd0;transform:rotate(-1deg);animation-delay:0.6s}
+.sticky:nth-child(4){--rot:2deg;background:#c8e6c9;transform:rotate(2deg);animation-delay:0.8s}
+.sticky:hover{transform:rotate(0deg) scale(1.02)!important;z-index:10}
+.sticky::before{content:'📎';position:absolute;top:-12px;right:20px;font-size:1.2rem;transform:rotate(15deg)}
+.post-date{font-size:0.85rem;color:rgba(93,64,55,0.6);margin-bottom:10px;font-style:italic}
+.sticky h2{font-size:1.5rem;color:#5d4037;margin-bottom:12px;font-weight:700}
+.sticky p{line-height:2;color:#6d4c41;margin-bottom:12px;font-weight:300}
+.post-tag{display:inline-block;padding:3px 10px;background:rgba(255,255,255,0.5);border-radius:3px;font-size:0.75rem;color:#8d6e63;margin-right:6px;margin-bottom:6px}
+.date-label{position:fixed;left:15px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;color:rgba(144,202,249,0.5);font-size:0.8rem;letter-spacing:3px;z-index:1}
+footer{text-align:center;padding:40px;color:#8d6e63;font-size:0.85rem;position:relative;z-index:1;padding-left:80px}
+footer .ruled-line{height:2px;background:linear-gradient(90deg,transparent,#90caf9,transparent);margin-bottom:20px;opacity:0.5}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">日记</a>
+<a href="#">随想</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="paperclip pc1">📎</div>
+<div class="paperclip pc2">📎</div>
+<div class="hero-content">
+<h1>私密日记</h1>
+<p>写给自己的悄悄话 📝</p>
+</div>
+</section>
+<div class="date-label">二〇二五 · 春</div>
+<div class="container">
+<article class="sticky">
+<div class="post-date">2025年3月12日 · 周三 · 晴</div>
+<h2>🌸 樱花树下的独白</h2>
+<p>今天提前一个小时出门，绕路去公园看樱花。清晨的公园几乎没有人，只有几个老人在打太极。樱花开了大约七成，风一吹就纷纷扬扬地落下来，落在头发上、肩膀上、还有摊开的手心里。</p>
+<p>我站在树下想了很多事情。想起去年这个时候还在为考试焦虑，想起前年这个时候和朋友去赏花的快乐。时间真奇怪，它带走了很多东西，却也留下了很多东西。那些以为会忘记的画面，原来都好好地收在记忆的某个角落里。</p>
+<p>在日记本里夹了一片樱花瓣。虽然知道它最终会枯萎变色，但此刻它是最美的。</p>
+<div class="post-tag">樱花</div>
+<div class="post-tag">独处</div>
+<div class="post-tag">感悟</div>
+</article>
+<article class="sticky">
+<div class="post-date">2025年3月8日 · 周六 · 多云</div>
+<h2>☕ 一个人的下午茶</h2>
+<p>给自己泡了一杯伯爵茶，配上上周烤的黄油饼干。坐在窗边看外面的行人，每个人都有自己的目的地，都有自己的故事。那个匆匆走过的西装男士，是在赶着去见重要的人吗？那对慢慢散步的老夫妻，已经携手走过了多少年？</p>
+<p>独处的时间其实很宝贵。在这个所有人都急于表达的时代，能够安静地和自己对话是一种奢侈。今天的下午茶时间，我给三个月后的自己写了一封信。不知道到时候再读，会是什么心情。</p>
+<div class="post-tag">独处</div>
+<div class="post-tag">下午茶</div>
+<div class="post-tag">写信</div>
+</article>
+<article class="sticky">
+<div class="post-date">2025年3月3日 · 周一 · 小雨</div>
+<h2>🌧️ 雨天的小确幸</h2>
+<p>今天下了一整天的雨。出门忘了带伞，只好在便利店的屋檐下躲雨。正觉得倒霉的时候，旁边一只流浪猫也跑来躲雨，它看了我一眼，然后淡定地坐下开始舔爪子。那一刻突然觉得，下雨也没什么不好的。</p>
+<p>回家后换了干衣服，窝在沙发上听着雨声看书。窗外的世界变得模糊而温柔，雨声像是天然的白噪音。读到一本很喜欢的小说的结尾，主角终于找到了属于自己的幸福。合上书的时候，外面的雨也停了。</p>
+<p>有时候，最平凡的一天反而是最值得记录的一天。</p>
+<div class="post-tag">雨天</div>
+<div class="post-tag">小确幸</div>
+<div class="post-tag">阅读</div>
+</article>
+</div>
+<footer>
+<div class="ruled-line"></div>
+<p>📓 私密日记 · 那些只说给自己听的话</p>
+<p style="margin-top:8px;opacity:0.5">© 2025 All rights reserved</p>
+</footer>
+</body>
+</html>

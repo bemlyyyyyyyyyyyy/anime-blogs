@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>像素冒险 - Pixel Quest</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a0a2e;color:#e0e0e0;overflow-x:hidden;}
+a{text-decoration:none;color:#00ffcc;}
+
+@keyframes bouncePixel{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes pixelFadeIn{0%{opacity:0;transform:scale(0.8);}100%{opacity:1;transform:scale(1);}}
+@keyframes healthPulse{0%,100%{box-shadow:0 0 5px #ff0040;}50%{box-shadow:0 0 15px #ff0040,0 0 25px #ff0040;}}
+@keyframes coinSpin{0%{transform:rotateY(0deg);}100%{transform:rotateY(360deg);}}
+@keyframes starTwinkle{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.8);}}
+@keyframes slideIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes walkCycle{0%,100%{transform:translateX(0);}25%{transform:translateX(3px);}75%{transform:translateX(-3px);}}
+
+.pixel-border{position:relative;padding:30px;background:#2a1a4e;box-shadow:inset -4px -4px 0 #1a0a3e,inset 4px 4px 0 #3a2a6e,-4px -4px 0 #0a0020,4px 4px 0 #0a0020;}
+.pixel-border::before{content:'';position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;border:4px solid #0a0020;pointer-events:none;}
+
+nav{background:#0a0020;border-bottom:4px solid #ffcc00;position:sticky;top:0;z-index:100;box-shadow:0 4px 0 #aa8800;}
+nav .inner{max-width:1200px;margin:0 auto;padding:12px 30px;display:flex;justify-content:space-between;align-items:center;}
+nav .logo{font-size:1.4rem;font-weight:700;color:#ffcc00;text-shadow:2px 2px 0 #aa8800,4px 4px 0 #0a0020;}
+nav .links{display:flex;gap:20px;}
+nav .links a{color:#00ffcc;font-size:0.9rem;text-shadow:1px 1px 0 #0a0020;transition:all 0.3s;}
+nav .links a:hover{color:#ffcc00;}
+
+.back-link{display:inline-block;margin:20px 30px;padding:8px 20px;background:#2a1a4e;color:#00ffcc;font-size:0.85rem;box-shadow:inset -3px -3px 0 #1a0a3e,inset 3px 3px 0 #3a2a6e,-3px -3px 0 #0a0020,3px 3px 0 #0a0020;transition:all 0.3s;}
+.back-link:hover{background:#3a2a6e;color:#ffcc00;}
+
+.hero{position:relative;min-height:55vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#0a0020 0%,#1a0a2e 40%,#2a1a4e 100%);overflow:hidden;}
+.hero .stars{position:absolute;top:0;left:0;width:100%;height:100%;}
+.hero .star{position:absolute;width:4px;height:4px;background:#fff;border-radius:0;animation:starTwinkle 2s infinite;}
+.hero .star:nth-child(1){top:10%;left:15%;animation-delay:0s;}
+.hero .star:nth-child(2){top:25%;left:70%;animation-delay:0.5s;}
+.hero .star:nth-child(3){top:40%;left:40%;animation-delay:1s;}
+.hero .star:nth-child(4){top:15%;left:85%;animation-delay:1.5s;}
+.hero .star:nth-child(5){top:50%;left:25%;animation-delay:0.3s;}
+.hero .star:nth-child(6){top:35%;left:60%;animation-delay:0.8s;}
+.hero .star:nth-child(7){top:5%;left:50%;animation-delay:1.2s;}
+.hero .star:nth-child(8){top:45%;left:80%;animation-delay:0.6s;}
+.hero h1{font-size:3.5rem;color:#ffcc00;text-shadow:4px 4px 0 #aa8800,8px 8px 0 #0a0020;position:relative;z-index:2;animation:bouncePixel 2s ease-in-out infinite;}
+.hero p{font-size:1rem;color:#00ffcc;margin-top:15px;position:relative;z-index:2;text-shadow:2px 2px 0 #0a0020;}
+.hero .ground{position:absolute;bottom:0;left:0;width:100%;height:60px;background:#1a0a2e;border-top:4px solid #3a2a6e;}
+.hero .ground::before{content:'';position:absolute;top:4px;left:0;width:100%;height:4px;background:repeating-linear-gradient(90deg,#3a2a6e 0px,#3a2a6e 20px,#2a1a4e 20px,#2a1a4e 40px);}
+
+.game-ui{position:absolute;top:20px;right:30px;display:flex;gap:20px;z-index:2;}
+.game-ui .health-bar{display:flex;align-items:center;gap:5px;}
+.game-ui .health-bar .heart{color:#ff0040;font-size:1.2rem;animation:healthPulse 2s infinite;}
+.game-ui .health-bar .heart:nth-child(2){animation-delay:0.3s;}
+.game-ui .health-bar .heart:nth-child(3){animation-delay:0.6s;}
+.game-ui .coin-counter{display:flex;align-items:center;gap:5px;color:#ffcc00;font-size:1rem;font-weight:700;}
+.game-ui .coin-counter .coin{display:inline-block;width:16px;height:16px;background:#ffcc00;border-radius:0;animation:coinSpin 2s linear infinite;font-size:0.7rem;text-align:center;line-height:16px;color:#aa8800;}
+
+.container{max-width:1200px;margin:0 auto;padding:40px 30px;display:grid;grid-template-columns:1fr 320px;gap:40px;}
+.main-content{display:flex;flex-direction:column;gap:40px;}
+
+.post-card{background:#2a1a4e;padding:30px;animation:pixelFadeIn 0.6s ease-out both;box-shadow:inset -4px -4px 0 #1a0a3e,inset 4px 4px 0 #3a2a6e,-4px -4px 0 #0a0020,4px 4px 0 #0a0020;}
+.post-card:nth-child(2){animation-delay:0.2s;}
+.post-card:nth-child(3){animation-delay:0.4s;}
+.post-card .tag{display:inline-block;padding:3px 12px;background:#ffcc00;color:#0a0020;font-size:0.75rem;font-weight:700;margin-bottom:10px;box-shadow:2px 2px 0 #aa8800;}
+.post-card h2{font-size:1.4rem;color:#ffcc00;margin-bottom:10px;text-shadow:2px 2px 0 #0a0020;}
+.post-card .meta{font-size:0.8rem;color:#6a5a8e;margin-bottom:15px;}
+.post-card p{line-height:1.8;color:#b0a0d0;font-size:0.9rem;}
+.post-card .img-placeholder{width:100%;height:180px;background:linear-gradient(135deg,#1a0a2e,#3a2a6e);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:3rem;image-rendering:pixelated;box-shadow:inset -4px -4px 0 #0a0020,inset 4px 4px 0 #4a3a7e;}
+.post-card .read-more{display:inline-block;margin-top:15px;padding:8px 20px;background:#00ffcc;color:#0a0020;font-size:0.85rem;font-weight:700;box-shadow:3px 3px 0 #0a8866;transition:all 0.2s;}
+.post-card .read-more:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 #0a8866;}
+.post-card .stats{display:flex;gap:15px;margin-top:15px;}
+.post-card .stats span{font-size:0.75rem;color:#ffcc00;display:flex;align-items:center;gap:5px;}
+
+.sidebar{display:flex;flex-direction:column;gap:25px;}
+.widget{background:#2a1a4e;padding:20px;box-shadow:inset -3px -3px 0 #1a0a3e,inset 3px 3px 0 #3a2a6e,-3px -3px 0 #0a0020,3px 3px 0 #0a0020;}
+.widget h3{color:#ffcc00;font-size:1rem;margin-bottom:15px;text-shadow:1px 1px 0 #0a0020;padding-bottom:8px;border-bottom:3px solid #3a2a6e;}
+.widget ul{list-style:none;}
+.widget ul li{padding:6px 0;border-bottom:2px solid rgba(58,42,110,0.5);}
+.widget ul li a{color:#b0a0d0;font-size:0.85rem;transition:color 0.3s;}
+.widget ul li a:hover{color:#ffcc00;}
+.widget .tag-cloud{display:flex;retro-wrap:wrap;gap:8px;flex-wrap:wrap;}
+.widget .tag-cloud span{padding:4px 10px;background:#ffcc00;color:#0a0020;font-size:0.7rem;font-weight:700;cursor:pointer;box-shadow:2px 2px 0 #aa8800;transition:all 0.2s;}
+.widget .tag-cloud span:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 #aa8800;}
+.widget .pixel-avatar{width:80px;height:80px;margin:0 auto 15px;background:#3a2a6e;display:flex;align-items:center;justify-content:center;font-size:2.5rem;box-shadow:inset -3px -3px 0 #1a0a3e,inset 3px 3px 0 #4a3a7e;image-rendering:pixelated;animation:bouncePixel 3s ease-in-out infinite;}
+.widget .about-text{font-size:0.8rem;color:#8a7aae;line-height:1.6;text-align:center;}
+.widget .xp-bar{margin-top:10px;height:12px;background:#0a0020;box-shadow:inset 2px 2px 0 #050010;position:relative;}
+.widget .xp-bar .fill{height:100%;width:75%;background:linear-gradient(90deg,#00ffcc,#ffcc00);box-shadow:inset -2px -2px 0 rgba(0,0,0,0.3);}
+.widget .xp-label{font-size:0.7rem;color:#ffcc00;margin-top:5px;text-align:right;}
+
+footer{text-align:center;padding:30px;border-top:4px solid #3a2a6e;margin-top:40px;background:#0a0020;}
+footer p{color:#4a3a6e;font-size:0.8rem;}
+footer .pixel-text{color:#ffcc00;text-shadow:2px 2px 0 #aa8800;}
+
+@media(max-width:900px){.container{grid-template-columns:1fr;}.hero h1{font-size:2rem;}.game-ui{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+<div class="inner">
+<a href="#" class="logo">像素冒险</a>
+<div class="links">
+<a href="#">🏠村庄</a><a href="#">⚔️冒险</a><a href="#">🗺️地图</a><a href="#">📦背包</a>
+</div>
+</div>
+</nav>
+<a href="index日志.html" class="back-link">← 返回目录</a>
+<section class="hero">
+<div class="stars">
+<div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+<div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+</div>
+<div class="game-ui">
+<div class="health-bar">
+<span class="heart">♥</span><span class="heart">♥</span><span class="heart" style="opacity:0.3;">♥</span>
+</div>
+<div class="coin-counter">
+<span class="coin">$</span> x 1247
+</div>
+</div>
+<div>
+<h1>像素冒险</h1>
+<p>在8位的世界里，开始一场16位的冒险</p>
+</div>
+<div class="ground"></div>
+</section>
+<div class="container">
+<main class="main-content">
+<article class="post-card">
+<div class="img-placeholder">🎮</div>
+<span class="tag">游戏手记</span>
+<h2>像素艺术的灵魂：为什么8-bit永远不会过时</h2>
+<div class="meta">2026-05-25 · 像素勇者</div>
+<p>在这个4K、光线追踪、虚幻引擎5横行的时代，像素艺术似乎应该被淘汰了。但事实恰恰相反——像素游戏正在经历一场文艺复兴。从《星露谷物语》到《空洞骑士》，从《蔚蓝》到《死亡细胞》，像素风格不仅没有消亡，反而焕发出了新的生命力。因为像素艺术的核心不是分辨率，而是一种对简洁之美的追求。每一个像素都承载着创作者的匠心，每一个色块都诉说着一个故事。</p>
+<div class="stats">
+<span>❤️ 247</span><span>⭐ 89</span><span>💬 34</span>
+</div>
+<a href="#" class="read-more">开始冒险 →</a>
+</article>
+<span class="tag">复古硬件</span>
+<h2>Game Boy的遗产：一个改变世界的小方块</h2>
+<div class="meta">2026-05-18 · 硬件考古学家</div>
+<p>1989年，任天堂发布了一款看似不起眼的掌机——Game Boy。它没有彩色屏幕，没有立体声，处理器甚至不如当时的计算器。但就是这个小小的灰色方块，开启了掌上游戏的黄金时代。从《俄罗斯方块》到《宝可梦》，Game Boy上诞生了无数经典。35年过去了，它依然是游戏史上最具影响力的硬件之一。它的遗产不仅在于技术，更在于它证明了：游戏性，永远比画面更重要。</p>
+<div class="stats">
+<span>❤️ 182</span><span>⭐ 67</span><span>💬 28</span>
+</div>
+<a href="#" class="read-more">开始冒险 →</a>
+</article>
+<article class="post-card">
+<div class="img-placeholder">🏰</div>
+<span class="tag">游戏设计</span>
+<h2>关卡设计的艺术：从1-1到开放世界</h2>
+<div class="meta">2026-05-10 · 关卡建筑师</div>
+<p>每一个伟大的游戏都有一个伟大的开场。《超级马里奥》的1-1关卡是游戏设计史上最完美的教学关——没有文字说明，没有教程视频，仅凭精心设计的关卡布局，就让玩家自然而然地学会了所有基本操作。这种"隐性教学"的设计哲学影响了此后几十年的游戏设计。如今的开放世界游戏虽然看似自由，但优秀的关卡设计原则从未改变：引导、奖励、挑战、节奏。</p>
+<div class="stats">
+<span>❤️ 315</span><span>⭐ 102</span><span>💬 45</span>
+</div>
+<a href="#" class="read-more">开始冒险 →</a>
+</article>
+</main>
+<aside class="sidebar">
+<div class="widget">
+<div class="pixel-avatar">🕹️</div>
+<div class="about-text">8-bit世界的永恒冒险者，在像素之间寻找隐藏的宝藏和未被发现的秘密。</div>
+<div class="xp-bar"><div class="fill"></div></div>
+<div class="xp-label">LV.42 — 750/1000 XP</div>
+</div>
+<div class="widget">
+<h3>冒险标签</h3>
+<div class="tag-cloud">
+<span>#像素</span><span>#复古</span><span>#任天堂</span><span>#RPG</span><span>#8bit</span><span>#独立游戏</span><span>#GameBoy</span><span>#怀旧</span>
+</div>
+</div>
+<div class="widget">
+<h3>任务日志</h3>
+<ul>
+<li><a href="#">🎮 FC红白机完全档案</a></li>
+<li><a href="#">👾 像素画入门教程</a></li>
+<li><a href="#">🕹️ 世嘉与任天堂的主机战争</a></li>
+<li><a href="#">🏰 RPG黄金年代回顾</a></li>
+<li><a href="#">⚔️ 魂系列关卡设计解析</a></li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p class="pixel-text">像素冒险 © 2026</p>
+<p style="margin-top:8px;">GAME OVER? CONTINUE? 9...8...7...</p>
+</footer>
+</body>
+</html>

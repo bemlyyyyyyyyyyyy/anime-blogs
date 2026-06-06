@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>苏系萌化 — 革命与萌的碰撞</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff5f5;color:#000;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:#dc2626;color:#fff;font-weight:700;margin:20px;border-radius:0 0 20px 0;letter-spacing:2px}
+.back-link:hover{background:#f472b6}
+.hero{background:linear-gradient(135deg,#dc2626 0%,#b91c1c 50%,#f472b6 100%);padding:80px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾 🐾';position:absolute;top:20px;left:0;width:200%;font-size:30px;letter-spacing:40px;animation:pawWalk 8s linear infinite;opacity:0.3}
+@keyframes pawWalk{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero h1{font-size:4em;color:#fff;text-shadow:4px 4px 0 #000;font-weight:700;letter-spacing:8px;position:relative;z-index:1}
+.hero .subtitle{color:#fff5f5;font-size:1.2em;margin-top:15px;font-weight:300;letter-spacing:4px}
+.propaganda-banner{background:#dc2626;color:#fff;text-align:center;padding:15px;font-weight:700;letter-spacing:5px;font-size:1.2em;position:relative;overflow:hidden}
+.propaganda-banner::before,.propaganda-banner::after{content:'★';margin:0 20px;color:#f472b6}
+.main-layout{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1200px;margin:40px auto;padding:0 20px}
+.posts-area{display:flex;flex-direction:column;gap:40px}
+.post-card{background:#fff;border-radius:20px;border:4px solid #dc2626;overflow:hidden;position:relative;transition:transform .3s}
+.post-card:hover{transform:rotate(-1deg) scale(1.02)}
+.post-card::before{content:'🐾';position:absolute;top:15px;right:15px;font-size:30px;z-index:2}
+.post-badge{position:absolute;top:15px;left:-5px;background:#dc2626;color:#fff;padding:5px 20px 5px 15px;font-weight:700;font-size:0.8em;clip-path:polygon(0 0,100% 0,95% 100%,0 100%)}
+.post-img{width:100%;height:250px;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:80px}
+.post-content{padding:30px}
+.post-content h2{font-size:1.8em;color:#dc2626;margin-bottom:10px;font-weight:700}
+.post-meta{color:#999;font-size:0.85em;margin-bottom:15px}
+.post-meta span{background:#fff5f5;padding:3px 10px;border-radius:10px;margin-right:5px;border:1px solid #f472b6}
+.post-content p{line-height:1.8;color:#333;margin-bottom:20px}
+.read-more{display:inline-block;background:#dc2626;color:#fff;padding:10px 30px;border-radius:0 20px 20px 0;font-weight:700;letter-spacing:2px;transition:all .3s}
+.read-more:hover{background:#f472b6;border-radius:20px 0 0 20px}
+.sidebar{display:flex;flex-direction:column;gap:30px}
+.sidebar-widget{background:#fff;border-radius:20px;border:3px solid #000;padding:25px;position:relative}
+.sidebar-widget::after{content:'';position:absolute;bottom:-3px;right:-3px;width:40px;height:40px;background:#f472b6;border-radius:20px 0 20px 0}
+.sidebar-widget h3{font-size:1.3em;color:#dc2626;margin-bottom:15px;padding-bottom:10px;border-bottom:3px solid #f472b6}
+.sidebar-widget h3::before{content:'🐾 '}
+.tag-cloud span{display:inline-block;padding:5px 15px;margin:3px;background:#fff5f5;border:2px solid #dc2626;border-radius:0 15px 15px 0;font-size:0.85em;transition:all .3s;cursor:pointer}
+.tag-cloud span:hover{background:#dc2626;color:#fff}
+.cat-avatar{width:80px;height:80px;background:#f472b6;border-radius:50%;border:4px solid #dc2626;display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 15px}
+.widget-list{list-style:none}
+.widget-list li{padding:10px 0;border-bottom:1px dashed #f472b6;font-size:0.9em}
+.widget-list li:last-child{border:none}
+.widget-list li::before{content:'♥ ';color:#dc2626}
+.cute-divider{text-align:center;padding:20px;font-size:20px;letter-spacing:10px;opacity:0.6}
+footer{background:#000;color:#fff5f5;text-align:center;padding:40px 20px;margin-top:40px}
+footer .paws{font-size:30px;letter-spacing:20px;margin-bottom:15px;opacity:0.5}
+footer p{font-size:0.85em;opacity:0.7}
+@keyframes hammerSwing{0%,100%{transform:rotate(-15deg)}50%{transform:rotate(15deg)}}
+.deco-hammer{display:inline-block;font-size:24px;animation:hammerSwing 2s ease-in-out infinite}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<h1>🐾 苏系萌化 🐾</h1>
+<p class="subtitle">毛茸茸的革命 · 可爱即正义 · 喵星人万岁</p>
+</div>
+
+<div class="propaganda-banner">★ 同志们！加入萌化先锋队！全世界的猫咪联合起来！★</div>
+
+<div class="main-layout">
+<div class="posts-area">
+
+<div class="post-card">
+<div class="post-badge">🔴 头条</div>
+<div class="post-img" style="background:linear-gradient(135deg,#f472b6 0%,#dc2626 50%,#000 100%)">🐱</div>
+<div class="post-content">
+<h2>🐱 可爱宣言：萌即是一切的开端</h2>
+<div class="post-meta">
+<span>📅 2026年萌月</span>
+<span>🏷️ 可爱革命</span>
+<span>💬 42条评论</span>
+</div>
+<p>在那个被严肃与秩序统治的世界里，一只戴着红色蝴蝶结的猫咪走上了广场的高台。它没有发表慷慨激昂的演说，只是轻轻地"喵"了一声。但这一声喵，却如同春雷般震动了每一个灵魂。从那天起，"萌"不再只是一个形容词，它成为了一种信仰，一种生活方式，一种革命的力量。</p>
+<p>可爱的猫咪们用肉垫拍打着键盘，写下了这部改变世界的宣言。第一条就是：每天必须揉猫十五分钟，违者罚看猫咪视频一小时。这不是玩笑，这是铁律，是萌化新秩序的基石。第二条：所有建筑的转角必须做成圆弧形，因为尖角不萌。</p>
+<a href="#" class="read-more">继续阅读 →</a>
+</div>
+</div>
+
+<div class="cute-divider">🐾 ♥ 🐾 ♥ 🐾 ♥ 🐾</div>
+
+<div class="post-card">
+<div class="post-img" style="background:linear-gradient(135deg,#000 0%,#dc2626 50%,#f472b6 100%)">⭐</div>
+<div class="post-content">
+<h2>⭐ 红星下的粉红泡泡——记第一届萌化文化节</h2>
+<div class="post-meta">
+<span>📅 2026年花月</span>
+<span>🏷️ 文化节</span>
+<span>💬 88条评论</span>
+</div>
+<p>当第一面印着猫爪的红旗在广场上升起时，所有人都知道，一个新的时代已经到来。第一届萌化文化节吸引了来自全国各地的同好——有穿着制服的少女，有戴着猫耳的大叔，还有那些从不承认自己也觉得可爱的老顽固们。整个会场弥漫着草莓味的气息，到处都是粉色与红色交织的装饰。</p>
+<p>最受欢迎的展区是"萌化历史馆"，里面展示着从古至今的可爱文物：从远古时代的圆润陶罐，到中世纪的萌系骑士盔甲，再到现代的二次元海报。文化节的闭幕式上，全体参与者齐声高呼："萌即是正义！肉垫即是力量！"</p>
+<a href="#" class="read-more">继续阅读 →</a>
+</div>
+</div>
+
+<div class="cute-divider">★ ♥ ★ ♥ ★ ♥ ★</div>
+
+<div class="post-card">
+<div class="post-img" style="background:linear-gradient(135deg,#f472b6 0%,#fff5f5 50%,#dc2626 100%)">🎶</div>
+<div class="post-content">
+<h2>🎶 萌化歌曲大全：当进行曲遇上喵喵叫</h2>
+<div class="post-meta">
+<span>📅 2026年乐月</span>
+<span>🏷️ 音乐</span>
+<span>💬 66条评论</span>
+</div>
+<p>你听过用猫叫声改编的进行曲吗？那种庄严的旋律配上软萌的"喵喵"声，产生了一种奇妙的化学反应——让人既想挺胸抬头地迈步，又想蹲下来撸猫。这就是萌化音乐的魅力所在。作曲家们大胆地将铜管乐器替换成了铃铛和木琴，将定音鼓换成了猫爪拍打声。</p>
+<p>最火的一首歌叫《肉垫进行曲》，歌词简单到令人发指："喵喵喵，喵喵喵，喵喵喵喵喵喵喵。"但这首歌的MV播放量已经突破了一个亿。副歌部分那个戴着军帽的猫咪挥爪子的动作，已经成为了年度最火舞蹈挑战。</p>
+<a href="#" class="read-more">继续阅读 →</a>
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+<div class="sidebar-widget">
+<div class="cat-avatar">🐱</div>
+<h3>关于本站</h3>
+<p style="text-align:center;line-height:1.8">欢迎来到萌化革命根据地！这里是可爱与力量并存的角落。加入我们，一起用萌改变世界！</p>
+</div>
+
+<div class="sidebar-widget">
+<h3>萌化标签</h3>
+<div class="tag-cloud">
+<span>🐱 猫咪万岁</span>
+<span>♥ 可爱宣言</span>
+<span>🐾 肉垫力量</span>
+<span>⭐ 红星萌化</span>
+<span>🎀 蝴蝶结</span>
+<span>🍓 草莓味</span>
+<span>🎶 萌系音乐</span>
+<span>💌 情书</span>
+</div>
+</div>
+
+<div class="sidebar-widget">
+<h3>热门话题</h3>
+<ul class="widget-list">
+<li>论猫耳在日常生活中的必要性</li>
+<li>肉垫触感的科学研究报告</li>
+<li>如何把制服穿出萌感</li>
+<li>粉色不是软弱，粉色是力量</li>
+<li>萌化食堂今日菜单</li>
+</ul>
+</div>
+
+<div class="sidebar-widget">
+<h3>萌化日历</h3>
+<div style="text-align:center;padding:10px">
+<div style="background:#dc2626;color:#fff;padding:5px;border-radius:10px 10px 0 0">六月</div>
+<div style="background:#fff5f5;padding:15px;border:2px solid #dc2626;border-top:none;border-radius:0 0 10px 10px">
+<div style="font-size:2em;color:#dc2626;font-weight:700">05</div>
+<div style="color:#f472b6;font-size:0.85em">萌化纪念日 🐾</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="paws">🐾 🐾 🐾 🐾 🐾</div>
+<p>© 2026 苏系萌化 · 全世界的猫咪，联合起来！</p>
+<p style="margin-top:10px;font-size:0.75em">♥ 用爱与肉垫打造 ♥</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手账拼贴 — 生活的碎片</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fdf6f0;color:#5d4e37;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:8px 20px;background:#ffb6c1;color:#fff;font-weight:700;margin:20px;border-radius:20px;font-size:0.85em;transform:rotate(-2deg)}
+.back-link:hover{background:#87ceeb}
+.hero{background:linear-gradient(135deg,#fce4ec 0%,#e3f2fd 25%,#fff9c4 50%,#e8f5e9 75%,#fce4ec 100%);padding:80px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'🌸 ⭐ 🌈 🦋 🌸 ⭐ 🌈 🦋 🌸 ⭐ 🌈 🦋';position:absolute;top:10px;left:0;width:200%;font-size:20px;letter-spacing:20px;animation:floatBy 10s linear infinite;opacity:0.4}
+@keyframes floatBy{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.hero h1{font-size:3em;color:#e91e63;font-weight:700;transform:rotate(-1deg);text-shadow:2px 2px 0 #ffd700;display:inline-block;background:#fff;padding:15px 40px;border-radius:20px;border:3px dashed #ffb6c1}
+.hero .subtitle{color:#9c27b0;font-size:1em;margin-top:15px;font-weight:300}
+.washi-tape{position:absolute;height:30px;opacity:0.6;z-index:10}
+.washi-1{background:repeating-linear-gradient(45deg,#ffb6c1,#ffb6c1 5px,#ffc1cc 5px,#ffc1cc 10px);top:180px;left:-20px;width:200px;transform:rotate(-5deg)}
+.washi-2{background:repeating-linear-gradient(-45deg,#87ceeb,#87ceeb 5px,#a7d8f0 5px,#a7d8f0 10px);top:300px;right:-10px;width:180px;transform:rotate(3deg)}
+.washi-3{background:repeating-linear-gradient(45deg,#ffd700,#ffd700 5px,#ffe44d 5px,#ffe44d 10px);top:450px;left:50px;width:150px;transform:rotate(-8deg)}
+.main-layout{display:grid;grid-template-columns:1fr 300px;gap:30px;max-width:1200px;margin:40px auto;padding:0 20px}
+.posts-area{display:flex;flex-direction:column;gap:30px}
+.post-card{background:#fff;border-radius:15px;padding:0;position:relative;overflow:visible;box-shadow:2px 3px 10px rgba(0,0,0,0.1)}
+.post-card:nth-child(1){transform:rotate(-1deg)}
+.post-card:nth-child(2){transform:rotate(0.5deg)}
+.post-card:nth-child(3){transform:rotate(-0.5deg)}
+.photo-corner{position:absolute;width:25px;height:25px}
+.photo-corner::before{content:'';position:absolute;width:100%;height:100%;border:3px solid #bdbdbd}
+.photo-corner.tl{top:-5px;left:-5px}
+.photo-corner.tl::before{border-right:none;border-bottom:none}
+.photo-corner.tr{top:-5px;right:-5px}
+.photo-corner.tr::before{border-left:none;border-bottom:none}
+.photo-corner.bl{bottom:-5px;left:-5px}
+.photo-corner.bl::before{border-right:none;border-top:none}
+.photo-corner.br{bottom:-5px;right:-5px}
+.photo-corner.br::before{border-left:none;border-top:none}
+.post-tape{position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);width:80px;height:25px;border-radius:3px;z-index:2}
+.tape-pink{background:rgba(255,182,193,0.6)}
+.tape-blue{background:rgba(135,206,235,0.6)}
+.tape-yellow{background:rgba(255,215,0,0.6)}
+.post-img{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:60px;border-radius:15px 15px 0 0}
+.post-content{padding:25px}
+.post-content h2{font-size:1.4em;color:#e91e63;margin-bottom:8px;font-weight:700}
+.post-meta{color:#999;font-size:0.8em;margin-bottom:12px;display:flex;gap:10px;flex-wrap:wrap}
+.sticker{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:14px;margin-right:5px}
+.sticker-pink{background:#fce4ec}
+.sticker-blue{background:#e3f2fd}
+.sticker-yellow{background:#fff9c4}
+.sticker-green{background:#e8f5e9}
+.post-content p{line-height:1.8;color:#666;margin-bottom:15px;font-size:0.9em}
+.read-more{display:inline-block;background:linear-gradient(135deg,#ffb6c1,#87ceeb);color:#fff;padding:8px 25px;border-radius:20px;font-weight:700;font-size:0.85em;transition:transform .3s}
+.read-more:hover{transform:scale(1.05)}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-widget{background:#fff;border-radius:15px;padding:20px;position:relative;box-shadow:2px 3px 8px rgba(0,0,0,0.08)}
+.sidebar-widget:nth-child(1){transform:rotate(1deg)}
+.sidebar-widget:nth-child(2){transform:rotate(-0.5deg)}
+.sidebar-widget:nth-child(3){transform:rotate(0.8deg)}
+.sidebar-widget h3{font-size:1.1em;color:#9c27b0;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.supplies-list{list-style:none}
+.supplies-list li{padding:8px 0;border-bottom:1px dashed #e0e0e0;font-size:0.85em;display:flex;align-items:center;gap:8px}
+.supplies-list li:last-child{border:none}
+.doodle-border{border:2px dashed #ffb6c1;border-radius:15px;padding:15px}
+.mood-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;font-size:0.7em}
+.mood-grid div{padding:8px 4px;border-radius:10px}
+footer{background:#fff;text-align:center;padding:40px 20px;margin-top:40px;border-top:3px dashed #ffb6c1}
+footer p{font-size:0.8em;color:#999}
+footer .deco{font-size:20px;letter-spacing:15px;margin-bottom:10px;opacity:0.6}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="washi-tape washi-1"></div>
+<div class="washi-tape washi-2"></div>
+<div class="washi-tape washi-3"></div>
+<h1>📔 手账拼贴</h1>
+<p class="subtitle">记录生活的每一个碎片 · 创造属于自己的小宇宙</p>
+</div>
+
+<div class="main-layout">
+<div class="posts-area">
+
+<div class="post-card">
+<div class="photo-corner tl"></div>
+<div class="photo-corner tr"></div>
+<div class="photo-corner bl"></div>
+<div class="photo-corner br"></div>
+<div class="post-tape tape-pink"></div>
+<div class="post-img" style="background:linear-gradient(135deg,#fce4ec,#f8bbd0)">🌸</div>
+<div class="post-content">
+<h2>📔 手账入门：从零开始的创意之旅</h2>
+<div class="post-meta">
+<span class="sticker sticker-pink">📅</span>
+<span>四月</span>
+<span class="sticker sticker-blue">💬</span>
+<span>38条评论</span>
+</div>
+<p>很多人问我："手账和日记有什么区别？"区别就在于——日记是记录你做了什么，手账是创造你想成为的样子。一本手账可以包含文字、绘画、拼贴、贴纸、胶带，甚至干花和车票。它是你的创意游乐场，没有规则，只有无限可能。</p>
+<p>入门的第一步很简单：一本空白本子，一支笔，加上你今天的心情。不需要买昂贵的工具，不需要会画画，不需要文笔优美。你只需要诚实地面对自己，把脑海中的碎片拼贴在一起。相信我，当第一本手账写满的那天，你会感谢当初开始的自己。</p>
+<a href="#" class="read-more">继续阅读 ✨</a>
+</div>
+</div>
+
+<div class="post-card">
+<div class="photo-corner tl"></div>
+<div class="photo-corner tr"></div>
+<div class="photo-corner bl"></div>
+<div class="photo-corner br"></div>
+<div class="post-tape tape-blue" style="transform:translateX(-50%) rotate(2deg)"></div>
+<div class="post-img" style="background:linear-gradient(135deg,#e3f2fd,#bbdefb)">🎨</div>
+<div class="post-content">
+<h2>🎨 和纸胶带收集指南：找到你的风格</h2>
+<div class="post-meta">
+<span class="sticker sticker-yellow">📅</span>
+<span>三月</span>
+<span class="sticker sticker-green">💬</span>
+<span>52条评论</span>
+</div>
+<p>和纸胶带是手账的灵魂装饰品。从纯色到花纹，从文字到插画，从复古到现代，和纸胶带的世界比你想象的要广阔得多。如果你是新手，我建议从这三种开始：一种纯色（百搭款），一种花纹（增加视觉趣味），一种文字（表达主题）。</p>
+<p>购买渠道方面，除了实体文具店，网上也有很多选择。日本品牌如MT、仓敷意匠、BGM都是经典之选，国内品牌如信的恋物、木子文具也越做越好。但小心——收集和纸胶带会上瘾！我的抽屉里已经有超过两百卷了，但每次看到新花色还是会忍不住入手。</p>
+<a href="#" class="read-more">继续阅读 ✨</a>
+</div>
+</div>
+
+<div class="post-card">
+<div class="photo-corner tl"></div>
+<div class="photo-corner tr"></div>
+<div class="photo-corner bl"></div>
+<div class="photo-corner br"></div>
+<div class="post-tape tape-yellow" style="transform:translateX(-50%) rotate(-3deg)"></div>
+<div class="post-img" style="background:linear-gradient(135deg,#fff9c4,#fff59d)">☕</div>
+<div class="post-content">
+<h2>☕ 手账与咖啡：一个下午的慢时光</h2>
+<div class="post-meta">
+<span class="sticker sticker-pink">📅</span>
+<span>二月</span>
+<span class="sticker sticker-blue">💬</span>
+<span>29条评论</span>
+</div>
+<p>周末的下午，找一家安静的咖啡馆，点一杯拿铁，摊开手账本，这就是我最享受的时光。手账不只是记录工具，它是一种仪式——一种让自己慢下来、与内心对话的仪式。在这个什么都快的时代，手账教会了我耐心。</p>
+<p>今天我做了一页关于"二月的色彩"的拼贴。用了淡粉色和淡蓝色的和纸胶带做底色，贴上几张拍立得照片（虽然是用便签纸画的代替品），在空白处写下了最近读的一本书的感悟。最后用金色的马克笔画了几颗星星作为点缀。简单，但很满足。</p>
+<a href="#" class="read-more">继续阅读 ✨</a>
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+<div class="sidebar-widget">
+<h3>🧸 今日心情</h3>
+<div class="mood-grid">
+<div style="background:#fce4ec">😊 开心</div>
+<div style="background:#e3f2fd">😌 平静</div>
+<div style="background:#fff9c4">🥰 幸福</div>
+<div style="background:#e8f5e9">💪 充实</div>
+</div>
+</div>
+
+<div class="sidebar-widget">
+<h3>✏️ 手账工具箱</h3>
+<ul class="supplies-list">
+<li><span class="sticker sticker-pink">🖊️</span> 针管笔 0.3mm</li>
+<li><span class="sticker sticker-blue">🖍️</span> 马克笔 12色</li>
+<li><span class="sticker sticker-yellow">📎</span> 和纸胶带 200+卷</li>
+<li><span class="sticker sticker-green">📒</span> 空白本 A5</li>
+<li><span class="sticker sticker-pink">✂️</span> 花边剪刀</li>
+</ul>
+</div>
+
+<div class="sidebar-widget">
+<h3>🌈 色彩灵感</h3>
+<div class="doodle-border">
+<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px">
+<div style="width:30px;height:30px;background:#ffb6c1;border-radius:50%"></div>
+<div style="width:30px;height:30px;background:#87ceeb;border-radius:50%"></div>
+<div style="width:30px;height:30px;background:#ffd700;border-radius:50%"></div>
+<div style="width:30px;height:30px;background:#98fb98;border-radius:50%"></div>
+<div style="width:30px;height:30px;background:#dda0dd;border-radius:50%"></div>
+<div style="width:30px;height:30px;background:#ffa07a;border-radius:50%"></div>
+</div>
+<p style="font-size:0.8em;line-height:1.6">本周色彩主题：春天的花园 🌷 柔和的粉色、清新的绿色、温暖的黄色……</p>
+</div>
+</div>
+
+<div class="sidebar-widget">
+<h3>📌 手账灵感</h3>
+<div style="font-size:0.85em;line-height:1.8">
+<p>💡 用旧邮票做复古拼贴</p>
+<p>💡 干花夹入手账的技巧</p>
+<p>💡 用咖啡渍做旧纸效果</p>
+<p>💡 每月一词的记录方式</p>
+</div>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="deco">🌸 🌈 ⭐ 🦋 🌸</div>
+<p>© 2026 手账拼贴 · 生活的每一个碎片都值得被记录</p>
+</footer>
+</body>
+</html>

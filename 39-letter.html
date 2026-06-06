@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>手写信笺 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#f5f0e1;color:#5d4037;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sealPulse{0%,100%{box-shadow:0 0 10px rgba(198,40,40,0.2)}50%{box-shadow:0 0 25px rgba(198,40,40,0.4)}}
+@keyframes stampPress{from{transform:scale(1.3) rotate(-5deg);opacity:0}to{transform:scale(1) rotate(0deg);opacity:1}}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(93,64,55,0.015) 3px,rgba(93,64,55,0.015) 4px),repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(93,64,55,0.01) 3px,rgba(93,64,55,0.01) 4px);pointer-events:none;z-index:0}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(245,240,225,0.95);backdrop-filter:blur(8px);z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(93,64,55,0.15);animation:fadeIn 0.8s ease}
+.nav a{color:#5d4037;text-decoration:none;font-size:0.9rem}
+.nav a:hover{color:#8d6e63}
+.nav-links{display:flex;gap:25px}
+.nav-links a{color:#5d4037;text-decoration:none;font-size:0.9rem}
+.hero{position:relative;height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#f5f0e1,#ede5d0,#f5f0e1);animation:fadeIn 1s ease;overflow:hidden}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:3.5rem;font-weight:700;color:#5d4037;margin-bottom:15px;font-style:italic}
+.hero p{font-size:1.1rem;color:#8d6e63;font-weight:300}
+.stamp-deco{position:absolute;width:70px;height:85px;border:3px dashed rgba(93,64,55,0.2);display:flex;align-items:center;justify-content:center;font-size:2rem;animation:stampPress 1s ease forwards;opacity:0}
+.stamp-1{top:10%;right:10%;animation-delay:0.5s;transform:rotate(-5deg)}
+.stamp-2{bottom:15%;left:8%;animation-delay:0.8s;transform:rotate(3deg)}
+.container{max-width:800px;margin:0 auto;padding:60px 20px;position:relative;z-index:1}
+.letter{background:#fff;border:1px solid rgba(93,64,55,0.1);border-radius:3px;padding:50px 45px;margin-bottom:50px;position:relative;animation:fadeIn 1s ease;box-shadow:3px 3px 15px rgba(0,0,0,0.05);transition:transform 0.3s}
+.letter::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(transparent,transparent 27px,rgba(144,202,249,0.08) 27px,rgba(144,202,249,0.08) 28px);pointer-events:none}
+.letter:hover{transform:translateY(-3px)}
+.letter-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:25px;padding-bottom:15px;border-bottom:1px solid rgba(93,64,55,0.1)}
+.letter-from{font-size:0.85rem;color:#8d6e63}
+.letter-date{font-size:0.85rem;color:#bdbdbd;font-style:italic}
+.wax-seal{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e53935,#c62828,#b71c1c);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;font-weight:700;box-shadow:inset -2px -2px 5px rgba(0,0,0,0.2),2px 2px 10px rgba(198,40,40,0.3);animation:sealPulse 3s ease-in-out infinite;flex-shrink:0}
+.letter h2{font-size:1.7rem;color:#5d4037;margin-bottom:20px;font-weight:700;font-style:italic}
+.letter p{line-height:2.2;color:#6d4c41;margin-bottom:18px;font-weight:300}
+.letter-closing{text-align:right;margin-top:30px;font-style:italic;color:#8d6e63}
+.post-tag{display:inline-block;padding:4px 14px;background:rgba(198,40,40,0.05);border:1px solid rgba(198,40,40,0.15);border-radius:3px;font-size:0.8rem;color:#c62828;margin-right:8px;margin-bottom:8px}
+.envelope-deco{text-align:center;padding:20px;font-size:2rem;letter-spacing:20px;opacity:0.3}
+footer{text-align:center;padding:40px;color:#8d6e63;font-size:0.85rem;position:relative;z-index:1}
+footer .ink-line{height:1px;background:linear-gradient(90deg,transparent,#5d4037,transparent);margin-bottom:20px;opacity:0.15}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">信件</a>
+<a href="#">笔友</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="stamp-deco stamp-1">✉️</div>
+<div class="stamp-deco stamp-2">🕊️</div>
+<div class="hero-content">
+<h1>✉️ 手写信笺</h1>
+<p>在这个时代，依然相信手写的温度</p>
+</div>
+</section>
+<div class="container">
+<article class="letter">
+<div class="letter-header">
+<div class="letter-from">寄信人：一个喜欢写信的人</div>
+<div class="wax-seal">信</div>
+</div>
+<div class="letter-date">2025年3月15日 · 春风中</div>
+<h2>给远方的你</h2>
+<p>你好呀，很久没有写信了。上一次提笔写信是什么时候？我已经记不太清了。也许是大学时给家里写的那封报平安的信，也许是高中时偷偷塞进同学课桌里的生日贺卡。总之，在这个微信秒回的时代，写信似乎变成了一件很奢侈的事情。</p>
+<p>但正是这种"慢"让我着迷。当你坐在桌前，铺开信纸，拿起笔，你必须认真地思考每一个字。因为信纸上没有删除键，每一笔都不可更改。这种约束反而让表达变得更加真诚——你会斟酌用词，会反复思量，会把最想说的话放在最重要的位置。</p>
+<p>所以今天我决定给你写一封信。不是电子邮件，不是微信消息，而是一封真正的、用手写的、会留下笔迹温度的信。希望你收到的时候，能感受到字里行间的用心。</p>
+<div class="letter-closing">此致，敬礼<br>一个想念你的朋友</div>
+<div style="margin-top:20px">
+<div class="post-tag">书信</div>
+<div class="post-tag">慢生活</div>
+<div class="post-tag">手写</div>
+</div>
+</article>
+<div class="envelope-deco">✉️ 💌 ✉️</div>
+<article class="letter">
+<div class="letter-header">
+<div class="letter-from">寄信人：图书馆的角落</div>
+<div class="wax-seal">笺</div>
+</div>
+<div class="letter-date">2025年3月8日 · 安静的午后</div>
+<h2>写给未来自己的信</h2>
+<p>亲爱的未来的我：当你读到这封信的时候，不知道已经过去了多久。你还记得现在的自己吗？记得此刻窗外正下着小雨，桌上放着一杯已经凉了的茶，笔记本里写满了乱七八糟的想法。</p>
+<p>我想告诉你几件事。第一，不要忘记写作的快乐。不管多忙，都要留一点时间给自己，写下想说的话。文字是最忠实的朋友，它不会背叛你，也不会遗忘你。</p>
+<p>第二，要继续相信美好的事情会发生。即使现在看不到方向，即使眼前全是迷雾，也要相信路就在脚下。每一个低谷都是为了迎接下一个高峰。</p>
+<p>第三，记得多给在乎的人写信。不是微信上的几行文字，而是真真切切的、带着温度的手写信。这是你能给别人的最珍贵的礼物之一。</p>
+<div class="letter-closing">永远爱你的<br>过去的自己 ❤️</div>
+<div style="margin-top:20px">
+<div class="post-tag">未来</div>
+<div class="post-tag">自我对话</div>
+<div class="post-tag">期许</div>
+</div>
+</article>
+</div>
+<footer>
+<div class="ink-line"></div>
+<p>✉️ 手写信笺 · 纸短情长，字字真心</p>
+<p style="margin-top:8px;opacity:0.5">© 2025 All rights reserved</p>
+</footer>
+</body>
+</html>

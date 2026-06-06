@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>终端二次元 — sudo anime</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:monospace;background:#000;color:#00ff00;overflow-x:hidden;font-size:14px;line-height:1.5}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:5px 15px;color:#00ff00;margin:15px;border:1px solid #003300;font-size:0.85em}
+.back-link:hover{background:#003300;color:#00ffff}
+.hero{background:#000;padding:60px 20px;text-align:center;position:relative;border-bottom:1px solid #003300}
+.hero pre{font-size:10px;line-height:1.2;color:#00ff00;display:inline-block;text-align:left;margin-bottom:20px}
+.hero h1{font-size:2em;color:#00ff00;font-weight:700;font-family:monospace}
+.hero h1 span{color:#00ffff}
+.hero .subtitle{color:#003300;font-size:0.85em;margin-top:10px}
+.hero .cursor{display:inline-block;width:10px;height:18px;background:#00ff00;animation:blink 1s step-end infinite;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.scanline{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,0,0.03) 2px,rgba(0,255,0,0.03) 4px);pointer-events:none;z-index:1000}
+.prompt{color:#00ffff}
+.path{color:#00ff00;font-weight:700}
+.cmd{color:#ffd700}
+.output{color:#00ff00}
+.main-content{max-width:900px;margin:30px auto;padding:0 20px}
+.terminal-nav{border:1px solid #003300;padding:15px;margin-bottom:30px;background:rgba(0,51,0,0.3)}
+.terminal-nav .line{padding:3px 0}
+.terminal-nav a{color:#00ffff}
+.terminal-nav a:hover{color:#ffd700;text-decoration:underline}
+.post-block{border:1px solid #003300;margin-bottom:30px;background:rgba(0,20,0,0.5)}
+.post-header{background:#003300;padding:10px 15px;display:flex;justify-content:space-between;align-items:center}
+.post-header .title{color:#00ffff;font-weight:700;font-size:0.9em}
+.post-header .meta{color:#00ff00;font-size:0.75em;opacity:0.7}
+.post-body{padding:20px}
+.post-body h2{color:#ffd700;font-size:1.2em;margin-bottom:10px;font-family:monospace}
+.post-body h2::before{content:'$ '}
+.post-body p{color:#00ff00;line-height:1.8;margin-bottom:15px;font-size:0.9em}
+.post-body .comment{color:#003300;font-style:italic}
+.post-body .highlight{color:#00ffff}
+.post-body .warning{color:#ffd700}
+.post-body code{background:#003300;padding:2px 6px;color:#00ffff}
+.post-footer{border-top:1px solid #003300;padding:10px 15px;font-size:0.75em;color:#003300}
+.post-footer span{margin-right:15px}
+.read-cmd{color:#00ffff;cursor:pointer}
+.read-cmd:hover{color:#ffd700}
+.ascii-art{color:#00ff00;font-size:10px;line-height:1.2;text-align:center;padding:20px;opacity:0.6}
+.sidebar-section{border:1px solid #003300;margin-bottom:20px;background:rgba(0,20,0,0.5)}
+.sidebar-section .header{background:#003300;padding:8px 15px;color:#00ffff;font-size:0.85em;font-weight:700}
+.sidebar-section .content{padding:15px;font-size:0.85em}
+.sidebar-section .content p{margin-bottom:8px;color:#00ff00}
+.sidebar-layout{display:grid;grid-template-columns:1fr 280px;gap:20px}
+.cmd-history{color:#003300;font-size:0.8em}
+.cmd-history .entry{padding:3px 0}
+.cmd-history .entry:hover{background:rgba(0,255,0,0.05)}
+.cmd-history .time{color:#003300;margin-right:10px}
+footer{border-top:1px solid #003300;text-align:center;padding:30px 20px;color:#003300;font-size:0.8em;margin-top:40px}
+footer .prompt-line{color:#00ff00;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<a href="index.html" class="back-link">← cd .. ; 返回目录</a>
+
+<div class="hero">
+<pre>
+    /\_/\  
+   ( o.o ) 
+    > ^ <
+   /|   |\
+  (_|   |_)
+</pre>
+<h1><span>$</span> 终端二次元 <span class="cursor"></span></h1>
+<p class="subtitle">// sudo apt-get install anime --force-yes</p>
+</div>
+
+<div class="main-content">
+
+<div class="terminal-nav">
+<div class="line"><span class="prompt">user@anime-terminal:~$</span> <span class="cmd">ls nav/</span></div>
+<div class="line"><span class="output">首页/  文章/  关于/  归档/  链接/</span></div>
+<div class="line"><span class="prompt">user@anime-terminal:~$</span> <span class="cmd">cat welcome.txt</span></div>
+<div class="line"><span class="output">欢迎来到终端二次元——一个用命令行美学构建的博客。</span></div>
+<div class="line"><span class="output">在这里，一切皆文件，一切皆可 cat。</span></div>
+<div class="line"><span class="prompt">user@anime-terminal:~$</span> <span class="cursor"></span></div>
+</div>
+
+<div class="sidebar-layout">
+<div>
+<div class="post-block">
+<div class="post-header">
+<span class="title">📄 ~/blog/coding-with-anime.md</span>
+<span class="meta">2026-06-01 03:26</span>
+</div>
+<div class="post-body">
+<h2>在深夜写代码的正确姿势</h2>
+<p>// 每一个深夜写代码的程序员，都需要一个二次元歌单。这不只是个人偏好，这是经过科学验证的最佳实践——至少我是这么告诉自己的。</p>
+<p>当你在凌晨三点调试一个怎么都修不好的bug时，耳机里传来的日语歌曲会给你一种奇妙的慰藉。你可能听不懂歌词，但那种充满活力的旋律会告诉你：<span class="highlight">你不是一个人在战斗</span>。整个世界还有无数个和你一样对着屏幕发呆的灵魂。</p>
+<p><span class="warning">// TODO: 明天一定要修好的bug（已标了三年了）</span></p>
+<p>推荐的编程歌单：第一首永远是《残酷天使的行动纲领》，这是程序员的开机音乐。之后可以接任何节奏感强的动漫歌曲，让代码在键盘上跳舞。记住：好的代码是有节奏感的代码。</p>
+<div class="post-footer">
+<span>📁 coding</span>
+<span>💬 67条评论</span>
+<span class="read-cmd">$ cat full-article.md</span>
+</div>
+</div>
+</div>
+
+<div class="post-block">
+<div class="post-header">
+<span class="title">📄 ~/blog/open-source-love.md</span>
+<span class="meta">2026-05-20 15:42</span>
+</div>
+<div class="post-body">
+<h2>开源世界的浪漫</h2>
+<p>// 有人问我为什么要把代码免费给别人用。我说：你见过樱花免费给人看吗？你听过风免费给人吹吗？代码也一样，美好的东西应该被分享。</p>
+<p>开源不只是技术，它是一种哲学。当你把自己花了无数个小时写出来的代码放到<span class="highlight">GitHub</span>上，让全世界的开发者都能看到、使用、改进它时，你创造的不只是软件，你创造的是连接——连接不同国家、不同文化、不同背景的人们。</p>
+<p>我在开源社区认识了来自日本的动画师、巴西的设计师、德国的系统工程师。我们用代码交流，用commit对话。每一次pull request都是一封情书，每一个issue都是一个邀请。<span class="warning">// merge conflict是分手的前兆（开玩笑的）</span></p>
+<div class="post-footer">
+<span>📁 opensource</span>
+<span>💬 45条评论</span>
+<span class="read-cmd">$ cat full-article.md</span>
+</div>
+</div>
+</div>
+
+<div class="post-block">
+<div class="post-header">
+<span class="title">📄 ~/blog/terminal-aesthetics.md</span>
+<span class="meta">2026-05-10 09:15</span>
+</div>
+<div class="post-body">
+<h2>终端美学：为什么命令行是最酷的界面</h2>
+<p>// GUI说：看我多漂亮！终端说：看我多强大。然后终端把GUI关掉了。</p>
+<p>命令行界面有一种独特的美感——简洁、高效、不废话。没有花哨的动画，没有圆角矩形，没有毛玻璃效果。只有黑色背景上的绿色文字，和一个闪烁的光标。但正是这种极简，反而有一种<span class="highlight">赛博朋克的未来感</span>。</p>
+<p>当你在朋友面前打开终端，输入几行神秘的命令，屏幕上刷刷地滚过一串日志输出——那种感觉，就像黑客帝国里的尼奥。朋友们会用敬畏的眼神看着你，虽然你其实只是在更新软件包。</p>
+<div class="post-footer">
+<span>📁 aesthetics</span>
+<span>💬 38条评论</span>
+<span class="read-cmd">$ cat full-article.md</span>
+</div>
+</div>
+</div>
+</div>
+
+<div>
+<div class="sidebar-section">
+<div class="header">$ whoami</div>
+<div class="content">
+<pre style="color:#00ff00;font-size:11px;line-height:1.3">
+    /\_/\  
+   ( o.o ) 
+    > ^ <
+  NEKO-chan
+  ----------
+  Role: 程序猫
+  Lang: 全部
+  Mood: 喵
+  Caffeine: 99%
+</pre>
+</div>
+</div>
+
+<div class="sidebar-section">
+<div class="header">$ cat /etc/tags.conf</div>
+<div class="content">
+<p><span style="color:#00ffff">#</span> 终端美学</p>
+<p><span style="color:#00ffff">#</span> 开源文化</p>
+<p><span style="color:#00ffff">#</span> 深夜编程</p>
+<p><span style="color:#00ffff">#</span> 赛博朋克</p>
+<p><span style="color:#00ffff">#</span> 二次元</p>
+<p><span style="color:#00ffff">#</span> 命令行艺术</p>
+</div>
+</div>
+
+<div class="sidebar-section">
+<div class="header">$ history | tail -5</div>
+<div class="content">
+<div class="cmd-history">
+<div class="entry"><span class="time">03:26</span> vim blog.md</div>
+<div class="entry"><span class="time">03:15</span> git commit -m "fix"</div>
+<div class="entry"><span class="time">02:58</span> npm run build</div>
+<div class="entry"><span class="time">02:40</span> rm -rf node_modules</div>
+<div class="entry"><span class="time">02:39</span> npm install</div>
+</div>
+</div>
+</div>
+
+<div class="sidebar-section">
+<div class="header">$ uptime</div>
+<div class="content">
+<p>连续运行: <span style="color:#ffd700">42天13小时</span></p>
+<p>已写文章: <span style="color:#ffd700">128篇</span></p>
+<p>咖啡消耗: <span style="color:#ffd700">∞ 杯</span></p>
+<p>Bug修复率: <span style="color:#ffd700">60%</span></p>
+<p>猫耳佩戴: <span style="color:#ffd700">是</span></p>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+<footer>
+<div class="prompt-line">user@anime-terminal:~$ echo "感谢访问"</div>
+<p>感谢访问</p>
+<div class="prompt-line" style="margin-top:10px">user@anime-terminal:~$ <span class="cursor" style="display:inline-block;width:8px;height:14px;background:#00ff00;animation:blink 1s step-end infinite"></span></div>
+<p style="margin-top:15px">© 2026 终端二次元 · 一切皆文件</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>樱花和风 — 春の物語</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fff5f5;color:#5a3e3e;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;margin:15px;background:rgba(255,255,255,0.7);border-radius:20px;color:#e88da0;font-size:14px;transition:all .3s}
+.back-link:hover{background:#fcb69f;color:#fff}
+nav{background:linear-gradient(135deg,#ffecd2,#fcb69f);padding:15px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 15px rgba(252,182,159,0.4)}
+nav .logo{font-size:24px;font-weight:700;color:#fff;text-shadow:1px 1px 3px rgba(0,0,0,0.1)}
+nav ul{list-style:none;display:flex;gap:25px}
+nav ul li a{color:#fff;font-weight:400;font-size:15px;padding:5px 12px;border-radius:15px;transition:all .3s}
+nav ul li a:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}
+.hero{position:relative;height:450px;background:linear-gradient(180deg,#ffecd2 0%,#fcb69f 50%,#fff5f5 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.hero h1{font-size:56px;color:#fff;text-shadow:2px 4px 8px rgba(200,100,100,0.3);z-index:2;letter-spacing:8px}
+.hero p{font-size:18px;color:rgba(255,255,255,0.85);margin-top:10px;z-index:2}
+.petal{position:absolute;width:12px;height:12px;background:radial-gradient(ellipse,#ffb7c5,#ff8fa3);border-radius:50% 0 50% 0;opacity:0.8;animation:fall linear infinite;z-index:1}
+.petal:nth-child(1){left:10%;animation-duration:8s;animation-delay:0s;width:10px;height:10px}
+.petal:nth-child(2){left:25%;animation-duration:12s;animation-delay:2s;width:14px;height:14px}
+.petal:nth-child(3){left:40%;animation-duration:9s;animation-delay:4s}
+.petal:nth-child(4){left:55%;animation-duration:11s;animation-delay:1s;width:8px;height:8px}
+.petal:nth-child(5){left:70%;animation-duration:10s;animation-delay:3s;width:16px;height:16px}
+.petal:nth-child(6){left:85%;animation-duration:7s;animation-delay:5s;width:11px;height:11px}
+.petal:nth-child(7){left:15%;animation-duration:13s;animation-delay:6s;width:9px;height:9px}
+.petal:nth-child(8){left:60%;animation-duration:9s;animation-delay:2.5s;width:13px;height:13px}
+.petal:nth-child(9){left:90%;animation-duration:10s;animation-delay:0.5s}
+.petal:nth-child(10){left:48%;animation-duration:11s;animation-delay:4.5s;width:10px;height:10px}
+@keyframes fall{
+0%{top:-10%;transform:rotate(0deg) translateX(0);opacity:0.9}
+25%{transform:rotate(90deg) translateX(30px)}
+50%{transform:rotate(180deg) translateX(-20px);opacity:0.7}
+75%{transform:rotate(270deg) translateX(40px)}
+100%{top:110%;transform:rotate(360deg) translateX(10px);opacity:0}
+}
+.container{display:grid;grid-template-columns:1fr 320px;gap:30px;max-width:1100px;margin:40px auto;padding:0 20px}
+main{display:flex;flex-direction:column;gap:30px}
+.card{background:#fff;border-radius:20px;padding:30px;box-shadow:0 8px 30px rgba(252,182,159,0.15);transition:all .4s ease;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#ffecd2,#fcb69f,#ff8fa3)}
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(252,182,159,0.25)}
+.card h2{font-size:22px;color:#d4727a;margin-bottom:10px}
+.card .date{font-size:13px;color:#c9a0a0;margin-bottom:15px}
+.card p{line-height:1.8;color:#7a5a5a;font-size:15px}
+.card .tag{display:inline-block;padding:4px 12px;background:linear-gradient(135deg,#ffecd2,#fcb69f);border-radius:12px;font-size:12px;color:#fff;margin-top:12px;margin-right:5px}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-card{background:#fff;border-radius:20px;padding:25px;box-shadow:0 8px 25px rgba(252,182,159,0.12);text-align:center}
+.sidebar-card h3{font-size:18px;color:#d4727a;margin-bottom:15px}
+.profile-img{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#ffecd2,#fcb69f);margin:0 auto 15px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.sidebar-card p{font-size:14px;color:#7a5a5a;line-height:1.7}
+.sidebar-card ul{list-style:none;text-align:left}
+.sidebar-card ul li{padding:8px 0;border-bottom:1px solid #ffe8e8;font-size:14px;color:#7a5a5a}
+.sidebar-card ul li:last-child{border:none}
+footer{text-align:center;padding:40px;background:linear-gradient(135deg,#ffecd2,#fcb69f);color:#fff;margin-top:50px;font-size:14px}
+footer a{color:#fff;text-decoration:underline}
+.deco-sakura{position:fixed;bottom:20px;right:20px;font-size:60px;opacity:0.15;pointer-events:none}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+<nav>
+<div class="logo">🌸 樱花和风</div>
+<ul>
+<li><a href="#">首页</a></li>
+<li><a href="#">春の诗</a></li>
+<li><a href="#">花见日记</a></li>
+<li><a href="#">关于</a></li>
+</ul>
+</nav>
+<section class="hero">
+<div class="petal"></div><div class="petal"></div><div class="petal"></div>
+<div class="petal"></div><div class="petal"></div><div class="petal"></div>
+<div class="petal"></div><div class="petal"></div><div class="petal"></div>
+<div class="petal"></div>
+<h1>樱花和风</h1>
+<p>春风十里，不如一场樱花雨</p>
+</section>
+<div class="container">
+<main>
+<article class="card">
+<h2>🌸 春日的第一枝樱花</h2>
+<div class="date">2026年3月28日 · 花见日记</div>
+<p>当第一缕春风拂过枝头，沉睡了一整个冬天的樱花树终于苏醒了。那些小小的花苞，像是害羞的少女，悄悄地探出头来，用最温柔的粉色装点着这个世界。我在公园的长椅上坐了整整一个下午，看着花瓣一片片展开，仿佛听到了春天的心跳声。阳光穿过花瓣的缝隙，在地面上洒下斑驳的光影，那一刻，时间似乎静止了。</p>
+<p>日本人说"花は桜木、人は武士"，但我觉得，花是樱花，人是每一个懂得欣赏美的人。每一朵樱花的花期只有短短一周，正因为短暂，才显得格外珍贵。就像生命中那些美好的瞬间，转瞬即逝，却永远留在记忆深处。</p>
+<span class="tag">春天</span><span class="tag">樱花</span><span class="tag">日记</span>
+</article>
+<article class="card">
+<h2>📜 古诗词中的春天意象</h2>
+<div class="date">2026年4月5日 · 春の诗</div>
+<p>"人面不知何处去，桃花依旧笑春风。"崔护的这首诗，每次读来都让人心生感慨。春天的花年年开放，可赏花的人却已不在原处。这让我想起了去年和朋友们一起赏樱的那个午后，欢声笑语仿佛还在耳边，可如今大家各奔东西，只有樱花依旧如期而至。</p>
+<p>古人对春天的描写总是那么细腻入微。从"春眠不觉晓"的慵懒，到"万紫千红总是春"的热闹，再到"落花人独立，微雨燕双飞"的孤寂——春天在诗人笔下，不仅仅是一个季节，更是一种心境，一种对生命的感悟。在这个快节奏的时代，我们或许应该偶尔停下脚步，像古人那样，用心去感受春天的每一个细节。</p>
+<span class="tag">诗词</span><span class="tag">文学</span><span class="tag">春天</span>
+</article>
+<article class="card">
+<h2>🍵 樱花抹茶的午后时光</h2>
+<div class="date">2026年4月12日 · 美食笔记</div>
+<p>周末的午后，我尝试制作了樱花抹茶拿铁。将盐渍樱花用温水泡开，配上细腻的抹茶粉和温热的牛奶，一杯粉色与绿色交织的饮品就完成了。第一口下去，抹茶的微苦与樱花的清甜在口中完美融合，仿佛整个春天都被装进了杯子里。</p>
+<p>生活中的小确幸，往往就藏在这样简单的时刻里。一个安静的午后，一杯用心制作的饮品，窗外偶尔传来的鸟鸣声，还有书页翻动的沙沙声。这些微不足道的小事，构成了我们生活中最温暖的底色。</p>
+<span class="tag">美食</span><span class="tag">生活</span>
+</article>
+</main>
+<aside>
+<div class="sidebar-card">
+<div class="profile-img">🌸</div>
+<h3>关于我</h3>
+<p>一个热爱春天的写字人<br>用文字记录花开的声音<br>愿每一篇文字都如春风般温暖</p>
+</div>
+<div class="sidebar-card">
+<h3>🏷 热门标签</h3>
+<ul>
+<li>🌸 樱花物语 (12)</li>
+<li>📜 春日诗词 (8)</li>
+<li>🍵 美食手记 (6)</li>
+<li>📷 花见摄影 (15)</li>
+<li>🎵 和风音乐 (4)</li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>📖 最近阅读</h3>
+<ul>
+<li>《源氏物语》紫式部</li>
+<li>《枕草子》清少纳言</li>
+<li>《春琴抄》谷崎润一郎</li>
+</ul>
+</div>
+</aside>
+</div>
+<footer>
+<p>🌸 樱花和风 — 用文字留住春天 🌸</p>
+<p style="margin-top:8px;opacity:0.8">© 2026 All Rights Reserved</p>
+</footer>
+<div class="deco-sakura">🌸</div>
+</body>
+</html>

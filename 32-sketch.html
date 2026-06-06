@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>素描日记 — 动漫博客</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#fafafa;color:#424242;overflow-x:hidden}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sketchDraw{from{stroke-dashoffset:200}to{stroke-dashoffset:0}}
+@keyframes pencilWobble{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(0,0,0,0.01) 20px,rgba(0,0,0,0.01) 21px),repeating-linear-gradient(-45deg,transparent,transparent 20px,rgba(0,0,0,0.01) 20px,rgba(0,0,0,0.01) 21px);pointer-events:none;z-index:0}
+.nav{position:fixed;top:0;width:100%;padding:15px 40px;background:rgba(250,250,250,0.95);backdrop-filter:blur(8px);z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:2px dashed #bdbdbd;animation:fadeIn 0.8s ease}
+.nav a{color:#424242;text-decoration:none;font-size:0.9rem;transition:color 0.3s}
+.nav a:hover{color:#757575}
+.nav-links{display:flex;gap:25px}
+.hero{position:relative;height:65vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#fafafa 0%,#f5f5f5 100%);animation:fadeIn 1s ease;overflow:hidden}
+.hero::before{content:'';position:absolute;top:20px;left:20px;right:20px;bottom:20px;border:2px dashed #bdbdbd;border-radius:5px;pointer-events:none}
+.hero-content{position:relative;z-index:2}
+.hero h1{font-size:3.5rem;font-weight:700;color:#424242;letter-spacing:5px;margin-bottom:15px;position:relative}
+.hero h1::after{content:'';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:80%;height:3px;background:repeating-linear-gradient(90deg,#424242 0,#424242 8px,transparent 8px,transparent 12px)}
+.hero p{font-size:1.1rem;color:#757575;font-weight:300;margin-top:20px}
+.hero p::before{content:'✏️ '}
+.hero p::after{content:' 🖊️'}
+.sketch-deco{position:absolute;font-size:2rem;opacity:0.15;animation:pencilWobble 4s ease-in-out infinite}
+.sketch-1{top:15%;left:10%;animation-delay:0s}
+.sketch-2{top:25%;right:12%;animation-delay:1s}
+.sketch-3{bottom:20%;left:15%;animation-delay:2s}
+.sketch-4{bottom:15%;right:10%;animation-delay:0.5s}
+.container{max-width:800px;margin:0 auto;padding:60px 20px;position:relative;z-index:1}
+.post{background:#fff;border:2px dashed #e0e0e0;border-radius:3px;padding:40px;margin-bottom:50px;position:relative;animation:fadeIn 1s ease;transition:transform 0.3s}
+.post::before{content:'';position:absolute;top:-2px;left:30px;right:30px;height:3px;background:repeating-linear-gradient(90deg,#424242 0,#424242 6px,transparent 6px,transparent 10px)}
+.post:hover{transform:rotate(-0.5deg)}
+.post:nth-child(even):hover{transform:rotate(0.5deg)}
+.post-date{font-size:0.85rem;color:#bdbdbd;margin-bottom:10px;font-style:italic}
+.post h2{font-size:1.7rem;color:#424242;margin-bottom:15px;position:relative;display:inline-block}
+.post h2::after{content:'';position:absolute;bottom:2px;left:0;width:100%;height:2px;background:repeating-linear-gradient(90deg,#424242 0,#424242 4px,transparent 4px,transparent 8px)}
+.post p{line-height:2;color:#616161;margin-bottom:15px;font-weight:300}
+.post-tag{display:inline-block;padding:3px 12px;border:1.5px dashed #bdbdbd;border-radius:2px;font-size:0.8rem;color:#757575;margin-right:8px;margin-bottom:8px}
+.sketch-divider{text-align:center;padding:20px 0;color:#bdbdbd;font-size:1.2rem;letter-spacing:10px}
+footer{text-align:center;padding:40px;color:#bdbdbd;font-size:0.85rem;position:relative;z-index:1}
+footer .pencil-line{height:2px;background:repeating-linear-gradient(90deg,transparent,transparent 5px,#bdbdbd 5px,#bdbdbd 10px);margin-bottom:20px}
+</style>
+</head>
+<body>
+<nav class="nav">
+<a href="index.html">← 返回目录</a>
+<div class="nav-links">
+<a href="#">首页</a>
+<a href="#">画集</a>
+<a href="#">关于</a>
+</div>
+</nav>
+<section class="hero">
+<div class="sketch-deco sketch-1">✏️</div>
+<div class="sketch-deco sketch-2">🖊️</div>
+<div class="sketch-deco sketch-3">📐</div>
+<div class="sketch-deco sketch-4">📏</div>
+<div class="hero-content">
+<h1>素描日记</h1>
+<p>用铅笔记录每一个安静的瞬间</p>
+</div>
+</section>
+<div class="container">
+<article class="post">
+<div class="post-date">2025年3月10日 · 星期一</div>
+<h2>✏️ 第一支铅笔的故事</h2>
+<p>收拾书桌时翻出了人生中的第一支素描铅笔——一支中华牌2B。笔身上还留着小时候咬过的齿痕，橡皮头已经发黄变硬。记得那是小学三年级，美术老师说我的线条画得不错，送了我这支铅笔。</p>
+<p>从那以后，我开始在所有能画的平面上画东西。课本的空白处、作业本的背面、甚至是家里的墙壁（为此挨了不少骂）。那支铅笔陪我度过了整个童年，虽然现在我已经有了各种专业的绘图铅笔，但它始终是我最珍视的一支。</p>
+<p>素描是一种诚实的艺术。每一根线条都是你当下的状态——手稳时线条流畅，心乱时线条颤抖。它不像其他媒介可以修饰掩盖，铅笔永远在说真话。</p>
+<div class="post-tag">铅笔</div>
+<div class="post-tag">回忆</div>
+<div class="post-tag">素描入门</div>
+</article>
+<div class="sketch-divider">· · · · · · · ·</div>
+<article class="post">
+<div class="post-date">2025年3月5日 · 星期三</div>
+<h2>🖊️ 画不完美的线条</h2>
+<p>最近在练习人物速写。每天早上在咖啡馆坐半小时，用炭笔快速画下周围的人。端着咖啡杯的老爷爷、低头看手机的年轻女孩、趴在桌上打瞌睡的猫——这些都是最好的练习素材。</p>
+<p>速写教会我最重要的一课是：接受不完美。你没有时间犹豫，没有机会修改，每一笔都是最终笔。这种限制反而释放了某种自由——既然无法完美，那就尽情表达吧。</p>
+<p>翻看这周的速写本，有些画确实很糟糕，比例失调，线条混乱。但其中有几张捕捉到了某个瞬间的神韵，那种稍纵即逝的真实感，是精心描摹永远无法达到的。</p>
+<div class="post-tag">速写</div>
+<div class="post-tag">不完美</div>
+<div class="post-tag">练习</div>
+</article>
+<div class="sketch-divider">· · · · · · · ·</div>
+<article class="post">
+<div class="post-date">2025年2月28日 · 星期五</div>
+<h2>📐 光影的游戏</h2>
+<p>今天花了整个下午画一组静物——一个旧台灯、几本书和一只陶瓷杯。素描最有意思的地方在于用黑白两色表现万千世界。明暗交界线的处理、反光的微妙变化、投影的虚实关系，这些都是素描的核心课题。</p>
+<p>老师说过一句话我一直记得："画素描不是画物体，而是画光照在物体上的样子。"这句话改变了我观察世界的方式。现在走在路上，我会不自觉地分析每一处光影——树叶间漏下的光斑、建筑物投下的长影、水面上的粼粼波光。</p>
+<p>世界原来一直是一幅巨大的素描作品，而我们每天都在其中行走。</p>
+<div class="post-tag">光影</div>
+<div class="post-tag">静物素描</div>
+<div class="post-tag">观察</div>
+</article>
+</div>
+<footer>
+<div class="pencil-line"></div>
+<p>✏️ 素描日记 · 用最简单的线条，画最真实的世界</p>
+<p style="margin-top:8px;opacity:0.5">© 2025 All rights reserved</p>
+</footer>
+</body>
+</html>

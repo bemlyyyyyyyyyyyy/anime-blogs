@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>折纸世界 — 纸上乾坤</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@纸00;400;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#f0f0f0;color:#424242;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+.back-link{display:inline-block;padding:10px 20px;background:#fff;color:#ff8a80;font-weight:700;margin:20px;border:2px solid #e0e0e0;border-radius:0;font-size:0.85em;position:relative;transition:all .3s}
+.back-link:hover{background:#ff8a80;color:#fff;border-color:#ff8a80}
+.hero{background:#fff;padding:100px 20px;text-align:center;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.05)}
+.paper-fold-hero{position:absolute;inset:0}
+.paper-fold-hero::before{content:'';position:absolute;top:0;right:0;width:200px;height:200px;background:linear-gradient(225deg,#f0f0f0 48%,#e0e0e0 48%,#e0e0e0 52%,#fff 52%);z-index:1}
+.paper-fold-hero::after{content:'';position:absolute;bottom:0;left:0;width:150px;height:150px;background:linear-gradient(45deg,#f0f0f0 48%,#e0e0e0 48%,#e0e0e0 52%,#fff 52%)}
+.hero h1{font-size:3.5em;color:#546e7a;font-weight:700;letter-spacing:10px;position:relative;z-index:2}
+.hero .subtitle{color:#b0bec5;font-size:1em;margin-top:15px;letter-spacing:5px;font-weight:300}
+.hero-crane{font-size:80px;opacity:0.15;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-15deg);z-index:0}
+.paper-divider{height:40px;position:relative;overflow:hidden}
+.paper-divider::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#f0f0f0,#fff 20%,#f0f0f0 40%,#fff 60%,#f0f0f0 80%,#fff)}
+.paper-divider::after{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:#e0e0e0}
+.main-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;max-width:1200px;margin:50px auto;padding:0 20px}
+.posts-area{display:flex;flex-direction:column;gap:50px}
+.post-card{background:#fff;position:relative;overflow:hidden;transition:transform .5s;transform-style:preserve-3d;perspective:1000px;box-shadow:4px 4px 0 #e0e0e0,8px 8px 0 #bdbdbd}
+.post-card:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 #e0e0e0,12px 12px 0 #bdbdbd}
+.post-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,transparent 60%,rgba(0,0,0,0.03) 60%,rgba(0,0,0,0.03) 61%,transparent 61%);pointer-events:none;z-index:1}
+.fold-accent{position:absolute;top:0;right:0;width:60px;height:60px;background:linear-gradient(225deg,#f0f0f0 48%,#e0e0e0 48%,#e0e0e0 52%,#fff 52%)}
+.triangle-deco{position:absolute;width:0;height:0}
+.triangle-deco.top-left{top:0;left:0;border-top:30px solid #ff8a80;border-right:30px solid transparent}
+.triangle-deco.top-right{top:0;right:0;border-top:30px solid #b0bec5;border-left:30px solid transparent}
+.post-img{width:100%;height:250px;display:flex;align-items:center;justify-content:center;font-size:80px;position:relative}
+.post-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,#fff)}
+.post-content{padding:30px}
+.post-content h2{font-size:1.5em;color:#546e7a;margin-bottom:10px;font-weight:700;letter-spacing:2px}
+.post-meta{color:#b0bec5;font-size:0.8em;margin-bottom:15px;display:flex;gap:10px}
+.post-meta span{background:#f5f5f5;padding:3px 10px}
+.post-content p{line-height:2;color:#616161;margin-bottom:20px}
+.read-more{display:inline-block;background:#ff8a80;color:#fff;padding:10px 30px;font-weight:700;font-size:0.85em;letter-spacing:2px;transition:all .3s;box-shadow:3px 3px 0 #e0e0e0}
+.read-more:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #e0e0e0}
+.sidebar{display:flex;flex-direction:column;gap:25px}
+.sidebar-widget{background:#fff;padding:25px;position:relative;box-shadow:3px 3px 0 #e0e0e0}
+.sidebar-widget::before{content:'';position:absolute;top:0;left:0;border-top:20px solid #ff8a80;border-right:20px solid transparent}
+.sidebar-widget h3{font-size:1.1em;color:#546e7a;margin-bottom:15px;padding-bottom:10px;border-bottom:2px dashed #e0e0e0}
+.sidebar-widget h3::before{content:'🦢 '}
+.paper-list{list-style:none}
+.paper-list li{padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:0.85em;color:#757575;display:flex;align-items:center;gap:8px}
+.paper-list li:last-child{border:none}
+.paper-list li .dot{width:8px;height:8px;background:#ff8a80;transform:rotate(45deg);flex-shrink:0}
+.geometry-box{text-align:center;padding:20px}
+.geometry-shape{display:inline-block;margin:10px}
+.crane-row{text-align:center;padding:15px;font-size:25px;letter-spacing:20px;opacity:0.3}
+footer{background:#fff;text-align:center;padding:40px 20px;margin-top:40px;box-shadow:0 -2px 10px rgba(0,0,0,0.05)}
+footer .cranes{font-size:25px;letter-spacing:15px;margin-bottom:15px;opacity:0.3}
+footer p{font-size:0.8em;color:#b0bec5;letter-spacing:3px}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<div class="hero">
+<div class="paper-fold-hero"></div>
+<div class="hero-crane">🦢</div>
+<h1>折 纸 世 界</h1>
+<p class="subtitle">一张纸，无限可能 · 几何之美 · 纸上乾坤</p>
+</div>
+
+<div class="crane-row">🦢 🦢 🦢 🦢 🦢 🦢 🦢 🦢 🦢</div>
+
+<div class="main-layout">
+<div class="posts-area">
+
+<div class="post-card">
+<div class="fold-accent"></div>
+<div class="triangle-deco top-left"></div>
+<div class="post-img" style="background:linear-gradient(135deg,#fff 0%,#f5f5f5 50%,#e0e0e0 100%)">🦢</div>
+<div class="paper-fold"></div>
+<div class="post-content">
+<h2>🦢 千纸鹤的意义：从祈愿到艺术</h2>
+<div class="post-meta">
+<span>📅 纸月</span>
+<span>🏷️ 折纸</span>
+<span>💬 45条评论</span>
+</div>
+<p>传说折一千只纸鹤就能实现一个愿望。但当你真正开始折的时候，你会发现——到了第一百只，你已经不在乎愿望了。你在乎的是每一次折叠的精确度，每一条折痕的清晰度，每一只鹤的比例和姿态。</p>
+<p>折纸是一种冥想。当你的手指沿着预设的折痕推动纸张时，大脑会进入一种奇妙的专注状态。外界的噪音消失了，只剩下纸张折叠时发出的轻微声响。有人说禅修需要坐禅，但我觉得折纸也是禅——用最简单的材料，创造最纯粹的美。</p>
+<a href="#" class="read-more">继续阅读 🦢</a>
+</div>
+</div>
+
+<div class="paper-divider"></div>
+
+<div class="post-card">
+<div class="fold-accent"></div>
+<div class="triangle-deco top-right"></div>
+<div class="post-img" style="background:linear-gradient(135deg,#e0e0e0 0%,#fff 50%,#f5f5f5 100%)">📐</div>
+<div class="post-content">
+<h2>📐 折纸与数学：隐藏在折痕中的方程式</h2>
+<div class="post-meta">
+<span>📅 几何月</span>
+<span>🏷️ 科学</span>
+<span>💬 33条评论</span>
+</div>
+<p>你以为折纸只是小孩子的游戏？错了。现代折纸已经发展成一门精密的数学科学。每一个复杂的折纸模型背后，都隐藏着严谨的几何方程式。日本数学家芳贺和夫发现了折纸三大定理，证明了仅用纸张和折痕就能解决三次方程——这比圆规和直尺更强大。</p>
+<p>在工程领域，折纸原理被用于设计太阳能板的折叠机构、心脏支架的微创展开方式、甚至太空望远镜的镜面折叠技术。一张纸的折叠方式，竟然能帮助人类探索宇宙。这就是折纸的魅力——最简单的形式中蕴含着最深刻的智慧。</p>
+<a href="#" class="read-more">继续阅读 🦢</a>
+</div>
+</div>
+
+<div class="paper-divider"></div>
+
+<div class="post-card">
+<div class="fold-accent"></div>
+<div class="post-img" style="background:linear-gradient(135deg,#fff 0%,#ff8a80 30%,#fff 60%,#e0e0e0 100%)">✂️</div>
+<div class="post-content">
+<h2>✂️ 纸的艺术：从折纸到纸雕</h2>
+<div class="post-meta">
+<span>📅 手工月</span>
+<span>🏷️ 工艺</span>
+<span>💬 27条评论</span>
+</div>
+<p>如果折纸是纸张的变形，那么纸雕就是纸张的解构。艺术家们用刻刀在纸上雕出层层叠叠的风景，用剪刀裁出精致繁复的花纹，用火烤出斑驳陆离的肌理。纸，这种看似脆弱的材料，在艺术家手中变得坚韧而永恒。</p>
+<p>我最近迷上了一种叫"纸浮雕"的技术——在多层纸张上雕刻不同的图案，然后叠加在一起，形成一种立体的画面效果。远看像一幅画，近看才发现是一个微型的纸张世界。每一层都有不同的故事，合在一起又构成了一个完整的叙事。</p>
+<a href="#" class="read-more">继续阅读 🦢</a>
+</div>
+</div>
+
+</div>
+
+<div class="sidebar">
+<div class="sidebar-widget">
+<h3>关于折纸世界</h3>
+<div class="geometry-box">
+<div class="geometry-shape" style="width:0;height:0;border-left:25px solid transparent;border-right:25px solid transparent;border-bottom:40px solid #ff8a80"></div>
+<div class="geometry-shape" style="width:35px;height:35px;background:#b0bec5;transform:rotate(45deg)"></div>
+<div class="geometry-shape" style="width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:35px solid #e0e0e0"></div>
+</div>
+<p style="font-size:0.85em;line-height:1.8;color:#757575;text-align:center">用纸张记录灵感，用折痕书写故事。在这里，每一张纸都是一个等待展开的宇宙。</p>
+</div>
+
+<div class="sidebar-widget">
+<h3>折纸材料</h3>
+<ul class="paper-list">
+<li><span class="dot"></span>和纸 15cm × 15cm</li>
+<li><span class="dot"></span>卡纸 200gsm</li>
+<li><span class="dot"></span>锡箔纸</li>
+<li><span class="dot"></span>牛皮纸</li>
+<li><span class="dot"></span>宣纸（超薄款）</li>
+</ul>
+</div>
+
+<div class="sidebar-widget">
+<h3>几何灵感</h3>
+<div style="text-align:center;padding:10px">
+<div style="display:inline-block;width:60px;height:60px;border:2px solid #ff8a80;border-radius:50%;margin:5px"></div>
+<div style="display:inline-block;width:50px;height:50px;border:2px solid #b0bec5;margin:5px;transform:rotate(45deg)"></div>
+<div style="display:inline-block;width:0;height:0;border-left:30px solid transparent;border-right:30px solid transparent;border-bottom:50px solid #e0e0e0;margin:5px"></div>
+</div>
+</div>
+
+<div class="sidebar-widget">
+<h3>纸鹤计数</h2>
+<div style="text-align:center;padding:15px">
+<div style="font-size:3em;color:#ff8a80;font-weight:700">847</div>
+<div style="font-size:0.8em;color:#b0bec5">/ 1000 只</div>
+<div style="height:8px;background:#f5f5f5;border-radius:4px;margin-top:10px;overflow:hidden">
+<div style="width:84.7%;height:100%;background:linear-gradient(90deg,#ff8a80,#ffab91);border-radius:4px"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="crane-row">🦢 🦢 🦢 🦢 🦢 🦢 🦢 🦢 🦢</div>
+
+<footer>
+<div class="cranes">🦢 🦢 🦢 🦢 🦢</div>
+<p>© 2026 折纸世界 · 一张纸，无限可能</p>
+</footer>
+</body>
+</html>
