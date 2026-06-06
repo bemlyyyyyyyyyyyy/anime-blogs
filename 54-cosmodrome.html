@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拜科努尔 — 天梯之路</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:#06080a;color:#7a8a9a;overflow-x:hidden}
+a{color:#7a8a9a;text-decoration:none}
+
+.back-link{display:inline-block;padding:12px 24px;background:rgba(122,138,154,0.1);
+  border:2px solid #7a8a9a;color:#7a8a9a;margin:20px;font-size:14px;letter-spacing:3px;
+  font-weight:700;transition:.3s;position:relative;z-index:10}
+.back-link:hover{background:#7a8a9a;color:#06080a}
+
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;justify-content:center;
+  overflow:hidden;background:linear-gradient(180deg,#06080a 0%,#0a1018 30%,#101828 60%,#1a2540 85%,#06080a 100%)}
+
+.hero-stars{position:absolute;inset:0}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%}
+
+.hero-rocket{position:absolute;bottom:20%;left:50%;transform:translateX(-50%);
+  width:6px;height:200px;background:linear-gradient(0deg,#b08060,#7a8a9a,#fff);
+  border-radius:3px 3px 0 0}
+.hero-rocket::before{content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
+  width:40px;height:30px;background:radial-gradient(ellipse at top,#ff6b35,#ff4500,transparent);
+  animation:thrust 0.5s ease-in-out infinite alternate;opacity:0.8}
+@keyframes thrust{from{height:30px;opacity:0.6}to{height:50px;opacity:1}}
+
+.hero-rocket::after{content:'';position:absolute;top:-15px;left:50%;transform:translateX(-50%);
+  width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;
+  border-bottom:20px solid #c4a66a}
+
+.hero-flame{position:absolute;bottom:15%;left:50%;transform:translateX(-50%);
+  width:200px;height:100px;background:radial-gradient(ellipse at top,rgba(255,107,53,0.2),transparent);
+  animation:flame-pulse 1s ease-in-out infinite alternate;pointer-events:none}
+@keyframes flame-pulse{from{opacity:0.3;transform:translateX(-50%) scale(1)}to{opacity:0.6;transform:translateX(-50%) scale(1.2)}}
+
+.hero-ground{position:absolute;bottom:0;left:0;width:100%;height:20%;
+  background:linear-gradient(0deg,#0a0a08,#06080a)}
+.hero-ground::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(176,128,96,0.3),transparent)}
+
+.hero-content{position:relative;z-index:5;text-align:center;padding-bottom:30vh}
+.hero-content .cosmo-id{font-family:'Courier New',monospace;font-size:12px;
+  color:rgba(122,138,154,0.3);letter-spacing:8px;margin-bottom:20px}
+.hero-content h1{font-size:5rem;font-weight:900;color:#c4d0dc;letter-spacing:15px;
+  text-shadow:0 0 60px rgba(122,138,154,0.3)}
+.hero-content h1 .ru{display:block;font-size:1.8rem;font-weight:300;letter-spacing:20px;
+  color:rgba(122,138,154,0.4);margin-top:10px}
+.hero-content .tagline{font-size:1rem;color:rgba(122,138,154,0.4);margin-top:20px;
+  letter-spacing:8px}
+
+.launch-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  border:2px solid rgba(122,138,154,0.08)}
+.pad{padding:40px;background:rgba(122,138,154,0.02);
+  border-right:1px solid rgba(122,138,154,0.06);position:relative}
+.pad:last-child{border-right:none}
+.pad .pad-id{font-family:'Courier New',monospace;font-size:10px;
+  color:rgba(122,138,154,0.2);letter-spacing:4px;margin-bottom:15px}
+.pad h3{font-size:1.1rem;font-weight:700;color:#c4d0dc;letter-spacing:3px;margin-bottom:12px}
+.pad p{font-size:0.85rem;line-height:1.9;color:rgba(122,138,154,0.45)}
+.pad .status-light{position:absolute;top:15px;right:15px;width:8px;height:8px;
+  border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,0.5)}
+
+.section{max-width:1200px;margin:0 auto;padding:70px 40px}
+
+.section-tag{font-family:'Courier New',monospace;font-size:11px;color:rgba(122,138,154,0.25);
+  letter-spacing:6px;margin-bottom:10px}
+.section-title{font-size:2.5rem;font-weight:900;color:#c4d0dc;letter-spacing:8px;
+  margin-bottom:15px}
+.section-desc{font-size:0.95rem;color:rgba(122,138,154,0.4);line-height:2;
+  max-width:700px;margin-bottom:40px}
+
+.timeline{position:relative;padding-left:60px}
+.timeline::before{content:'';position:absolute;left:20px;top:0;width:2px;height:100%;
+  background:linear-gradient(180deg,rgba(122,138,154,0.3),transparent)}
+
+.timeline-item{position:relative;margin-bottom:40px;padding:30px;
+  background:rgba(122,138,154,0.02);border:1px solid rgba(122,138,154,0.06)}
+.timeline-item::before{content:'';position:absolute;left:-48px;top:35px;width:12px;height:12px;
+  background:#7a8a9a;border-radius:50%;border:3px solid #06080a}
+
+.timeline-item .year{font-family:'Courier New',monospace;font-size:2rem;font-weight:900;
+  color:rgba(122,138,154,0.15);position:absolute;top:15px;right:20px}
+.timeline-item h3{font-size:1.2rem;font-weight:700;color:#c4d0dc;letter-spacing:2px;margin-bottom:10px}
+.timeline-item p{font-size:0.9rem;line-height:2;color:rgba(122,138,154,0.5)}
+
+.mission-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.mission{padding:35px;background:rgba(122,138,154,0.02);border:1px solid rgba(122,138,154,0.06);
+  position:relative;transition:.4s}
+.mission:hover{background:rgba(122,138,154,0.04);border-color:rgba(122,138,154,0.15)}
+.mission .mission-code{font-family:'Courier New',monospace;font-size:10px;
+  color:rgba(122,138,154,0.2);letter-spacing:4px;margin-bottom:10px}
+.mission h3{font-size:1.2rem;font-weight:700;color:#c4d0dc;letter-spacing:2px;margin-bottom:12px}
+.mission p{font-size:0.85rem;line-height:1.9;color:rgba(122,138,154,0.45)}
+.mission .outcome{margin-top:12px;font-size:11px;letter-spacing:2px}
+.mission .outcome.success{color:#4ade80}
+.mission .outcome.failed{color:#ef4444}
+
+.countdown{background:#0a0a08;border:3px solid rgba(122,138,154,0.1);padding:50px;
+  text-align:center;position:relative}
+.countdown::before{content:'ОБРАТНЫЙ ОТСЧЁТ · 倒计时';position:absolute;top:15px;left:20px;
+  font-size:10px;color:rgba(122,138,154,0.2);letter-spacing:4px}
+
+.countdown-display{display:flex;justify-content:center;gap:30px;margin:30px 0}
+.countdown-unit{text-align:center}
+.countdown-unit .digit{font-size:4rem;font-weight:900;color:#c4d0dc;font-family:'Courier New',monospace;
+  text-shadow:0 0 30px rgba(122,138,154,0.3)}
+.countdown-unit .label{font-size:11px;color:rgba(122,138,154,0.3);letter-spacing:4px;margin-top:8px}
+
+.countdown .mission-info{font-size:0.9rem;color:rgba(122,138,154,0.4);letter-spacing:3px}
+
+footer{text-align:center;padding:50px;border-top:1px solid rgba(122,138,154,0.08);
+  margin-top:60px}
+footer .star-icon{font-size:1.5rem;color:rgba(122,138,154,0.2);margin-bottom:10px}
+footer p{font-size:12px;color:rgba(122,138,154,0.2);letter-spacing:5px}
+
+@media(max-width:768px){
+  .hero-content h1{font-size:3rem;letter-spacing:5px}
+  .launch-pad{grid-template-columns:1fr}
+  .mission-grid{grid-template-columns:1fr}
+  .countdown-display{gap:15px}
+  .countdown-unit .digit{font-size:2.5rem}
+  .section{padding:40px 15px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<section class="hero">
+  <div class="hero-stars" id="stars"></div>
+  <div class="hero-rocket"></div>
+  <div class="hero-flame"></div>
+  <div class="hero-ground"></div>
+  <div class="hero-content">
+    <div class="cosmo-id">КОСМОДРОМ БАЙКОНУР · ПЛОЩАДКА №1 · 1955</div>
+    <h1>拜科努尔
+      <span class="ru">БАЙКОНУР</span>
+    </h1>
+    <div class="tagline">通往星辰的钢铁阶梯</div>
+  </div>
+</section>
+
+<div class="section">
+  <div class="section-tag">СТАРТОВЫЕ ПЛОЩАДКИ · 发射台</div>
+  <h2 class="section-title">发射工位</h2>
+  <div class="launch-pad">
+    <div class="pad">
+      <div class="pad-id">ПЛОЩАДКА-1 · 加加林发射台</div>
+      <h3>一号发射台</h3>
+      <p>人类首次太空飞行的起点。1961年4月12日，尤里·加加林从这里升空，成为第一个进入太空的人类。发射台的钢铁结构已经见证了数百次发射，每一次点火都在它的表面留下新的灼烧痕迹。如今它依然在服役，只是发射的不再是东方号，而是联盟号。</p>
+      <div class="status-light"></div>
+    </div>
+    <div class="pad">
+      <div class="pad-id">ПЛОЩАДКА-81 · 暴风雪号</div>
+      <h3>八十一号工位</h3>
+      <p>暴风雪号航天飞机的专属发射台。这座巨型设施高达一百五十米，配备了世界上最强大的液氢液氧发动机。1988年，无人驾驶的暴风雪号从这里升空并成功返回，创造了航天史上的奇迹。如今这座发射台已经沉睡，但它的结构依然完好。</p>
+      <div class="status-light" style="background:#facc15;box-shadow:0 0 10px rgba(250,204,21,0.5)"></div>
+    </div>
+    <div class="pad">
+      <div class="pad-id">ПЛОЩАДКА-250 · 未来之门</div>
+      <h3>二百五十号工位</h3>
+      <p>最新建造的超重型火箭发射台，专门为下一代深空探测器设计。发射台基座深入地下三十米，可以承受三千吨推力的震动。液氧和煤油储罐如同两座银色巨塔般矗立在发射台两侧。这里将是人类迈向火星的起点。</p>
+      <div class="status-light" style="background:#60a5fa;box-shadow:0 0 10px rgba(96,165,250,0.5)"></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">ИСТОРИЯ · 历史</div>
+  <h2 class="section-title">航天纪年</h2>
+  <div class="section-desc">从荒漠中的秘密基地到人类通往太空的门户，拜科努尔的历史就是一部人类征服宇宙的史诗。</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="year">1955</span>
+      <h3>秘密基地奠基</h3>
+      <p>在哈萨克斯坦的茫茫荒漠中，一座秘密军事基地开始建设。数万名工人在极端环境下昼夜施工，建造了世界上最先进的导弹发射设施。基地的存在被列为最高机密，连工人的家属都不知道他们去了哪里。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">1957</span>
+      <h3>人造卫星升空</h3>
+      <p>1957年10月4日，R-7火箭将一颗直径仅五十八厘米的金属球送入太空。斯普特尼克一号的信号在全球的收音机中回响，宣告了太空时代的到来。整个基地沸腾了，工程师们拥抱哭泣——他们的梦想终于成为了现实。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">1961</span>
+      <h3>加加林首飞</h3>
+      <p>"Поехали!（出发！）"——加加林的这句呼号通过无线电传遍了全世界。东方一号飞船在一号发射台点火升空，一百零八分钟后绕地球一圈返回。人类第一次从太空俯瞰了自己的家园。加加林着陆后对一位农妇说的第一句话是："我是苏联公民，我从太空回来了！"</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">1988</span>
+      <h3>暴风雪号首飞</h3>
+      <p>苏联的航天飞机——暴风雪号——在无人驾驶的情况下完成了首次也是唯一一次飞行。这架翼展二十四米的飞行器从八十一号工位升空，绕地球两圈后精准着陆在拜科努尔的跑道上。着陆偏差仅三米，证明了苏联自动着陆技术的卓越水平。</p>
+    </div>
+    <div class="timeline-item">
+      <span class="year">2025</span>
+      <h3>新纪元开启</h3>
+      <p>拜科努尔迎来了新的主人和新的使命。二百五十号工位的超重型发射台已经完工，人类最强大的运载火箭即将从这里启程。目标不再是近地轨道，而是月球、火星，以及更远的深空。拜科努尔将继续作为人类通往宇宙的门户。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-tag">МИССИИ · 任务档案</div>
+  <h2 class="section-title">里程碑任务</h2>
+  <div class="mission-grid">
+    <div class="mission">
+      <div class="mission-code">VOSTOK-1 · 东方一号</div>
+      <h3>首次载人航天</h3>
+      <p>将尤里·加加林送入太空，绕地球一圈，飞行时间108分钟。这是人类历史上第一次载人太空飞行，标志着太空时代的真正开始。</p>
+      <div class="outcome success">● УСПЕХ · 成功</div>
+    </div>
+    <div class="mission">
+      <div class="mission-code">VOSKHOD-2 · 上升二号</h3>
+      <h3>首次太空行走</h3>
+      <p>阿列克谢·列昂诺夫走出飞船，在太空中漂浮了十二分钟。返回时宇航服膨胀卡在舱口，他不得不冒着生命危险放气缩小体积才得以返回。</p>
+      <div class="outcome success">● УСПЕХ · 成功</div>
+    </div>
+    <div class="mission">
+      <div class="mission-code">LUNA-9 · 月球九号</div>
+      <h3>首次月球软着陆</h3>
+      <p>无人探测器在月球表面成功软着陆，传回了第一批月球表面的近距离照片。这些照片彻底改变了人类对月球表面的认知——它不是一片流沙，而是坚硬的岩石。</p>
+      <div class="outcome success">● УСПЕХ · 成功</div>
+    </div>
+    <div class="mission">
+      <div class="mission-code">N1-L3 · N1登月计划</div>
+      <h3>苏联载人登月</h3>
+      <p>N1火箭——人类有史以来最强大的运载火箭——四次发射，四次失败。每一次爆炸都伴随着数十亿美元的损失和无数工程师的心血。苏联的登月梦最终未能实现。</p>
+      <div class="outcome failed">● НЕУДАЧА · 失败</div>
+    </div>
+  </div>
+</div>
+
+<div class="countdown">
+  <h3 style="font-size:1.3rem;color:#c4d0dc;letter-spacing:5px;margin-bottom:5px">下次发射任务</h3>
+  <p class="mission-info">SOYUZ-MS-25 · 联盟号 · 250号工位</p>
+  <div class="countdown-display">
+    <div class="countdown-unit"><div class="digit" id="days">07</div><div class="label">ДНЕЙ · 天</div></div>
+    <div class="countdown-unit"><div class="digit" id="hours">14</div><div class="label">ЧАСОВ · 时</div></div>
+    <div class="countdown-unit"><div class="digit" id="mins">32</div><div class="label">МИНУТ · 分</div></div>
+    <div class="countdown-unit"><div class="digit" id="secs">08</div><div class="label">СЕКУНД · 秒</div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="star-icon">★</div>
+  <p>КОСМОДРОМ БАЙКОНУР · 拜科努尔航天发射场</p>
+  <p style="margin-top:8px;font-size:10px;color:rgba(122,138,154,0.15)">К ЗВЁЗДАМ · 通往星辰</p>
+</footer>
+
+<script>
+const stars=document.getElementById('stars');
+for(let i=0;i<100;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.top=Math.random()*100+'%';
+  s.style.left=Math.random()*100+'%';
+  s.style.opacity=Math.random()*0.8+0.2;
+  s.style.width=s.style.height=Math.random()*2+1+'px';
+  stars.appendChild(s);
+}
+function tick(){
+  const s=document.getElementById('secs');
+  let v=parseInt(s.textContent);
+  v=v<=0?59:v-1;
+  s.textContent=String(v).padStart(2,'0');
+  if(v===59){
+    const m=document.getElementById('mins');
+    let mv=parseInt(m.textContent);
+    mv=mv<=0?59:mv-1;
+    m.textContent=String(mv).padStart(2,'0');
+  }
+}
+setInterval(tick,1000);
+</script>
+</body>
+</html>

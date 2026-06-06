@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地堡要塞 — 深层掩体</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Courier New',monospace;background:#0d0d0d;color:#8a8a7a;overflow-x:hidden}
+a{color:#8a8a7a;text-decoration:none}
+
+.back-link{display:inline-block;padding:12px 24px;background:rgba(138,138,122,0.1);
+  border:3px solid #8a8a7a;color:#8a8a7a;margin:20px;font-size:13px;letter-spacing:3px;
+  font-weight:700;transition:.3s;position:relative;z-index:10;text-transform:uppercase}
+.back-link:hover{background:#8a8a7a;color:#0d0d0d}
+
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:linear-gradient(180deg,#0d0d0d 0%,#1a1a18 40%,#252520 60%,#0d0d0d 100%)}
+
+.hero::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,transparent,transparent 200px,rgba(138,138,122,0.03) 200px,rgba(138,138,122,0.03) 201px),
+  repeating-linear-gradient(0deg,transparent,transparent 200px,rgba(138,138,122,0.03) 200px,rgba(138,138,122,0.03) 201px)}
+
+.hero-door{position:absolute;width:300px;height:500px;border:6px solid rgba(138,138,122,0.15);
+  top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-door::before{content:'';position:absolute;top:50%;left:0;width:100%;height:4px;
+  background:rgba(138,138,122,0.1)}
+.hero-door::after{content:'';position:absolute;top:50%;right:20px;width:20px;height:40px;
+  background:rgba(138,138,122,0.2);border-radius:10px;transform:translateY(-50%)}
+
+.hero-rivets{position:absolute;inset:0}
+.rivet{position:absolute;width:8px;height:8px;background:radial-gradient(circle,#5a5a50,#2a2a25);
+  border-radius:50%;border:1px solid rgba(138,138,122,0.15)}
+
+.hero-content{position:relative;z-index:5;text-align:center}
+.hero-content .depth{font-size:13px;color:rgba(138,138,122,0.4);letter-spacing:8px;margin-bottom:20px}
+.hero-content h1{font-size:6rem;font-weight:900;color:#8a8a7a;letter-spacing:20px;
+  text-shadow:0 0 80px rgba(138,138,122,0.2);line-height:1}
+.hero-content .sub{font-size:1.5rem;font-weight:300;color:rgba(138,138,122,0.4);
+  letter-spacing:15px;margin-top:10px}
+.hero-content .clearance{margin-top:30px;padding:10px 30px;border:2px solid rgba(138,138,122,0.2);
+  display:inline-block;font-size:11px;color:rgba(138,138,122,0.4);letter-spacing:5px}
+
+.corridor{position:relative;padding:0;overflow:hidden}
+.corridor-inner{display:flex;perspective:1000px}
+.corridor-wall{flex:1;min-height:400px;position:relative}
+.corridor-wall.left{background:linear-gradient(90deg,#0d0d0d,#1a1a18);
+  border-right:4px solid rgba(138,138,122,0.08)}
+.corridor-wall.right{background:linear-gradient(90deg,#1a1a18,#0d0d0d);
+  border-left:4px solid rgba(138,138,122,0.08)}
+
+.wall-panel{position:absolute;background:#151513;border:2px solid rgba(138,138,122,0.08);
+  padding:20px;transition:.3s}
+.wall-panel:hover{border-color:rgba(138,138,122,0.2)}
+.wall-panel h3{font-size:0.85rem;color:#8a8a7a;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.wall-panel p{font-size:0.8rem;line-height:1.8;color:rgba(138,138,122,0.5)}
+
+.floor-grate{height:80px;background:repeating-linear-gradient(90deg,transparent,transparent 8px,
+  rgba(138,138,122,0.05) 8px,rgba(138,138,122,0.05) 10px);
+  border-top:3px solid rgba(138,138,122,0.1);border-bottom:3px solid rgba(138,138,122,0.1);
+  display:flex;align-items:center;justify-content:center}
+.floor-grate span{font-size:11px;color:rgba(138,138,122,0.3);letter-spacing:8px}
+
+.section{max-width:1200px;margin:0 auto;padding:60px 40px}
+
+.section-label{font-size:11px;color:rgba(138,138,122,0.3);letter-spacing:6px;
+  text-transform:uppercase;margin-bottom:10px}
+.section-title{font-size:2.5rem;font-weight:900;color:#8a8a7a;letter-spacing:8px;
+  margin-bottom:40px;border-bottom:3px solid rgba(138,138,122,0.1);padding-bottom:20px}
+
+.bunker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+
+.bunker-room{background:#151513;border:2px solid rgba(138,138,122,0.08);padding:35px;
+  position:relative;transition:.4s}
+.bunker-room:hover{background:#1a1a18;border-color:rgba(138,138,122,0.2)}
+.bunker-room::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;
+  background:linear-gradient(90deg,transparent,rgba(138,138,122,0.2),transparent)}
+
+.bunker-room .room-num{font-size:3rem;font-weight:900;color:rgba(138,138,122,0.08);
+  position:absolute;top:10px;right:15px}
+.bunker-room h3{font-size:1rem;font-weight:700;color:#8a8a7a;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:12px}
+.bunker-room p{font-size:0.85rem;line-height:1.9;color:rgba(138,138,122,0.5)}
+.bunker-room .status{margin-top:15px;font-size:10px;letter-spacing:3px;
+  color:rgba(138,138,122,0.3);text-transform:uppercase}
+.bunker-room .status .dot{display:inline-block;width:6px;height:6px;border-radius:50%;
+  margin-right:6px}
+.bunker-room .status .dot.green{background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,0.5)}
+.bunker-room .status .dot.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,0.5)}
+.bunker-room .status .dot.yellow{background:#facc15;box-shadow:0 0 8px rgba(250,204,21,0.5)}
+
+.blueprint{background:#151513;border:3px solid rgba(138,138,122,0.1);padding:50px;
+  position:relative;margin:0 0 60px}
+.blueprint::before{content:'ЧЕРТЁЖ · 蓝图';position:absolute;top:15px;right:20px;
+  font-size:10px;color:rgba(138,138,122,0.2);letter-spacing:4px}
+
+.blueprint-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(4,60px);gap:2px}
+.bp-cell{background:rgba(138,138,122,0.03);border:1px solid rgba(138,138,122,0.06);
+  display:flex;align-items:center;justify-content:center;font-size:10px;
+  color:rgba(138,138,122,0.3);letter-spacing:1px;position:relative}
+.bp-cell.filled{background:rgba(138,138,122,0.08);border-color:rgba(138,138,122,0.15)}
+.bp-cell.corridor-cell{background:rgba(138,138,122,0.04)}
+.bp-cell.exit{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.2);color:rgba(239,68,68,0.5)}
+
+.system-log{background:#0d0d0d;border:2px solid rgba(138,138,122,0.08);padding:25px;
+  font-size:0.8rem;line-height:2.2;color:rgba(138,138,122,0.4);max-height:300px;
+  overflow-y:auto}
+.system-log .log-line{border-bottom:1px solid rgba(138,138,122,0.04);padding:4px 0}
+.system-log .log-time{color:rgba(138,138,122,0.25);margin-right:15px}
+.system-log .log-warn{color:#facc15}
+.system-log .log-error{color:#ef4444}
+.system-log .log-ok{color:#4ade80}
+
+footer{text-align:center;padding:50px;border-top:3px solid rgba(138,138,122,0.08);
+  margin-top:40px}
+footer .code{font-size:2rem;font-weight:900;color:rgba(138,138,122,0.15);letter-spacing:15px}
+footer p{font-size:11px;color:rgba(138,138,122,0.2);letter-spacing:5px;margin-top:10px}
+
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.blink{animation:blink 2s ease-in-out infinite}
+
+@media(max-width:768px){
+  .hero-content h1{font-size:3rem;letter-spacing:8px}
+  .bunker-grid{grid-template-columns:1fr}
+  .blueprint-grid{grid-template-columns:repeat(4,1fr)}
+  .section{padding:40px 15px}
+}
+</style>
+</head>
+<body>
+<a href="index.html" class="back-link">← 返回目录</a>
+
+<section class="hero">
+  <div class="hero-door"></div>
+  <div class="hero-rivets" id="rivets"></div>
+  <div class="hero-content">
+    <div class="depth">ГЛУБИНА: -380М · 地下380米</div>
+    <h1>地堡要塞</h1>
+    <div class="sub">БУНКЕР КРЕПОСТЬ</div>
+    <div class="clearance">ДОПУСК УРОВЕНЬ 5 · КОД: ЧЕРНЫЙ МЕДВЕДЬ</div>
+  </div>
+</section>
+
+<div class="floor-grate">
+  <span>▼ УРОВЕНЬ B-1 · 负一层 · 行政区域 ▼</span>
+</div>
+
+<div class="section">
+  <div class="section-label">LEVEL B-1 — 行政与指挥</div>
+  <h2 class="section-title">指挥层</h2>
+  <div class="bunker-grid">
+    <div class="bunker-room">
+      <span class="room-num">B1</span>
+      <h3>中央指挥室</h3>
+      <p>地堡的心脏，一个被六层钢板和两米厚铅混凝土包裹的球形空间。三百六十度环绕屏幕实时显示着地表和设施内部的每一个角落。指挥官的座椅位于正中央，可以旋转面对任何一个屏幕。这里是整个地下城市的决策中枢。</p>
+      <div class="status"><span class="dot green"></span>СИСТЕМА НОРМА · 系统正常</div>
+    </div>
+    <div class="bunker-room">
+      <span class="room-num">B1</span>
+      <h3>通讯中心</h3>
+      <p>配备了最先进的加密通讯系统，可以与全球任何一个苏维埃设施建立安全连接。天线阵列深埋在地下，通过三百米长的波导管与地表天线相连。即使在核战争的电磁脉冲下，通讯中心也能保持七十二小时的不间断运作。</p>
+      <div class="status"><span class="dot green"></span>СИСТЕМА НОРМА · 系统正常</div>
+    </div>
+    <div class="bunker-room">
+      <span class="room-num">B1</span>
+      <h3>战略分析室</h3>
+      <p>墙壁上覆盖着巨大的地图，标注着全球苏维埃设施的位置和状态。分析员们坐在半圆形的工位前，面前是闪烁的终端屏幕。房间角落里有一台老式电传打字机，据说曾直接连接克里姆林宫的热线。</p>
+      <div class="status"><span class="dot yellow"></span>МОНИТОРИНГ · 监控中</div>
+    </div>
+  </div>
+</div>
+
+<div class="floor-grate">
+  <span>▼ УРОВЕНЬ B-3 · 负三层 · 工业生产 ▼</span>
+</div>
+
+<div class="section">
+  <div class="section-label">LEVEL B-3 — 工业与制造</div>
+  <h2 class="section-title">工业层</h2>
+  <div class="bunker-grid">
+    <div class="bunker-room">
+      <span class="room-num">B3</span>
+      <h3>地下兵工厂</h3>
+      <p>一条全自动武器生产线隐藏在地堡最深处。从原材料的冶炼到成品的组装，整个过程无需人工干预。机械臂如同蜘蛛般灵活地在流水线上穿梭，焊接的火花在黑暗中如同萤火虫般闪烁。这里每天可以生产三百支突击步枪或五十枚战术导弹。</p>
+      <div class="status"><span class="dot green"></span>ПРОИЗВОДСТВО · 生产中</div>
+    </div>
+    <div class="bunker-room">
+      <span class="room-num">B3</span>
+      <h3>核反应堆</h3>
+      <p>地堡的能源心脏——一座小型核反应堆，可以独立运行二十年而无需补充燃料。反应堆被铅和硼水层层包裹，散发出一种令人不安的蓝色切伦科夫辐射光芒。控制棒的升降决定了整个地堡的生死存亡。操作员们二十四小时轮班监控着每一个参数。</p>
+      <div class="status"><span class="dot green"></span>АКТИВНЫЙ · 运行中</div>
+    </div>
+    <div class="bunker-room">
+      <span class="room-num">B3</span>
+      <h3>水净化工厂</h3>
+      <p>地堡的饮用水来自地下一千米的深层地下水。净化系统采用七级过滤和紫外线消毒，水质甚至优于地表的自来水厂。储水罐可以维持全设施人员一百八十天的饮用需求。墙壁上的管道如同血管般将净水输送到每一个房间。</p>
+      <div class="status"><span class="dot green"></span>НОРМА · 正常</div>
+    </div>
+  </div>
+</div>
+
+<div class="blueprint">
+  <h3 style="font-size:1rem;color:#8a8a7a;letter-spacing:4px;margin-bottom:20px;text-transform:uppercase">
+    地堡剖面图 · РАЗРЕЗ БУНКЕРА
+  </h3>
+  <div class="blueprint-grid">
+    <div class="bp-cell filled">B1-指挥</div><div class="bp-cell filled">B1-通讯</div>
+    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 走廊 —</div>
+    <div class="bp-cell filled" style="grid-column:span 2">B1-分析</div>
+    <div class="bp-cell exit" style="grid-column:span 2">EXIT ↑</div>
+    <div class="bp-cell filled">B2-医疗</div><div class="bp-cell filled">B2-宿舍</div>
+    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 走廊 —</div>
+    <div class="bp-cell filled" style="grid-column:span 2">B2-食堂</div>
+    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 电梯 —</div>
+    <div class="bp-cell filled">B3-兵工</div><div class="bp-cell filled">B3-反应堆</div>
+    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 管道 —</div>
+    <div class="bp-cell filled" style="grid-column:span 2">B3-净水</div>
+    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 维修 —</div>
+    <div class="bp-cell filled">B5-仓储</div><div class="bp-cell filled">B5-冷储</div>
+    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 通道 —</div>
+    <div class="bp-cell filled" style="grid-column:span 2">B5-禁区</div>
+    <div class="bp-cell exit" style="grid-column:span 2">LOCK ↓</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">СИСТЕМНЫЙ ЖУРНАЛ — 系统日志</div>
+  <h2 class="section-title">运行日志</h2>
+  <div class="system-log">
+    <div class="log-line"><span class="log-time">[1986-04-26 01:23:04]</span> <span class="log-error">КРИТИЧЕСКИЙ: 地表辐射水平超标 — 启动全面封锁协议</span></div>
+    <div class="log-line"><span class="log-time">[1986-04-26 01:23:05]</span> 密封门 B1-B5 全部关闭 · 气压平衡系统启动</div>
+    <div class="log-line"><span class="log-time">[1986-04-26 01:23:06]</span> 核反应堆功率提升至 120% · 应急供电模式</div>
+    <div class="log-line"><span class="log-time">[1986-04-26 01:24:00]</span> <span class="log-ok">空气过滤系统 HEPA-7 启动 · 内循环建立</span></div>
+    <div class="log-line"><span class="log-time">[1986-04-26 01:25:30]</span> 储备物资清点: 食物 270天 · 水 180天 · 医疗 90天</div>
+    <div class="log-line"><span class="log-time">[1986-04-26 02:00:00]</span> <span class="log-warn">ПРЕДУПРЕЖДЕНИЕ: 地表通讯中断 — 切换至地下通讯网络</span></div>
+    <div class="log-line"><span class="log-time">[1986-04-26 03:15:00]</span> 兵工厂转入战时生产模式 · 弹药产量 +300%</div>
+    <div class="log-line"><span class="log-time">[1986-04-26 06:00:00]</span> <span class="log-ok">第一批蘑菇种植舱投产 · 食物自给计划启动</span></div>
+    <div class="log-line"><span class="log-time">[1986-05-01 00:00:00]</span> 封锁第5天 · 人员士气评估: 稳定</div>
+    <div class="log-line"><span class="log-time">[1986-06-01 00:00:00]</span> <span class="log-warn">ПРЕДУПРЕЖДЕНИЕ: B-5禁区检测到异常震动 — 频率: 未知</span></div>
+    <div class="log-line"><span class="log-time">[1986-06-15 00:00:00]</span> <span class="log-error">КРИТИЧЕСКИЙ: B-5禁区密封失效 — 自动封锁启动 — 人员撤离</span></div>
+    <div class="log-line"><span class="log-time">[1986-06-15 03:00:00]</span> B-5禁区状态: <span class="log-error">ПОТЕРЯНО · 失联</span></div>
+  </div>
+</div>
+
+<footer>
+  <div class="code">БУНКЕР</div>
+  <p>ГЛУБИННЫЙ ЗАПАСНОЙ КОМАНДНЫЙ ПУНКТ · 深层备用指挥所</p>
+  <p style="margin-top:8px;font-size:10px;color:rgba(138,138,122,0.15)">ПОСЛЕДНЕЕ УБЕЖИЩЕ · 最后的庇护所</p>
+</footer>
+
+<script>
+const rivets=document.getElementById('rivets');
+for(let i=0;i<40;i++){
+  const r=document.createElement('div');
+  r.className='rivet';
+  r.style.top=Math.random()*100+'%';
+  r.style.left=Math.random()*100+'%';
+  rivets.appendChild(r);
+}
+</script>
+</body>
+</html>

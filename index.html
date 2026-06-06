@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>50个博客网页鉴赏</title>
+<title>55个博客网页鉴赏</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
@@ -28,6 +28,7 @@
   .filters button[data-cat="c"].active{background:linear-gradient(135deg,#dc2626,#fbbf24);border-color:transparent}
   .filters button[data-cat="d"].active{background:linear-gradient(135deg,#86efac,#67e8f9);border-color:transparent;color:#333}
   .filters button[data-cat="e"].active{background:linear-gradient(135deg,#f97316,#ec4899);border-color:transparent}
+  .filters button[data-cat="f"].active{background:linear-gradient(135deg,#c4a66a,#8b6914);border-color:transparent;color:#0a0806}
   .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
   .card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:.4s;
     border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
@@ -55,8 +56,8 @@
 <div class="bg-grid"></div>
 <div class="container">
   <header>
-    <h1>50 个博客网页鉴赏</h1>
-    <p>简约大气 × 二次元 × 苏联解构 — 每一页都是独立设计的博客模板，点击任意卡片开始鉴赏</p>
+    <h1>55 个博客网页鉴赏</h1>
+    <p>简约大气 × 二次元 × 苏联解构 × 原子之心 — 每一页都是独立设计的博客模板，点击任意卡片开始鉴赏</p>
   </header>
   <div class="filters">
     <button class="active" data-cat="all">全部</button>
@@ -65,9 +66,10 @@
     <button data-cat="c">苏联解构</button>
     <button data-cat="d">文艺清新</button>
     <button data-cat="e">混合实验</button>
+  <button data-cat="f">原子之心</button>
   </div>
   <div class="grid" id="grid"></div>
-  <footer>50 Blog Pages Collection — 手工制作，逐一鉴赏</footer>
+  <footer>55 Blog Pages Collection — 手工制作，逐一鉴赏</footer>
 </div>
 <script>
 const blogs=[
@@ -170,7 +172,17 @@ const blogs=[
   {n:"49",file:"49-stained-glass.html",name:"彩色玻璃",cat:"e",emoji:"🏛️",tags:["教堂","玻璃窗","彩绘"],
    gradient:"linear-gradient(135deg,#1a0033,#dc2626,#2563eb)"},
   {n:"50",file:"50-fusion.html",name:"终极融合",cat:"e",emoji:"🔥",tags:["混搭","全风格","实验"],
-   gradient:"linear-gradient(135deg,#ff6b9d,#c44dff,#6e8efb)"}
+   gradient:"linear-gradient(135deg,#ff6b9d,#c44dff,#6e8efb)"},
+  {n:"51",file:"51-atom-heart.html",name:"原子之心",cat:"f",emoji:"⚛",tags:["苏联","机械","工业"],
+   gradient:"linear-gradient(135deg,#1a150d,#c4a66a)"},
+  {n:"52",file:"52-bunker.html",name:"地堡要塞",cat:"f",emoji:"🔒",tags:["地堡","钢铁","密室"],
+   gradient:"linear-gradient(135deg,#0d0d0d,#8a8a7a)"},
+  {n:"53",file:"53-factory.html",name:"红色工厂",cat:"f",emoji:"⚙",tags:["工厂","齿轮","锻造"],
+   gradient:"linear-gradient(135deg,#0a0606,#b08060)"},
+  {n:"54",file:"54-cosmodrome.html",name:"拜科努尔",cat:"f",emoji:"🚀",tags:["航天","火箭","发射"],
+   gradient:"linear-gradient(135deg,#06080a,#7a8a9a)"},
+  {n:"55",file:"55-mechanical.html",name:"机械圣殿",cat:"f",emoji:"🏛",tags:["圣殿","铸铁","永恒"],
+   gradient:"linear-gradient(135deg,#080808,#9a8a7a)"}
 ];
 const grid=document.getElementById('grid');
 blogs.forEach(b=>{
