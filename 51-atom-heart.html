@@ -3,262 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>原子之心 — 3826号设施</title>
+<title>3826号设施 — 原子之心</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Noto Sans SC',sans-serif;background:#0a0806;color:#c4a66a;overflow-x:hidden}
-a{color:#c4a66a;text-decoration:none}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a1a1a;color:#ddd;overflow-x:hidden}
+a{color:#ddd;text-decoration:none}
 
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(196,166,106,0.015) 3px,rgba(196,166,106,0.015) 4px);
-  pointer-events:none;z-index:9999}
+.back-link{position:fixed;top:20px;left:20px;z-index:100;display:inline-block;padding:10px 20px;
+  background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:13px;
+  letter-spacing:3px;backdrop-filter:blur(10px);transition:.3s}
+.back-link:hover{background:rgba(255,255,255,0.2)}
 
-.back-link{display:inline-block;padding:12px 24px;background:rgba(196,166,106,0.1);
-  border:2px solid #c4a66a;color:#c4a66a;margin:20px;font-size:14px;letter-spacing:3px;
-  font-weight:700;transition:.3s;position:relative;z-index:10}
-.back-link:hover{background:#c4a66a;color:#0a0806}
+.sky{position:relative;height:45vh;background:linear-gradient(180deg,#4a90d9 0%,#7ab8f5 40%,#a8d4f5 70%,#d4eaf8 100%);
+  overflow:hidden}
+.sky .cloud{position:absolute;background:rgba(255,255,255,0.6);border-radius:50%;filter:blur(8px)}
+.sky .cloud.c1{width:300px;height:80px;top:15%;left:10%;animation:drift 40s linear infinite}
+.sky .cloud.c2{width:200px;height:60px;top:25%;left:60%;animation:drift 55s linear infinite reverse}
+.sky .cloud.c3{width:250px;height:70px;top:40%;left:35%;animation:drift 45s linear infinite;animation-delay:-15s}
+.sky .cloud.c4{width:180px;height:50px;top:10%;left:80%;animation:drift 60s linear infinite;animation-delay:-20s}
+@keyframes drift{from{transform:translateX(-400px)}to{transform:translateX(calc(100vw + 400px))}}
 
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  overflow:hidden;background:linear-gradient(180deg,#0a0806 0%,#1a150d 30%,#2a1f0f 60%,#0a0806 100%)}
+.sky .sun{position:absolute;top:8%;right:15%;width:80px;height:80px;
+  background:radial-gradient(circle,#fff8e1,#ffd54f,transparent 70%);border-radius:50%;
+  box-shadow:0 0 60px rgba(255,213,79,0.4)}
 
-.hero-wall{position:absolute;inset:0;background:
-  repeating-linear-gradient(90deg,transparent,transparent 120px,rgba(196,166,106,0.04) 120px,rgba(196,166,106,0.04) 122px),
-  repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(196,166,106,0.03) 80px,rgba(196,166,106,0.03) 82px)}
+.sky .birds{position:absolute;top:20%;left:30%;color:rgba(0,0,0,0.15);font-size:12px;letter-spacing:5px;
+  animation:bird-fly 20s linear infinite}
+@keyframes bird-fly{from{transform:translateX(-200px)}to{transform:translateX(300px)}}
 
-.hero-pipe{position:absolute;background:linear-gradient(90deg,#1a150d,#2a2215,#1a150d);border:1px solid rgba(196,166,106,0.1)}
-.hero-pipe.p1{width:40px;height:100%;left:8%;top:0}
-.hero-pipe.p2{width:60px;height:100%;right:5%;top:0}
-.hero-pipe.p3{width:100%;height:30px;top:15%;left:0}
-.hero-pipe.p4{width:100%;height:50px;bottom:20%;left:0}
+.building{position:relative;height:55vh;background:linear-gradient(180deg,#d4d4cc 0%,#c8c8c0 20%,#b8b8b0 50%,#a0a098 80%,#888880 100%);
+  overflow:hidden}
 
-.hero-pipe::before,.hero-pipe.p1::before{content:'';position:absolute;width:100%;height:20px;
-  background:linear-gradient(180deg,#3a3020,#1a150d);top:20%}
-.hero-pipe.p2::before{content:'';position:absolute;width:100%;height:25px;
-  background:linear-gradient(180deg,#3a3020,#1a150d);top:60%}
+.building-facade{position:absolute;inset:0;display:flex}
+.building-col{flex:1;position:relative;border-left:2px solid rgba(0,0,0,0.08);border-right:2px solid rgba(0,0,0,0.08)}
+.building-col::before{content:'';position:absolute;top:0;left:50%;width:2px;height:100%;
+  background:rgba(0,0,0,0.04);transform:translateX(-50%)}
 
-.hero-vent{position:absolute;width:120px;height:80px;background:linear-gradient(180deg,#0d0a06,#1a150d);
-  border:2px solid rgba(196,166,106,0.15);overflow:hidden}
-.hero-vent::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  background:repeating-linear-gradient(0deg,transparent,transparent 6px,rgba(196,166,106,0.1) 6px,rgba(196,166,106,0.1) 8px)}
-.hero-vent.v1{top:30%;left:15%}
-.hero-vent.v2{bottom:25%;right:12%}
-.hero-vent.v3{top:60%;left:60%}
+.building-window{position:absolute;width:40px;height:60px;background:linear-gradient(135deg,#2a2a2a,#1a1a1a);
+  border:3px solid #a0a098;box-shadow:inset 0 0 10px rgba(0,0,0,0.5)}
 
-.hero-light{position:absolute;width:300px;height:600px;opacity:0.08;
-  background:linear-gradient(180deg,#c4a66a,transparent);transform:rotate(-15deg);top:-10%;left:40%}
+.building-balcony{position:absolute;height:8px;background:#908880;border:1px solid rgba(0,0,0,0.15);
+  box-shadow:0 3px 6px rgba(0,0,0,0.2)}
+.building-balcony::before{content:'';position:absolute;top:8px;left:0;width:100%;height:20px;
+  background:repeating-linear-gradient(90deg,transparent,transparent 6px,rgba(0,0,0,0.1) 6px,rgba(0,0,0,0.1) 8px)}
 
-@keyframes flicker{0%,90%,100%{opacity:1}92%{opacity:0.4}94%{opacity:0.9}96%{opacity:0.3}}
+.building-banner{position:absolute;width:60px;height:120px;background:linear-gradient(180deg,#c62828,#b71c1c);
+  display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:2rem;
+  font-weight:900;box-shadow:2px 2px 10px rgba(0,0,0,0.3)}
 
-.hero-content{position:relative;z-index:5;text-align:center}
-.hero-badge{display:inline-block;padding:8px 30px;border:2px solid rgba(196,166,106,0.3);
-  font-size:12px;letter-spacing:8px;color:rgba(196,166,106,0.5);margin-bottom:30px}
-.hero-content h1{font-size:5rem;font-weight:900;color:#c4a66a;letter-spacing:15px;
-  text-shadow:0 0 60px rgba(196,166,106,0.3);margin-bottom:10px}
-.hero-content h1 .sub-line{display:block;font-size:1.2rem;font-weight:300;letter-spacing:20px;
-  color:rgba(196,166,106,0.4);margin-top:15px}
-.hero-content .facility-code{font-family:'Courier New',monospace;font-size:14px;
-  color:rgba(196,166,106,0.3);letter-spacing:6px;margin-top:25px}
+.building-star{position:absolute;color:#c62828;font-size:3rem;text-shadow:0 2px 4px rgba(0,0,0,0.3)}
 
-.warning-bar{background:repeating-linear-gradient(45deg,#c4a66a,#c4a66a 20px,#0a0806 20px,#0a0806 40px);
-  height:8px;position:relative;z-index:2}
+.building-text{position:absolute;bottom:15%;left:50%;transform:translateX(-50%);text-align:center;z-index:10}
+.building-text h1{font-size:4rem;font-weight:900;color:#1a1a1a;letter-spacing:15px;
+  text-shadow:0 2px 4px rgba(0,0,0,0.1)}
+.building-text .sub{font-size:1.2rem;color:#3a3a3a;letter-spacing:10px;margin-top:8px}
+.building-text .code{font-family:'Courier New',monospace;font-size:12px;color:rgba(26,26,26,0.4);
+  letter-spacing:6px;margin-top:12px}
 
-.section{max-width:1200px;margin:0 auto;padding:80px 40px;position:relative;z-index:2}
+.steel-divider{height:60px;background:linear-gradient(180deg,#4a4a4a,#2a2a2a);
+  border-top:4px solid #666;border-bottom:4px solid #1a1a1a;position:relative;
+  display:flex;align-items:center;justify-content:center}
+.steel-divider::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background:repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(255,255,255,0.03) 80px,rgba(255,255,255,0.03) 82px)}
+.steel-divider .rivet{position:absolute;width:10px;height:10px;
+  background:radial-gradient(circle,#888,#444);border-radius:50%;border:1px solid #333}
+.steel-divider .rivet:nth-child(1){left:20px}
+.steel-divider .rivet:nth-child(2){right:20px}
+.steel-divider span{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:8px;z-index:2}
 
-.section-title{font-size:2.5rem;font-weight:900;color:#c4a66a;letter-spacing:6px;
-  border-left:6px solid #8b6914;padding-left:20px;margin-bottom:40px;
-  text-transform:uppercase}
-.section-title .ru{display:block;font-size:0.9rem;font-weight:300;letter-spacing:8px;
-  color:rgba(196,166,106,0.3);margin-top:5px}
+.maze{position:relative;min-height:100vh;background:#1a1a1a;overflow:hidden}
 
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.maze-wall{position:absolute;background:linear-gradient(180deg,#333,#222);
+  border:2px solid rgba(255,255,255,0.05)}
+.maze-wall.horizontal{height:8px}
+.maze-wall.vertical{width:8px}
 
-.panel{background:linear-gradient(135deg,#1a150d,#0d0a06);border:2px solid rgba(196,166,106,0.12);
-  padding:40px;position:relative;overflow:hidden}
-.panel::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;
-  background:linear-gradient(180deg,#c4a66a,#8b6914,transparent)}
-.panel::after{content:'';position:absolute;top:10px;right:10px;width:30px;height:30px;
-  border:2px solid rgba(196,166,106,0.1);border-radius:50%}
+.maze-pipe{position:absolute;background:linear-gradient(90deg,#3a3a3a,#555,#3a3a3a);
+  border:1px solid rgba(255,255,255,0.05)}
+.maze-pipe.thick{height:20px}
+.maze-pipe.thin{height:8px}
+.maze-pipe.vert{width:15px;height:100%}
+.maze-pipe .joint{position:absolute;width:25px;height:25px;
+  background:radial-gradient(circle,#555,#333);border-radius:50%;border:2px solid #444}
 
-.panel h3{font-size:1.4rem;font-weight:700;color:#c4a66a;margin-bottom:15px;letter-spacing:3px}
-.panel p{font-size:0.95rem;line-height:2;color:rgba(196,166,106,0.6);margin-bottom:15px}
-.panel .tag{display:inline-block;padding:4px 14px;border:1px solid rgba(196,166,106,0.2);
-  font-size:11px;color:rgba(196,166,106,0.4);letter-spacing:2px;margin-right:8px;margin-top:10px}
+.maze-gear{position:absolute;border:3px solid rgba(255,255,255,0.06);border-radius:50%;
+  animation:spin 20s linear infinite}
+.maze-gear::before{content:'';position:absolute;top:50%;left:50%;width:30%;height:30%;
+  background:rgba(255,255,255,0.03);border-radius:50%;transform:translate(-50%,-50%)}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.pipe-divider{height:60px;position:relative;margin:0 40px}
-.pipe-divider::before{content:'';position:absolute;top:50%;left:0;width:100%;height:4px;
-  background:linear-gradient(90deg,transparent,#c4a66a,transparent);transform:translateY(-50%)}
-.pipe-divider::after{content:'⚙';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-size:24px;color:#c4a66a;background:#0a0806;padding:0 20px}
+.maze-vent{position:absolute;background:#111;border:2px solid rgba(255,255,255,0.06);
+  overflow:hidden}
+.maze-vent::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 4px,rgba(255,255,255,0.04) 4px,rgba(255,255,255,0.04) 6px)}
 
-.mech-wall{background:linear-gradient(135deg,#15100a,#1a150d);border:3px solid rgba(196,166,106,0.1);
-  padding:50px;position:relative;margin:0 40px 0;overflow:hidden}
-.mech-wall::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
-  background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(196,166,106,0.02) 60px,rgba(196,166,106,0.02) 61px),
-  repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(196,166,106,0.02) 60px,rgba(196,166,106,0.02) 61px)}
+.maze-light{position:absolute;width:4px;height:4px;border-radius:50%;
+  box-shadow:0 0 10px 4px}
+.maze-light.red{background:#f44336;box-shadow:0 0 10px 4px rgba(244,67,54,0.4)}
+.maze-light.green{background:#4caf50;box-shadow:0 0 10px 4px rgba(76,175,80,0.4)}
+.maze-light.yellow{background:#ff9800;box-shadow:0 0 10px 4px rgba(255,152,0,0.3)}
 
-.mech-wall .bolt{position:absolute;width:12px;height:12px;background:radial-gradient(circle,#4a3d2a,#1a150d);
-  border-radius:50%;border:1px solid rgba(196,166,106,0.2)}
-.mech-wall .bolt.b1{top:15px;left:15px}
-.mech-wall .bolt.b2{top:15px;right:15px}
-.mech-wall .bolt.b3{bottom:15px;left:15px}
-.mech-wall .bolt.b4{bottom:15px;right:15px}
-.mech-wall .bolt.b5{top:15px;left:50%}
-.mech-wall .bolt.b6{bottom:15px;left:50%}
+.maze-grate{position:absolute;background:repeating-linear-gradient(90deg,transparent,transparent 6px,
+  rgba(255,255,255,0.04) 6px,rgba(255,255,255,0.04) 8px);
+  border:1px solid rgba(255,255,255,0.05)}
 
-.mech-wall h2{font-size:2rem;font-weight:900;color:#c4a66a;letter-spacing:8px;margin-bottom:20px;
-  text-transform:uppercase;position:relative;z-index:2}
-.mech-wall p{font-size:1rem;line-height:2.2;color:rgba(196,166,106,0.55);max-width:800px;
-  position:relative;z-index:2}
-.mech-wall .warning-sign{display:inline-block;margin-top:20px;padding:10px 25px;
-  border:2px solid #8b6914;color:#8b6914;font-size:12px;letter-spacing:4px;font-weight:700;
-  position:relative;z-index:2;animation:flicker 3s infinite}
+.maze-screen{position:absolute;background:#0a1a0a;border:3px solid #333;padding:15px;
+  font-family:'Courier New',monospace;font-size:11px;color:#4caf50;line-height:1.8}
+.maze-screen .cursor{animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
 
-.gauge-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:0 40px;
-  border:2px solid rgba(196,166,106,0.1);background:#0d0a06}
-.gauge-item{padding:30px;text-align:center;border-right:1px solid rgba(196,166,106,0.08);
-  position:relative}
-.gauge-item:last-child{border-right:none}
-.gauge-item .value{font-size:2.5rem;font-weight:900;color:#c4a66a;font-family:'Courier New',monospace}
-.gauge-item .label{font-size:11px;color:rgba(196,166,106,0.4);letter-spacing:3px;margin-top:8px}
-.gauge-item .bar{height:4px;background:rgba(196,166,106,0.1);margin-top:15px;border-radius:2px;overflow:hidden}
-.gauge-item .bar-fill{height:100%;background:linear-gradient(90deg,#8b6914,#c4a66a);border-radius:2px}
+.content-area{max-width:1100px;margin:0 auto;padding:60px 40px;position:relative;z-index:5}
+.section-title{font-size:2rem;font-weight:900;color:#fff;letter-spacing:8px;margin-bottom:30px;
+  border-left:4px solid #c62828;padding-left:15px}
+.section-title .ru{display:block;font-size:0.8rem;font-weight:300;letter-spacing:6px;
+  color:rgba(255,255,255,0.3);margin-top:5px}
 
-footer{text-align:center;padding:50px;border-top:2px solid rgba(196,166,106,0.1);
-  margin-top:60px;position:relative;z-index:2}
-footer .logo-text{font-size:1.5rem;font-weight:900;color:#c4a66a;letter-spacing:10px;margin-bottom:10px}
-footer p{font-size:12px;color:rgba(196,166,106,0.3);letter-spacing:4px}
-footer .ru-text{font-size:11px;color:rgba(196,166,106,0.2);letter-spacing:6px;margin-top:10px}
+.article-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px;margin-bottom:40px}
+.article{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:30px;
+  position:relative;transition:.3s}
+.article:hover{border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.05)}
+.article::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:linear-gradient(180deg,#c62828,transparent)}
+.article h3{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px;margin-bottom:12px}
+.article p{font-size:0.85rem;line-height:2;color:rgba(255,255,255,0.5)}
+.article .tag{display:inline-block;margin-top:12px;padding:3px 10px;border:1px solid rgba(255,255,255,0.1);
+  font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:2px;margin-right:6px}
 
-@keyframes steam{0%{transform:translateY(0) scale(1);opacity:0.3}100%{transform:translateY(-80px) scale(1.5);opacity:0}}
-.steam-vent{position:fixed;bottom:0;right:100px;width:60px;height:60px;pointer-events:none;z-index:9998}
-.steam-particle{position:absolute;bottom:0;left:50%;width:8px;height:8px;
-  background:radial-gradient(circle,rgba(196,166,106,0.3),transparent);border-radius:50%;
-  animation:steam 3s ease-out infinite}
+.polymer-bar{height:8px;background:linear-gradient(90deg,#c62828,#e53935,#c62828);
+  box-shadow:0 0 20px rgba(198,40,40,0.3)}
+
+footer{text-align:center;padding:40px;border-top:1px solid rgba(255,255,255,0.05);margin-top:40px}
+footer .num{font-size:3rem;font-weight:900;color:rgba(255,255,255,0.08);letter-spacing:10px}
+footer p{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:5px;margin-top:8px}
 
 @media(max-width:768px){
-  .hero-content h1{font-size:2.5rem;letter-spacing:5px}
-  .grid-2{grid-template-columns:1fr}
-  .gauge-bar{grid-template-columns:repeat(2,1fr)}
-  .mech-wall{margin:0 10px;padding:30px}
-  .section{padding:40px 15px}
+  .building-text h1{font-size:2rem;letter-spacing:5px}
+  .article-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <a href="index.html" class="back-link">← 返回目录</a>
 
-<section class="hero">
-  <div class="hero-wall"></div>
-  <div class="hero-pipe p1"></div>
-  <div class="hero-pipe p2"></div>
-  <div class="hero-pipe p3"></div>
-  <div class="hero-pipe p4"></div>
-  <div class="hero-vent v1"></div>
-  <div class="hero-vent v2"></div>
-  <div class="hero-vent v3"></div>
-  <div class="hero-light"></div>
-  <div class="hero-content">
-    <div class="hero-badge">СОВЕТСКАЯ НАУКА · 苏维埃科学</div>
-    <h1>原子之心
-      <span class="sub-line">АТОМНОЕ СЕРДЦЕ</span>
-    </h1>
-    <div class="facility-code">FACILITY 3826 · ЗОНА ДОСТУПА: ULTRA · CLEARANCE: КРАСНЫЙ</div>
+<div class="sky">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="cloud c4"></div>
+  <div class="birds">~ ~ ~ ~ ~</div>
+</div>
+
+<div class="building">
+  <div class="building-facade">
+    <div class="building-col"></div>
+    <div class="building-col"></div>
+    <div class="building-col"></div>
+    <div class="building-col"></div>
+    <div class="building-col"></div>
+    <div class="building-col"></div>
   </div>
-</section>
+  <div class="building-window" style="top:20%;left:12%"></div>
+  <div class="building-window" style="top:20%;left:30%"></div>
+  <div class="building-window" style="top:20%;left:48%"></div>
+  <div class="building-window" style="top:20%;left:66%"></div>
+  <div class="building-window" style="top:20%;left:82%"></div>
+  <div class="building-window" style="top:50%;left:12%"></div>
+  <div class="building-window" style="top:50%;left:30%"></div>
+  <div class="building-window" style="top:50%;left:48%"></div>
+  <div class="building-window" style="top:50%;left:66%"></div>
+  <div class="building-window" style="top:50%;left:82%"></div>
+  <div class="building-balcony" style="top:42%;left:10%;width:15%"></div>
+  <div class="building-balcony" style="top:42%;left:45%;width:15%"></div>
+  <div class="building-balcony" style="top:42%;left:78%;width:15%"></div>
+  <div class="building-banner" style="top:8%;left:20%">☭</div>
+  <div class="building-banner" style="top:8%;right:20%">★</div>
+  <div class="building-star" style="top:5%;left:50%;transform:translateX(-50%)">★</div>
+  <div class="building-text">
+    <h1>3826</h1>
+    <div class="sub">НАУЧНЫЙ КОМПЛЕКС · 科学综合体</div>
+    <div class="code">FACILITY 3826 · KAZAKH SSR · 1955</div>
+  </div>
+</div>
 
-<div class="warning-bar"></div>
+<div class="steel-divider">
+  <div class="rivet"></div>
+  <div class="rivet"></div>
+  <span>▼ УРОВЕНЬ ПОДЗЕМНЫЙ · 地下层 ▼</span>
+</div>
 
-<div class="section">
-  <h2 class="section-title">设施概览<span class="ru">ОБЗОР ОБЪЕКТА — 3826号综合研究设施</span></h2>
-  <div class="grid-2">
-    <div class="panel">
-      <h3>聚合物生产车间</h3>
-      <p>3826号设施的核心工业区，占地十二万平方米的地下车间日夜不停地运转。巨型聚合反应釜如同倒悬的钢铁心脏，将液态金属与合成纤维编织成苏联未来的骨骼。每一条生产线都是机械美学的巅峰——齿轮咬合齿轮，活塞推动活塞，整个车间就是一台精密运转的巨型机器。</p>
-      <p>墙壁上布满纵横交错的管道，蒸汽从接缝处嘶嘶泄漏，空气弥漫着机油与臭氧的混合气味。头顶的行车如钢铁巨鸟般来回穿梭，吊装着数吨重的零部件。在这里，人类是机器的仆从，而机器是国家的意志。</p>
-      <span class="tag">聚合物</span><span class="tag">车间</span><span class="tag">自动化</span>
-    </div>
-    <div class="panel">
-      <h3>神经网络控制中心</h3>
-      <p>设施的神经中枢位于地下第八层，一个被厚达两米的铅混凝土墙包裹的球形大厅。数百台终端机排列成同心圆环，绿色的字符在黑色屏幕上永不停歇地跳动。这里是"集体"——3826号设施的人工智能管理系统——的物理载体。</p>
-      <p>控制中心的穹顶嵌满了指示灯，如同一片人造星空。每当系统进入高负荷状态，这些灯光便会疯狂闪烁，整个大厅仿佛活了过来。操作员们坐在旋转椅上，面前是三面环绕的控制台，他们的每一个指令都会在零点三秒内传达到设施的每一个角落。</p>
-      <span class="tag">AI</span><span class="tag">控制中心</span><span class="tag">神经网络</span>
+<div class="maze" id="maze">
+  <div class="maze-pipe thick" style="top:5%;left:0;width:100%"></div>
+  <div class="maze-pipe thick" style="top:30%;left:0;width:60%"></div>
+  <div class="maze-pipe thin" style="top:55%;left:20%;width:80%"></div>
+  <div class="maze-pipe thick" style="top:80%;left:0;width:100%"></div>
+  <div class="maze-pipe vert" style="top:0;left:15%;height:100%"></div>
+  <div class="maze-pipe vert" style="top:0;left:50%;height:60%"></div>
+  <div class="maze-pipe vert" style="top:30%;right:20%;height:70%"></div>
+
+  <div class="maze-gear" style="width:120px;height:120px;top:10%;left:25%"></div>
+  <div class="maze-gear" style="width:80px;height:80px;top:15%;left:33%;animation-direction:reverse"></div>
+  <div class="maze-gear" style="width:100px;height:100px;top:60%;right:15%"></div>
+  <div class="maze-gear" style="width:60px;height:60px;top:65%;right:22%;animation-direction:reverse"></div>
+
+  <div class="maze-vent" style="top:20%;left:5%;width:80px;height:50px"></div>
+  <div class="maze-vent" style="top:45%;right:8%;width:100px;height:60px"></div>
+  <div class="maze-vent" style="bottom:15%;left:40%;width:120px;height:70px"></div>
+
+  <div class="maze-light red" style="top:8%;left:10%"></div>
+  <div class="maze-light green" style="top:8%;left:30%"></div>
+  <div class="maze-light red" style="top:8%;left:50%"></div>
+  <div class="maze-light yellow" style="top:8%;left:70%"></div>
+  <div class="maze-light green" style="top:35%;left:8%"></div>
+  <div class="maze-light red" style="top:35%;right:8%"></div>
+  <div class="maze-light yellow" style="top:60%;left:5%"></div>
+  <div class="maze-light green" style="bottom:10%;left:25%"></div>
+  <div class="maze-light red" style="bottom:10%;right:25%"></div>
+
+  <div class="maze-grate" style="top:40%;left:30%;width:200px;height:100px"></div>
+  <div class="maze-grate" style="top:70%;left:60%;width:150px;height:80px"></div>
+
+  <div class="maze-screen" style="top:15%;right:10%">
+    > SYSTEM STATUS: ONLINE<br>
+    > POLYMER: 98.7%<br>
+    > ROBOTS: 12,847 ACTIVE<br>
+    > KOLLEKTIV: 2.0 READY<span class="cursor">_</span>
+  </div>
+  <div class="maze-screen" style="bottom:20%;left:5%">
+    > FACILITY 3826<br>
+    > SECURITY: OMEGA<br>
+    > ALERT: NONE<span class="cursor">_</span>
+  </div>
+
+  <div class="content-area">
+    <h2 class="section-title">设施内部<span class="ru">ВНУТРИ ОБЪЕКТА — 3826号设施</span></h2>
+    <div class="article-grid">
+      <div class="article">
+        <h3>聚合物管道网络</h3>
+        <p>3826号设施的地下管道系统绵延数百公里，红色聚合物在透明管道中缓缓流动，如同这座巨型设施的血液循环系统。管道壁上刻满了编号和警告标识，每一个分叉都通向不同的实验区域。维修机器人在管道间穿梭，它们的瓷白色面孔在黑暗中发出微弱的光芒。</p>
+        <span class="tag">聚合物</span><span class="tag">管道</span>
+      </div>
+      <div class="article">
+        <h3>机器人维修通道</h3>
+        <p>狭窄的钢铁走廊两侧排列着密密麻麻的机器人充电仓，每一个仓内都沉睡着一具仿生机器人。它们的面孔光滑如瓷器，眼睛紧闭，偶尔会突然转动头部——这只是神经网络的例行自检。通道的尽头是一扇巨大的液压门，门后是禁区。</p>
+        <span class="tag">机器人</span><span class="tag">维修</span>
+      </div>
+      <div class="article">
+        <h3>冷聚变反应室</h3>
+        <p>设施的核心能源来自一台冷聚变反应堆，蓝色的切伦科夫辐射在厚重的铅玻璃后闪烁。反应堆被三层防爆墙包裹，温度始终维持在绝对零度以上仅两度。操作员通过远程操控台监测着每一个参数，任何微小的偏差都可能导致灾难性的后果。</p>
+        <span class="tag">能源</span><span class="tag">冷聚变</span>
+      </div>
+      <div class="article">
+        <h3>集体网络节点</h3>
+        <p>散布在设施各处的网络节点如同神经突触般将所有机器人连接在一起。每个节点都浸泡在红色聚合物中，散发着微弱的脉冲光芒。当"集体2.0"系统激活时，这些节点将同时亮起，整个设施会如同一个活着的有机体般呼吸。</p>
+        <span class="tag">网络</span><span class="tag">AI</span>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="pipe-divider"></div>
-
-<div class="mech-wall">
-  <div class="bolt b1"></div><div class="bolt b2"></div><div class="bolt b3"></div>
-  <div class="bolt b4"></div><div class="bolt b5"></div><div class="bolt b6"></div>
-  <h2>机械走廊 · МЕХАНИЧЕСКИЙ КОРИДОР</h2>
-  <p>从主入口到设施核心，需要穿越长达三公里的机械走廊。走廊两侧是密不透风的钢铁墙壁，每隔五米就有一扇液压密封门。墙壁上裸露的管道如同血管般纵横交错——粗的是冷却液主管道，细的是数据传输线缆，最细的则是神经网络的物理节点。</p>
-  <p>走廊的地面是铸铁格栅，透过缝隙可以看到下层密密麻麻的齿轮组在不停转动。天花板上悬挂着工业照明灯，发出昏黄的光芒，偶尔会因为电压不稳而闪烁。空气中始终弥漫着一股金属的腥味，混合着润滑剂的气息。在这条走廊里行走，你会感觉自己正在穿越一台巨型机器的消化道。</p>
-  <div class="warning-sign">⚠ ВНИМАНИЕ · 注意 · 高压区域 · 非授权人员禁止进入</div>
-</div>
-
-<div class="pipe-divider"></div>
-
-<div class="section">
-  <h2 class="section-title">技术档案<span class="ru">ТЕХНИЧЕСКИЕ ДОКУМЕНТЫ — 机密等级：绝密</span></h2>
-  <div class="grid-2">
-    <div class="panel">
-      <h3>机器人军团</h3>
-      <p>3826号设施最引以为傲的成就是其全自动机器人生产线。从最初的"蜜蜂"系列工业机器人，到后来的"海鸥"系列服务机器人，再到最新型号的"双子"系列——一对可以无缝协作的仿生机器人。每一台机器人都搭载了由"集体"统一管理的神经网络芯片。</p>
-      <p>然而，很少有人知道，在设施最深处的禁区中，还沉睡着一批从未被激活的原型机。它们的代号是"Близнецы"（双生子），拥有远超量产型号的自主意识。档案显示，这些原型机的激活协议在1986年被永久封存。原因一栏只写了两个字：<span style="color:#c4a66a;font-weight:700">失控</span>。</p>
-    </div>
-    <div class="panel">
-      <h3>聚合物生命体</h3>
-      <p>在3826号设施的生物学实验室中，科学家们创造了一种前所未有的物质——能够自主生长和修复的聚合物。这种被称为"活体金属"的材料可以像肌肉一样收缩，像骨骼一样承重，像皮肤一样自我愈合。它是机器人技术与生物学的完美融合。</p>
-      <p>但"活体金属"也有其黑暗面。实验室日志中记录了多起"金属感染"事故——研究人员的防护服被聚合物渗透，皮肤与金属开始融合。这些事故的幸存者被送往设施的医疗翼后便再未出现。医疗翼的门上如今挂着一块牌子："永久封闭 — 指令来源：最高苏维埃"。</p>
-    </div>
-  </div>
-</div>
-
-<div class="gauge-bar">
-  <div class="gauge-item">
-    <div class="value">3826</div>
-    <div class="label">设施编号</div>
-    <div class="bar"><div class="bar-fill" style="width:100%"></div></div>
-  </div>
-  <div class="gauge-item">
-    <div class="value">12K</div>
-    <div class="label">驻扎人员</div>
-    <div class="bar"><div class="bar-fill" style="width:75%"></div></div>
-  </div>
-  <div class="gauge-item">
-    <div class="value">99.7%</div>
-    <div class="label">系统运行率</div>
-    <div class="bar"><div class="bar-fill" style="width:99%"></div></div>
-  </div>
-  <div class="gauge-item">
-    <div class="value">Ω级</div>
-    <div class="label">安全等级</div>
-    <div class="bar"><div class="bar-fill" style="width:88%"></div></div>
-  </div>
-  <div class="gauge-item">
-    <div class="value">∞</div>
-    <div class="label">能源储备</div>
-    <div class="bar"><div class="bar-fill" style="width:95%"></div></div>
-  </div>
-</div>
+<div class="polymer-bar"></div>
 
 <footer>
-  <div class="logo-text">3826</div>
-  <p>СОВЕТСКИЙ НАУЧНЫЙ КОМПЛЕКС · 苏维埃科学综合体</p>
-  <p class="ru-text">СЛАВА НАУКЕ · СЛАВА БУДУЩЕМУ</p>
+  <div class="num">3826</div>
+  <p>АТОМНОЕ СЕРДЦЕ · 原子之心 · FACILITY 3826</p>
+  <p style="margin-top:5px;font-size:10px;color:rgba(255,255,255,0.1)">ПРАВДА ГДЕ-ТО РЯДОМ</p>
 </footer>
-
-<script>
-for(let i=0;i<6;i++){
-  const p=document.createElement('div');
-  p.className='steam-particle';
-  p.style.left=Math.random()*40+10+'px';
-  p.style.animationDelay=Math.random()*3+'s';
-  p.style.animationDuration=2+Math.random()*2+'s';
-  document.querySelector('.steam-vent')?.appendChild(p);
-}
-</script>
 </body>
 </html>

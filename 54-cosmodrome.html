@@ -3,278 +3,183 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>拜科努尔 — 天梯之路</title>
+<title>训练场 — 3826号设施</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Noto Sans SC',sans-serif;background:#06080a;color:#7a8a9a;overflow-x:hidden}
-a{color:#7a8a9a;text-decoration:none}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a1a1a;color:#ddd;overflow-x:hidden}
+a{color:#ddd;text-decoration:none}
+.back-link{position:fixed;top:20px;left:20px;z-index:100;display:inline-block;padding:10px 20px;
+  background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:13px;
+  letter-spacing:3px;backdrop-filter:blur(10px);transition:.3s}
+.back-link:hover{background:rgba(255,255,255,0.2)}
 
-.back-link{display:inline-block;padding:12px 24px;background:rgba(122,138,154,0.1);
-  border:2px solid #7a8a9a;color:#7a8a9a;margin:20px;font-size:14px;letter-spacing:3px;
-  font-weight:700;transition:.3s;position:relative;z-index:10}
-.back-link:hover{background:#7a8a9a;color:#06080a}
+.sky{position:relative;height:50vh;background:linear-gradient(180deg,#3a7cb8 0%,#6aafe0 40%,#a0d0f0 70%,#d0e8f8 100%);
+  overflow:hidden}
+.sky .cloud{position:absolute;background:rgba(255,255,255,0.5);border-radius:50%;filter:blur(6px)}
+.sky .cloud.c1{width:350px;height:90px;top:10%;left:5%;animation:drift 50s linear infinite}
+.sky .cloud.c2{width:220px;height:60px;top:30%;left:50%;animation:drift 65s linear infinite reverse}
+.sky .cloud.c3{width:180px;height:50px;top:50%;left:75%;animation:drift 45s linear infinite;animation-delay:-10s}
+@keyframes drift{from{transform:translateX(-400px)}to{transform:translateX(calc(100vw + 400px))}}
+.sky .sun{position:absolute;top:5%;right:20%;width:60px;height:60px;
+  background:radial-gradient(circle,#fff,#ffd54f,transparent 70%);border-radius:50%;
+  box-shadow:0 0 40px rgba(255,213,79,0.3)}
 
-.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;justify-content:center;
-  overflow:hidden;background:linear-gradient(180deg,#06080a 0%,#0a1018 30%,#101828 60%,#1a2540 85%,#06080a 100%)}
+.field{position:relative;height:25vh;background:linear-gradient(180deg,#8aaa70,#7a9a60,#6a8a50);
+  overflow:hidden}
+.field .grass{position:absolute;bottom:0;left:0;width:100%;height:30%;
+  background:repeating-linear-gradient(90deg,#5a7a40 0px,#5a7a40 3px,transparent 3px,transparent 8px)}
+.field .path{position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:150px;height:100%;background:linear-gradient(180deg,#a09080,#908070);
+  border-left:3px solid #807060;border-right:3px solid #807060}
 
-.hero-stars{position:absolute;inset:0}
-.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%}
+.wall-soviet{position:relative;height:30vh;background:linear-gradient(180deg,#c0bcb0,#b0aca0,#a09c90);
+  overflow:hidden}
+.wall-soviet .panel{position:absolute;border:2px solid rgba(0,0,0,0.05);
+  background:linear-gradient(135deg,#c8c4b8,#b8b4a8)}
+.wall-soviet .panel .rivet{position:absolute;width:6px;height:6px;
+  background:radial-gradient(circle,#999,#666);border-radius:50%}
+.wall-soviet .stencil{position:absolute;font-weight:900;color:rgba(198,40,40,0.15);
+  letter-spacing:5px}
+.wall-soviet .star{position:absolute;color:#c62828;font-size:2rem;opacity:0.3}
 
-.hero-rocket{position:absolute;bottom:20%;left:50%;transform:translateX(-50%);
-  width:6px;height:200px;background:linear-gradient(0deg,#b08060,#7a8a9a,#fff);
-  border-radius:3px 3px 0 0}
-.hero-rocket::before{content:'';position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);
-  width:40px;height:30px;background:radial-gradient(ellipse at top,#ff6b35,#ff4500,transparent);
-  animation:thrust 0.5s ease-in-out infinite alternate;opacity:0.8}
-@keyframes thrust{from{height:30px;opacity:0.6}to{height:50px;opacity:1}}
+.steel-div{height:50px;background:linear-gradient(180deg,#4a4a4a,#2a2a2a);
+  border-top:3px solid #666;border-bottom:3px solid #111;display:flex;align-items:center;
+  justify-content:center;position:relative}
+.steel-div .bolt{position:absolute;width:8px;height:8px;
+  background:radial-gradient(circle,#777,#444);border-radius:50%}
+.steel-div .bolt:nth-child(1){left:15px}.steel-div .bolt:nth-child(2){right:15px}
+.steel-div span{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:6px}
 
-.hero-rocket::after{content:'';position:absolute;top:-15px;left:50%;transform:translateX(-50%);
-  width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;
-  border-bottom:20px solid #c4a66a}
+.basement{position:relative;min-height:100vh;background:#111;overflow:hidden}
+.basement .pipe{position:absolute;background:linear-gradient(90deg,#3a3a3a,#555,#3a3a3a);
+  border:1px solid rgba(255,255,255,0.04)}
+.basement .pipe.h{height:14px}.basement .pipe.v{width:14px}
+.basement .cage{position:absolute;border:3px solid rgba(255,255,255,0.08);padding:20px;
+  background:rgba(255,255,255,0.01)}
+.basement .cage::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;
+  background:repeating-linear-gradient(0deg,transparent,transparent 8px,rgba(255,255,255,0.02) 8px,rgba(255,255,255,0.02) 10px)}
+.basement .light{position:absolute;width:30px;height:8px;background:rgba(255,200,100,0.1);
+  border-radius:4px;box-shadow:0 0 20px rgba(255,200,100,0.05)}
 
-.hero-flame{position:absolute;bottom:15%;left:50%;transform:translateX(-50%);
-  width:200px;height:100px;background:radial-gradient(ellipse at top,rgba(255,107,53,0.2),transparent);
-  animation:flame-pulse 1s ease-in-out infinite alternate;pointer-events:none}
-@keyframes flame-pulse{from{opacity:0.3;transform:translateX(-50%) scale(1)}to{opacity:0.6;transform:translateX(-50%) scale(1.2)}}
+.content{max-width:1100px;margin:0 auto;padding:60px 40px;position:relative;z-index:5}
+.section-title{font-size:2rem;font-weight:900;color:#fff;letter-spacing:8px;margin-bottom:30px;
+  border-left:4px solid #c62828;padding-left:15px}
+.section-title .ru{display:block;font-size:0.8rem;font-weight:300;letter-spacing:6px;
+  color:rgba(255,255,255,0.3);margin-top:5px}
 
-.hero-ground{position:absolute;bottom:0;left:0;width:100%;height:20%;
-  background:linear-gradient(0deg,#0a0a08,#06080a)}
-.hero-ground::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(176,128,96,0.3),transparent)}
+.polygon-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
+.polygon{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:35px;
+  position:relative}
+.polygon::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;
+  background:linear-gradient(180deg,#c62828,transparent)}
+.polygon .poly-id{font-family:'Courier New',monospace;font-size:10px;color:rgba(255,255,255,0.2);
+  letter-spacing:4px;margin-bottom:10px}
+.polygon h3{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px;margin-bottom:12px}
+.polygon p{font-size:0.85rem;line-height:2;color:rgba(255,255,255,0.5)}
+.polygon .threat{margin-top:10px;font-size:10px;letter-spacing:3px}
+.polygon .threat.low{color:#4caf50}.polygon .threat.med{color:#ff9800}
+.polygon .threat.high{color:#f44336}.polygon .threat.max{color:#f44336;font-weight:700}
 
-.hero-content{position:relative;z-index:5;text-align:center;padding-bottom:30vh}
-.hero-content .cosmo-id{font-family:'Courier New',monospace;font-size:12px;
-  color:rgba(122,138,154,0.3);letter-spacing:8px;margin-bottom:20px}
-.hero-content h1{font-size:5rem;font-weight:900;color:#c4d0dc;letter-spacing:15px;
-  text-shadow:0 0 60px rgba(122,138,154,0.3)}
-.hero-content h1 .ru{display:block;font-size:1.8rem;font-weight:300;letter-spacing:20px;
-  color:rgba(122,138,154,0.4);margin-top:10px}
-.hero-content .tagline{font-size:1rem;color:rgba(122,138,154,0.4);margin-top:20px;
-  letter-spacing:8px}
+footer{text-align:center;padding:40px;border-top:1px solid rgba(255,255,255,0.05);margin-top:40px}
+footer .icon{font-size:2rem;color:rgba(255,255,255,0.1);margin-bottom:10px}
+footer p{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:5px}
 
-.launch-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-  border:2px solid rgba(122,138,154,0.08)}
-.pad{padding:40px;background:rgba(122,138,154,0.02);
-  border-right:1px solid rgba(122,138,154,0.06);position:relative}
-.pad:last-child{border-right:none}
-.pad .pad-id{font-family:'Courier New',monospace;font-size:10px;
-  color:rgba(122,138,154,0.2);letter-spacing:4px;margin-bottom:15px}
-.pad h3{font-size:1.1rem;font-weight:700;color:#c4d0dc;letter-spacing:3px;margin-bottom:12px}
-.pad p{font-size:0.85rem;line-height:1.9;color:rgba(122,138,154,0.45)}
-.pad .status-light{position:absolute;top:15px;right:15px;width:8px;height:8px;
-  border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,0.5)}
-
-.section{max-width:1200px;margin:0 auto;padding:70px 40px}
-
-.section-tag{font-family:'Courier New',monospace;font-size:11px;color:rgba(122,138,154,0.25);
-  letter-spacing:6px;margin-bottom:10px}
-.section-title{font-size:2.5rem;font-weight:900;color:#c4d0dc;letter-spacing:8px;
-  margin-bottom:15px}
-.section-desc{font-size:0.95rem;color:rgba(122,138,154,0.4);line-height:2;
-  max-width:700px;margin-bottom:40px}
-
-.timeline{position:relative;padding-left:60px}
-.timeline::before{content:'';position:absolute;left:20px;top:0;width:2px;height:100%;
-  background:linear-gradient(180deg,rgba(122,138,154,0.3),transparent)}
-
-.timeline-item{position:relative;margin-bottom:40px;padding:30px;
-  background:rgba(122,138,154,0.02);border:1px solid rgba(122,138,154,0.06)}
-.timeline-item::before{content:'';position:absolute;left:-48px;top:35px;width:12px;height:12px;
-  background:#7a8a9a;border-radius:50%;border:3px solid #06080a}
-
-.timeline-item .year{font-family:'Courier New',monospace;font-size:2rem;font-weight:900;
-  color:rgba(122,138,154,0.15);position:absolute;top:15px;right:20px}
-.timeline-item h3{font-size:1.2rem;font-weight:700;color:#c4d0dc;letter-spacing:2px;margin-bottom:10px}
-.timeline-item p{font-size:0.9rem;line-height:2;color:rgba(122,138,154,0.5)}
-
-.mission-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
-.mission{padding:35px;background:rgba(122,138,154,0.02);border:1px solid rgba(122,138,154,0.06);
-  position:relative;transition:.4s}
-.mission:hover{background:rgba(122,138,154,0.04);border-color:rgba(122,138,154,0.15)}
-.mission .mission-code{font-family:'Courier New',monospace;font-size:10px;
-  color:rgba(122,138,154,0.2);letter-spacing:4px;margin-bottom:10px}
-.mission h3{font-size:1.2rem;font-weight:700;color:#c4d0dc;letter-spacing:2px;margin-bottom:12px}
-.mission p{font-size:0.85rem;line-height:1.9;color:rgba(122,138,154,0.45)}
-.mission .outcome{margin-top:12px;font-size:11px;letter-spacing:2px}
-.mission .outcome.success{color:#4ade80}
-.mission .outcome.failed{color:#ef4444}
-
-.countdown{background:#0a0a08;border:3px solid rgba(122,138,154,0.1);padding:50px;
-  text-align:center;position:relative}
-.countdown::before{content:'ОБРАТНЫЙ ОТСЧЁТ · 倒计时';position:absolute;top:15px;left:20px;
-  font-size:10px;color:rgba(122,138,154,0.2);letter-spacing:4px}
-
-.countdown-display{display:flex;justify-content:center;gap:30px;margin:30px 0}
-.countdown-unit{text-align:center}
-.countdown-unit .digit{font-size:4rem;font-weight:900;color:#c4d0dc;font-family:'Courier New',monospace;
-  text-shadow:0 0 30px rgba(122,138,154,0.3)}
-.countdown-unit .label{font-size:11px;color:rgba(122,138,154,0.3);letter-spacing:4px;margin-top:8px}
-
-.countdown .mission-info{font-size:0.9rem;color:rgba(122,138,154,0.4);letter-spacing:3px}
-
-footer{text-align:center;padding:50px;border-top:1px solid rgba(122,138,154,0.08);
-  margin-top:60px}
-footer .star-icon{font-size:1.5rem;color:rgba(122,138,154,0.2);margin-bottom:10px}
-footer p{font-size:12px;color:rgba(122,138,154,0.2);letter-spacing:5px}
-
-@media(max-width:768px){
-  .hero-content h1{font-size:3rem;letter-spacing:5px}
-  .launch-pad{grid-template-columns:1fr}
-  .mission-grid{grid-template-columns:1fr}
-  .countdown-display{gap:15px}
-  .countdown-unit .digit{font-size:2.5rem}
-  .section{padding:40px 15px}
-}
+@media(max-width:768px){.polygon-grid{grid-template-columns:1fr}.content{padding:40px 15px}}
 </style>
 </head>
 <body>
 <a href="index.html" class="back-link">← 返回目录</a>
 
-<section class="hero">
-  <div class="hero-stars" id="stars"></div>
-  <div class="hero-rocket"></div>
-  <div class="hero-flame"></div>
-  <div class="hero-ground"></div>
-  <div class="hero-content">
-    <div class="cosmo-id">КОСМОДРОМ БАЙКОНУР · ПЛОЩАДКА №1 · 1955</div>
-    <h1>拜科努尔
-      <span class="ru">БАЙКОНУР</span>
-    </h1>
-    <div class="tagline">通往星辰的钢铁阶梯</div>
-  </div>
-</section>
-
-<div class="section">
-  <div class="section-tag">СТАРТОВЫЕ ПЛОЩАДКИ · 发射台</div>
-  <h2 class="section-title">发射工位</h2>
-  <div class="launch-pad">
-    <div class="pad">
-      <div class="pad-id">ПЛОЩАДКА-1 · 加加林发射台</div>
-      <h3>一号发射台</h3>
-      <p>人类首次太空飞行的起点。1961年4月12日，尤里·加加林从这里升空，成为第一个进入太空的人类。发射台的钢铁结构已经见证了数百次发射，每一次点火都在它的表面留下新的灼烧痕迹。如今它依然在服役，只是发射的不再是东方号，而是联盟号。</p>
-      <div class="status-light"></div>
-    </div>
-    <div class="pad">
-      <div class="pad-id">ПЛОЩАДКА-81 · 暴风雪号</div>
-      <h3>八十一号工位</h3>
-      <p>暴风雪号航天飞机的专属发射台。这座巨型设施高达一百五十米，配备了世界上最强大的液氢液氧发动机。1988年，无人驾驶的暴风雪号从这里升空并成功返回，创造了航天史上的奇迹。如今这座发射台已经沉睡，但它的结构依然完好。</p>
-      <div class="status-light" style="background:#facc15;box-shadow:0 0 10px rgba(250,204,21,0.5)"></div>
-    </div>
-    <div class="pad">
-      <div class="pad-id">ПЛОЩАДКА-250 · 未来之门</div>
-      <h3>二百五十号工位</h3>
-      <p>最新建造的超重型火箭发射台，专门为下一代深空探测器设计。发射台基座深入地下三十米，可以承受三千吨推力的震动。液氧和煤油储罐如同两座银色巨塔般矗立在发射台两侧。这里将是人类迈向火星的起点。</p>
-      <div class="status-light" style="background:#60a5fa;box-shadow:0 0 10px rgba(96,165,250,0.5)"></div>
-    </div>
-  </div>
+<div class="sky">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
 </div>
 
-<div class="section">
-  <div class="section-tag">ИСТОРИЯ · 历史</div>
-  <h2 class="section-title">航天纪年</h2>
-  <div class="section-desc">从荒漠中的秘密基地到人类通往太空的门户，拜科努尔的历史就是一部人类征服宇宙的史诗。</div>
-  <div class="timeline">
-    <div class="timeline-item">
-      <span class="year">1955</span>
-      <h3>秘密基地奠基</h3>
-      <p>在哈萨克斯坦的茫茫荒漠中，一座秘密军事基地开始建设。数万名工人在极端环境下昼夜施工，建造了世界上最先进的导弹发射设施。基地的存在被列为最高机密，连工人的家属都不知道他们去了哪里。</p>
-    </div>
-    <div class="timeline-item">
-      <span class="year">1957</span>
-      <h3>人造卫星升空</h3>
-      <p>1957年10月4日，R-7火箭将一颗直径仅五十八厘米的金属球送入太空。斯普特尼克一号的信号在全球的收音机中回响，宣告了太空时代的到来。整个基地沸腾了，工程师们拥抱哭泣——他们的梦想终于成为了现实。</p>
-    </div>
-    <div class="timeline-item">
-      <span class="year">1961</span>
-      <h3>加加林首飞</h3>
-      <p>"Поехали!（出发！）"——加加林的这句呼号通过无线电传遍了全世界。东方一号飞船在一号发射台点火升空，一百零八分钟后绕地球一圈返回。人类第一次从太空俯瞰了自己的家园。加加林着陆后对一位农妇说的第一句话是："我是苏联公民，我从太空回来了！"</p>
-    </div>
-    <div class="timeline-item">
-      <span class="year">1988</span>
-      <h3>暴风雪号首飞</h3>
-      <p>苏联的航天飞机——暴风雪号——在无人驾驶的情况下完成了首次也是唯一一次飞行。这架翼展二十四米的飞行器从八十一号工位升空，绕地球两圈后精准着陆在拜科努尔的跑道上。着陆偏差仅三米，证明了苏联自动着陆技术的卓越水平。</p>
-    </div>
-    <div class="timeline-item">
-      <span class="year">2025</span>
-      <h3>新纪元开启</h3>
-      <p>拜科努尔迎来了新的主人和新的使命。二百五十号工位的超重型发射台已经完工，人类最强大的运载火箭即将从这里启程。目标不再是近地轨道，而是月球、火星，以及更远的深空。拜科努尔将继续作为人类通往宇宙的门户。</p>
-    </div>
-  </div>
+<div class="field">
+  <div class="grass"></div>
+  <div class="path"></div>
 </div>
 
-<div class="section">
-  <div class="section-tag">МИССИИ · 任务档案</div>
-  <h2 class="section-title">里程碑任务</h2>
-  <div class="mission-grid">
-    <div class="mission">
-      <div class="mission-code">VOSTOK-1 · 东方一号</div>
-      <h3>首次载人航天</h3>
-      <p>将尤里·加加林送入太空，绕地球一圈，飞行时间108分钟。这是人类历史上第一次载人太空飞行，标志着太空时代的真正开始。</p>
-      <div class="outcome success">● УСПЕХ · 成功</div>
-    </div>
-    <div class="mission">
-      <div class="mission-code">VOSKHOD-2 · 上升二号</h3>
-      <h3>首次太空行走</h3>
-      <p>阿列克谢·列昂诺夫走出飞船，在太空中漂浮了十二分钟。返回时宇航服膨胀卡在舱口，他不得不冒着生命危险放气缩小体积才得以返回。</p>
-      <div class="outcome success">● УСПЕХ · 成功</div>
-    </div>
-    <div class="mission">
-      <div class="mission-code">LUNA-9 · 月球九号</div>
-      <h3>首次月球软着陆</h3>
-      <p>无人探测器在月球表面成功软着陆，传回了第一批月球表面的近距离照片。这些照片彻底改变了人类对月球表面的认知——它不是一片流沙，而是坚硬的岩石。</p>
-      <div class="outcome success">● УСПЕХ · 成功</div>
-    </div>
-    <div class="mission">
-      <div class="mission-code">N1-L3 · N1登月计划</div>
-      <h3>苏联载人登月</h3>
-      <p>N1火箭——人类有史以来最强大的运载火箭——四次发射，四次失败。每一次爆炸都伴随着数十亿美元的损失和无数工程师的心血。苏联的登月梦最终未能实现。</p>
-      <div class="outcome failed">● НЕУДАЧА · 失败</div>
-    </div>
+<div class="wall-soviet">
+  <div class="panel" style="top:10%;left:5%;width:180px;height:100px">
+    <div class="rivet" style="top:5px;left:5px"></div><div class="rivet" style="top:5px;right:5px"></div>
+    <div class="rivet" style="bottom:5px;left:5px"></div><div class="rivet" style="bottom:5px;right:5px"></div>
   </div>
+  <div class="panel" style="top:10%;left:30%;width:200px;height:120px">
+    <div class="rivet" style="top:5px;left:5px"></div><div class="rivet" style="top:5px;right:5px"></div>
+    <div class="rivet" style="bottom:5px;left:5px"></div><div class="rivet" style="bottom:5px;right:5px"></div>
+  </div>
+  <div class="panel" style="top:10%;right:10%;width:160px;height:90px">
+    <div class="rivet" style="top:5px;left:5px"></div><div class="rivet" style="top:5px;right:5px"></div>
+    <div class="rivet" style="bottom:5px;left:5px"></div><div class="rivet" style="bottom:5px;right:5px"></div>
+  </div>
+  <div class="stencil" style="top:50%;left:10%;font-size:3rem">ПОЛИГОН</div>
+  <div class="stencil" style="top:50%;right:10%;font-size:2rem">训练场</div>
+  <div class="star" style="top:15%;left:55%">★</div>
+  <div class="star" style="top:60%;left:75%">★</div>
 </div>
 
-<div class="countdown">
-  <h3 style="font-size:1.3rem;color:#c4d0dc;letter-spacing:5px;margin-bottom:5px">下次发射任务</h3>
-  <p class="mission-info">SOYUZ-MS-25 · 联盟号 · 250号工位</p>
-  <div class="countdown-display">
-    <div class="countdown-unit"><div class="digit" id="days">07</div><div class="label">ДНЕЙ · 天</div></div>
-    <div class="countdown-unit"><div class="digit" id="hours">14</div><div class="label">ЧАСОВ · 时</div></div>
-    <div class="countdown-unit"><div class="digit" id="mins">32</div><div class="label">МИНУТ · 分</div></div>
-    <div class="countdown-unit"><div class="digit" id="secs">08</div><div class="label">СЕКУНД · 秒</div></div>
+<div class="steel-div">
+  <div class="bolt"></div><div class="bolt"></div>
+  <span>▼ ПОЛИГОН ИСПЫТАНИЙ · 测试场 ▼</span>
+</div>
+
+<div class="basement">
+  <div class="pipe h" style="top:4%;left:0;width:100%"></div>
+  <div class="pipe h" style="top:30%;left:0;width:65%"></div>
+  <div class="pipe h" style="top:55%;left:20%;width:80%"></div>
+  <div class="pipe h" style="bottom:8%;left:0;width:100%"></div>
+  <div class="pipe v" style="top:0;left:12%;height:100%"></div>
+  <div class="pipe v" style="top:0;left:45%;height:55%"></div>
+  <div class="pipe v" style="top:30%;right:18%;height:70%"></div>
+
+  <div class="cage" style="top:15%;left:20%;width:200px;height:120px"></div>
+  <div class="cage" style="top:45%;right:10%;width:180px;height:100px"></div>
+  <div class="cage" style="bottom:15%;left:35%;width:220px;height:110px"></div>
+
+  <div class="light" style="top:8%;left:30%"></div>
+  <div class="light" style="top:8%;left:60%"></div>
+  <div class="light" style="top:33%;left:8%"></div>
+  <div class="light" style="top:58%;right:5%"></div>
+  <div class="light" style="bottom:12%;left:20%"></div>
+
+  <div class="content">
+    <h2 class="section-title">测试场<span class="ru">ПОЛИГОНЫ — 机器人战斗训练场</span></h2>
+    <div class="polygon-grid">
+      <div class="polygon">
+        <div class="poly-id">POLYGON-01 · 热身区</div>
+        <h3>基础格斗场</h3>
+        <p>一个圆形竞技场，直径五十米，地面覆盖着减震聚合物垫。墙壁上安装了弹射装置和障碍物生成器。这里是新出厂机器人进行基础格斗训练的地方。训练内容包括闪避、格挡和基础攻击。人类教官通过远程控制台指挥机器人对手的动作。</p>
+        <div class="threat low">● УРОВЕНЬ УГРОЗЫ: НИЗКИЙ · 威胁等级: 低</div>
+      </div>
+      <div class="polygon">
+        <div class="poly-id">POLYGON-02 · 模拟区</div>
+        <h3>城市作战模拟</h3>
+        <p>一个按照苏联城市街区等比例建造的模拟训练场。建筑物、街道、车辆一应俱全，甚至还有仿真市民机器人在街上行走。战斗机器人需要在这里学习如何在城市环境中作战，同时避免伤害平民。但训练记录显示，平民误伤率始终居高不下。</p>
+        <div class="threat med">● УРОВЕНЬ УГРОЗЫ: СРЕДНИЙ · 威胁等级: 中</div>
+      </div>
+      <div class="polygon">
+        <div class="poly-id">POLYGON-03 · 极限区</div>
+        <h3>极端环境测试</h3>
+        <p>一个可以模拟各种极端环境的密封舱室。温度范围从零下60°C到零上200°C，湿度可以从沙漠级干燥到热带级潮湿，甚至可以模拟真空和高压环境。机器人在这里接受最严苛的耐久性测试——只有通过测试的型号才能被批准量产。</p>
+        <div class="threat high">● УРОВЕНЬ УГРОЗЫ: ВЫСОКИЙ · 威胁等级: 高</div>
+      </div>
+      <div class="polygon">
+        <div class="poly-id">POLYGON-07 · 禁区</div>
+        <h3>失控应急预案</h3>
+        <p>这个测试场从未出现在任何公开文件中。它位于设施最深处，被五层防爆墙包裹。这里进行的不是常规训练，而是"失控模拟"——故意让机器人进入战斗模式，然后测试各种紧急关闭手段。日志显示，有三次模拟中机器人拒绝执行关闭指令。这三次事故的后续报告被列为绝密。</p>
+        <div class="threat max">● УРОВЕНЬ УГРОЗЫ: МАКСИМАЛЬНЫЙ · 威胁等级: 最高</div>
+      </div>
+    </div>
   </div>
 </div>
 
 <footer>
-  <div class="star-icon">★</div>
-  <p>КОСМОДРОМ БАЙКОНУР · 拜科努尔航天发射场</p>
-  <p style="margin-top:8px;font-size:10px;color:rgba(122,138,154,0.15)">К ЗВЁЗДАМ · 通往星辰</p>
+  <div class="icon">⚔</div>
+  <p>ПОЛИГОН ИСПЫТАНИЙ · 测试场 · FACILITY 3826</p>
 </footer>
-
-<script>
-const stars=document.getElementById('stars');
-for(let i=0;i<100;i++){
-  const s=document.createElement('div');
-  s.className='star';
-  s.style.top=Math.random()*100+'%';
-  s.style.left=Math.random()*100+'%';
-  s.style.opacity=Math.random()*0.8+0.2;
-  s.style.width=s.style.height=Math.random()*2+1+'px';
-  stars.appendChild(s);
-}
-function tick(){
-  const s=document.getElementById('secs');
-  let v=parseInt(s.textContent);
-  v=v<=0?59:v-1;
-  s.textContent=String(v).padStart(2,'0');
-  if(v===59){
-    const m=document.getElementById('mins');
-    let mv=parseInt(m.textContent);
-    mv=mv<=0?59:mv-1;
-    m.textContent=String(mv).padStart(2,'0');
-  }
-}
-setInterval(tick,1000);
-</script>
 </body>
 </html>

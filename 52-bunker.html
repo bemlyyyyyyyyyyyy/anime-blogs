@@ -3,261 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>地堡要塞 — 深层掩体</title>
+<title>聚合物实验室 — 3826号设施</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Courier New',monospace;background:#0d0d0d;color:#8a8a7a;overflow-x:hidden}
-a{color:#8a8a7a;text-decoration:none}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a1a1a;color:#ddd;overflow-x:hidden}
+a{color:#ddd;text-decoration:none}
+.back-link{position:fixed;top:20px;left:20px;z-index:100;display:inline-block;padding:10px 20px;
+  background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:13px;
+  letter-spacing:3px;backdrop-filter:blur(10px);transition:.3s}
+.back-link:hover{background:rgba(255,255,255,0.2)}
 
-.back-link{display:inline-block;padding:12px 24px;background:rgba(138,138,122,0.1);
-  border:3px solid #8a8a7a;color:#8a8a7a;margin:20px;font-size:13px;letter-spacing:3px;
-  font-weight:700;transition:.3s;position:relative;z-index:10;text-transform:uppercase}
-.back-link:hover{background:#8a8a7a;color:#0d0d0d}
+.sky{position:relative;height:40vh;background:linear-gradient(180deg,#5a9cd6 0%,#8ec5f0 50%,#c8e4f8 100%);overflow:hidden}
+.sky .cloud{position:absolute;background:rgba(255,255,255,0.5);border-radius:50%;filter:blur(6px)}
+.sky .cloud.c1{width:280px;height:70px;top:20%;left:5%;animation:drift 50s linear infinite}
+.sky .cloud.c2{width:200px;height:55px;top:35%;left:55%;animation:drift 65s linear infinite reverse}
+.sky .cloud.c3{width:240px;height:65px;top:50%;left:30%;animation:drift 55s linear infinite;animation-delay:-20s}
+@keyframes drift{from{transform:translateX(-350px)}to{transform:translateX(calc(100vw + 350px))}}
 
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  overflow:hidden;background:linear-gradient(180deg,#0d0d0d 0%,#1a1a18 40%,#252520 60%,#0d0d0d 100%)}
-
-.hero::before{content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(90deg,transparent,transparent 200px,rgba(138,138,122,0.03) 200px,rgba(138,138,122,0.03) 201px),
-  repeating-linear-gradient(0deg,transparent,transparent 200px,rgba(138,138,122,0.03) 200px,rgba(138,138,122,0.03) 201px)}
-
-.hero-door{position:absolute;width:300px;height:500px;border:6px solid rgba(138,138,122,0.15);
-  top:50%;left:50%;transform:translate(-50%,-50%)}
-.hero-door::before{content:'';position:absolute;top:50%;left:0;width:100%;height:4px;
-  background:rgba(138,138,122,0.1)}
-.hero-door::after{content:'';position:absolute;top:50%;right:20px;width:20px;height:40px;
-  background:rgba(138,138,122,0.2);border-radius:10px;transform:translateY(-50%)}
-
-.hero-rivets{position:absolute;inset:0}
-.rivet{position:absolute;width:8px;height:8px;background:radial-gradient(circle,#5a5a50,#2a2a25);
-  border-radius:50%;border:1px solid rgba(138,138,122,0.15)}
-
-.hero-content{position:relative;z-index:5;text-align:center}
-.hero-content .depth{font-size:13px;color:rgba(138,138,122,0.4);letter-spacing:8px;margin-bottom:20px}
-.hero-content h1{font-size:6rem;font-weight:900;color:#8a8a7a;letter-spacing:20px;
-  text-shadow:0 0 80px rgba(138,138,122,0.2);line-height:1}
-.hero-content .sub{font-size:1.5rem;font-weight:300;color:rgba(138,138,122,0.4);
-  letter-spacing:15px;margin-top:10px}
-.hero-content .clearance{margin-top:30px;padding:10px 30px;border:2px solid rgba(138,138,122,0.2);
-  display:inline-block;font-size:11px;color:rgba(138,138,122,0.4);letter-spacing:5px}
-
-.corridor{position:relative;padding:0;overflow:hidden}
-.corridor-inner{display:flex;perspective:1000px}
-.corridor-wall{flex:1;min-height:400px;position:relative}
-.corridor-wall.left{background:linear-gradient(90deg,#0d0d0d,#1a1a18);
-  border-right:4px solid rgba(138,138,122,0.08)}
-.corridor-wall.right{background:linear-gradient(90deg,#1a1a18,#0d0d0d);
-  border-left:4px solid rgba(138,138,122,0.08)}
-
-.wall-panel{position:absolute;background:#151513;border:2px solid rgba(138,138,122,0.08);
-  padding:20px;transition:.3s}
-.wall-panel:hover{border-color:rgba(138,138,122,0.2)}
-.wall-panel h3{font-size:0.85rem;color:#8a8a7a;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.wall-panel p{font-size:0.8rem;line-height:1.8;color:rgba(138,138,122,0.5)}
-
-.floor-grate{height:80px;background:repeating-linear-gradient(90deg,transparent,transparent 8px,
-  rgba(138,138,122,0.05) 8px,rgba(138,138,122,0.05) 10px);
-  border-top:3px solid rgba(138,138,122,0.1);border-bottom:3px solid rgba(138,138,122,0.1);
+.building{position:relative;height:30vh;background:linear-gradient(180deg,#ccc8c0,#b8b4a8,#a8a498);
   display:flex;align-items:center;justify-content:center}
-.floor-grate span{font-size:11px;color:rgba(138,138,122,0.3);letter-spacing:8px}
+.building .facade{display:flex;gap:0;width:100%;height:100%;position:relative}
+.building .pillar{flex:1;border-left:1px solid rgba(0,0,0,0.06);border-right:1px solid rgba(0,0,0,0.06);
+  position:relative}
+.building .pillar::after{content:'';position:absolute;top:0;left:0;width:100%;height:8px;
+  background:rgba(0,0,0,0.08)}
+.building .win{position:absolute;width:35px;height:50px;background:#2a2a2a;border:2px solid #a8a498}
+.building .sign{position:absolute;bottom:25%;left:50%;transform:translateX(-50%);background:#c62828;
+  color:#fff;padding:8px 30px;font-weight:700;letter-spacing:5px;font-size:1.2rem;
+  box-shadow:0 4px 15px rgba(0,0,0,0.3)}
+.building .red-star{position:absolute;top:15%;left:50%;transform:translateX(-50%);
+  color:#c62828;font-size:4rem;text-shadow:0 2px 8px rgba(0,0,0,0.2)}
 
-.section{max-width:1200px;margin:0 auto;padding:60px 40px}
+.steel-div{height:50px;background:linear-gradient(180deg,#4a4a4a,#2a2a2a);
+  border-top:3px solid #666;border-bottom:3px solid #111;display:flex;align-items:center;
+  justify-content:center;position:relative}
+.steel-div .bolt{position:absolute;width:8px;height:8px;
+  background:radial-gradient(circle,#777,#444);border-radius:50%}
+.steel-div .bolt:nth-child(1){left:15px}.steel-div .bolt:nth-child(2){right:15px}
+.steel-div span{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:6px}
 
-.section-label{font-size:11px;color:rgba(138,138,122,0.3);letter-spacing:6px;
-  text-transform:uppercase;margin-bottom:10px}
-.section-title{font-size:2.5rem;font-weight:900;color:#8a8a7a;letter-spacing:8px;
-  margin-bottom:40px;border-bottom:3px solid rgba(138,138,122,0.1);padding-bottom:20px}
+.lab{position:relative;min-height:100vh;background:#111;overflow:hidden}
+.lab .pipe-h{position:absolute;height:12px;background:linear-gradient(180deg,#444,#2a2a2a,#444);
+  border:1px solid rgba(255,255,255,0.06)}
+.lab .pipe-v{position:absolute;width:12px;background:linear-gradient(90deg,#444,#2a2a2a,#444);
+  border:1px solid rgba(255,255,255,0.06)}
+.lab .tank{position:absolute;border:3px solid rgba(255,255,255,0.08);border-radius:50%;
+  overflow:hidden}
+.lab .tank::before{content:'';position:absolute;bottom:0;left:0;width:100%;
+  background:linear-gradient(180deg,rgba(198,40,40,0.3),rgba(198,40,40,0.1))}
+.lab .valve{position:absolute;width:30px;height:30px;background:radial-gradient(circle,#666,#333);
+  border:2px solid #555;border-radius:50%}
+.lab .valve::before{content:'';position:absolute;top:50%;left:50%;width:12px;height:3px;
+  background:#888;transform:translate(-50%,-50%)}
+.lab .indicator{position:absolute;width:6px;height:6px;border-radius:50%}
+.lab .indicator.on{background:#4caf50;box-shadow:0 0 8px rgba(76,175,80,0.6)}
+.lab .indicator.warn{background:#ff9800;box-shadow:0 0 8px rgba(255,152,0,0.5)}
+.lab .indicator.err{background:#f44336;box-shadow:0 0 8px rgba(244,67,54,0.5);
+  animation:blink-red 1.5s ease-in-out infinite}
+@keyframes blink-red{50%{opacity:0.3}}
 
-.bunker-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.content{max-width:1100px;margin:0 auto;padding:60px 40px;position:relative;z-index:5}
+.section-title{font-size:2rem;font-weight:900;color:#fff;letter-spacing:8px;margin-bottom:30px;
+  border-left:4px solid #c62828;padding-left:15px}
+.section-title .ru{display:block;font-size:0.8rem;font-weight:300;letter-spacing:6px;
+  color:rgba(255,255,255,0.3);margin-top:5px}
 
-.bunker-room{background:#151513;border:2px solid rgba(138,138,122,0.08);padding:35px;
-  position:relative;transition:.4s}
-.bunker-room:hover{background:#1a1a18;border-color:rgba(138,138,122,0.2)}
-.bunker-room::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;
-  background:linear-gradient(90deg,transparent,rgba(138,138,122,0.2),transparent)}
+.experiment{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:30px}
+.exp-panel{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:30px;
+  position:relative}
+.exp-panel::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;
+  background:linear-gradient(90deg,transparent,#c62828,transparent)}
+.exp-panel h3{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:2px;margin-bottom:12px}
+.exp-panel p{font-size:0.85rem;line-height:2;color:rgba(255,255,255,0.5)}
+.exp-panel .polymer{display:inline-block;margin-top:10px;padding:4px 12px;
+  background:rgba(198,40,40,0.15);border:1px solid rgba(198,40,40,0.3);
+  color:#e53935;font-size:10px;letter-spacing:2px}
 
-.bunker-room .room-num{font-size:3rem;font-weight:900;color:rgba(138,138,122,0.08);
-  position:absolute;top:10px;right:15px}
-.bunker-room h3{font-size:1rem;font-weight:700;color:#8a8a7a;letter-spacing:3px;
-  text-transform:uppercase;margin-bottom:12px}
-.bunker-room p{font-size:0.85rem;line-height:1.9;color:rgba(138,138,122,0.5)}
-.bunker-room .status{margin-top:15px;font-size:10px;letter-spacing:3px;
-  color:rgba(138,138,122,0.3);text-transform:uppercase}
-.bunker-room .status .dot{display:inline-block;width:6px;height:6px;border-radius:50%;
-  margin-right:6px}
-.bunker-room .status .dot.green{background:#4ade80;box-shadow:0 0 8px rgba(74,222,128,0.5)}
-.bunker-room .status .dot.red{background:#ef4444;box-shadow:0 0 8px rgba(239,68,68,0.5)}
-.bunker-room .status .dot.yellow{background:#facc15;box-shadow:0 0 8px rgba(250,204,21,0.5)}
+.pipeline-diagram{background:#0a0a0a;border:2px solid rgba(255,255,255,0.06);padding:40px;
+  margin:40px 0;position:relative;overflow:hidden}
+.pipeline-diagram::before{content:'СХЕМА ТРУБОПРОВОДА · 管道示意图';position:absolute;
+  top:10px;right:15px;font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:3px}
 
-.blueprint{background:#151513;border:3px solid rgba(138,138,122,0.1);padding:50px;
-  position:relative;margin:0 0 60px}
-.blueprint::before{content:'ЧЕРТЁЖ · 蓝图';position:absolute;top:15px;right:20px;
-  font-size:10px;color:rgba(138,138,122,0.2);letter-spacing:4px}
+.pipe-display{display:flex;gap:0;height:120px;margin:20px 0}
+.pipe-seg{flex:1;position:relative;border:1px solid rgba(255,255,255,0.06)}
+.pipe-seg .flow{position:absolute;bottom:0;left:0;width:100%;
+  background:linear-gradient(0deg,rgba(198,40,40,0.4),transparent)}
+.pipe-seg .label{position:absolute;top:5px;left:5px;font-size:9px;color:rgba(255,255,255,0.2);
+  letter-spacing:2px}
 
-.blueprint-grid{display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(4,60px);gap:2px}
-.bp-cell{background:rgba(138,138,122,0.03);border:1px solid rgba(138,138,122,0.06);
-  display:flex;align-items:center;justify-content:center;font-size:10px;
-  color:rgba(138,138,122,0.3);letter-spacing:1px;position:relative}
-.bp-cell.filled{background:rgba(138,138,122,0.08);border-color:rgba(138,138,122,0.15)}
-.bp-cell.corridor-cell{background:rgba(138,138,122,0.04)}
-.bp-cell.exit{background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.2);color:rgba(239,68,68,0.5)}
-
-.system-log{background:#0d0d0d;border:2px solid rgba(138,138,122,0.08);padding:25px;
-  font-size:0.8rem;line-height:2.2;color:rgba(138,138,122,0.4);max-height:300px;
-  overflow-y:auto}
-.system-log .log-line{border-bottom:1px solid rgba(138,138,122,0.04);padding:4px 0}
-.system-log .log-time{color:rgba(138,138,122,0.25);margin-right:15px}
-.system-log .log-warn{color:#facc15}
-.system-log .log-error{color:#ef4444}
-.system-log .log-ok{color:#4ade80}
-
-footer{text-align:center;padding:50px;border-top:3px solid rgba(138,138,122,0.08);
-  margin-top:40px}
-footer .code{font-size:2rem;font-weight:900;color:rgba(138,138,122,0.15);letter-spacing:15px}
-footer p{font-size:11px;color:rgba(138,138,122,0.2);letter-spacing:5px;margin-top:10px}
-
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.blink{animation:blink 2s ease-in-out infinite}
+footer{text-align:center;padding:40px;border-top:1px solid rgba(255,255,255,0.05);margin-top:40px}
+footer .icon{font-size:2rem;color:rgba(198,40,40,0.2);margin-bottom:10px}
+footer p{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:5px}
 
 @media(max-width:768px){
-  .hero-content h1{font-size:3rem;letter-spacing:8px}
-  .bunker-grid{grid-template-columns:1fr}
-  .blueprint-grid{grid-template-columns:repeat(4,1fr)}
-  .section{padding:40px 15px}
+  .experiment{grid-template-columns:1fr}
+  .content{padding:40px 15px}
 }
 </style>
 </head>
 <body>
 <a href="index.html" class="back-link">← 返回目录</a>
 
-<section class="hero">
-  <div class="hero-door"></div>
-  <div class="hero-rivets" id="rivets"></div>
-  <div class="hero-content">
-    <div class="depth">ГЛУБИНА: -380М · 地下380米</div>
-    <h1>地堡要塞</h1>
-    <div class="sub">БУНКЕР КРЕПОСТЬ</div>
-    <div class="clearance">ДОПУСК УРОВЕНЬ 5 · КОД: ЧЕРНЫЙ МЕДВЕДЬ</div>
+<div class="sky">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+</div>
+
+<div class="building">
+  <div class="facade">
+    <div class="pillar"></div><div class="pillar"></div><div class="pillar"></div>
+    <div class="pillar"></div><div class="pillar"></div><div class="pillar"></div>
+    <div class="pillar"></div><div class="pillar"></div>
   </div>
-</section>
-
-<div class="floor-grate">
-  <span>▼ УРОВЕНЬ B-1 · 负一层 · 行政区域 ▼</span>
+  <div class="win" style="top:25%;left:15%"></div>
+  <div class="win" style="top:25%;left:35%"></div>
+  <div class="win" style="top:25%;left:55%"></div>
+  <div class="win" style="top:25%;left:75%"></div>
+  <div class="red-star">★</div>
+  <div class="sign">聚合物实验室</div>
 </div>
 
-<div class="section">
-  <div class="section-label">LEVEL B-1 — 行政与指挥</div>
-  <h2 class="section-title">指挥层</h2>
-  <div class="bunker-grid">
-    <div class="bunker-room">
-      <span class="room-num">B1</span>
-      <h3>中央指挥室</h3>
-      <p>地堡的心脏，一个被六层钢板和两米厚铅混凝土包裹的球形空间。三百六十度环绕屏幕实时显示着地表和设施内部的每一个角落。指挥官的座椅位于正中央，可以旋转面对任何一个屏幕。这里是整个地下城市的决策中枢。</p>
-      <div class="status"><span class="dot green"></span>СИСТЕМА НОРМА · 系统正常</div>
-    </div>
-    <div class="bunker-room">
-      <span class="room-num">B1</span>
-      <h3>通讯中心</h3>
-      <p>配备了最先进的加密通讯系统，可以与全球任何一个苏维埃设施建立安全连接。天线阵列深埋在地下，通过三百米长的波导管与地表天线相连。即使在核战争的电磁脉冲下，通讯中心也能保持七十二小时的不间断运作。</p>
-      <div class="status"><span class="dot green"></span>СИСТЕМА НОРМА · 系统正常</div>
-    </div>
-    <div class="bunker-room">
-      <span class="room-num">B1</span>
-      <h3>战略分析室</h3>
-      <p>墙壁上覆盖着巨大的地图，标注着全球苏维埃设施的位置和状态。分析员们坐在半圆形的工位前，面前是闪烁的终端屏幕。房间角落里有一台老式电传打字机，据说曾直接连接克里姆林宫的热线。</p>
-      <div class="status"><span class="dot yellow"></span>МОНИТОРИНГ · 监控中</div>
-    </div>
-  </div>
+<div class="steel-div">
+  <div class="bolt"></div><div class="bolt"></div>
+  <span>▼ ЛАБОРАТОРИЯ ПОЛИМЕРА ▼</span>
 </div>
 
-<div class="floor-grate">
-  <span>▼ УРОВЕНЬ B-3 · 负三层 · 工业生产 ▼</span>
-</div>
+<div class="lab">
+  <div class="pipe-h" style="top:3%;left:0;width:100%"></div>
+  <div class="pipe-h" style="top:25%;left:0;width:70%"></div>
+  <div class="pipe-h" style="top:50%;left:15%;width:85%"></div>
+  <div class="pipe-h" style="top:75%;left:0;width:100%"></div>
+  <div class="pipe-h" style="bottom:5%;left:0;width:100%"></div>
+  <div class="pipe-v" style="top:0;left:10%;height:100%"></div>
+  <div class="pipe-v" style="top:0;left:40%;height:50%"></div>
+  <div class="pipe-v" style="top:25%;right:25%;height:75%"></div>
+  <div class="pipe-v" style="top:0;right:8%;height:100%"></div>
 
-<div class="section">
-  <div class="section-label">LEVEL B-3 — 工业与制造</div>
-  <h2 class="section-title">工业层</h2>
-  <div class="bunker-grid">
-    <div class="bunker-room">
-      <span class="room-num">B3</span>
-      <h3>地下兵工厂</h3>
-      <p>一条全自动武器生产线隐藏在地堡最深处。从原材料的冶炼到成品的组装，整个过程无需人工干预。机械臂如同蜘蛛般灵活地在流水线上穿梭，焊接的火花在黑暗中如同萤火虫般闪烁。这里每天可以生产三百支突击步枪或五十枚战术导弹。</p>
-      <div class="status"><span class="dot green"></span>ПРОИЗВОДСТВО · 生产中</div>
-    </div>
-    <div class="bunker-room">
-      <span class="room-num">B3</span>
-      <h3>核反应堆</h3>
-      <p>地堡的能源心脏——一座小型核反应堆，可以独立运行二十年而无需补充燃料。反应堆被铅和硼水层层包裹，散发出一种令人不安的蓝色切伦科夫辐射光芒。控制棒的升降决定了整个地堡的生死存亡。操作员们二十四小时轮班监控着每一个参数。</p>
-      <div class="status"><span class="dot green"></span>АКТИВНЫЙ · 运行中</div>
-    </div>
-    <div class="bunker-room">
-      <span class="room-num">B3</span>
-      <h3>水净化工厂</h3>
-      <p>地堡的饮用水来自地下一千米的深层地下水。净化系统采用七级过滤和紫外线消毒，水质甚至优于地表的自来水厂。储水罐可以维持全设施人员一百八十天的饮用需求。墙壁上的管道如同血管般将净水输送到每一个房间。</p>
-      <div class="status"><span class="dot green"></span>НОРМА · 正常</div>
-    </div>
-  </div>
-</div>
+  <div class="tank" style="width:100px;height:100px;top:12%;left:20%"></div>
+  <div class="tank" style="width:70px;height:70px;top:35%;right:12%"></div>
+  <div class="tank" style="width:120px;height:120px;bottom:15%;left:55%"></div>
 
-<div class="blueprint">
-  <h3 style="font-size:1rem;color:#8a8a7a;letter-spacing:4px;margin-bottom:20px;text-transform:uppercase">
-    地堡剖面图 · РАЗРЕЗ БУНКЕРА
-  </h3>
-  <div class="blueprint-grid">
-    <div class="bp-cell filled">B1-指挥</div><div class="bp-cell filled">B1-通讯</div>
-    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 走廊 —</div>
-    <div class="bp-cell filled" style="grid-column:span 2">B1-分析</div>
-    <div class="bp-cell exit" style="grid-column:span 2">EXIT ↑</div>
-    <div class="bp-cell filled">B2-医疗</div><div class="bp-cell filled">B2-宿舍</div>
-    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 走廊 —</div>
-    <div class="bp-cell filled" style="grid-column:span 2">B2-食堂</div>
-    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 电梯 —</div>
-    <div class="bp-cell filled">B3-兵工</div><div class="bp-cell filled">B3-反应堆</div>
-    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 管道 —</div>
-    <div class="bp-cell filled" style="grid-column:span 2">B3-净水</div>
-    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 维修 —</div>
-    <div class="bp-cell filled">B5-仓储</div><div class="bp-cell filled">B5-冷储</div>
-    <div class="bp-cell corridor-cell" style="grid-column:span 2">— 通道 —</div>
-    <div class="bp-cell filled" style="grid-column:span 2">B5-禁区</div>
-    <div class="bp-cell exit" style="grid-column:span 2">LOCK ↓</div>
-  </div>
-</div>
+  <div class="valve" style="top:22%;left:8%"></div>
+  <div class="valve" style="top:48%;left:38%"></div>
+  <div class="valve" style="top:72%;right:23%"></div>
 
-<div class="section">
-  <div class="section-label">СИСТЕМНЫЙ ЖУРНАЛ — 系统日志</div>
-  <h2 class="section-title">运行日志</h2>
-  <div class="system-log">
-    <div class="log-line"><span class="log-time">[1986-04-26 01:23:04]</span> <span class="log-error">КРИТИЧЕСКИЙ: 地表辐射水平超标 — 启动全面封锁协议</span></div>
-    <div class="log-line"><span class="log-time">[1986-04-26 01:23:05]</span> 密封门 B1-B5 全部关闭 · 气压平衡系统启动</div>
-    <div class="log-line"><span class="log-time">[1986-04-26 01:23:06]</span> 核反应堆功率提升至 120% · 应急供电模式</div>
-    <div class="log-line"><span class="log-time">[1986-04-26 01:24:00]</span> <span class="log-ok">空气过滤系统 HEPA-7 启动 · 内循环建立</span></div>
-    <div class="log-line"><span class="log-time">[1986-04-26 01:25:30]</span> 储备物资清点: 食物 270天 · 水 180天 · 医疗 90天</div>
-    <div class="log-line"><span class="log-time">[1986-04-26 02:00:00]</span> <span class="log-warn">ПРЕДУПРЕЖДЕНИЕ: 地表通讯中断 — 切换至地下通讯网络</span></div>
-    <div class="log-line"><span class="log-time">[1986-04-26 03:15:00]</span> 兵工厂转入战时生产模式 · 弹药产量 +300%</div>
-    <div class="log-line"><span class="log-time">[1986-04-26 06:00:00]</span> <span class="log-ok">第一批蘑菇种植舱投产 · 食物自给计划启动</span></div>
-    <div class="log-line"><span class="log-time">[1986-05-01 00:00:00]</span> 封锁第5天 · 人员士气评估: 稳定</div>
-    <div class="log-line"><span class="log-time">[1986-06-01 00:00:00]</span> <span class="log-warn">ПРЕДУПРЕЖДЕНИЕ: B-5禁区检测到异常震动 — 频率: 未知</span></div>
-    <div class="log-line"><span class="log-time">[1986-06-15 00:00:00]</span> <span class="log-error">КРИТИЧЕСКИЙ: B-5禁区密封失效 — 自动封锁启动 — 人员撤离</span></div>
-    <div class="log-line"><span class="log-time">[1986-06-15 03:00:00]</span> B-5禁区状态: <span class="log-error">ПОТЕРЯНО · 失联</span></div>
+  <div class="indicator on" style="top:5%;left:25%"></div>
+  <div class="indicator on" style="top:5%;left:45%"></div>
+  <div class="indicator warn" style="top:5%;left:65%"></div>
+  <div class="indicator err" style="top:28%;left:8%"></div>
+  <div class="indicator on" style="top:52%;left:13%"></div>
+  <div class="indicator warn" style="top:78%;right:6%"></div>
+  <div class="indicator on" style="bottom:3%;left:35%"></div>
+
+  <div class="content">
+    <h2 class="section-title">聚合物研究<span class="ru">ИССЛЕДОВАНИЕ ПОЛИМЕРА — 实验档案</span></h2>
+    <div class="experiment">
+      <div class="exp-panel">
+        <h3>聚合物合成反应</h3>
+        <p>红色聚合物是3826号设施最核心的科技突破。这种液态可编程材料可以被注入任何结构中，赋予其自主修复和学习能力。在实验室的反应釜中，聚合物以每分钟三毫升的速度合成，每一滴都携带着数百万个纳米级计算单元。反应温度必须精确控制在47.3°C，任何偏差都会导致聚合物失去活性。</p>
+        <span class="polymer">ПОЛИМЕР · 红色聚合物</span>
+      </div>
+      <div class="exp-panel">
+        <h3>神经连接实验</h3>
+        <p>THOUGHT神经连接器是聚合物技术的巅峰应用——将液态聚合物注入人体神经系统，实现人脑与机器的直接对话。实验对象的太阳穴上会安装两个圆形接口，聚合物通过这些接口流入大脑皮层。成功连接后，实验对象可以通过意念控制机器人，甚至访问"集体"网络中的所有数据。</p>
+        <span class="polymer">THOUGHT · 神经连接器</span>
+      </div>
+      <div class="exp-panel">
+        <h3>仿生机器人铸造</h3>
+        <p>在地下第三层的铸造车间中，仿生机器人的外壳由一种特殊的聚合物陶瓷制成。这种材料光滑如瓷器，却坚硬如钢铁。每一个机器人面孔都是独一无二的——它们基于苏联公民的面部数据建模，但会被故意扭曲几个微米，制造出一种令人不安的"几乎人类"的感觉。</p>
+        <span class="polymer">КЕРАМИКА · 聚合物陶瓷</span>
+      </div>
+      <div class="exp-panel">
+        <h3>集体网络测试</h3>
+        <p>集体1.0是一个无线网络人工智能系统，将所有机器人连接为一个统一的整体。当一台机器人学习到新技能时，所有机器人会同时获得这项技能。集体2.0的目标更进一步——将人类也纳入网络。通过THOUGHT连接器，人类可以直接向机器人下达指令，甚至将自己的意识上传到网络中。</p>
+        <span class="polymer">КОЛЛЕКТИВ · 集体网络</span>
+      </div>
+    </div>
+
+    <div class="pipeline-diagram">
+      <h3 style="color:rgba(255,255,255,0.5);font-size:0.9rem;letter-spacing:3px;margin-bottom:15px">
+        聚合物输送管道 · 总长度: 347公里
+      </h3>
+      <div class="pipe-display">
+        <div class="pipe-seg"><div class="flow" style="height:80%"></div><div class="label">合成车间</div></div>
+        <div class="pipe-seg"><div class="flow" style="height:65%"></div><div class="label">净化站</div></div>
+        <div class="pipe-seg"><div class="flow" style="height:90%"></div><div class="label">储存罐</div></div>
+        <div class="pipe-seg"><div class="flow" style="height:50%"></div><div class="label">分配中心</div></div>
+        <div class="pipe-seg"><div class="flow" style="height:75%"></div><div class="label">机器人车间</div></div>
+        <div class="pipe-seg"><div class="flow" style="height:40%"></div><div class="label">THOUGHT实验室</div></div>
+      </div>
+      <p style="font-size:0.8rem;color:rgba(255,255,255,0.3);line-height:2;margin-top:15px">
+        聚合物从地下合成车间通过直径30厘米的主管道输送至各实验区域。管道内壁涂有纳米防粘涂层，
+        确保聚合物在输送过程中不会附着在管壁上。每个分叉点都装有流量传感器和紧急截止阀。
+        当检测到异常流量时，系统会在0.3秒内关闭相关管段。
+      </p>
+    </div>
   </div>
 </div>
 
 <footer>
-  <div class="code">БУНКЕР</div>
-  <p>ГЛУБИННЫЙ ЗАПАСНОЙ КОМАНДНЫЙ ПУНКТ · 深层备用指挥所</p>
-  <p style="margin-top:8px;font-size:10px;color:rgba(138,138,122,0.15)">ПОСЛЕДНЕЕ УБЕЖИЩЕ · 最后的庇护所</p>
+  <div class="icon">⚗</div>
+  <p>ЛАБОРАТОРИЯ ПОЛИМЕРА · 聚合物实验室 · 3826</p>
 </footer>
-
-<script>
-const rivets=document.getElementById('rivets');
-for(let i=0;i<40;i++){
-  const r=document.createElement('div');
-  r.className='rivet';
-  r.style.top=Math.random()*100+'%';
-  r.style.left=Math.random()*100+'%';
-  rivets.appendChild(r);
-}
-</script>
 </body>
 </html>

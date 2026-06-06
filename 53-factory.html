@@ -3,288 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>红色工厂 — КРАСНЫЙ ЗАВОД</title>
+<title>机器人车间 — 3826号设施</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700;900&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Noto Sans SC',sans-serif;background:#0a0606;color:#b08060;overflow-x:hidden}
-a{color:#b08060;text-decoration:none}
+body{font-family:'Noto Sans SC',sans-serif;background:#1a1a1a;color:#ddd;overflow-x:hidden}
+a{color:#ddd;text-decoration:none}
+.back-link{position:fixed;top:20px;left:20px;z-index:100;display:inline-block;padding:10px 20px;
+  background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:13px;
+  letter-spacing:3px;backdrop-filter:blur(10px);transition:.3s}
+.back-link:hover{background:rgba(255,255,255,0.2)}
 
-.back-link{display:inline-block;padding:12px 24px;background:rgba(176,128,96,0.1);
-  border:2px solid #b08060;color:#b08060;margin:20px;font-size:14px;letter-spacing:3px;
-  font-weight:700;transition:.3s;position:relative;z-index:10}
-.back-link:hover{background:#b08060;color:#0a0606}
+.sky{position:relative;height:40vh;background:linear-gradient(180deg,#4a8cc8 0%,#7ab5e8 50%,#b8d8f0 100%);overflow:hidden}
+.sky .cloud{position:absolute;background:rgba(255,255,255,0.5);border-radius:50%;filter:blur(5px)}
+.sky .cloud.c1{width:320px;height:80px;top:15%;left:15%;animation:drift 45s linear infinite}
+.sky .cloud.c2{width:180px;height:50px;top:30%;left:65%;animation:drift 60s linear infinite reverse}
+@keyframes drift{from{transform:translateX(-400px)}to{transform:translateX(calc(100vw + 400px))}}
 
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(176,128,96,0.01) 2px,rgba(176,128,96,0.01) 4px);
-  pointer-events:none;z-index:9999}
+.building{position:relative;height:30vh;background:linear-gradient(180deg,#c8c4b8,#b0aca0,#989488);
+  display:flex;align-items:flex-end;justify-content:center}
+.building .wall{width:100%;height:100%;position:relative;display:flex}
+.building .section{flex:1;border-left:1px solid rgba(0,0,0,0.06);position:relative}
+.building .section::before{content:'';position:absolute;top:0;left:0;width:100%;height:6px;
+  background:rgba(0,0,0,0.1)}
+.building .w{position:absolute;width:30px;height:45px;background:#2a2a2a;border:2px solid #a09c90}
+.building .gate{position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:200px;height:60%;background:linear-gradient(180deg,#3a3a3a,#2a2a2a);
+  border:3px solid #777;border-bottom:none}
+.building .gate::before{content:'ЦЕХ №7';position:absolute;top:15px;left:50%;transform:translateX(-50%);
+  font-size:14px;color:rgba(255,255,255,0.3);letter-spacing:5px;font-weight:700}
+.building .gate::after{content:'';position:absolute;top:50%;left:50%;width:40px;height:40px;
+  border:3px solid #888;border-radius:50%;transform:translate(-50%,-50%)}
+.building .banner{position:absolute;top:8%;background:#c62828;color:#fff;padding:5px 20px;
+  font-size:11px;letter-spacing:4px;font-weight:700}
 
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;
-  overflow:hidden;background:#0a0606}
+.steel-div{height:50px;background:linear-gradient(180deg,#4a4a4a,#2a2a2a);
+  border-top:3px solid #666;border-bottom:3px solid #111;display:flex;align-items:center;
+  justify-content:center}
+.steel-div span{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:6px}
 
-.hero-gear{position:absolute;border:4px solid rgba(176,128,96,0.08);border-radius:50%}
-.hero-gear.g1{width:400px;height:400px;top:-100px;left:-100px;animation:spin 30s linear infinite}
-.hero-gear.g2{width:300px;height:300px;bottom:-80px;right:-80px;animation:spin 25s linear infinite reverse}
-.hero-gear.g3{width:200px;height:200px;top:30%;right:15%;animation:spin 20s linear infinite}
-.hero-gear.g4{width:150px;height:150px;bottom:30%;left:10%;animation:spin 15s linear infinite reverse}
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.workshop{position:relative;min-height:100vh;background:#111;overflow:hidden}
+.workshop .beam{position:absolute;background:linear-gradient(180deg,#333,#222,#333);
+  border:1px solid rgba(255,255,255,0.04)}
+.workshop .beam.h{height:10px}.workshop .beam.v{width:10px}
+.workshop .conveyor{position:absolute;height:30px;background:repeating-linear-gradient(90deg,
+  #333 0px,#333 20px,#2a2a2a 20px,#2a2a2a 22px);
+  border:2px solid #444;overflow:hidden}
+.workshop .conveyor::after{content:'';position:absolute;top:0;left:0;width:200%;height:100%;
+  background:repeating-linear-gradient(90deg,transparent,transparent 38px,rgba(255,255,255,0.03) 38px,rgba(255,255,255,0.03) 40px);
+  animation:conveyor-run 2s linear infinite}
+@keyframes conveyor-run{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.workshop .robot-arm{position:absolute;width:8px;background:linear-gradient(90deg,#555,#888,#555);
+  border:1px solid #666;transform-origin:top center}
+.workshop .robot-arm .claw{position:absolute;bottom:-15px;left:50%;transform:translateX(-50%);
+  width:20px;height:15px;border:2px solid #888;border-top:none;border-radius:0 0 5px 5px}
 
-.hero-gear::before{content:'';position:absolute;top:50%;left:50%;width:20%;height:20%;
-  background:rgba(176,128,96,0.1);border-radius:50%;transform:translate(-50%,-50%)}
-.hero-gear::after{content:'';position:absolute;top:5%;left:50%;width:4px;height:15%;
-  background:rgba(176,128,96,0.12);transform-origin:bottom center;transform:translateX(-50%)}
+.workshop .screen{position:absolute;background:#0a1a0a;border:2px solid #333;padding:12px;
+  font-family:'Courier New',monospace;font-size:10px;color:#4caf50;line-height:1.6}
+.workshop .led{position:absolute;width:5px;height:5px;border-radius:50%}
+.workshop .led.g{background:#4caf50;box-shadow:0 0 6px rgba(76,175,80,0.5)}
+.workshop .led.r{background:#f44336;box-shadow:0 0 6px rgba(244,67,54,0.5)}
 
-.hero-smoke{position:absolute;bottom:0;left:0;width:100%;height:40%;
-  background:linear-gradient(0deg,rgba(176,128,96,0.05),transparent);pointer-events:none}
+.robot-row{display:flex;justify-content:center;gap:30px;padding:30px 0;margin:20px 0;
+  border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05)}
+.robot-silhouette{width:50px;height:100px;position:relative}
+.robot-silhouette .head{width:30px;height:30px;background:radial-gradient(circle,#e0d8d0,#b0a8a0);
+  border-radius:50%;margin:0 auto;position:relative}
+.robot-silhouette .head::before{content:'';position:absolute;top:12px;left:5px;width:8px;height:3px;
+  background:#333;border-radius:2px;box-shadow:12px 0 0 #333}
+.robot-silhouette .body{width:35px;height:40px;background:linear-gradient(180deg,#c0b8b0,#a09890);
+  margin:3px auto;border-radius:3px}
+.robot-silhouette .arm{position:absolute;width:6px;height:35px;background:#b0a8a0;border-radius:3px}
+.robot-silhouette .arm.l{left:-10px;top:35px;transform:rotate(10deg)}
+.robot-silhouette .arm.r{right:-10px;top:35px;transform:rotate(-10deg)}
+.robot-silhouette .leg{position:absolute;width:8px;height:30px;background:#a09890;border-radius:3px}
+.robot-silhouette .leg.l{left:12px;bottom:-28px}
+.robot-silhouette .leg.r{right:12px;bottom:-28px}
 
-.hero-content{position:relative;z-index:5;text-align:center}
-.hero-content .factory-id{font-family:'Courier New',monospace;font-size:12px;
-  color:rgba(176,128,96,0.3);letter-spacing:8px;margin-bottom:25px}
-.hero-content h1{font-size:5.5rem;font-weight:900;color:#b08060;letter-spacing:12px;
-  text-shadow:0 0 80px rgba(176,128,96,0.3);line-height:1.1}
-.hero-content h1 .ru{display:block;font-size:2rem;font-weight:300;letter-spacing:20px;
-  color:rgba(176,128,96,0.4);margin-top:10px}
-.hero-content .slogan{font-size:1.1rem;color:rgba(176,128,96,0.5);margin-top:20px;
-  letter-spacing:8px;font-weight:700}
+.content{max-width:1100px;margin:0 auto;padding:60px 40px;position:relative;z-index:5}
+.section-title{font-size:2rem;font-weight:900;color:#fff;letter-spacing:8px;margin-bottom:30px;
+  border-left:4px solid #c62828;padding-left:15px}
+.section-title .ru{display:block;font-size:0.8rem;font-weight:300;letter-spacing:6px;
+  color:rgba(255,255,255,0.3);margin-top:5px}
 
-.conveyor{height:120px;background:#0d0808;position:relative;overflow:hidden;
-  border-top:3px solid rgba(176,128,96,0.15);border-bottom:3px solid rgba(176,128,96,0.15)}
-.conveyor-belt{position:absolute;bottom:0;left:0;width:200%;height:40px;
-  background:repeating-linear-gradient(90deg,rgba(176,128,96,0.08) 0px,rgba(176,128,96,0.08) 40px,
-  rgba(176,128,96,0.03) 40px,rgba(176,128,96,0.03) 80px);animation:conveyor-move 4s linear infinite}
-@keyframes conveyor-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.robot-catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.robot-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);
+  padding:30px;text-align:center;position:relative;transition:.3s}
+.robot-card:hover{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.12)}
+.robot-card::before{content:'';position:absolute;top:0;left:50%;width:40px;height:3px;
+  background:#c62828;transform:translateX(-50%)}
+.robot-card .face{width:60px;height:60px;background:radial-gradient(circle,#e8e0d8,#c8c0b8);
+  border-radius:50%;margin:0 auto 15px;position:relative}
+.robot-card .face::before{content:'';position:absolute;top:25px;left:15px;width:10px;height:3px;
+  background:#333;border-radius:2px;box-shadow:18px 0 0 #333}
+.robot-card .face::after{content:'';position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+  width:12px;height:2px;background:#555;border-radius:1px}
+.robot-card h3{font-size:1rem;font-weight:700;color:#fff;letter-spacing:2px;margin-bottom:8px}
+.robot-card .model{font-family:'Courier New',monospace;font-size:10px;color:rgba(255,255,255,0.25);
+  letter-spacing:3px;margin-bottom:10px}
+.robot-card p{font-size:0.8rem;line-height:1.8;color:rgba(255,255,255,0.45)}
 
-.conveyor-item{position:absolute;bottom:50px;width:30px;height:30px;
-  background:rgba(176,128,96,0.15);border:2px solid rgba(176,128,96,0.2);
-  animation:item-move 8s linear infinite}
-@keyframes item-move{from{transform:translateX(-50px)}to{transform:translateX(calc(100vw + 50px))}}
+footer{text-align:center;padding:40px;border-top:1px solid rgba(255,255,255,0.05);margin-top:40px}
+footer .icon{font-size:2rem;color:rgba(255,255,255,0.1);margin-bottom:10px}
+footer p{font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:5px}
 
-.section{max-width:1200px;margin:0 auto;padding:70px 40px}
-
-.section-header{display:flex;align-items:center;gap:20px;margin-bottom:40px}
-.section-header .line{flex:1;height:2px;background:linear-gradient(90deg,rgba(176,128,96,0.3),transparent)}
-.section-header h2{font-size:2rem;font-weight:900;color:#b08060;letter-spacing:8px;white-space:nowrap}
-.section-header .line-left{background:linear-gradient(270deg,rgba(176,128,96,0.3),transparent)}
-
-.workshop{display:grid;grid-template-columns:repeat(2,1fr);gap:0}
-
-.machine{background:linear-gradient(135deg,#120e0a,#0a0606);border:2px solid rgba(176,128,96,0.1);
-  padding:40px;position:relative;overflow:hidden}
-.machine::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;
-  background:linear-gradient(90deg,transparent,#b08060,transparent)}
-.machine::after{content:'';position:absolute;bottom:15px;right:15px;width:50px;height:50px;
-  border:2px solid rgba(176,128,96,0.08);border-radius:50%}
-
-.machine .machine-id{font-family:'Courier New',monospace;font-size:10px;
-  color:rgba(176,128,96,0.2);letter-spacing:4px;margin-bottom:15px}
-.machine h3{font-size:1.3rem;font-weight:700;color:#b08060;letter-spacing:3px;margin-bottom:15px}
-.machine p{font-size:0.9rem;line-height:2;color:rgba(176,128,96,0.5)}
-.machine .specs{margin-top:15px;display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.machine .spec{font-family:'Courier New',monospace;font-size:11px;color:rgba(176,128,96,0.3);
-  padding:5px 10px;background:rgba(176,128,96,0.03);border:1px solid rgba(176,128,96,0.06)}
-
-.chimney-row{display:flex;justify-content:center;gap:60px;padding:40px 0;position:relative}
-.chimney{width:60px;height:200px;background:linear-gradient(90deg,#1a1210,#2a1e18,#1a1210);
-  position:relative;border:2px solid rgba(176,128,96,0.08)}
-.chimney::before{content:'';position:absolute;top:-20px;left:-10px;width:calc(100% + 20px);height:20px;
-  background:#2a1e18;border:2px solid rgba(176,128,96,0.1)}
-.chimney::after{content:'';position:absolute;top:-60px;left:50%;width:30px;height:40px;
-  background:radial-gradient(ellipse at bottom,rgba(176,128,96,0.15),transparent);
-  transform:translateX(-50%);animation:smoke 3s ease-out infinite}
-@keyframes smoke{0%{opacity:0.5;transform:translateX(-50%) translateY(0) scale(1)}
-  100%{opacity:0;transform:translateX(-50%) translateY(-40px) scale(2)}}
-
-.chimney:nth-child(2)::after{animation-delay:1s;height:50px}
-.chimney:nth-child(3)::after{animation-delay:2s}
-.chimney:nth-child(4)::after{animation-delay:0.5s;height:35px}
-
-.production-line{background:#120e0a;border:3px solid rgba(176,128,96,0.1);padding:50px;
-  position:relative}
-.production-line::before{content:'ПРОИЗВОДСТВЕННАЯ ЛИНИЯ · 生产线';position:absolute;
-  top:15px;right:20px;font-size:10px;color:rgba(176,128,96,0.2);letter-spacing:3px}
-
-.process-steps{display:flex;gap:0;margin-top:20px}
-.process-step{flex:1;padding:25px;border:1px solid rgba(176,128,96,0.08);text-align:center;
-  position:relative;background:rgba(176,128,96,0.02)}
-.process-step::after{content:'→';position:absolute;right:-12px;top:50%;transform:translateY(-50%);
-  font-size:20px;color:rgba(176,128,96,0.3);z-index:2}
-.process-step:last-child::after{display:none}
-.process-step .step-num{font-size:2rem;font-weight:900;color:rgba(176,128,96,0.1);
-  font-family:'Courier New',monospace}
-.process-step h4{font-size:0.9rem;font-weight:700;color:#b08060;margin:10px 0 8px;letter-spacing:2px}
-.process-step p{font-size:0.8rem;color:rgba(176,128,96,0.4);line-height:1.7}
-
-.output-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;
-  border:2px solid rgba(176,128,96,0.1)}
-.stat-box{padding:30px;text-align:center;border-right:1px solid rgba(176,128,96,0.08);
-  background:rgba(176,128,96,0.02)}
-.stat-box:last-child{border-right:none}
-.stat-box .num{font-size:2.5rem;font-weight:900;color:#b08060;font-family:'Courier New',monospace}
-.stat-box .unit{font-size:12px;color:rgba(176,128,96,0.3);letter-spacing:3px;margin-top:8px;
-  text-transform:uppercase}
-
-footer{text-align:center;padding:50px;border-top:2px solid rgba(176,128,96,0.1);
-  margin-top:60px}
-footer .gear-icon{font-size:2rem;color:rgba(176,128,96,0.2);margin-bottom:15px;
-  animation:spin 10s linear infinite;display:inline-block}
-footer p{font-size:12px;color:rgba(176,128,96,0.25);letter-spacing:5px}
-
-@media(max-width:768px){
-  .hero-content h1{font-size:3rem;letter-spacing:5px}
-  .workshop{grid-template-columns:1fr}
-  .process-steps{flex-direction:column}
-  .process-step::after{display:none}
-  .output-stats{grid-template-columns:repeat(2,1fr)}
-  .chimney-row{gap:30px}
-}
+@media(max-width:768px){.robot-catalog{grid-template-columns:1fr}.content{padding:40px 15px}}
 </style>
 </head>
 <body>
 <a href="index.html" class="back-link">← 返回目录</a>
 
-<section class="hero">
-  <div class="hero-gear g1"></div>
-  <div class="hero-gear g2"></div>
-  <div class="hero-gear g3"></div>
-  <div class="hero-gear g4"></div>
-  <div class="hero-smoke"></div>
-  <div class="hero-content">
-    <div class="factory-id">ЗАВОД №47 · ОСНОВАН 1952 · ГОРОД СОВЕТОВ</div>
-    <h1>红色工厂
-      <span class="ru">КРАСНЫЙ ЗАВОД</span>
-    </h1>
-    <div class="slogan">ТРУД · ПОРЯДОК · МОЩЬ · 劳动 · 秩序 · 力量</div>
-  </div>
-</section>
-
-<div class="conveyor">
-  <div class="conveyor-belt"></div>
-  <div class="conveyor-item" style="animation-delay:0s"></div>
-  <div class="conveyor-item" style="animation-delay:2s"></div>
-  <div class="conveyor-item" style="animation-delay:4s"></div>
-  <div class="conveyor-item" style="animation-delay:6s"></div>
+<div class="sky">
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
 </div>
 
-<div class="section">
-  <div class="section-header">
-    <div class="line line-left"></div>
-    <h2>生产车间</h2>
-    <div class="line"></div>
+<div class="building">
+  <div class="wall">
+    <div class="section"><div class="w" style="top:20%;left:30%"></div></div>
+    <div class="section"><div class="w" style="top:20%;left:40%"></div></div>
+    <div class="section"><div class="w" style="top:20%;left:30%"></div></div>
+    <div class="section"><div class="w" style="top:20%;left:40%"></div></div>
+    <div class="section"><div class="w" style="top:20%;left:30%"></div></div>
   </div>
-  <div class="workshop">
-    <div class="machine">
-      <div class="machine-id">ЦЕХ-01 · 一号车间</div>
-      <h3>锻压车间</h3>
-      <p>八台万吨级水压机昼夜不停地将炽热的钢锭锻造成各种形状。每一次锤击都伴随着震耳欲聋的巨响和飞溅的火花。车间的地面是厚达半米的铸铁板，经过数十年的锤击已经变得光滑如镜。空气中弥漫着灼热的金属气息，温度常年保持在五十度以上。</p>
-      <div class="specs">
-        <div class="spec">压力: 15000吨</div>
-        <div class="spec">温度: 1200°C</div>
-        <div class="spec">日产: 200件</div>
-        <div class="spec">运行: 24/7</div>
-      </div>
-    </div>
-    <div class="machine">
-      <div class="machine-id">ЦЕХ-02 · 二号车间</div>
-      <h3>精密铸造</h3>
-      <p>失蜡铸造工艺在这里被推向了极致。每一个零件都经过七十二道工序的精密加工，误差控制在零点零一毫米以内。车间内部保持着恒温恒湿的环境，空气经过三层过滤。工人们穿着白色无尘服，如同外科医生般精确地操作着每一台设备。</p>
-      <div class="specs">
-        <div class="spec">精度: 0.01mm</div>
-        <div class="spec">工序: 72道</div>
-        <div class="spec">良率: 99.8%</div>
-        <div class="spec">洁净: ISO 5</div>
-      </div>
-    </div>
-    <div class="machine">
-      <div class="machine-id">ЦЕХ-03 · 三号车间</div>
-      <h3>焊接中心</h3>
-      <p>自动化焊接机器人在密闭的防护罩内舞动着机械臂，电弧的蓝光在黑暗中如同闪电般刺眼。每一条焊缝都经过X射线探伤检测，确保零缺陷。车间的墙壁上挂满了焊接工艺规程，每一张都是数十年经验的结晶。这里的焊接技术可以将钛合金与不锈钢完美融合。</p>
-      <div class="specs">
-        <div class="spec">焊接: 氩弧/电子束</div>
-        <div class="spec">检测: X射线</div>
-        <div class="spec">材料: 钛/不锈钢</div>
-        <div class="spec">机器人: 24台</div>
-      </div>
-    </div>
-    <div class="machine">
-      <div class="machine-id">ЦЕХ-04 · 四号车间</div>
-      <h3>总装线</h3>
-      <p>所有零部件在这里汇聚，被组装成最终产品。流水线长达三百米，两侧是密密麻麻的工具架和零件箱。每一个工位都有严格的操作规范和时间控制——每个动作精确到秒。头顶的行车如同巨鹰般将重型部件精准地吊装到位。整条生产线的节拍是四十五秒一个成品。</p>
-      <div class="specs">
-        <div class="spec">线长: 300米</div>
-        <div class="spec">节拍: 45秒</div>
-        <div class="spec">工位: 120个</div>
-        <div class="spec">日产量: 800</div>
-      </div>
-    </div>
-  </div>
+  <div class="gate"></div>
+  <div class="banner" style="left:10%">РОБОТЫ</div>
+  <div class="banner" style="right:10%">机器人</div>
 </div>
 
-<div class="chimney-row">
-  <div class="chimney"></div>
-  <div class="chimney"></div>
-  <div class="chimney"></div>
-  <div class="chimney"></div>
-</div>
+<div class="steel-div"><span>▼ ЦЕХ РОБОТОВ · 机器人车间 ▼</span></div>
 
-<div class="section">
-  <div class="section-header">
-    <div class="line line-left"></div>
-    <h2>生产工艺</h2>
-    <div class="line"></div>
+<div class="workshop">
+  <div class="beam h" style="top:5%;left:0;width:100%"></div>
+  <div class="beam h" style="top:35%;left:0;width:100%"></div>
+  <div class="beam h" style="bottom:10%;left:0;width:100%"></div>
+  <div class="beam v" style="top:0;left:12%;height:100%"></div>
+  <div class="beam v" style="top:0;right:12%;height:100%"></div>
+
+  <div class="conveyor" style="top:28%;left:15%;width:70%"></div>
+  <div class="conveyor" style="top:60%;left:10%;width:80%"></div>
+
+  <div class="robot-arm" style="top:10%;left:30%;height:120px;transform:rotate(-15deg)"></div>
+  <div class="robot-arm" style="top:10%;left:55%;height:100px;transform:rotate(10deg)"></div>
+  <div class="robot-arm" style="top:10%;left:75%;height:130px;transform:rotate(-5deg)"></div>
+
+  <div class="screen" style="top:10%;right:5%">
+    ROBOT_ASSEMBLY v3.2<br>
+    UNITS: 847/SHIFT<br>
+    STATUS: NOMINAL<br>
+    DEFECT RATE: 0.02%
   </div>
-  <div class="production-line">
-    <p style="color:rgba(176,128,96,0.5);line-height:2;margin-bottom:10px">
-      从原材料到成品，每一件产品都经过严格的工艺流程。四十七号工厂的生产线是苏维埃工业体系的缩影——
-      精确、高效、永不疲倦。每一个齿轮的转动都是国家意志的延伸。
-    </p>
-    <div class="process-steps">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <h4>原料冶炼</h4>
-        <p>矿石在高温炉中熔化，杂质被去除，金属纯度达到99.99%</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <h4>锻造成型</h4>
-        <p>万吨压机将金属坯料锻造成接近最终形状的半成品</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <h4>精密加工</h4>
-        <p>数控机床进行微米级切削，表面光洁度达到镜面级别</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <h4>质量检验</h4>
-        <p>每一件产品都经过无损探伤和性能测试，合格率99.8%</p>
-      </div>
-    </div>
+  <div class="screen" style="bottom:15%;left:3%">
+    CONVEYOR_SPEED: 2.4m/s<br>
+    TEMP: 23.7°C<br>
+    HUMIDITY: 45%
+  </div>
 
-    <div class="output-stats">
-      <div class="stat-box">
-        <div class="num">47</div>
-        <div class="unit">工厂编号</div>
+  <div class="led g" style="top:7%;left:20%"></div>
+  <div class="led g" style="top:7%;left:40%"></div>
+  <div class="led r" style="top:7%;left:60%"></div>
+  <div class="led g" style="top:7%;left:80%"></div>
+  <div class="led g" style="top:38%;left:18%"></div>
+  <div class="led r" style="top:38%;right:18%"></div>
+
+  <div class="robot-row">
+    <div class="robot-silhouette"><div class="head"></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+    <div class="robot-silhouette"><div class="head"></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+    <div class="robot-silhouette"><div class="head"></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+    <div class="robot-silhouette"><div class="head"></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+    <div class="robot-silhouette"><div class="head"></div><div class="body"></div><div class="arm l"></div><div class="arm r"></div><div class="leg l"></div><div class="leg r"></div></div>
+  </div>
+
+  <div class="content">
+    <h2 class="section-title">机器人型号<span class="ru">МОДЕЛИ РОБОТОВ — 产品目录</span></h2>
+    <div class="robot-catalog">
+      <div class="robot-card">
+        <div class="face"></div>
+        <h3>蜜蜂 · ПЧЕЛА</h3>
+        <div class="model">MODEL: AH-B01</div>
+        <p>工业搬运机器人，载重500公斤。六足设计，可在任何地形上稳定行走。瓷白色面部，蓝色指示灯眼睛。</p>
       </div>
-      <div class="stat-box">
-        <div class="num">1952</div>
-        <div class="unit">建厂年份</div>
+      <div class="robot-card">
+        <div class="face"></div>
+        <h3>海鸥 · ЧАЙКА</h3>
+        <div class="model">MODEL: AH-C02</div>
+        <p>服务型机器人，负责设施内的清洁和餐饮服务。双足行走，双手灵活。面部带有微笑表情，但看起来更令人不安。</p>
       </div>
-      <div class="stat-box">
-        <div class="num">8000+</div>
-        <div class="unit">在职员工</div>
+      <div class="robot-card">
+        <div class="face"></div>
+        <h3>双子 · БЛИЗНЕЦЫ</h3>
+        <div class="model">MODEL: AH-T03</div>
+        <p>芭蕾舞者型战斗护卫机器人。一对女性形态的机器人，动作优雅而致命。面部完美无瑕，如同瓷娃娃。搭载了阵亡特工的记忆。</p>
       </div>
-      <div class="stat-box">
-        <div class="num">∞</div>
-        <div class="unit">生产永不停歇</div>
+      <div class="robot-card">
+        <div class="face"></div>
+        <h3>木星 · ЮПИТЕР</h3>
+        <div class="model">MODEL: AH-J04</div>
+        <p>重型工业机器人，用于建筑和矿山作业。四臂设计，每只手可举起两吨重物。面部较小，几乎隐藏在金属躯体中。</p>
+      </div>
+      <div class="robot-card">
+        <div class="face"></div>
+        <h3>教师 · УЧИТЕЛЬ</h3>
+        <div class="model">MODEL: AH-T05</div>
+        <p>教育型机器人，负责设施内幼儿园和学校。面部表情最丰富，但正因为如此而最令人恐惧。会用温柔的声音讲课。</p>
+      </div>
+      <div class="robot-card">
+        <div class="face"></div>
+        <h3>卫兵 · СТРАЖ</h3>
+        <div class="model">MODEL: AH-G06</div>
+        <p>安保型机器人，配备非致命和致命武器。面部无表情，红色指示灯眼睛在黑暗中发光。失控后最先攻击人类的型号。</p>
       </div>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="gear-icon">⚙</div>
-  <p>КРАСНЫЙ ЗАВОД №47 · 红色四十七号工厂</p>
-  <p style="margin-top:8px;font-size:10px;color:rgba(176,128,96,0.15)">ТРУД — ЭТО СВОБОДА · 劳动即自由</p>
+  <div class="icon">🤖</div>
+  <p>ЦЕХ РОБОТОВ · 机器人车间 · FACILITY 3826</p>
 </footer>
 </body>
 </html>
